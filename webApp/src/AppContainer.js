@@ -8,7 +8,7 @@ import { thelogout } from './store/actions/actions';
 import { connect } from 'react-redux';
 
 
-import App from './Api';
+import App from './App';
 
 
 const mapStateToProps = (state) => {

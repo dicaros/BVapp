@@ -74,11 +74,9 @@ export function setCurrentSize(size) {
       }
 }
 
-
 export function loademployees(url, page, size) {
                 return (dispatch) => {
                 dispatch(itemsIsLoading(true)); 
-
                 fetch(url+'?'+'page='+page+'&size='+size, {
                   method: 'GET',
                   credentials: 'include',
