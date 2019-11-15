@@ -82,20 +82,30 @@ export function loademployees(url, page, size) {
                 fetch(url+'?'+'page='+page+'&size='+size, {
                   method: 'GET',
                   credentials: 'include',
-                               headers: { 
+                  headers: { 
                           'Content-Type': 'application/json',
                         },
                })
                  .then((res) => {
-                      if (!res.ok) {
-                        throw Error(res.statusText);
-                      }
                     dispatch(itemsIsLoading(false));
-                    return res;
+                    if(res.status == '401') {
+                        console.log("unauthorized " + res.status);
+                    }
+                    else {
+                        console.log("success " + res.status);
+                        dispatch(itemsFetchDataSuccess(res));
+                        dispatch(loginsuccessfull(true));
+                        return res;
+                }
              })
             .then((res) => res.json())
             .then((items) => dispatch(itemsFetchDataSuccess(items)))
-            .catch(() => dispatch(itemsHasErrored(true)));
+            .catch(error => {
+                        dispatch(itemsHasErrored(true));
+                        console.log("fail " + error.status)
+            }
+            
+            );
     };
 }
 
@@ -103,46 +113,38 @@ export function thelogout(logouturl){
              return dispatch =>
               { fetch(logouturl, {
                         method: "POST",
-                        credentials: "include",
-                  })
-
+                       credentials: 'include'
+                    })
             .then(res => { 
                             dispatch(loginsuccessfull(false));
-                })
-            .then(res => { 
-                            dispatch(loginsuccessfull(false));
+                            console.log("log out " + res.status)
                 })
             }  
 }
 
-export function thelogin(loginurl, targeturl)  {
+export function thelogin(loginurl)  {
                return (dispatch) => {
                 dispatch(loginsuccessfull(false));
                   fetch(loginurl, {
                         method: "POST",
-                    headers: { 
+                        credentials: 'include',
+                        headers: { 
                           'Content-Type': 'application/json',
                           'Authorization': 'Basic ' + encode('greg' + ":" + 'turnquist'),
                         },
-                        credentials: 'include',
                         body: JSON.stringify({
                             username: 'xxxxxxxxx',
                             password: 'xxxxxxxxx'
                        })
                   })
            .then(res => { 
-             if (res.status == '404') {
                             dispatch(loginsuccessfull(true));
-                      }
+                            console.log("log in " + res.status);
                 }
-                    ) 
-       .then((res) => { 
-           console.log();
-        }).catch(error =>
+                    ).catch(error =>
                       { 
-                                                    return true
-
+                            dispatch(loginsuccessfull(false));
+                            console.log("not logged " + error.status)
               })
-
       }
     }

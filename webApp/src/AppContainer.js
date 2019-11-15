@@ -27,10 +27,9 @@ const mapDispatchToProps = (dispatch) => {
         fetchData: (url, page, size) => dispatch(loademployees(url, page, size)),
         setSize: (size) => dispatch(setCurrentSize(size)),
         setPage: (direction, url, page, pagenum) => dispatch(setCurrentPage(direction, page, pagenum)),
-        doLogin: (loginurl, targeturl) => dispatch(thelogin(loginurl, targeturl)),                               
+        doLogin: (loginurl, targeturl) => dispatch(thelogin(loginurl)),                               
         doLogout: (logouturl) => dispatch(thelogout(logouturl))                               
          };
-
 };
 
 const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);

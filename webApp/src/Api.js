@@ -26,17 +26,14 @@ class App extends React.Component {
 
  logout(logouturl) {
          this.props.doLogout(logouturl);
-         this.refresh()           
       }
 
- doLogin(loginurl, url) {
-         this.props.doLogin(loginurl, url)
+ async doLogin(loginurl, url) {
+         await this.props.doLogin(loginurl)
          this.refresh()
 }
 
-
   refresh(){        this.props.fetchData(url, this.props.page, this.props.size)       }
-
 
   render() {      
 
@@ -54,7 +51,7 @@ class App extends React.Component {
 
 
         const TableBody = (props) => {
-                        if(typeof this.props.items._embedded !== 'undefined' && this.props.loginsuccess) {
+                        if(typeof this.props.items._embedded !== 'undefined' && this.props.loginsuccess && !this.props.isLoading) {
                         
                                   return (
                                             countpage = this.props.items.page.totalPages + ' ',
@@ -74,18 +71,16 @@ class App extends React.Component {
                                         )
                                     );
                                   }
-                          
-
-
+             
                         else if (this.props.hasErrored) {
-                                  return <div>Error: failed to load</div>
+                                  return <div>Error: failed to load 1</div>
                                 }
                         else if (this.props.isLoading) {
                                   return <div>Loading...</div>
                                 }                         
                         
                           else { 
-                                  return <div>Error: failed to load</div>                                
+                                  return <div>Error: failed to load 2 { this.props.isLoading } e 3 { this.props.hasErrored } e 4 { this.props.loginsuccess }</div>
                                 }
           }
 
