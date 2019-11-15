@@ -1,4 +1,4 @@
-package IOL.ProvaFinaleAPI;
+package BVApp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-public class ProvaFinaleApiApplication {
+public class BVappApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProvaFinaleApiApplication.class, args);
+		SpringApplication.run(BVappApplication.class, args);
 	}
 
 }

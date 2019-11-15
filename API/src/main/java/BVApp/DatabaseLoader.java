@@ -1,4 +1,4 @@
-package IOL.ProvaFinaleAPI;
+package BVApp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -33,7 +33,7 @@ public class DatabaseLoader implements CommandLineRunner {
 			new UsernamePasswordAuthenticationToken("greg", "doesn't matter",
 				AuthorityUtils.createAuthorityList("ROLE_MANAGER")));
 
-		this.employees.save(new Employee("Frodo", "Baggins", "ring bearer", greg));
+		this.employees.save(new Employee("Frodozz", "Baggins", "ring bearer", greg));
 		this.employees.save(new Employee("Bilbo", "Baggins", "burglar", greg));
 		this.employees.save(new Employee("Gandalf", "the Grey", "wizard", greg));
 		this.employees.save(new Employee("Gandalf2", "the Grey2", "wizard", greg));

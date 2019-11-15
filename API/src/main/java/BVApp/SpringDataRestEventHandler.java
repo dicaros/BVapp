@@ -1,4 +1,4 @@
-package IOL.ProvaFinaleAPI;
+package BVApp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;

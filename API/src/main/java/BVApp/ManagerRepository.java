@@ -1,4 +1,4 @@
-package IOL.ProvaFinaleAPI;
+package BVApp;
 
 import org.springframework.data.repository.Repository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

@@ -1,4 +1,4 @@
-package IOL.ProvaFinaleAPI;
+package BVApp;
 
 import java.util.Arrays;
 import java.util.Objects;
