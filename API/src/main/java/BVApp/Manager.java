@@ -23,7 +23,7 @@ public class Manager {
 
 	private @JsonIgnore String password;
 
-	private String[] roles;
+	private String roles;
 
 	public void setPassword(String password) {
 		this.password = PASSWORD_ENCODER.encode(password);
@@ -31,7 +31,7 @@ public class Manager {
 
 	protected Manager() {}
 
-	public Manager(String name, String password, String... roles) {
+	public Manager(String name, String password, String roles) {
 
 		this.name = name;
 		this.setPassword(password);
@@ -46,14 +46,14 @@ public class Manager {
 		return Objects.equals(id, manager.id) &&
 			Objects.equals(name, manager.name) &&
 			Objects.equals(password, manager.password) &&
-			Arrays.equals(roles, manager.roles);
+			Objects.equals(roles, manager.roles);
 	}
 
 	@Override
 	public int hashCode() {
 
 		int result = Objects.hash(id, name, password);
-		result = 31 * result + Arrays.hashCode(roles);
+		result = 31 * result + Objects.hashCode(roles);
 		return result;
 	}
 
@@ -77,11 +77,11 @@ public class Manager {
 		return password;
 	}
 
-	public String[] getRoles() {
+	public String getRoles() {
 		return roles;
 	}
 
-	public void setRoles(String[] roles) {
+	public void setRoles(String roles) {
 		this.roles = roles;
 	}
 
@@ -90,7 +90,7 @@ public class Manager {
 		return "Manager{" +
 			"id=" + id +
 			", name='" + name + '\'' +
-			", roles=" + Arrays.toString(roles) +
+			", roles=" + roles +
 			'}';
 	}
 }
