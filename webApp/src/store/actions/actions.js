@@ -108,9 +108,7 @@ export function thelogout(logouturl){
             }  
 }
 
-export function thelogin(loginurl)  {
-                var user = 'greg';
-                var password = 'turnquist';
+export function thelogin(loginurl, target)  {
                return (dispatch) => {
                 dispatch(loginsuccessfull(false));
                   fetch(loginurl, {
@@ -118,7 +116,7 @@ export function thelogin(loginurl)  {
                         credentials: 'include',
                         headers: { 
                           'Content-Type': 'application/json',
-                          'Authorization': 'Basic ' + encode('greg' + ":" + 'turnquist'),
+                          'Authorization': 'Basic ' + encode(target.username.value + ":" + target.password.value),
                         },
                         body: JSON.stringify({
                             username: 'xxxxxxxxx',
@@ -126,12 +124,22 @@ export function thelogin(loginurl)  {
                        })
                   })
            .then(res => { 
+                alert(target.username.value + target.password.value)
+                        if(res.status != '401')
+                        {
                             dispatch(loginsuccessfull(true));
+                        }
+                        else {
+                            dispatch(loginsuccessfull(false));
+                        }
                             console.log("log in " + res.status);
                 }
                     ).catch(error =>
                       { 
+                          if(error.status=='401')
+                          {
                             dispatch(loginsuccessfull(false));
+                        }
                             console.log("not logged " + error.status)
               })
       }

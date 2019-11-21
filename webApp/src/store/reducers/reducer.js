@@ -29,7 +29,6 @@ export function loginsuccessfull(state = false, action) {
     }
 }
 
-
 export function page(state = 0, action) {
     switch (action.type) {
         case 'CURRENT_PAGE':

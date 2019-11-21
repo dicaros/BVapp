@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchData: (url, page, size) => dispatch(loademployees(url, page, size)),
         setSize: (size) => dispatch(setCurrentSize(size)),
         setPage: (direction, page, pagenum) => dispatch(setCurrentPage(direction, page, pagenum)),
-        doLogin: (loginurl) => dispatch(thelogin(loginurl)),                               
+        doLogin: (loginurl, target) => dispatch(thelogin(loginurl, target)),                               
         doLogout: (logouturl) => dispatch(thelogout(logouturl)),                               
         addNew: (firstName, lastName, description, url) => dispatch(newItem(firstName, lastName, description, url))                               
          };

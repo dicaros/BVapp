@@ -9,8 +9,8 @@ const logouturl = "http://localhost:8080/logout"
 class App extends React.Component {
 
    
-  componentDidMount() {  
-    console.log(this.props.loginsuccess)    
+componentDidMount() {  
+       console.log(this.props.loginsuccess)    
                 this.refresh();
   };
 
@@ -55,7 +55,7 @@ addNew(firstName, lastName, description) {
 
 handleSubmit(event) {
   event.preventDefault();
-  this.props.doLogin(loginurl);
+  this.props.doLogin(loginurl, event.target);
 }
 
   refresh(){        this.props.fetchData(url, this.props.page, this.props.size)       }
@@ -64,7 +64,7 @@ handleSubmit(event) {
 
         const LoginForm = () => {
                   return(
-                  <form onSubmit={this.handleSubmit.bind(this)}> 
+                  <form method='POST' onSubmit={this.handleSubmit.bind(this)}> 
                       <table>
                         <thead>
                           <tr>
@@ -74,16 +74,16 @@ handleSubmit(event) {
                         <tbody>
                           <tr>
                                 <td>User</td>
-                                <td><input type = 'text' name = 'username'/></td>
+                                <td><input type='text' name='username'/></td>
                           </tr>
                           <tr>
                                 <td>Password</td>
-                                <td><input type = 'password' name = 'password'/></td>
+                                <td><input type='password' name='password'/></td>
                           </tr>
                           </tbody>
                         <tfoot>
                           <tr>
-                                <td className='tdloginbutton' colSpan={2}><button bloc type="submit" className='submitbutton' >Login</button></td>
+                                <td className='tdloginbutton' colSpan={2}><button type="submit" className='submitbutton' >Login</button></td>
                           </tr>
                         </tfoot>
                       </table>
@@ -158,7 +158,7 @@ handleSubmit(event) {
                                     </td></tr></tfoot>
                                       );   
                           }
-        if(this.props.loginsuccess) {
+        if(this.props.loginsuccess || this.props.isLoading) {
         return (
                   <table width='30%'>
                       <TableHeader />
