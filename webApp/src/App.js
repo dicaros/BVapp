@@ -1,5 +1,6 @@
 import React from 'react';
 import { handleDelete } from './functions/functions'
+import './css/index.css'
 const loginurl = "http://localhost:8080"
 var countpage = 0 + ' '
 const url = 'http://localhost:8080/api/employees'
@@ -8,12 +9,13 @@ const logouturl = "http://localhost:8080/logout"
 class App extends React.Component {
 
    
-  componentDidMount() {                  
+  componentDidMount() {  
+    console.log(this.props.loginsuccess)    
                 this.refresh();
   };
 
   componentDidUpdate(prevProps) {
-      if(this.props.page !== prevProps.page || this.props.size !== prevProps.size || this.props.loginsuccess !== prevProps.loginsuccess)
+      if(this.props.page != prevProps.page || this.props.size != prevProps.size || this.props.loginsuccess != prevProps.loginsuccess)
       {
         this.refresh();
       }
@@ -25,7 +27,7 @@ class App extends React.Component {
   };
 
   switchPage (direction) {
-        this.props.setPage(direction, url, this.props.page, this.props.items.page.totalPages)
+        this.props.setPage(direction, this.props.page, this.props.items.page.totalPages)
           };
 
  logout(logouturl) {
@@ -34,29 +36,67 @@ class App extends React.Component {
       }
       }
 
- doLogin(loginurl, url) {
+ doLogin(loginurl) {
+   if(this.props.loginsuccess)
+   {console.log('Already logged in, nothing happens')}
       if (!this.props.loginsuccess) {
-         this.props.doLogin(loginurl)
+        console.log('Logging in') 
+        this.props.doLogin(loginurl)
       }
 }
 
 addNew(firstName, lastName, description) {
-  if (!this.props.loginsuccess) {
-     this.props.doLogin(loginurl)
+
+  if (this.props.loginsuccess) {
+     this.props.addNew(firstName, lastName, description, url)
+     this.refresh();
   }
+}
+
+handleSubmit(event) {
+  event.preventDefault();
+  this.props.doLogin(loginurl);
 }
 
   refresh(){        this.props.fetchData(url, this.props.page, this.props.size)       }
 
   render() {      
 
+        const LoginForm = () => {
+                  return(
+                  <form onSubmit={this.handleSubmit.bind(this)}> 
+                      <table>
+                        <thead>
+                          <tr>
+                                <th colSpan={2}>You are not logged. Please login</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                                <td>User</td>
+                                <td><input type = 'text' name = 'username'/></td>
+                          </tr>
+                          <tr>
+                                <td>Password</td>
+                                <td><input type = 'password' name = 'password'/></td>
+                          </tr>
+                          </tbody>
+                        <tfoot>
+                          <tr>
+                                <td className='tdloginbutton' colSpan={2}><button bloc type="submit" className='submitbutton' >Login</button></td>
+                          </tr>
+                        </tfoot>
+                      </table>
+            </form>)
+        }
+
         const TableHeader = () => {
                         return (
                                       <thead>
-                                          <tr>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Description</th>
+                                          <tr> 
+                                            <th className='thlist'>First Name</th>
+                                            <th className='thlist'>Last Name</th>
+                                            <th className='thlist'>Description</th>
                                           </tr>
                                       </thead>
                                 )
@@ -81,7 +121,7 @@ addNew(firstName, lastName, description) {
 
         const TableBody = () => {
                         
-                        if(typeof this.props.items._embedded !== 'undefined' && this.props.loginsuccess && !this.props.isLoading) {
+                        if(typeof this.props.items._embedded != 'undefined' && this.props.loginsuccess && !this.props.isLoading) {
                                    return (<tbody><Tablerow/></tbody>)
                                   }
                         else if (this.props.hasErrored) {
@@ -93,18 +133,17 @@ addNew(firstName, lastName, description) {
                         else { 
                                   return (<tbody><tr><td>Error: failed to load 2</td></tr></tbody>)
                                 }
-
           }
 
                 const TableFooter = () => {
                                     return (
                                     
-                                      <tfoot><tr><td>
+                                      <tfoot><tr><td colSpan={4}>
                                                       <button onClick={() => this.switchPage('prev')}>Prev</button><span>&nbsp;&nbsp;</span>
                                                       <button onClick={() => this.switchPage('next')}>Next</button><span>&nbsp;&nbsp;</span>
-                                                      <button onClick={() => this.doLogin(loginurl, url)}>Login</button><span>&nbsp;&nbsp;</span>
+                                                      <button onClick={() => this.doLogin(loginurl)}>Login</button><span>&nbsp;&nbsp;</span>
                                                       <button onClick={() => this.logout(logouturl)}>Logout</button><span>&nbsp;&nbsp;</span>
-                                                      <button onClick={() => this.logout(logouturl)}>Create New</button><span>&nbsp;&nbsp;</span>
+                                                      <button onClick={() => this.addNew('Stefano', 'Di Caro', 'Test')}>Create New</button><span>&nbsp;&nbsp;</span>
 
                                                       {this.props.page+1}/{countpage}
                                                       
@@ -117,20 +156,23 @@ addNew(firstName, lastName, description) {
                                                       </select>                                                   
 
                                     </td></tr></tfoot>
-                                      );
-                                    
+                                      );   
                           }
-
-
+        if(this.props.loginsuccess) {
         return (
-                  <table>
+                  <table width='30%'>
                       <TableHeader />
                       <TableBody  />
                       <TableFooter  />
                   </table>
                 );
+        }
+        else {
+          return(
+                <LoginForm />
+            )
+        }
     }
-
 }
 
 export default App;

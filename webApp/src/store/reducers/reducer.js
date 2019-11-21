@@ -7,6 +7,7 @@ export function itemsHasErrored(state = false, action) {
             return action.hasErrored;        default:
             return state;
     }
+
 }export function itemsIsLoading(state = false, action) {
     switch (action.type) {
         case 'ITEMS_IS_LOADING':
@@ -28,6 +29,7 @@ export function loginsuccessfull(state = false, action) {
     }
 }
 
+
 export function page(state = 0, action) {
     switch (action.type) {
         case 'CURRENT_PAGE':
@@ -42,7 +44,6 @@ export function size(state = 10, action) {
             return state;
     }
 }
-
 
 export default combineReducers({
     items,

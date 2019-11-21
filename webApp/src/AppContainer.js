@@ -3,6 +3,7 @@ import { setCurrentPage } from './store/actions/actions';
 import { setCurrentSize } from './store/actions/actions';
 import { thelogin } from './store/actions/actions';
 import { thelogout } from './store/actions/actions';
+import { newItem } from './store/actions/actions';
 
 import { connect } from 'react-redux';
 
@@ -25,9 +26,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (url, page, size) => dispatch(loademployees(url, page, size)),
         setSize: (size) => dispatch(setCurrentSize(size)),
-        setPage: (direction, url, page, pagenum) => dispatch(setCurrentPage(direction, page, pagenum)),
-        doLogin: (loginurl, targeturl) => dispatch(thelogin(loginurl)),                               
-        doLogout: (logouturl) => dispatch(thelogout(logouturl))                               
+        setPage: (direction, page, pagenum) => dispatch(setCurrentPage(direction, page, pagenum)),
+        doLogin: (loginurl) => dispatch(thelogin(loginurl)),                               
+        doLogout: (logouturl) => dispatch(thelogout(logouturl)),                               
+        addNew: (firstName, lastName, description, url) => dispatch(newItem(firstName, lastName, description, url))                               
          };
 };
 
