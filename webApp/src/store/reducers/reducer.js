@@ -1,7 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-
-import thunk from 'redux-thunk';
-
+import { combineReducers } from 'redux';
 
 // reducers.js
 export function itemsHasErrored(state = false, action) {

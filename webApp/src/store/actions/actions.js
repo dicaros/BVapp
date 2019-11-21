@@ -1,16 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { encode } from "base-64";
-import thunk from 'redux-thunk';
-import {
-  ITEMS_IS_LOADING,
-  ITEMS_HAS_ERRORED,
-  ITEMS_FETCH_DATA_SUCCESS,
-  CURRENT_SIZE,
-  CURRENT_PAGE,
-  LOGIN_SUCCESS
-
-} from './actionsTypes.js'
-
 
 export function itemsHasErrored(bool) {
     return {
@@ -57,11 +45,11 @@ export function currentsize(number) {
 // actions.js
 export function setCurrentPage(direction, page, pagenum) {
     return (dispatch) => {
-      if(direction == 'next' && page+1<pagenum) {
+      if(direction === 'next' && page+1<pagenum) {
       page = ++page;
       dispatch(currentpage(page));
       }
-      else if (direction == 'prev' && page>0) {
+      else if (direction === 'prev' && page>0) {
       page = --page;
       dispatch(currentpage(page)); 
       }
@@ -86,7 +74,7 @@ export function loademployees(url, page, size) {
                })
                  .then((res) => {
                     dispatch(itemsIsLoading(false));
-                    if(res.status == '401') {
+                    if(res.status === '401') {
                         console.log("unauthorized " + res.status);
                     }
                     else {
@@ -146,3 +134,23 @@ export function thelogin(loginurl)  {
               })
       }
     }
+
+ export function newItem(firstName, lastName, description, url)  {
+        var newrecord = {firstName: firstName, lastName: lastName, description: description}
+        return (dispatch) => {
+           fetch(url, {
+                 method: "POST",
+                 credentials: 'include',
+                 headers: { 
+                   'Content-Type': 'application/json',
+                 },
+              })
+    .then(res => { 
+                     console.log(res.status);
+         }
+             ).catch(error =>
+               { 
+                     console.log(error.status)
+       })
+}
+}

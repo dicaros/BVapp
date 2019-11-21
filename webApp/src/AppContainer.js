@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { loademployees } from './store/actions/actions';
 import { setCurrentPage } from './store/actions/actions';
 import { setCurrentSize } from './store/actions/actions';

@@ -15,4 +15,3 @@ export function handleDelete(deleteurl, props, url) {
                     })                  
 
 };
-
