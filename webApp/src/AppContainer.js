@@ -6,8 +6,7 @@ import { thelogout } from './store/actions/actions';
 import { newItem } from './store/actions/actions';
 
 import { connect } from 'react-redux';
-import App from './App';
-
+import EmployeeList from './components/EmployeeList';
 
 const mapStateToProps = (state) => {
              return {
@@ -31,6 +30,6 @@ const mapDispatchToProps = (dispatch) => {
          };
 };
 
-const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
+const AppContainer = connect(mapStateToProps, mapDispatchToProps)(EmployeeList);
 
 export default AppContainer;
