@@ -1,70 +1,65 @@
 import { encode } from "base-64";
+import { IS_ERROR } from './action-type';
+import { IS_LOADING } from './action-type';
+import { ITEMS_FETCH_DATA_SUCCESS } from './action-type';
+import { LOGIN_SUCCESS } from './action-type';
+import { CURRENT_PAGE } from './action-type';
+import { CURRENT_SIZE } from './action-type';
+import { store } from '../store'
 
-export function itemsHasErrored(bool) {
+export function isError(bool) {
     return {
-        type: 'ITEMS_HAS_ERRORED',
+        type: IS_ERROR,
         hasErrored: bool
     };
 }
 
-export function itemsIsLoading(bool) {
+export function isLoading(bool) {
     return {
-        type: 'ITEMS_IS_LOADING',
+        type: IS_LOADING,
         isLoading: bool
     };
 }
 
 export function itemsFetchDataSuccess(items) {
     return {
-        type: 'ITEMS_FETCH_DATA_SUCCESS',
+        type: ITEMS_FETCH_DATA_SUCCESS,
         items
     };
 }
 
 export function loginsuccessfull(bool) {
     return {
-        type: 'LOGIN_SUCCESS',
+        type: LOGIN_SUCCESS,
         loginsuccess: bool
     };
 }
 
-export function currentpage(number) {
-    return {
-        type: 'CURRENT_PAGE',
-        page: number
-    };
-}
-
-export function currentsize(number) {
-    return {
-        type: 'CURRENT_SIZE',
-        size: number
-    };
-}
-
-// actions.js
-export function setCurrentPage(direction, page, pagenum) {
-    return (dispatch) => {
-      if(direction == 'next' && page+1<pagenum) {
-      page = ++page;
-      dispatch(currentpage(page));
+export function setCurrentPage(direction, pagenum) {
+    var thepage = store.getState().page
+      if(direction == 'next' && store.getState().page+1<pagenum) {
+      thepage = store.getState().page+1;
       }
-      else if (direction == 'prev' && page>0) {
-      page = --page;
-      dispatch(currentpage(page)); 
+      else if (direction == 'prev' && store.getState().page>0) {
+      thepage = store.getState().page-1;
       }
-  }
+      return {
+        type: CURRENT_PAGE,
+        page: thepage
+      }
+  
 }
 
 export function setCurrentSize(size) {
-    return (dispatch) => {    
-      dispatch(currentsize(size));
-      }
+    return {
+        type: CURRENT_SIZE,
+        size: size
+    };
 }
 
 export function loademployees(url, page, size) {
                 return (dispatch) => {
-                dispatch(itemsIsLoading(true)); 
+                dispatch(isLoading(true)); 
                 fetch(url+'?page='+page+'&size='+size, {
                   method: 'GET',
                   credentials: 'include',
@@ -73,7 +68,7 @@ export function loademployees(url, page, size) {
                         },
                })
                  .then((res) => {
-                    dispatch(itemsIsLoading(false));
+                    dispatch(isLoading(false));
                     if(res.status == '401') {
                         console.log("unauthorized " + res.status);
                     }
@@ -87,7 +82,7 @@ export function loademployees(url, page, size) {
             .then((res) => res.json())
             .then((items) => dispatch(itemsFetchDataSuccess(items)))
             .catch(error => {
-                        dispatch(itemsHasErrored(true));
+                        dispatch(isError(true));
                         console.log("fail " + error.status)
             }
             
@@ -124,7 +119,6 @@ export function thelogin(loginurl, target)  {
                        })
                   })
            .then(res => { 
-                alert(target.username.value + target.password.value)
                         if(res.status != '401')
                         {
                             dispatch(loginsuccessfull(true));
@@ -147,7 +141,6 @@ export function thelogin(loginurl, target)  {
 
  export function newItem(firstName, lastName, description, url)  {
         var newrecord = {firstName: firstName, lastName: lastName, description: description}
-        alert(newrecord.firstName)
         return (dispatch) => {
            fetch(url, {
                  method: "POST",
@@ -164,5 +157,5 @@ export function thelogin(loginurl, target)  {
                { 
                      console.log(error.status)
        })
-}
+    }
 }

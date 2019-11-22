@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 
 // reducers.js
-export function itemsHasErrored(state = false, action) {
+export function isError(state = false, action) {
     switch (action.type) {
-        case 'ITEMS_HAS_ERRORED':
+        case 'IS_ERROR':
             return action.hasErrored;        default:
             return state;
     }
 
-}export function itemsIsLoading(state = false, action) {
+}export function isLoading(state = false, action) {
     switch (action.type) {
         case 'ITEMS_IS_LOADING':
             return action.isLoading;        default:
@@ -21,7 +21,7 @@ export function itemsHasErrored(state = false, action) {
             return state;
     }
 }
-export function loginsuccessfull(state = false, action) {
+export function loginsuccessfull(state = null, action) {
     switch (action.type) {
         case 'LOGIN_SUCCESS':
             return action.loginsuccess;        default:
@@ -46,8 +46,8 @@ export function size(state = 10, action) {
 
 export default combineReducers({
     items,
-    itemsHasErrored,
-    itemsIsLoading,
+    isError,
+    isLoading,
     page,
     size,
     loginsuccessfull

@@ -1,0 +1,6 @@
+export const IS_ERROR = 'IS_ERROR';
+export const IS_LOADING = 'IS_LOADING';
+export const ITEMS_FETCH_DATA_SUCCESS = 'ITEMS_FETCH_DATA_SUCCESS';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const CURRENT_PAGE = 'CURRENT_PAGE';
+export const CURRENT_SIZE = 'CURRENT_SIZE';
