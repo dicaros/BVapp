@@ -70,6 +70,7 @@ export function loademployees(url, page, size) {
                  .then((res) => {
                     dispatch(isLoading(false));
                     if(res.status == '401') {
+                        dispatch(loginsuccessfull(false));
                         console.log("unauthorized " + res.status);
                     }
                     else {
