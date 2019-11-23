@@ -1,23 +1,21 @@
 import React from 'react';
 import { handleDelete } from '../functions/functions'
-import '../css/index.css'
-const loginurl = "http://localhost:8080"
+
 var countpage = 0 + ' '
 const url = 'http://localhost:8080/api/employees'
-const logouturl = "http://localhost:8080/logout"
 
 class EmployeeList extends React.Component {
 
-    componentDidMount() {  
-        console.log(this.props.loginsuccess)    
+    componentDidMount() { 
+      console.log(this.props.loginsuccess)    
                  this.refresh();
    };
  
- componentDidUpdate(prevProps) {
-       if(this.props.page != prevProps.page || this.props.size != prevProps.size || this.props.loginsuccess != prevProps.loginsuccess)
+    componentDidUpdate(prevProps) {
+       if(this.props.page != prevProps.page || this.props.size != prevProps.size || this.props.loginsuccess != prevProps.loginsuccess || this.props.nitems != prevProps.nitems)
        {
-         this.refresh();
-       }
+        this.refresh();
+      }
      } 
  
    async handleChange(event) {
@@ -29,66 +27,10 @@ class EmployeeList extends React.Component {
          this.props.setPage(direction, this.props.items.page.totalPages)
            };
  
-  logout(logouturl) {
-       if (this.props.loginsuccess) {
-          this.props.doLogout(logouturl);
-       }
-       }
- 
-  doLogin(loginurl) {
-    if(this.props.loginsuccess)
-    {console.log('Already logged in, nothing happens')}
-       if (!this.props.loginsuccess) {
-         console.log('Logging in') 
-         this.props.doLogin(loginurl)
-       }
- }
- 
- addNew(firstName, lastName, description) {
- 
-   if (this.props.loginsuccess) {
-      this.props.addNew(firstName, lastName, description, url)
-      this.refresh();
-   }
- }
- 
- handleSubmit(event) {
-   event.preventDefault();
-   this.props.doLogin(loginurl, event.target);
- }
- 
    refresh(){ this.props.fetchData(url, this.props.page, this.props.size) }
  
    render() {      
- 
-         const LoginForm = () => {
-                   return(
-                   <form method='POST' onSubmit={this.handleSubmit.bind(this)}> 
-                       <table>
-                         <thead>
-                           <tr>
-                                 <th colSpan={2}>You are not logged. Please login</th>
-                           </tr>
-                         </thead>
-                         <tbody>
-                           <tr>
-                                 <td>User</td>
-                                 <td><input type='text' name='username'/></td>
-                           </tr>
-                           <tr>
-                                 <td>Password</td>
-                                 <td><input type='password' name='password'/></td>
-                           </tr>
-                           </tbody>
-                         <tfoot>
-                           <tr>
-                                 <td className='tdloginbutton' colSpan={2}><button type="submit" className='submitbutton' >Login</button></td>
-                           </tr>
-                         </tfoot>
-                       </table>
-             </form>)
-         }
- 
+
          const TableHeader = () => {
                          return (
                                        <thead>
@@ -126,10 +68,7 @@ class EmployeeList extends React.Component {
                                        <tfoot><tr><td colSpan={4}>
                                                        <button onClick={() => this.switchPage('prev')}>Prev</button><span>&nbsp;&nbsp;</span>
                                                        <button onClick={() => this.switchPage('next')}>Next</button><span>&nbsp;&nbsp;</span>
-                                                       <button onClick={() => this.doLogin(loginurl)}>Login</button><span>&nbsp;&nbsp;</span>
-                                                       <button onClick={() => this.logout(logouturl)}>Logout</button><span>&nbsp;&nbsp;</span>
-                                                       <button onClick={() => this.addNew('Stefano', 'Di Caro', 'Test')}>Create New</button><span>&nbsp;&nbsp;</span>
- 
+                                  
                                                        {this.props.page+1}/{countpage}
                                                        
                                                         <select value={this.props.size} onChange={this.handleChange.bind(this)}>
@@ -145,18 +84,12 @@ class EmployeeList extends React.Component {
                            }
          if(this.props.loginsuccess && typeof this.props.items._embedded != 'undefined') {
          return (
-                   <table width='30%'>
+                   <table className='tablelist'>
                        <TableHeader />
                        <TableBody  />
                        <TableFooter  />
                    </table>
                  );
-         }
-         else if(!this.props.loginsuccess && this.props.loginsuccess != null) {
-           return(
-                 <LoginForm />
-             )
-             
          }
          else {
           return ''
@@ -164,4 +97,4 @@ class EmployeeList extends React.Component {
      }
  }
  
- export default EmployeeList;
+export default EmployeeList;

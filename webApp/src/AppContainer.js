@@ -4,35 +4,43 @@ import { setCurrentSize } from './store/actions/actions';
 import { thelogin } from './store/actions/actions';
 import { thelogout } from './store/actions/actions';
 import { newItem } from './store/actions/actions';
+import { getUser } from './store/actions/actions';
 
 import { connect } from 'react-redux';
+import AppHeader from './components/AppHeader';
+
 import EmployeeList from './components/EmployeeList';
 import LoginPage from './components/LoginPage';
 
+
 const mapStateToProps = (state) => {
-             return {
-                  items: state.items,
-                  isError: state.isError,
-                  isLoading: state.isLoading,
-                  page: state.page,
-                  size: state.size,
-                  loginsuccess: state.loginsuccessfull
-                };
-          };
-
-const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url, page, size) => dispatch(loademployees(url, page, size)),
-        setSize: (size) => dispatch(setCurrentSize(size)),
-        setPage: (direction, pagenum) => dispatch(setCurrentPage(direction, pagenum)),
-        doLogin: (loginurl, target) => dispatch(thelogin(loginurl, target)),                               
-        doLogout: (logouturl) => dispatch(thelogout(logouturl)),                               
-        addNew: (firstName, lastName, description, url) => dispatch(newItem(firstName, lastName, description, url))                               
-         };
-};
+         isError: state.isError,
+         isLoading: state.isLoading,
+         loginsuccess: state.loginsuccessfull,
+         listurl: state.listurl,
+         items: state.items,
+         nitems: state.nitems,
+         page: state.page,
+         size: state.size,
+         username: state.username
+       };
+  };
+  
+  const mapDispatchToProps = (dispatch) => {
+  return {
+      fetchData: (url, page, size) => dispatch(loademployees(url, page, size)),
+      doLogin: (loginurl, target) => dispatch(thelogin(loginurl, target)),                               
+      doLogout: (logouturl) => dispatch(thelogout(logouturl)),
+      setSize: (size) => dispatch(setCurrentSize(size)),
+      setPage: (direction, pagenum) => dispatch(setCurrentPage(direction, pagenum)),                              
+      addNew: (firstName, lastName, description, url, nitems) => dispatch(newItem(firstName, lastName, description, url, nitems)),
+      getUser: () => dispatch(getUser('http://localhost:8080/username'))
+    };
+  };
+  
+  export const HeaderComponent = connect(mapStateToProps, mapDispatchToProps)(AppHeader);
+  export const EmployeeComponent = connect(mapStateToProps, mapDispatchToProps)(EmployeeList);
+  export const LoginComponent = connect(mapStateToProps, mapDispatchToProps)(LoginPage);
 
-export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(EmployeeList);
-
-export const LoginContainer = connect(mapStateToProps, mapDispatchToProps)(LoginPage);
-
-export default AppContainer;
+  export default HeaderComponent;

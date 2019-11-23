@@ -1,6 +1,26 @@
-th {
-    padding: 5px;
-    text-align: center;
+body {
+    margin: 0px;
+    font-style: normal;
+    font-weight: normal;
+    font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+}
+
+header {
+    margin: 0;
+    display: block;
+    background-color: #6454ff
+}
+
+main {
+    margin: 0px;
+}
+
+section {
+    margin: 5px;
+}
+
+.tablelist {
+    width: 50%;
 }
 
 td {
@@ -13,22 +33,39 @@ td {
     width: 100%;
     text-align: center;
 }
+
 .tdloginheader {
     height: 30px;
     width: 100%;
 }
 
-.thlist {
-    width: 25%;
+th {
+    padding: 5px;
+    text-align: center;
 }
 
-body {
-    font-size: 12;
+.thlist {
+    width: 30%;
+}
+
+#topheader {
+    padding: 5px;
+    text-align: right;
+    color: #eeffff;
+}
+
+#topheaderlink {
+    text-decoration: none;
     font-style: normal;
     font-weight: normal;
     font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
-    width: 3000;
+    color: #eeffff  ;
 }
+
+#topheaderlink:hover {
+    color: #ffdf5f;
+}
+
 
 .submitbutton {
     width: 80%;

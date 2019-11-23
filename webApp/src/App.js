@@ -1,10 +1,26 @@
 import React from 'react'
-import AppContainer from './AppContainer'
-import AppHeader from './components/appHeader'
+import { EmployeeComponent } from './AppContainer';
+import { HeaderComponent } from './AppContainer';
+import { LoginComponent } from './AppContainer';
 
-const App = () => (
-  <div>    <AppHeader />
-        <AppContainer />  </div>
-)
+class App extends React.Component {
+  render () {
+    
+    
 
-export default App
+    const HeaderRender = () => {
+      return (<header><HeaderComponent /></header>)
+    }
+
+    const BodyRender = () => {
+              return(<section><LoginComponent /><EmployeeComponent /></section>)
+    }
+
+    
+    return (<div id = 'main'><HeaderRender />
+    <BodyRender /></div>)   
+          }
+
+}
+
+ export default App;
