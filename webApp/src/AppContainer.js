@@ -7,6 +7,7 @@ import { newItem } from './store/actions/actions';
 
 import { connect } from 'react-redux';
 import EmployeeList from './components/EmployeeList';
+import LoginPage from './components/LoginPage';
 
 const mapStateToProps = (state) => {
              return {
@@ -30,6 +31,8 @@ const mapDispatchToProps = (dispatch) => {
          };
 };
 
-const AppContainer = connect(mapStateToProps, mapDispatchToProps)(EmployeeList);
+export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(EmployeeList);
+
+export const LoginContainer = connect(mapStateToProps, mapDispatchToProps)(LoginPage);
 
 export default AppContainer;
