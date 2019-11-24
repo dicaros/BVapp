@@ -2,7 +2,7 @@ import React from 'react';
 import { handleDelete } from '../functions/functions'
 
 var countpage = 0 + ' '
-const url = 'http://localhost:8080/api/employees'
+const url = 'http://localhost:8080/api/games'
 
 class EmployeeList extends React.Component {
 
@@ -42,8 +42,9 @@ class EmployeeList extends React.Component {
                          return (
                                        <thead>
                                            <tr> 
-                                             <th className='thlist'>First Name</th>
-                                             <th className='thlist'>Last Name</th>
+                                             <th className='thlist'>Game organizer</th>
+                                             <th className='thlist'>Date</th>
+                                             <th className='thlist'>Time</th>
                                              <th className='thlist'>Description</th>
                                            </tr>
                                        </thead>
@@ -53,15 +54,16 @@ class EmployeeList extends React.Component {
  
          const Tablerow = () => {
            return(        
-                   this.props.items._embedded.employees.map ((row, index) =>                   
+                   this.props.items._embedded.games.map ((row, index) =>                   
                    {
                      return(
                            <tr key={index}>
-                           <td>{row.firstName}</td>
-                           <td>{row.lastName}</td>
+                           <td>{row.myuser.name}</td>
+                           <td>{row.gamedate}</td>
+                           <td>{row.gametime}</td>
                            <td>{row.description}</td>
                    <td><button onClick={() => {handleDelete(row._links.self.href, this.props, url)}}>Delete</button></td>
-                   <td><a  id = 'topheaderlink' href = '#' onClick={() => this.updateRecord('Dummy character', 'Surname', 'Job updated', row._links.self.href)}>Update</a></td>
+                   <td><a  id = 'bodylink' href = '#' onClick={() => this.updateRecord('Dummy character', 'Surname', 'Job updated', row._links.self.href)}>Update</a></td>
                    </tr>)})
            )
          }
@@ -91,7 +93,8 @@ class EmployeeList extends React.Component {
                                        );   
                            }
          if(this.props.loginsuccess && typeof this.props.items._embedded != 'undefined') {
-         return (
+          
+          return (
                    <table className='tablelist'>
                        <TableHeader />
                        <TableBody  />

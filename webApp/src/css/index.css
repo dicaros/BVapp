@@ -5,10 +5,24 @@ body {
     font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
 }
 
+#bodylink {
+    text-decoration: none;
+    font-style: normal;
+    font-weight: normal;
+    font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    color: #000000;
+}
+
+#bodylink:hover {
+    color: #ffdf5f;
+}
+
 header {
     margin: 0;
     display: block;
-    background-color: #6454ff
+    background-color: #6454ff;
+    position: sticky;
+    top: 0;
 }
 
 main {
@@ -19,7 +33,16 @@ section {
     margin: 5px;
 }
 
-.tablelist {
+  .submitbutton {
+    width: 80%;
+    background-color: lightskyblue;
+    border-style: solid;
+    border-color: darkgrey;
+    border-width: 1px;
+    height: 100%;
+}
+
+  .tablelist {
     width: 50%;
 }
 
@@ -64,14 +87,4 @@ th {
 
 #topheaderlink:hover {
     color: #ffdf5f;
-}
-
-
-.submitbutton {
-    width: 80%;
-    background-color: lightskyblue;
-    border-style: solid;
-    border-color: darkgrey;
-    border-width: 1px;
-    height: 100%;
 }

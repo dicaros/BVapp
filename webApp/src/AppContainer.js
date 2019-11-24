@@ -13,7 +13,6 @@ import AppHeader from './components/AppHeader';
 import EmployeeList from './components/EmployeeList';
 import LoginPage from './components/LoginPage';
 
-
 const mapStateToProps = (state) => {
     return {
          isError: state.isError,
