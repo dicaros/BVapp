@@ -10,25 +10,25 @@ import javax.persistence.Version;
 
 import net.minidev.json.annotate.JsonIgnore;
 
-@Entity
+@Entity // declare that this class is meant for storage in a dbs table
 public class Employee {
 
-	private @Id @GeneratedValue Long id;
+	private @Id @GeneratedValue Long id; // automatically generated primary ID
 	private String firstName;
 	private String lastName;
 	private String description;
 
 	private @Version @JsonIgnore Long version;
 
-	private @ManyToOne Manager manager;
+	private @ManyToOne Myuser myuser;
 
 	private Employee() {}
 
-	public Employee(String firstName, String lastName, String description, Manager manager) {
+	public Employee(String firstName, String lastName, String description, Myuser myuser) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.description = description;
-		this.manager = manager;
+		this.myuser = myuser;
 	}
 
 	@Override
@@ -41,13 +41,13 @@ public class Employee {
 			Objects.equals(lastName, employee.lastName) &&
 			Objects.equals(description, employee.description) &&
 			Objects.equals(version, employee.version) &&
-			Objects.equals(manager, employee.manager);
+			Objects.equals(myuser, employee.myuser);
 	}
 
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, firstName, lastName, description, version, manager);
+		return Objects.hash(id, firstName, lastName, description, version, myuser);
 	}
 
 	public Long getId() {
@@ -90,12 +90,12 @@ public class Employee {
 		this.version = version;
 	}
 
-	public Manager getManager() {
-		return manager;
+	public Myuser getMyuser() {
+		return myuser;
 	}
 
-	public void setManager(Manager manager) {
-		this.manager = manager;
+	public void setMyuser(Myuser myuser) {
+		this.myuser = myuser;
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class Employee {
 			", lastName='" + lastName + '\'' +
 			", description='" + description + '\'' +
 			", version=" + version +
-			", manager=" + manager +
+			", myuser=" + myuser +
 			'}';
 	}
 }

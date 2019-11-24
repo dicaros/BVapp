@@ -5,6 +5,7 @@ import { thelogin } from './store/actions/actions';
 import { thelogout } from './store/actions/actions';
 import { newItem } from './store/actions/actions';
 import { getUser } from './store/actions/actions';
+import { updateRecord } from './store/actions/actions';
 
 import { connect } from 'react-redux';
 import AppHeader from './components/AppHeader';
@@ -35,7 +36,9 @@ const mapStateToProps = (state) => {
       setSize: (size) => dispatch(setCurrentSize(size)),
       setPage: (direction, pagenum) => dispatch(setCurrentPage(direction, pagenum)),                              
       addNew: (firstName, lastName, description, url, nitems) => dispatch(newItem(firstName, lastName, description, url, nitems)),
-      getUser: () => dispatch(getUser('http://localhost:8080/username'))
+      getUser: () => dispatch(getUser('http://localhost:8080/username')),
+      updateRecord: (firstName, lastName, description, url) => dispatch(updateRecord(firstName, lastName, description, url))
+
     };
   };
   

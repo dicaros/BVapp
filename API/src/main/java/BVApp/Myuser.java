@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Manager {
+public class Myuser {
 
 	public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
@@ -25,27 +25,29 @@ public class Manager {
 	private String roles;
 
 	public void setPassword(String password) {
-		this.password = PASSWORD_ENCODER.encode(password);
+		this.password = PASSWORD_ENCODER.encode(password); // encrypt password
 	}
 
-	protected Manager() {}
+	protected Myuser() {}
 
-	public Manager(String name, String password, String roles) {
+	public Myuser(String name, String password, String roles) {
 
 		this.name = name;
 		this.setPassword(password);
 		this.roles = roles;
+	
+	
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		Manager manager = (Manager) o;
-		return Objects.equals(id, manager.id) &&
-			Objects.equals(name, manager.name) &&
-			Objects.equals(password, manager.password) &&
-			Objects.equals(roles, manager.roles);
+		Myuser myuser = (Myuser) o;
+		return Objects.equals(id, myuser.id) &&
+			Objects.equals(name, myuser.name) &&
+			Objects.equals(password, myuser.password) &&
+			Objects.equals(roles, myuser.roles);
 	}
 
 	@Override
@@ -86,7 +88,7 @@ public class Manager {
 
 	@Override
 	public String toString() {
-		return "Manager{" +
+		return "Myuser{" +
 			"id=" + id +
 			", name='" + name + '\'' +
 			", roles=" + roles +

@@ -27,7 +27,7 @@ export function getUser(userurl) {
         }
     }).then((data) => {
         dispatch(setuser(data))
-    })
+        })
     }
 }
 
@@ -101,21 +101,21 @@ export function loginsuccessfull(bool) {
 }
 
 export function newItem(firstName, lastName, description, url, nitems)  {
-    var newrecord = {firstName: firstName, lastName: lastName, description: description}
+    var updatedrecord = {firstName: firstName, lastName: lastName, description: description}
     fetch(url, {
              method: "POST",
              credentials: 'include',
              headers: { 
                'Content-Type': 'application/json',
              },
-             body: JSON.stringify(newrecord)
+             body: JSON.stringify(updatedrecord)
           })
 .then(res => { 
-                console.log(res.status);
+                console.log('update request:' + res.status);
      }
          ).catch(error =>
            { 
-                 console.log(error.status)
+                 console.log('update request error:' + error.status)
    })
 
    return {
@@ -206,3 +206,18 @@ export function thelogin(loginurl, target)  {
        }  
 }
 
+export function updateRecord(firstName, lastName, description, url) {
+    var newrecord = {firstName: firstName, lastName: lastName, description: description}
+    return (dispatch) => {fetch(url, {
+             method: "PUT",
+             credentials: 'include',
+             headers: { 
+               'Content-Type': 'application/json',
+             },
+             body: JSON.stringify(newrecord)
+          })
+.then(res => { console.log(res.status); }
+         ).catch(error =>
+           { console.log(error.status) })
+    }
+}

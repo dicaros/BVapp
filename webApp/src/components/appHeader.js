@@ -17,7 +17,7 @@ class AppHeader extends React.Component {
 
 async addNew(firstName, lastName, description) {
       if (this.props.loginsuccess) {
-       await  this.props.addNew(firstName, lastName, description, this.props.listurl, this.props.items.page.totalElements)
+        await  this.props.addNew(firstName, lastName, description, this.props.listurl, this.props.items.page.totalElements)
          this.refresh();
       }
     }

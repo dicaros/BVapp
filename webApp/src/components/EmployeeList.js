@@ -26,7 +26,14 @@ class EmployeeList extends React.Component {
    switchPage (direction) {
          this.props.setPage(direction, this.props.items.page.totalPages)
            };
- 
+
+   async updateRecord(firstName, lastName, description, url) {  
+    if (this.props.loginsuccess) {
+       await  this.props.updateRecord(firstName, lastName, description, url)
+         this.refresh();
+      }
+    }
+
    refresh(){ this.props.fetchData(url, this.props.page, this.props.size) }
  
    render() {      
@@ -54,6 +61,7 @@ class EmployeeList extends React.Component {
                            <td>{row.lastName}</td>
                            <td>{row.description}</td>
                    <td><button onClick={() => {handleDelete(row._links.self.href, this.props, url)}}>Delete</button></td>
+                   <td><a  id = 'topheaderlink' href = '#' onClick={() => this.updateRecord('Dummy character', 'Surname', 'Job updated', row._links.self.href)}>Update</a></td>
                    </tr>)})
            )
          }

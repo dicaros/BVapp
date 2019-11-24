@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 @RepositoryEventHandler(Employee.class)
 public class SpringDataRestEventHandler {
 
-	private final ManagerRepository managerRepository;
+	private final MyuserRepository myuserRepository;
 
 	@Autowired
-	public SpringDataRestEventHandler(ManagerRepository managerRepository) {
-		this.managerRepository = managerRepository;
+	public SpringDataRestEventHandler(MyuserRepository myuserRepository) {
+		this.myuserRepository = myuserRepository;
 	}
 
 	@HandleBeforeCreate
@@ -23,13 +23,13 @@ public class SpringDataRestEventHandler {
 	public void applyUserInformationUsingSecurityContext(Employee employee) {
 
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
-		Manager manager = this.managerRepository.findByName(name);
-		if (manager == null) {
-			Manager newManager = new Manager();
-			newManager.setName(name);
-			newManager.setRoles("ROLE_MANAGER");
-			manager = this.managerRepository.save(newManager);
+		Myuser myuser = this.myuserRepository.findByName(name);
+		if (myuser == null) {
+			Myuser newMyuser = new Myuser();
+			newMyuser.setName(name);
+			newMyuser.setRoles("ROLE_USER");
+			myuser = this.myuserRepository.save(newMyuser);
 		}
-		employee.setManager(manager);
+		employee.setMyuser(myuser);
 	}
 }

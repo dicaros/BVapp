@@ -7,33 +7,33 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-@Component
-public class DatabaseLoader implements CommandLineRunner {
+@Component // automatically picked by @SpringBootApplication
+public class DatabaseLoader implements CommandLineRunner { // executes after all beans are created and registered
 
 	private final EmployeeRepository employees;
-	private final ManagerRepository managers;
+	private final MyuserRepository myusers;
 
 	@Autowired
 	public DatabaseLoader(EmployeeRepository employeeRepository,
-						  ManagerRepository managerRepository) {
+						  MyuserRepository myuserRepository) {
 
 		this.employees = employeeRepository;
-		this.managers = managerRepository;
+		this.myusers = myuserRepository;
 	}
 
 	@Override
 	public void run(String... strings) throws Exception {
 
-		Manager greg = this.managers.save(new Manager("greg", "turnquist",
-							"ROLE_MANAGER"));
-		Manager oliver = this.managers.save(new Manager("oliver", "gierke",
-							"ROLE_MANAGER"));
+		Myuser greg = this.myusers.save(new Myuser("greg", "turnquist",
+							"ROLE_USER"));
+		Myuser oliver = this.myusers.save(new Myuser("oliver", "gierke",
+							"ROLE_USER"));
 
 		SecurityContextHolder.getContext().setAuthentication(
 			new UsernamePasswordAuthenticationToken("greg", "doesn't matter",
-				AuthorityUtils.createAuthorityList("ROLE_MANAGER")));
+				AuthorityUtils.createAuthorityList("ROLE_USER")));
 
-		this.employees.save(new Employee("Frodozzo", "Baggins", "ring bearer", greg));
+		this.employees.save(new Employee("Frodo", "Baggins", "ring bearer", greg));
 		this.employees.save(new Employee("Bilbo", "Baggins", "burglar", greg));
 		this.employees.save(new Employee("Gandalf", "the Grey", "wizard", greg));
 		this.employees.save(new Employee("Gandalf2", "the Grey2", "wizard", greg));
@@ -48,7 +48,7 @@ public class DatabaseLoader implements CommandLineRunner {
 
 		SecurityContextHolder.getContext().setAuthentication(
 			new UsernamePasswordAuthenticationToken("oliver", "doesn't matter",
-				AuthorityUtils.createAuthorityList("ROLE_MANAGER")));
+				AuthorityUtils.createAuthorityList("ROLE_USER")));
 
 		this.employees.save(new Employee("Samwise", "Gamgee", "gardener", oliver));
 		this.employees.save(new Employee("Merry", "Brandybuck", "pony rider", oliver));
