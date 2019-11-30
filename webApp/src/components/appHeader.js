@@ -34,14 +34,15 @@ async addNew(isPrivate, gameDate, gameTime, description) {
          <thead>
          <tr>
             <td className = 'headermenu_left'>
-                  <img src = {logo} id='logo' alt='Logo'></img>
+                  <a href='/'><img src = {logo} id='logo' alt='Logo'></img></a>
             </td>
             <td className = 'headermenu_center'>
             </td>
             <td className = 'headermenu_right'>
+            <a  id = 'topheaderlink' href = '#' onClick={() => this.addNew(true, '2019-10-05', '15:00:00', 'this is a game that I just created')}>Create New</a> |&nbsp;
                   { this.props.loginsuccess && <span><a  id = 'topheaderlink' href = '#' onClick={() => this.logout(logouturl)}>Logout</a> | </span>}
                   { !this.props.loginsuccess && <span><a  id = 'topheaderlink' href = '#' onClick={() => this.logout(logouturl)}>Sign in</a> | </span>}
-                  <a  id = 'topheaderlink' href = '#' onClick={() => this.addNew(true, '2019-10-05', '15:00:00', 'this is a game that I just created')}>Create New</a> |&nbsp;
+
                   <a  id = 'topheaderlink' href = '#' >{ this.props.username }</a><span>&nbsp;&nbsp;</span>                
             </td>
           </tr>

@@ -20,11 +20,11 @@ public class SpringDataRestEventHandler {
 
 	@HandleBeforeCreate
 	@HandleBeforeSave
-	public void applyUserInformationUsingSecurityContext1(Employee employee) 
+	public void applyUserInformationUsingSecurityContext1(MyUserDetails myuserdetails) 
 {
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		Myuser myuser = this.myuserRepository.findByName(name);
-		employee.setMyuser(myuser);
+		myuserdetails.setMyuser(myuser);
 	}
 	@HandleBeforeCreate
 	@HandleBeforeSave

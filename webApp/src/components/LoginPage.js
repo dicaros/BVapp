@@ -32,22 +32,26 @@ class LoginPage extends React.Component {
                    <form method='POST' onSubmit={this.handleSubmit.bind(this)}> 
                        <table>
                          <thead>
-                           <tr>
+                         <tr>
+                                 <th colSpan={2}><br></br></th>
+                           </tr>
+                           <tr height='50px'>
                                  <th colSpan={2}>You are not logged. Please login</th>
                            </tr>
                          </thead>
                          <tbody>
-                           <tr>
+                           <tr height='25px'>
                                  <td>User</td>
                                  <td><input type='text' name='username'/></td>
                            </tr>
-                           <tr>
+                           <tr height='25px'>
                                  <td>Password</td>
                                  <td><input type='password' name='password'/></td>
                            </tr>
                            </tbody>
                          <tfoot>
-                           <tr>
+
+                           <tr height='60px'>
                                  <td className='tdloginbutton' colSpan={2}><button type="submit" className='submitbutton' >Login</button></td>
                            </tr>
                          </tfoot>
@@ -58,7 +62,7 @@ class LoginPage extends React.Component {
  
         if(!this.props.loginsuccess && this.props.loginsuccess != null) {
            return(
-                 <LoginForm />
+                 <center><LoginForm /></center>
              )
              
          }
