@@ -15,13 +15,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Myuser {
 
 	public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
-
 	private @Id @GeneratedValue Long id;
-
+	
 	private String name;
-
+//	private String firstname;
+//	private String lastname;
+//	private String emailaddress;
 	private @JsonIgnore String password;
-
 	private String roles;
 
 	public void setPassword(String password) {
@@ -35,8 +35,7 @@ public class Myuser {
 		this.name = name;
 		this.setPassword(password);
 		this.roles = roles;
-	
-	
+		
 	}
 
 	@Override
@@ -46,6 +45,9 @@ public class Myuser {
 		Myuser myuser = (Myuser) o;
 		return Objects.equals(id, myuser.id) &&
 			Objects.equals(name, myuser.name) &&
+//			Objects.equals(firstname, myuser.firstname) &&
+//			Objects.equals(lastname, myuser.lastname) &&
+//			Objects.equals(emailaddress, myuser.emailaddress) &&
 			Objects.equals(password, myuser.password) &&
 			Objects.equals(roles, myuser.roles);
 	}
@@ -74,6 +76,31 @@ public class Myuser {
 		this.name = name;
 	}
 
+//	public String getFirstname() {
+//		return firstname;
+//	}
+
+//	public void setFirstname(String firstname) {
+//		this.firstname = firstname;
+//	}
+	
+//	public String getLastname() {
+//		return lastname;
+//	}
+
+//	public void setLastname(String lastname) {
+//		this.lastname = lastname;
+//	}
+
+	
+//	public String getEmailaddress() {
+//		return emailaddress;
+//	}
+
+//	public void setEmailaddress(String emailaddress) {
+//		this.emailaddress = emailaddress;
+//	}
+	
 	public String getPassword() {
 		return password;
 	}

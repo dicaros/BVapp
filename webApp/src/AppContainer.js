@@ -1,4 +1,4 @@
-import { loademployees } from './store/actions/actions';
+import { loadgames } from './store/actions/actions';
 import { setCurrentPage } from './store/actions/actions';
 import { setCurrentSize } from './store/actions/actions';
 import { thelogin } from './store/actions/actions';
@@ -10,7 +10,7 @@ import { updateRecord } from './store/actions/actions';
 import { connect } from 'react-redux';
 import AppHeader from './components/AppHeader';
 
-import EmployeeList from './components/EmployeeList';
+import GameList from './components/GameList';
 import LoginPage from './components/LoginPage';
 
 const mapStateToProps = (state) => {
@@ -29,12 +29,12 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
   return {
-      fetchData: (url, page, size) => dispatch(loademployees(url, page, size)),
+      fetchData: (url, page, size) => dispatch(loadgames(url, page, size)),
       doLogin: (loginurl, target) => dispatch(thelogin(loginurl, target)),                               
       doLogout: (logouturl) => dispatch(thelogout(logouturl)),
       setSize: (size) => dispatch(setCurrentSize(size)),
       setPage: (direction, pagenum) => dispatch(setCurrentPage(direction, pagenum)),                              
-      addNew: (firstName, lastName, description, url, nitems) => dispatch(newItem(firstName, lastName, description, url, nitems)),
+      addNew: (isPrivate, gameDate, gameTime, description, url, nitems) => dispatch(newItem(isPrivate, gameDate, gameTime, description, url, nitems)),
       getUser: () => dispatch(getUser('http://localhost:8080/username')),
       updateRecord: (firstName, lastName, description, url) => dispatch(updateRecord(firstName, lastName, description, url))
 
@@ -42,7 +42,7 @@ const mapStateToProps = (state) => {
   };
   
   export const HeaderComponent = connect(mapStateToProps, mapDispatchToProps)(AppHeader);
-  export const EmployeeComponent = connect(mapStateToProps, mapDispatchToProps)(EmployeeList);
+  export const GameComponent = connect(mapStateToProps, mapDispatchToProps)(GameList);
   export const LoginComponent = connect(mapStateToProps, mapDispatchToProps)(LoginPage);
 
   export default HeaderComponent;

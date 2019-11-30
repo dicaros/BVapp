@@ -17,12 +17,56 @@ body {
     color: #ffdf5f;
 }
 
+button {
+    background-color: black;
+    color: #71cee7;
+    border-style: hidden;
+    border-color: darkgrey;    
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    font-size: medium;
+}
+
+.submitbutton {
+    width: 80%;
+    background-color: lightskyblue;
+    border-style: solid;
+    border-color: darkgrey;
+    border-width: 1px;
+    height: 100%;
+}
+
 header {
     margin: 0;
     display: block;
-    background-color: #6454ff;
+    background-color: black; 
+    box-shadow: 0px 7px 4px #999999;
     position: sticky;
     top: 0;
+}
+
+.headermenu_center {
+    width: 60%;
+}
+
+.headermenu_left {
+    width: 20%;
+
+}
+
+.headermenu_right {
+    width: 20%;
+}
+
+#logo {
+    width: 35%;
+    height: 35%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 main {
@@ -33,13 +77,9 @@ section {
     margin: 5px;
 }
 
-  .submitbutton {
-    width: 80%;
-    background-color: lightskyblue;
-    border-style: solid;
-    border-color: darkgrey;
-    border-width: 1px;
-    height: 100%;
+.tableheader {
+    width: 100%;  
+
 }
 
   .tablelist {
@@ -49,6 +89,10 @@ section {
 td {
     text-align: left;
     padding: 0px;
+}
+
+#tdgamelist1 {
+    text-align: center;
 }
 
 .tdloginbutton {
@@ -67,14 +111,11 @@ th {
     text-align: center;
 }
 
-.thlist {
-    width: 30%;
-}
-
 #topheader {
     padding: 5px;
     text-align: right;
-    color: #eeffff;
+    font-size: 110%;
+    color: #71cee7;
 }
 
 #topheaderlink {
@@ -82,9 +123,15 @@ th {
     font-style: normal;
     font-weight: normal;
     font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
-    color: #eeffff  ;
+    font-size: 110%;
+    color: #71cee7  ;
 }
 
 #topheaderlink:hover {
     color: #ffdf5f;
+}
+
+#trfooter {
+    align-content: center;
+    width: 100%;
 }

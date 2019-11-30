@@ -2,9 +2,8 @@ import React from 'react';
 import { handleDelete } from '../functions/functions'
 
 var countpage = 0 + ' '
-const url = 'http://localhost:8080/api/games'
 
-class EmployeeList extends React.Component {
+class GameList extends React.Component {
 
     componentDidMount() { 
       console.log(this.props.loginsuccess)    
@@ -20,7 +19,7 @@ class EmployeeList extends React.Component {
  
    async handleChange(event) {
          await this.props.setSize(event.target.value);
-         await this.props.setPage('prev', url, 1, this.props.items.page.totalPages)
+         await this.props.setPage('prev', this.props.listurl, 1, this.props.items.page.totalPages)
    };
  
    switchPage (direction) {
@@ -34,7 +33,7 @@ class EmployeeList extends React.Component {
       }
     }
 
-   refresh(){ this.props.fetchData(url, this.props.page, this.props.size) }
+   refresh(){ this.props.fetchData(this.props.listurl, this.props.page, this.props.size) }
  
    render() {      
 
@@ -42,10 +41,10 @@ class EmployeeList extends React.Component {
                          return (
                                        <thead>
                                            <tr> 
-                                             <th className='thlist'>Game organizer</th>
-                                             <th className='thlist'>Date</th>
-                                             <th className='thlist'>Time</th>
-                                             <th className='thlist'>Description</th>
+                                             <th>Game organizer</th>
+                                             <th>Date</th>
+                                             <th>Time</th>
+                                             <th>Description</th>
                                            </tr>
                                        </thead>
                                  )
@@ -58,12 +57,12 @@ class EmployeeList extends React.Component {
                    {
                      return(
                            <tr key={index}>
-                           <td>{row.myuser.name}</td>
-                           <td>{row.gamedate}</td>
-                           <td>{row.gametime}</td>
-                           <td>{row.description}</td>
-                   <td><button onClick={() => {handleDelete(row._links.self.href, this.props, url)}}>Delete</button></td>
-                   <td><a  id = 'bodylink' href = '#' onClick={() => this.updateRecord('Dummy character', 'Surname', 'Job updated', row._links.self.href)}>Update</a></td>
+                           <td id = 'tdgamelist1' width='20%'>{row.myuser.name} {row.myuser.surname}</td>
+                           <td id = 'tdgamelist1' width='10%'>{row.gamedate}</td>
+                           <td id = 'tdgamelist1' width='10%'>{row.gametime}</td>
+                           <td width='40%'>{row.description}</td>
+                   <td width='5%'><button id='button_delete' onClick={() => {handleDelete(row._links.self.href, this.props, this.props.listurl)}}>Delete</button></td>
+                   <td width='5%'><a  id = 'bodylink' href = '#' onClick={() => this.updateRecord('Dummy character', 'Surname', 'Job updated', row._links.self.href)}>Update</a></td>
                    </tr>)})
            )
          }
@@ -75,8 +74,14 @@ class EmployeeList extends React.Component {
                  const TableFooter = () => {
                                      return (
                                       countpage = this.props.items.page.totalPages + ' ',
-                                       <tfoot><tr><td colSpan={4}>
-                                                       <button onClick={() => this.switchPage('prev')}>Prev</button><span>&nbsp;&nbsp;</span>
+                                       <tfoot>
+                                         <tr><td colSpan='6'>
+                                           <br></br>
+                                           </td>
+                                         </tr>
+                                         <tr id = 'trfooter'>
+                                           <td colSpan='6'>
+                                                     <center>  <button onClick={() => this.switchPage('prev')}>Prev</button><span>&nbsp;&nbsp;</span>
                                                        <button onClick={() => this.switchPage('next')}>Next</button><span>&nbsp;&nbsp;</span>
                                   
                                                        {this.props.page+1}/{countpage}
@@ -87,9 +92,10 @@ class EmployeeList extends React.Component {
                                                            <option value={20}>20</option>
                                                            <option value={50}>50</option>
                                                            <option value={100}>100</option>
-                                                       </select>                                                   
- 
-                                     </td></tr></tfoot>
+                                                       </select>                                                   </center>
+                                       </td>
+                               
+                                     </tr></tfoot>
                                        );   
                            }
          if(this.props.loginsuccess && typeof this.props.items._embedded != 'undefined') {
@@ -108,4 +114,4 @@ class EmployeeList extends React.Component {
      }
  }
  
-export default EmployeeList;
+export default GameList;

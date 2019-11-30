@@ -12,7 +12,7 @@ public interface GameRepository extends PagingAndSortingRepository<Game, Long> {
 	Game save(@Param("game") Game game);
 
 	@Override
-	@PreAuthorize("@gameRepository.findById(#id)?.myuser?.name == authentication?.name")
+	@PreAuthorize("@gameRepository.findById(#id)?.myuser?.name  == authentication?.name")
 	void deleteById(@Param("id") Long id);
 
 	@Override

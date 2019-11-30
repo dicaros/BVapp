@@ -19,11 +19,11 @@ export function getUser(userurl) {
               },
      })
      .then((res) => {
-        if(res.status=='401') {
-            return ('Guest')
+        if(res.status!='401') {
+            return res.text()
         }
         else {
-            return res.text()
+            return ('Guest')
         }
     }).then((data) => {
         dispatch(setuser(data))
@@ -59,7 +59,7 @@ export function itemsFetchDataSuccess(items) {
     };
 }
 
-export function loademployees(url, page, size) {
+export function loadgames(url, page, size) {
     return (dispatch) => {
     dispatch(isLoading(true)); 
     fetch(url+'?page='+page+'&size='+size, {
@@ -100,8 +100,8 @@ export function loginsuccessfull(bool) {
     };
 }
 
-export function newItem(firstName, lastName, description, url, nitems)  {
-    var updatedrecord = {firstName: firstName, lastName: lastName, description: description}
+export function newItem(isPrivate, gameDate, gameTime, description, url, nitems)  {
+    var updatedrecord = {sportcenter: 1, priceperperson: 10, isprivate: isPrivate, gamedate: gameDate, gametime: gameTime, gameisfull: true, gameispast: true, description: description}
     fetch(url, {
              method: "POST",
              credentials: 'include',
@@ -179,7 +179,10 @@ export function thelogin(loginurl, target)  {
                             console.log("log in " + res.status);
                     })
             .then(res => {
-                dispatch(setuser(target.username.value));
+                if(res.status != '401')
+                {
+                        dispatch(setuser(target.username.value));
+                }
             })
                     .catch(error =>
                       { 

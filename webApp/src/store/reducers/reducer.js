@@ -35,7 +35,7 @@ export function isError(state = false, action) {
     }
 }
 
-export function listurl(state = 'http://localhost:8080/api/employees', action) {
+export function listurl(state = 'http://localhost:8080/api/games', action) {
     switch (action.type) {
         case 'LIST_URL':
             return action.listurl;        default:

@@ -1,5 +1,5 @@
 import React from 'react'
-import { EmployeeComponent } from './AppContainer';
+import { GameComponent } from './AppContainer';
 import { HeaderComponent } from './AppContainer';
 import { LoginComponent } from './AppContainer';
 
@@ -13,11 +13,11 @@ class App extends React.Component {
     }
 
     const BodyRender = () => {
-              return(<section><LoginComponent /><EmployeeComponent /></section>)
+              return(<section><LoginComponent /><GameComponent /></section>)
     }
 
     
-    return (<div id = 'main'><HeaderRender />
+    return (  <div id = 'main'><HeaderRender />
     <BodyRender /></div>)   
           }
 
