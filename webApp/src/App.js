@@ -2,6 +2,7 @@ import React from 'react'
 import { GameComponent } from './AppContainer';
 import { HeaderComponent } from './AppContainer';
 import { LoginComponent } from './AppContainer';
+import { UserComponent } from './AppContainer';
 
 class App extends React.Component {
   render () {
@@ -13,7 +14,7 @@ class App extends React.Component {
     }
 
     const BodyRender = () => {
-              return(<section><LoginComponent /><GameComponent /></section>)
+              return(<section><LoginComponent /><GameComponent /><UserComponent /></section>)
     }
 
     

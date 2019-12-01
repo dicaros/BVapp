@@ -5,5 +5,7 @@ export const IS_LOADING = 'IS_LOADING';
 export const ITEMS_FETCH_DATA_SUCCESS = 'ITEMS_FETCH_DATA_SUCCESS';
 export const LIST_URL = 'LIST_URL'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const MYUSER_URL = 'MYUSER_URL'
 export const N_ITEMS = 'N_ITEMS'
 export const SET_USER = 'SET_USER'
+export const USER_FETCH_DATA_SUCCESS = 'USER_FETCH_DATA_SUCCESS'

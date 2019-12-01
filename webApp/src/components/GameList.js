@@ -33,7 +33,7 @@ class GameList extends React.Component {
       }
     }
 
-   refresh(){ this.props.fetchData(this.props.listurl, this.props.page, this.props.size) }
+   refresh(){ this.props.fetchGames(this.props.listurl, this.props.page, this.props.size) }
  
    render() {      
 

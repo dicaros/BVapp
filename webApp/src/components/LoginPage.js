@@ -23,7 +23,7 @@ class LoginPage extends React.Component {
      this.props.doLogin(loginurl, event.target);
  }
  
-   refresh(){ this.props.fetchData(this.props.listurl, this.props.page, this.props.size) }
+   refresh(){ this.props.fetchGames(this.props.listurl, this.props.page, this.props.size) }
  
    render() {      
  
@@ -62,7 +62,10 @@ class LoginPage extends React.Component {
  
         if(!this.props.loginsuccess && this.props.loginsuccess != null) {
            return(
-                 <center><LoginForm /></center>
+                 <center><LoginForm />
+                    <br></br>
+                    <div>New user? Register at this <a href='#'>link</a></div>
+                 </center>
              )
              
          }

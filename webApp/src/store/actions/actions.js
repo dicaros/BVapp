@@ -6,8 +6,11 @@ import { IS_LOADING } from './action-type';
 import { ITEMS_FETCH_DATA_SUCCESS } from './action-type';
 import { LIST_URL } from './action-type';
 import { LOGIN_SUCCESS } from './action-type';
+import { MYUSER_URL } from './action-type';
 import { N_ITEMS } from './action-type';
 import { SET_USER } from './action-type';
+import { USER_FETCH_DATA_SUCCESS } from './action-type';
+
 import { store } from '../store'
 
 export function getUser(userurl) {
@@ -45,13 +48,6 @@ export function isLoading(bool) {
     };
 }
 
-export function listurl(listurl) {
-    return {
-        type: LIST_URL,
-        listurl: listurl
-    };
-}
-
 export function itemsFetchDataSuccess(items) {
     return {
         type: ITEMS_FETCH_DATA_SUCCESS,
@@ -59,44 +55,93 @@ export function itemsFetchDataSuccess(items) {
     };
 }
 
-export function loadgames(url, page, size) {
-    return (dispatch) => {
-    dispatch(isLoading(true)); 
-    fetch(url+'?page='+page+'&size='+size, {
-      method: 'GET',
-      credentials: 'include',
-      headers: { 
-              'Content-Type': 'application/json',
-            },
-   })
-     .then((res) => {
-        dispatch(isLoading(false));
-        if(res.status == '401') {
-            dispatch(loginsuccessfull(false));
-            console.log("unauthorized " + res.status);
-        }
-        else {
-            console.log("success " + res.status);
-            dispatch(itemsFetchDataSuccess(res));
-            dispatch(loginsuccessfull(true));
-            return res;
-    }
- })
-.then((res) => res.json())
-.then((items) => dispatch(itemsFetchDataSuccess(items)))
-.catch(error => {
-            dispatch(isError(true));
-            console.log("fail " + error.status)
+
+export function listurl(listurl) {
+    return {
+        type: LIST_URL,
+        listurl: listurl
+    };
 }
 
-);
-};
+export function loadgames(url, page, size) {
+            return (dispatch) => {
+                    dispatch(isLoading(true)); 
+                    fetch(url+'?page='+page+'&size='+size, {
+                                                                method: 'GET',
+                                                                credentials: 'include',
+                                                                headers: { 
+                                                                            'Content-Type': 'application/json',
+                                                                },
+                    })
+                    .then((res) => {
+                                        dispatch(isLoading(false));
+                                        if(res.status == '401') {
+                                                                        dispatch(loginsuccessfull(false));
+                                                                        console.log("unauthorized " + res.status);
+                                                                }
+                                        else {
+                                                                        console.log("success " + res.status);
+                                                                        dispatch(itemsFetchDataSuccess(res));
+                                                                        dispatch(loginsuccessfull(true));
+                                                                        return res;
+                                        }
+                                })
+                    .then((res) => res.json())
+                    .then((items) => dispatch(itemsFetchDataSuccess(items)))
+                    .catch(error => {
+                                        dispatch(isError(true));
+                                        console.log("fail " + error.status)
+                                    }
+
+                            );
+                                };
+    }
+
+export function loaduserdetails(url) {
+        return (dispatch) => {
+                dispatch(isLoading(true)); 
+                fetch(url, {
+                                                            method: 'GET',
+                                                            credentials: 'include',
+                                                            headers: { 
+                                                                        'Content-Type': 'application/json',
+                                                            },
+                })
+                .then((res) => {
+                                    dispatch(isLoading(false));
+                                    if(res.status == '401') {
+                                                                    dispatch(loginsuccessfull(false));
+                                                                    console.log("unauthorized " + res.status);
+                                                            }
+                                    else {
+                                                                    console.log("success " + res.status);
+                                                                    dispatch(userFetchDataSuccess(res));
+                                                                    dispatch(loginsuccessfull(true));
+                                                                    return res;
+                                    }
+                            })
+                .then((res) => res.json())
+                .then((items) => dispatch(userFetchDataSuccess(items)))
+                .catch(error => {
+                                    dispatch(isError(true));
+                                    console.log("fail " + error.status)
+                                }
+
+                        );
+                            };
 }
 
 export function loginsuccessfull(bool) {
     return {
         type: LOGIN_SUCCESS,
         loginsuccess: bool
+    };
+}
+
+export function myuserurl(myuserurl) {
+    return {
+        type: MYUSER_URL,
+        myuserurl: myuserurl
     };
 }
 
@@ -223,4 +268,11 @@ export function updateRecord(firstName, lastName, description, url) {
          ).catch(error =>
            { console.log(error.status) })
     }
+}
+
+export function userFetchDataSuccess(useritems) {
+    return {
+        type: USER_FETCH_DATA_SUCCESS,
+        useritems
+    };
 }

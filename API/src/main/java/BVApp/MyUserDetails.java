@@ -5,38 +5,37 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
-
 import net.minidev.json.annotate.JsonIgnore;
 
 @Entity // declare that this class is meant for storage in a dbs table
 public class MyUserDetails {
 
 	private @Id @GeneratedValue Long id; // automatically generated primary ID
-	private String firstName;
-	private String lastName;
+	private String firstname;
+	private String lastname;
 	private String phone;
-	private String gpsx;
-	private String gpsy;
+	private Double gpsx;
+	private Double gpsy;
 	private Integer playedcount;
-	private Integer noShowCount;
+	private Integer noshowcount;
 	
 
 	private @Version @JsonIgnore Long version;
 
-	private @ManyToOne Myuser myuser;
+	private @OneToOne Myuser myuser;
 
 	private MyUserDetails() {}
 
-	public MyUserDetails(String firstName, String lastName, String phone, String gpsx, String gpsy, Integer playedcount, Integer noShowCount, Myuser myuser) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public MyUserDetails(String firstname, String lastname, String phone, Double gpsx, Double gpsy, Integer playedcount, Integer noshowcount, Myuser myuser) {
+		this.firstname = firstname;
+		this.lastname = lastname;
 		this.phone = phone;
 		this.gpsx = gpsx;
 		this.gpsy = gpsy;
 		this.playedcount = playedcount;
-		this.noShowCount = noShowCount;
+		this.noshowcount = noshowcount;
 		this.myuser = myuser;
 	}
 
@@ -46,19 +45,19 @@ public class MyUserDetails {
 		if (o == null || getClass() != o.getClass()) return false;
 		MyUserDetails myuserdetails = (MyUserDetails) o;
 		return Objects.equals(id, myuserdetails.id) &&
-			Objects.equals(firstName, myuserdetails.firstName) &&
-			Objects.equals(lastName, myuserdetails.lastName) &&
+			Objects.equals(firstname, myuserdetails.firstname) &&
+			Objects.equals(lastname, myuserdetails.lastname) &&
 			Objects.equals(phone, myuserdetails.phone) &&
 			Objects.equals(gpsx, myuserdetails.gpsx) &&
 			Objects.equals(gpsy, myuserdetails.gpsy) &&
 			Objects.equals(playedcount, myuserdetails.playedcount) &&
-			Objects.equals(noShowCount, myuserdetails.noShowCount) &&			
+			Objects.equals(noshowcount, myuserdetails.noshowcount) &&			
 			Objects.equals(myuser, myuserdetails.myuser);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, firstName, lastName, phone, gpsx, gpsy, playedcount, noShowCount, myuser);
+		return Objects.hash(id, firstname, lastname, phone, gpsx, gpsy, playedcount, noshowcount, myuser);
 	}
 
 	public Long getId() {
@@ -70,19 +69,19 @@ public class MyUserDetails {
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return firstname;
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstname = firstName;
 	}
 
 	public String getLastName() {
-		return lastName;
+		return lastname;
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastname = lastName;
 	}
 
 	public String getPhone() {
@@ -93,19 +92,19 @@ public class MyUserDetails {
 		this.phone = phone;
 	}
 
-	public String getgpsx() {
+	public Double getgpsx() {
 		return gpsx;
 	}
 
-	public void setgpsx(String gpsx) {
+	public void setgpsx(Double gpsx) {
 		this.gpsx = gpsx;
 	}
 
-	public String getgpsy() {
+	public Double getgpsy() {
 		return gpsy;
 	}
 
-	public void setgpsy(String gpsy) {
+	public void setgpsy(Double gpsy) {
 		this.gpsy = gpsy;
 	}
 
@@ -118,11 +117,11 @@ public class MyUserDetails {
 	}
 
 	public Integer getnoShowCount() {
-		return noShowCount;
+		return noshowcount;
 	}
 
 	public void setnoShowCount(Integer noShowCount) {
-		this.noShowCount = noShowCount;
+		this.noshowcount = noShowCount;
 	}
 
 	public Long getVersion() {
@@ -132,6 +131,7 @@ public class MyUserDetails {
 	public void setVersion(Long version) {
 		this.version = version;
 	}
+
 
 	public Myuser getMyuser() {
 		return myuser;
@@ -145,17 +145,15 @@ public class MyUserDetails {
 	public String toString() {
 		return "MyUserDetails{" +
 			"id=" + id +
-			", firstName='" + firstName + '\'' +
-			", lastName='" + lastName + '\'' +
+			", firstName='" + firstname + '\'' +
+			", lastName='" + lastname + '\'' +
 						", phone='" + phone + '\'' +
 						", gpsx='" + gpsx + '\'' +
 						", gpsy='" + gpsy + '\'' +
 						", playedcount='" + playedcount + '\'' +
-						", noShowCount='" + noShowCount + '\'' +		
+						", noShowCount='" + noshowcount + '\'' +		
 			", version=" + version +
 			", myuser=" + myuser +
 			'}';
 	}
 }
-
-

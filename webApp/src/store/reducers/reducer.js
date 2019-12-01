@@ -21,13 +21,17 @@ export function isError(state = false, action) {
             return state;
     }
 
-}export function isLoading(state = false, action) {
+}
+
+export function isLoading(state = false, action) {
     switch (action.type) {
         case 'ITEMS_IS_LOADING':
             return action.isLoading;        default:
             return state;
     }
-}export function items(state = [], action) {
+}
+
+export function items(state = [], action) {
     switch (action.type) {
         case 'ITEMS_FETCH_DATA_SUCCESS':
             return action.items;        default:
@@ -51,10 +55,27 @@ export function loginsuccessfull(state = null, action) {
     }
 }
 
+export function myuserurl(state = 'http://localhost:8080/api/myUserDetailses', action) {
+    switch (action.type) {
+        case 'MYUSER_URL':
+            return action.myuserurl;        default:
+            return state;
+    }
+}
+
+
 export function nitems(state = 0, action) {
     switch (action.type) {
         case 'N_ITEMS':
             return action.nitems;        default:
+            return state;
+    }
+}
+
+export function useritems(state = [], action) {
+    switch (action.type) {
+        case 'USER_FETCH_DATA_SUCCESS':
+            return action.useritems;        default:
             return state;
     }
 }
@@ -73,8 +94,10 @@ export default combineReducers({
     isLoading,
     listurl,
     loginsuccessfull,
+    myuserurl,
     nitems,
     page,
     size,
-    username
+    useritems,
+    username,
 });

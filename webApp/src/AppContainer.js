@@ -1,4 +1,4 @@
-import { loadgames } from './store/actions/actions';
+import { loadgames, loaduserdetails } from './store/actions/actions';
 import { setCurrentPage } from './store/actions/actions';
 import { setCurrentSize } from './store/actions/actions';
 import { thelogin } from './store/actions/actions';
@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import AppHeader from './components/AppHeader';
 
 import GameList from './components/GameList';
+import UserDetails from './components/UserDetails';
 import LoginPage from './components/LoginPage';
 
 const mapStateToProps = (state) => {
@@ -20,17 +21,20 @@ const mapStateToProps = (state) => {
          loginsuccess: state.loginsuccessfull,
          listurl: state.listurl,
          items: state.items,
+         myuserurl: state.myuserurl,
          nitems: state.nitems,
          page: state.page,
          size: state.size,
+         useritems: state.useritems,
          username: state.username
        };
   };
   
   const mapDispatchToProps = (dispatch) => {
   return {
-      fetchData: (url, page, size) => dispatch(loadgames(url, page, size)),
-      doLogin: (loginurl, target) => dispatch(thelogin(loginurl, target)),                               
+      fetchGames: (url, page, size) => dispatch(loadgames(url, page, size)),
+      fetchUserDetails: (url, page, size) => dispatch(loaduserdetails(url, page, size)),
+      doLogin: (loginurl, target) => dispatch(thelogin(loginurl, target)),                                    
       doLogout: (logouturl) => dispatch(thelogout(logouturl)),
       setSize: (size) => dispatch(setCurrentSize(size)),
       setPage: (direction, pagenum) => dispatch(setCurrentPage(direction, pagenum)),                              
@@ -43,6 +47,7 @@ const mapStateToProps = (state) => {
   
   export const HeaderComponent = connect(mapStateToProps, mapDispatchToProps)(AppHeader);
   export const GameComponent = connect(mapStateToProps, mapDispatchToProps)(GameList);
+  export const UserComponent = connect(mapStateToProps, mapDispatchToProps)(UserDetails);
   export const LoginComponent = connect(mapStateToProps, mapDispatchToProps)(LoginPage);
 
   export default HeaderComponent;
