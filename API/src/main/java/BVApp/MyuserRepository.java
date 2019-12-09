@@ -10,4 +10,6 @@ public interface MyuserRepository extends Repository<Myuser, Long> {
 
 	Myuser findByName(String name);
 
+	Myuser findById(Long id);
+
 }

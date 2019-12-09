@@ -51,6 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl("/");
 	}
 
+	
 	   @Bean
 	    public CorsConfigurationSource corsConfigurationSource() {
 	        final CorsConfiguration configuration = new CorsConfiguration();

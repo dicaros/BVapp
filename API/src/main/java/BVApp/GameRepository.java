@@ -18,5 +18,5 @@ public interface GameRepository extends PagingAndSortingRepository<Game, Long> {
 	@Override
 	@PreAuthorize("#game?.myuser?.name == authentication?.name")
 	void delete(@Param("game") Game game);
-
+	
 }

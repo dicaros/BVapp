@@ -18,10 +18,13 @@ class UserDetails extends React.Component {
                          return (
                                        <thead>
                                            <tr> 
-                                             <th>Game organizer</th>
-                                             <th>Date</th>
-                                             <th>Time</th>
-                                             <th>Description</th>
+                                             <th>Name</th>
+                                             <th>Surname</th>
+                                             <th>Phone</th>
+                                             <th>GPSx</th>
+                                             <th>GPSy</th>
+                                             <th># Games</th>
+                                             <th># No Show</th>
                                            </tr>
                                        </thead>
                                  )
