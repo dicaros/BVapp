@@ -169,6 +169,26 @@ export function newItem(isPrivate, gameDate, gameTime, description, url, nitems)
     }
 }
 
+export function newUser(url, target)  {
+    var updatedrecord = {name: target.username.value, password: target.password.value, roles: 'ROLE_USER'}
+    fetch(url, {
+             method: "POST",
+             credentials: 'include',
+             headers: { 
+               'Content-Type': 'application/json',
+             },
+             body: JSON.stringify(updatedrecord)
+          })
+.then(res => { 
+                console.log('update request:' + res.status);
+     }
+         ).catch(error =>
+           { 
+                 console.log('update request error:' + error.status)
+  })
+
+}
+
 export function setCurrentPage(direction, pagenum) {
     var thepage = store.getState().page
       if(direction == 'next' && store.getState().page+1<pagenum) {

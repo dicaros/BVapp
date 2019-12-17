@@ -42,7 +42,7 @@ async addNew(isPrivate, gameDate, gameTime, description) {
       this.refresh();
     }
 
-    refresh(){ this.props.fetchData(this.props.listurl, this.props.page, this.props.size) }
+    refresh(){ this.props.fetchGames(this.props.listurl, this.props.page, this.props.size) }
 
 
     render() {
@@ -59,22 +59,22 @@ async addNew(isPrivate, gameDate, gameTime, description) {
                 </li>     
                 <li>
                   
-                <div class="container" onClick={this.menuShowToggle}>
-                      <div class="bar1"></div>
-                      <div class="bar2"></div>
-                      <div class="bar3"></div>
+                <div className="container" onClick={this.menuShowToggle}>
+                      <div className="bar1"></div>
+                      <div className="bar2"></div>
+                      <div className="bar3"></div>
                 </div> 
                     { this.state.showMenu && !this.props.loginsuccess && 
                     <ul>
-                          <li><a href = '#' onClick={() => this.logout(logouturl)}>Login</a></li>
-                          <li><a href="#">Register</a></li>
+                          <li><a href = '/' onClick={() => this.logout(logouturl)}>Login</a></li>
+                          <li><a href="/register">Register</a></li>
                           <li><a href="#">About...</a></li>
                       </ul> }
 
                       { this.state.showMenu && this.props.loginsuccess && 
                     <ul>
                           <li><a  href = '#' onClick={() => this.logout(logouturl)}>Logout</a></li>
-                          <li><a href="#">Register</a></li>
+                          <li><a href="/register">Register</a></li>
                           <li><a href="#">About...</a></li>
                           <li><a id = 'topheaderlink' href = '#' onClick={() => this.addNew(true, '2019-10-05', '15:00:00', 'this is a game that I just created')}>Create New</a></li>
                           <li><div id='line'></div></li>

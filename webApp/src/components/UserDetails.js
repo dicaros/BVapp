@@ -10,8 +10,16 @@ class UserDetails extends React.Component {
                  this.refresh();
    };
 
-   refresh(){ this.props.fetchUserDetails(this.props.myuserurl, this.props.page, this.props.size) }
- 
+   componentDidUpdate(prevProps) {
+    if(this.props.loginsuccess != prevProps.loginsuccess)
+    {
+     this.refresh();
+   }
+  } 
+
+
+   refresh(){ this.props.fetchUserDetails(this.props.myuserurl) }
+
    render() {      
 
          const TableHeader = () => {
@@ -71,7 +79,7 @@ class UserDetails extends React.Component {
          if(this.props.loginsuccess && typeof this.props.useritems._embedded != 'undefined') {
           return (
             
-                   <table className='tablelist'>
+                   <table>
                        <TableHeader />
                        <TableBody  />
                        <TableFooter  />

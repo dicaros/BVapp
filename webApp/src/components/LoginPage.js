@@ -64,7 +64,7 @@ class LoginPage extends React.Component {
            return(
                  <center><LoginForm />
                     <br></br>
-                    <div>New user? Register at this <a href='#'>link</a></div>
+                    <div>New user? Register at this <a href='/register'>link</a></div>
                  </center>
              )
              

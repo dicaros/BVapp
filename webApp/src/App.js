@@ -3,6 +3,13 @@ import { GameComponent } from './AppContainer';
 import { HeaderComponent } from './AppContainer';
 import { LoginComponent } from './AppContainer';
 import { UserComponent } from './AppContainer';
+import { RegisterComponent } from './AppContainer';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 class App extends React.Component {
   render () {
@@ -13,8 +20,22 @@ class App extends React.Component {
       return (<header><HeaderComponent /></header>)
     }
 
+ 
     const BodyRender = () => {
-              return(<section><LoginComponent /><GameComponent /><UserComponent /></section>)
+              return(<section>
+              <Router>
+                     <Switch>
+                            <Route path="/register">
+                                    <RegisterComponent />
+                            </Route>
+                            <Route path="/">
+                                    <LoginComponent /><GameComponent />
+                            </Route>
+                    </Switch>
+              </Router>
+                    </section>
+                    
+                )
     }
 
     
