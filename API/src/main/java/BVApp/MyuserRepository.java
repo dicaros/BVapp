@@ -10,7 +10,7 @@ public interface MyuserRepository extends CrudRepository<Myuser, Long> {
 
 /*	@Override
 	@PreAuthorize("permitAll()")*/
-	Myuser save(@Param("myuser")Myuser myuser);
+	Myuser save(Myuser myuser);
 
 	Myuser findByName(String name);
 

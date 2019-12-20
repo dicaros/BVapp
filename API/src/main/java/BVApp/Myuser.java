@@ -18,7 +18,7 @@ public class Myuser {
 
 	private @Id @GeneratedValue Long id;
 	private String name;
-	private @JsonIgnore String password;
+	private String password;
 	private String roles;
 
 	public void setPassword(String password) {

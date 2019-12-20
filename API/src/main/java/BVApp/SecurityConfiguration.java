@@ -36,7 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http
 			.cors().and()
 			.authorizeRequests()
-				.antMatchers("/built/**", "/main.css").permitAll()
+				.antMatchers("/signup", "/built/**", "/main.css").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()

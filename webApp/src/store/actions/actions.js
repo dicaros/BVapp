@@ -170,7 +170,7 @@ export function newItem(isPrivate, gameDate, gameTime, description, url, nitems)
 }
 
 export function newUser(url, target)  {
-    var updatedrecord = {name: target.username.value, password: target.password.value, roles: 'ROLE_USER'}
+    var updatedrecord = {name: target.username.value, password: target.password.value}
     fetch(url, {
              method: "POST",
              credentials: 'include',

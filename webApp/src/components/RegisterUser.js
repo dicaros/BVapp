@@ -1,6 +1,6 @@
 import React from 'react';
 
-const url = "http://localhost:8080/api/myusers"
+const url = "http://localhost:8080/signup"
 
 
 class RegisterUser extends React.Component {
@@ -35,7 +35,7 @@ class RegisterUser extends React.Component {
                       </tr>
                       <tr height='25px'>
                             <td>Repeat Password*</td>
-                            <td><input type='passwordrepeat' name='password'/></td>
+                            <td><input type='passwordrepeat' name='password2'/></td>
                       </tr>
                       </tbody>
                     <tfoot>

@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 @Component // automatically picked by @SpringBootApplication
 public class DatabaseLoader implements CommandLineRunner { // executes after all beans are created and registered
 
-	private final EmployeeRepository employees;
+//	private final EmployeeRepository employees;
 	private final MyuserRepository myusers;
 
 	@Autowired
-	public DatabaseLoader(EmployeeRepository employeeRepository,
+	public DatabaseLoader(/*EmployeeRepository employeeRepository,*/
 						  MyuserRepository myuserRepository) {
 
-		this.employees = employeeRepository;
+		/*this.employees = employeeRepository;*/
 		this.myusers = myuserRepository;
 	}
 
@@ -28,12 +28,14 @@ public class DatabaseLoader implements CommandLineRunner { // executes after all
 							"ROLE_USER"));
 		Myuser oliver = this.myusers.save(new Myuser("oliver", "gierke",
 							"ROLE_USER"));
+		Myuser ciaone = this.myusers.save(new Myuser("ciaone", "ciaone",
+				"ROLE_USER"));
 
 		SecurityContextHolder.getContext().setAuthentication(
 			new UsernamePasswordAuthenticationToken("greg", "doesn't matter",
 				AuthorityUtils.createAuthorityList("ROLE_USER")));
 
-		this.employees.save(new Employee("Frodo", "Baggins", "ring bearer", greg));
+	/*	this.employees.save(new Employee("Frodo", "Baggins", "ring bearer", greg));
 		this.employees.save(new Employee("Bilbo", "Baggins", "burglar", greg));
 		this.employees.save(new Employee("Gandalf", "the Grey", "wizard", greg));
 		this.employees.save(new Employee("Gandalf2", "the Grey2", "wizard", greg));
@@ -45,14 +47,14 @@ public class DatabaseLoader implements CommandLineRunner { // executes after all
 		this.employees.save(new Employee("Gandalf8", "the Grey8", "wizard", greg));
 		this.employees.save(new Employee("Gandalf9", "the Grey9", "wizard", greg));
 		this.employees.save(new Employee("Gandalf10", "the Grey10", "wizard", greg));
-
+*/
 		SecurityContextHolder.getContext().setAuthentication(
 			new UsernamePasswordAuthenticationToken("oliver", "doesn't matter",
 				AuthorityUtils.createAuthorityList("ROLE_USER")));
 
-		this.employees.save(new Employee("Samwise", "Gamgee", "gardener", oliver));
+	/*	this.employees.save(new Employee("Samwise", "Gamgee", "gardener", oliver));
 		this.employees.save(new Employee("Merry", "Brandybuck", "pony rider", oliver));
-		this.employees.save(new Employee("Peregrin", "Took", "pipe smoker", oliver));
+		this.employees.save(new Employee("Peregrin", "Took", "pipe smoker", oliver));*/
 
 		SecurityContextHolder.clearContext();
 	}
