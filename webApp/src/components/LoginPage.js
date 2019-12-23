@@ -9,15 +9,6 @@ class LoginPage extends React.Component {
   //      this.refresh();
   // };
  
-  doLogin(loginurl) {
-    if(this.props.loginsuccess)
-    {console.log('Already logged in, nothing happens')}
-       if (!this.props.loginsuccess) {
-         console.log('Logging in') 
-         this.props.doLogin(loginurl)
-       }
- }
- 
  handleSubmit(event) {
      event.preventDefault();
      this.props.doLogin(loginurl, event.target);
@@ -52,7 +43,7 @@ class LoginPage extends React.Component {
                          <tfoot>
 
                            <tr height='60px'>
-                                 <td className='tdloginbutton' colSpan={2}><button type="submit" className='submitbutton' >Login</button></td>
+                                 <td name="login" className='tdloginbutton' colSpan={2}><button type="submit" className='submitbutton' >Login</button></td>
                            </tr>
                          </tfoot>
                        </table>

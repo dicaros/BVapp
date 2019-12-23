@@ -89,6 +89,11 @@ section {
     margin: 5px;
 }
 
+.signuperror {
+    color: crimson;
+    font-size: smaller;
+}
+
 .tableheader {
     width: 100%;  
 }

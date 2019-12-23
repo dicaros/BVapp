@@ -74,7 +74,6 @@ async addNew(isPrivate, gameDate, gameTime, description) {
                       { this.state.showMenu && this.props.loginsuccess && 
                     <ul>
                           <li><a  href = '#' onClick={() => this.logout(logouturl)}>Logout</a></li>
-                          <li><a href="/register">Register</a></li>
                           <li><a href="#">About...</a></li>
                           <li><a id = 'topheaderlink' href = '#' onClick={() => this.addNew(true, '2019-10-05', '15:00:00', 'this is a game that I just created')}>Create New</a></li>
                           <li><div id='line'></div></li>

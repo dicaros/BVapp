@@ -5,12 +5,16 @@ public class UserResponse {
 		public Boolean checkfailed;
 		public Boolean psswmismatch;
 		public Boolean psswblank;
+		public Boolean nameblank;
+		public Boolean nameexists;
 		public String resultdescription;
 		
-		public UserResponse(Boolean checkfailed, Boolean psswmismatch, Boolean psswblank, String resultdescription) {
+		public UserResponse(Boolean checkfailed, Boolean psswmismatch, Boolean psswblank, Boolean nameblank, Boolean nameexists, String resultdescription) {
 			this.checkfailed = checkfailed;
 			this.psswmismatch = psswmismatch;
 			this.psswblank = psswblank;
+			this.nameblank = nameblank;
+			this.nameexists = nameexists;
 			this.resultdescription = resultdescription;
 		}
 	
@@ -36,6 +40,22 @@ public class UserResponse {
 
 		public void setpsswblank(Boolean psswblank) {
 			this.psswblank = psswblank;
+		}
+
+		public Boolean getnameblank() {
+			return nameblank;
+		}
+
+		public void setnameblank(Boolean nameblank) {
+			this.nameblank = nameblank;
+		}
+
+		public Boolean getnameexists() {
+			return nameexists;
+		}
+
+		public void setnameexists(Boolean nameexists) {
+			this.nameexists = nameexists;
 		}
 
 		

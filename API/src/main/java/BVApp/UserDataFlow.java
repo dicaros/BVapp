@@ -40,7 +40,7 @@ public class UserDataFlow {
 
 	public UserResponse saveUser(MyuserRepository repo)
 	{	 
-		UserResponse usercheck = this.validateRegistration(this.password, this.confirmpassword);
+		UserResponse usercheck = this.validateRegistration(this.password, this.confirmpassword, this.name, repo);
 
 		if(usercheck.checkfailed == false)
 			{
@@ -52,23 +52,37 @@ public class UserDataFlow {
 		return usercheck;
 	}
 	
-	public UserResponse validateRegistration(String password1, String password2)
+	public UserResponse validateRegistration(String password1, String password2, String name, MyuserRepository repo)
 	{	
-		UserResponse usercheck = new UserResponse(false, false, false, "Registration OK");
-		
-		
-		
+		UserResponse usercheck = new UserResponse(false, false, false, false, false, "");
+
+		if(name == null || name.equals(""))
+		{
+			usercheck.setFailed(true);
+			usercheck.setnameblank(true);
+			usercheck.setDescription(usercheck.resultdescription + "The name field cannot be blank. ");
+		}
+
 		if(!password1.equals(password2))
 		{
 			usercheck.setFailed(true);
 			usercheck.setpsswmismatch(true);
-			usercheck.setDescription("The two passwords must match. ");
+			usercheck.setDescription(usercheck.resultdescription + "The two passwords must match. ");
 		}
-		if(password1 == null || password2 == null || password1.equals("") || password2.equals(""))
+
+		if(password1 == null || password1.equals(""))
 		{
 			usercheck.setFailed(true);
 			usercheck.setpsswblank(true);
 			usercheck.setDescription(usercheck.resultdescription + "The password field cannot be blank.");
+		}
+
+		Myuser finduser = repo.findByName(name);
+		if(finduser != null)
+		{
+			usercheck.setFailed(true);
+			usercheck.setnameexists(true);
+			usercheck.setDescription(usercheck.resultdescription + "The usename already exists. ");
 		}
 		
 		return usercheck;

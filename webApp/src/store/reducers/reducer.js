@@ -63,7 +63,6 @@ export function myuserurl(state = 'http://localhost:8080/api/myUserDetailses', a
     }
 }
 
-
 export function nitems(state = 0, action) {
     switch (action.type) {
         case 'N_ITEMS':
@@ -76,6 +75,14 @@ export function useritems(state = [], action) {
     switch (action.type) {
         case 'USER_FETCH_DATA_SUCCESS':
             return action.useritems;        default:
+            return state;
+    }
+}
+
+export function registration(state = [], action) {
+    switch (action.type) {
+        case 'REGISTRATION_STATUS':
+            return action.registration;        default:
             return state;
     }
 }
@@ -97,6 +104,7 @@ export default combineReducers({
     myuserurl,
     nitems,
     page,
+    registration,
     size,
     useritems,
     username,

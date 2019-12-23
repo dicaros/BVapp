@@ -8,8 +8,10 @@ import { LIST_URL } from './action-type';
 import { LOGIN_SUCCESS } from './action-type';
 import { MYUSER_URL } from './action-type';
 import { N_ITEMS } from './action-type';
+import { REGISTRATION_STATUS } from './action-type';
 import { SET_USER } from './action-type';
 import { USER_FETCH_DATA_SUCCESS } from './action-type';
+
 
 import { store } from '../store'
 
@@ -171,22 +173,21 @@ export function newItem(isPrivate, gameDate, gameTime, description, url, nitems)
 
 export function newUser(url, target)  {
     var updatedrecord = {name: target.username.value, password: target.password.value, confirmpassword: target.password2.value}
+    return (dispatch) => {
     fetch(url, {
              method: "POST",
              credentials: 'include',
              headers: { 
                'Content-Type': 'application/json',
-             },
+            },
              body: JSON.stringify(updatedrecord)
           })
-.then(res => { 
-                console.log('update request:' + res.status);
-     }
-         ).catch(error =>
-           { 
-                 console.log('update request error:' + error.status)
-  })
-
+          .then(res => res.json())
+          .then(items => {            
+                var response = items;
+                dispatch(setregistration(response));
+        })
+    }
 }
 
 export function setCurrentPage(direction, pagenum) {
@@ -208,6 +209,13 @@ export function setCurrentSize(size) {
     return {
         type: CURRENT_SIZE,
         size: size
+    };
+}
+
+export function setregistration(registration) {
+    return {
+        type: REGISTRATION_STATUS,
+        registration: registration
     };
 }
 

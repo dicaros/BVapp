@@ -20,12 +20,11 @@ class App extends React.Component {
       return (<header><HeaderComponent /></header>)
     }
 
- 
     const BodyRender = () => {
               return(<section>
               <Router>
                      <Switch>
-                            <Route path="/register">
+                            <Route path="/register" loginsuccess={this.props.loginsuccess}>
                                     <RegisterComponent />
                             </Route>
                             <Route path="/">

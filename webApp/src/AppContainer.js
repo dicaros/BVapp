@@ -29,7 +29,8 @@ const mapStateToProps = (state) => {
          page: state.page,
          size: state.size,
          useritems: state.useritems,
-         username: state.username
+         username: state.username,
+         registration: state.registration
        };
   };
   
@@ -44,8 +45,7 @@ const mapStateToProps = (state) => {
       addNew: (isPrivate, gameDate, gameTime, description, url, nitems) => dispatch(newItem(isPrivate, gameDate, gameTime, description, url, nitems)),
       getUser: () => dispatch(getUser('http://localhost:8080/username')),
       updateRecord: (firstName, lastName, description, url) => dispatch(updateRecord(firstName, lastName, description, url)),
-      newUser: (url, target) => newUser(url, target)
-
+      newUsers: (url, target) => dispatch(newUser(url, target)),
     };
   };
   
