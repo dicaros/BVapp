@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 12.0
--- Dumped by pg_dump version 12.0
+-- Dumped from database version 11.5
+-- Dumped by pg_dump version 11.5
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -18,7 +18,7 @@ SET row_security = off;
 
 SET default_tablespace = '';
 
-SET default_table_access_method = heap;
+SET default_with_oids = false;
 
 --
 -- Name: employee; Type: TABLE; Schema: public; Owner: postgres
@@ -253,7 +253,8 @@ CREATE TABLE public.myuser (
     id integer NOT NULL,
     name character varying(100),
     password character varying(100),
-    roles character varying(50)
+    roles character varying(50),
+    email character varying(100)
 );
 
 
@@ -478,11 +479,13 @@ COPY public.my_user_details (id, firstname, lastname, phone, gpsx, gpsy, playedc
 -- Data for Name: myuser; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.myuser (id, name, password, roles) FROM stdin;
-2	oliver	$2a$10$wgiNEeTp05q8hfaf.5YIQe7kKtUOD4IJPJGjCpH4dyfLj6dfOdEjG	ROLE_USER
-1	dicaros	$2a$10$0WfvL7hMaAb/NR9Nmst7bOkduPQzcYuc2HXocw/sHHXvc9VNVBfe.	ROLE_USER
-534	greg	$2a$10$phqpiCx3BnIA6tQFfp1Y2.mSHmfB8PFXtWnsT/m.eiKAs.BXMpLWu	ROLE_USER
-547	pippo	$2a$10$Ty0Ob1pQCA6WtrhsorYrVuAT60fO/C6DpiZdSo3BSiis1doUWC.Qm	ROLE_USER
+COPY public.myuser (id, name, password, roles, email) FROM stdin;
+2	oliver	$2a$10$wgiNEeTp05q8hfaf.5YIQe7kKtUOD4IJPJGjCpH4dyfLj6dfOdEjG	ROLE_USER	\N
+1	dicaros	$2a$10$0WfvL7hMaAb/NR9Nmst7bOkduPQzcYuc2HXocw/sHHXvc9VNVBfe.	ROLE_USER	\N
+534	greg	$2a$10$phqpiCx3BnIA6tQFfp1Y2.mSHmfB8PFXtWnsT/m.eiKAs.BXMpLWu	ROLE_USER	\N
+605	doc	$2a$10$4mgi9wVEPmLfrFm9xt6cw.GSXVfY77NyvVhEWc8G7cWsbfJnJp7kq	ROLE_USER	\N
+607	bene	$2a$10$qsixSoZ9vboMYPO7moUC0OeI6BwwKxnhmMB0AGrr9t8bb5JhvSLYi	ROLE_USER	\N
+608	stefano	$2a$10$UQuLrfoPb6rV98BYBi4ZP.XGL1.FQsGRtT/QErbg9xUEL8L0SsNVa	ROLE_USER	stefano@
 \.
 
 
@@ -519,7 +522,7 @@ SELECT pg_catalog.setval('public.game_id_seq', 1, true);
 -- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.hibernate_sequence', 547, true);
+SELECT pg_catalog.setval('public.hibernate_sequence', 608, true);
 
 
 --
