@@ -57,7 +57,7 @@ class GameList extends React.Component {
                    {
                      return(
                            <tr key={index}>
-                           <td id = 'tdgamelist1' width='20%'>{row._embedded.myuser.name} </td>
+                           <td id = 'tdgamelist1' width='20%'>{row.myuser.name} </td>
                            <td id = 'tdgamelist1' width='10%'>{row.gamedate}</td>
                            <td id = 'tdgamelist1' width='10%'>{row.gametime}</td>
                            <td width='40%'>{row.description}</td>

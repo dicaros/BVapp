@@ -10,7 +10,7 @@ import javax.persistence.Version;
 import net.minidev.json.annotate.JsonIgnore;
 
 @Entity // declare that this class is meant for storage in a dbs table
-public class MyUserDetails {
+public class MyUserDetail {
 
 	private @Id @GeneratedValue Long id; // automatically generated primary ID
 	private String firstname;
@@ -26,9 +26,9 @@ public class MyUserDetails {
 
 	private @OneToOne Myuser myuser;
 
-	private MyUserDetails() {}
+	private MyUserDetail() {}
 
-	public MyUserDetails(String firstname, String lastname, String phone, Double gpsx, Double gpsy, Integer playedcount, Integer noshowcount, Myuser myuser) {
+	public MyUserDetail(String firstname, String lastname, String phone, Double gpsx, Double gpsy, Integer playedcount, Integer noshowcount, Myuser myuser) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.phone = phone;
@@ -43,7 +43,7 @@ public class MyUserDetails {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		MyUserDetails myuserdetails = (MyUserDetails) o;
+		MyUserDetail myuserdetails = (MyUserDetail) o;
 		return Objects.equals(id, myuserdetails.id) &&
 			Objects.equals(firstname, myuserdetails.firstname) &&
 			Objects.equals(lastname, myuserdetails.lastname) &&

@@ -8,7 +8,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 class App extends React.Component {
@@ -28,7 +27,7 @@ class App extends React.Component {
                                     <RegisterComponent />
                             </Route>
                             <Route path="/">
-                                    <LoginComponent /><GameComponent />
+                                    <LoginComponent /><GameComponent /><UserComponent />
                             </Route>
                     </Switch>
               </Router>

@@ -55,7 +55,7 @@ export function loginsuccessfull(state = null, action) {
     }
 }
 
-export function myuserurl(state = 'http://localhost:8080/api/myUserDetailses', action) {
+export function myuserurl(state = 'http://localhost:8080/api/myUserDetails', action) {
     switch (action.type) {
         case 'MYUSER_URL':
             return action.myuserurl;        default:

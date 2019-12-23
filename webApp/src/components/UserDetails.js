@@ -41,7 +41,7 @@ class UserDetails extends React.Component {
  
          const Tablerow = () => {
            return(        
-              this.props.useritems._embedded.myUserDetailses.map ((row, index) =>                   
+              this.props.useritems._embedded.myUserDetails.map ((row, index) =>                   
                    {
                      return(
                            <tr key={index}>
