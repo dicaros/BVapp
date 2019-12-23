@@ -18,8 +18,9 @@ public class Myuser {
 
 	private @Id @GeneratedValue Long id;
 	private String name;
-	private String password;
+	private @JsonIgnore String password;
 	private String roles;
+	private String email;
 
 	public void setPassword(String password) {
 		this.password = PASSWORD_ENCODER.encode(password); // encrypt password
@@ -27,11 +28,12 @@ public class Myuser {
 
 	protected Myuser() {}
 
-	public Myuser(String name, String password, String roles) {
+	public Myuser(String name, String password, String roles, String  email) {
 
 		this.name = name;
 		this.setPassword(password);
 		this.roles = roles;
+		this.email = email;
 		
 	}
 
@@ -43,13 +45,14 @@ public class Myuser {
 		return Objects.equals(id, myuser.id) &&
 			Objects.equals(name, myuser.name) &&
 			Objects.equals(password, myuser.password) &&
-			Objects.equals(roles, myuser.roles);
+			Objects.equals(roles, myuser.roles) &&
+			Objects.equals(email, myuser.email);
 	}
 
 	@Override
 	public int hashCode() {
 
-		int result = Objects.hash(id, name, password);
+		int result = Objects.hash(id, name, password, email);
 		result = 31 * result + Objects.hashCode(roles);
 		return result;
 	}
@@ -70,6 +73,15 @@ public class Myuser {
 		this.name = name;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	
 	public String getPassword() {
 		return password;
 	}
@@ -88,6 +100,7 @@ public class Myuser {
 			"id=" + id +
 			", name='" + name + '\'' +
 			", roles=" + roles +
+			", email=" + email +
 			'}';
 	}
 }

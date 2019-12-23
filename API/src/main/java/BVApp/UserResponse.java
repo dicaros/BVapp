@@ -5,16 +5,22 @@ public class UserResponse {
 		public Boolean checkfailed;
 		public Boolean psswmismatch;
 		public Boolean psswblank;
+		public Boolean psswshort;
 		public Boolean nameblank;
 		public Boolean nameexists;
+		public Boolean emailexists;		
+		public Boolean emailvalid;
 		public String resultdescription;
 		
-		public UserResponse(Boolean checkfailed, Boolean psswmismatch, Boolean psswblank, Boolean nameblank, Boolean nameexists, String resultdescription) {
+		public UserResponse(Boolean checkfailed, Boolean psswmismatch, Boolean psswblank, Boolean psswshort, Boolean nameblank, Boolean nameexists, Boolean emailexists, Boolean emailvalid, String resultdescription) {
 			this.checkfailed = checkfailed;
 			this.psswmismatch = psswmismatch;
 			this.psswblank = psswblank;
+			this.psswshort = psswshort;
 			this.nameblank = nameblank;
 			this.nameexists = nameexists;
+			this.emailexists = emailexists;
+			this.emailvalid = emailvalid;
 			this.resultdescription = resultdescription;
 		}
 	
@@ -42,6 +48,14 @@ public class UserResponse {
 			this.psswblank = psswblank;
 		}
 
+		public Boolean getpsswshort() {
+			return psswshort;
+		}
+
+		public void setpsswshort(Boolean psswshort) {
+			this.psswshort = psswshort;
+		}
+		
 		public Boolean getnameblank() {
 			return nameblank;
 		}
@@ -58,7 +72,22 @@ public class UserResponse {
 			this.nameexists = nameexists;
 		}
 
-		
+		public Boolean getemailexists() {
+			return emailexists;
+		}
+
+		public void setemailexists(Boolean emailexists) {
+			this.emailexists = emailexists;
+		}
+
+		public Boolean getemailvalid() {
+			return emailvalid;
+		}
+
+		public void setemailvalid(Boolean emailvalid) {
+			this.emailvalid = emailvalid;
+		}
+
 		public String getDescription() {
 			return resultdescription;
 		}

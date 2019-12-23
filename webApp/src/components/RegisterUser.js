@@ -31,16 +31,25 @@ class RegisterUser extends React.Component {
   const Error2 = () => {
     if (this.props.registration.psswblank) {
     return (' the password cannot be blank')}
+    else if (this.props.registration.psswshort) {
+      return (' the password must be at least 8 chars long')}
     else {return ''}
 }
 
-  const Error3 = () => {
+const Error3 = () => {
   if (this.props.registration.psswmismatch) {
   return (' you have typed two different passwords')}
   else {return ''}
 }
 
-
+const Error4 = () => {
+  if (this.props.registration.emailvalid) {
+  return (' please provide a valid email address')}
+  else if (this.props.registration.emailexists) {
+    return (' a user with this email address already exists')}
+  
+  else {return ''}
+}
 
     const RegisterForm = () => {
               return(
@@ -60,6 +69,12 @@ class RegisterUser extends React.Component {
                             <td><input type='text' name='username'/></td>
                             <td width = '20px'> </td>
                             <td className='signuperror'> <Error1 /></td>
+                      </tr>
+                      <tr height='25px'>
+                            <td>Email*</td>
+                            <td><input type='text' name='email'/></td>
+                            <td></td>
+                            <td className='signuperror'> <Error4 /></td>
                       </tr>
                       <tr height='25px'>
                             <td>Password*</td>

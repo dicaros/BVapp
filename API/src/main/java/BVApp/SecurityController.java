@@ -33,12 +33,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 	    	MyuserRepository repo = context.getBean(MyuserRepository.class);
 	    	
-	    	UserDataFlow newuser = new UserDataFlow(user.name, user.password, user.confirmpassword);	    	
+	    	UserDataFlow newuser = new UserDataFlow(user.name, user.password, user.confirmpassword, user.email);	    	
 	    	UserResponse trysaveuser = newuser.saveUser(repo);
 
 	    	System.out.println(trysaveuser.resultdescription); 
 	    	
 	    	return trysaveuser;
-	    }
-	        
+	    }	        
 }
