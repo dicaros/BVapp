@@ -35,7 +35,7 @@ class RegisterUser extends React.Component {
                       </tr>
                       <tr height='25px'>
                             <td>Repeat Password*</td>
-                            <td><input type='passwordrepeat' name='password2'/></td>
+                            <td><input type='password' name='password2'/></td>
                       </tr>
                       </tbody>
                     <tfoot>
