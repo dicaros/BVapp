@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -10,8 +9,9 @@ import { store } from './store/store';
 // Wrap existing app in Provider - Step 2
 ReactDOM.render(
   <Provider store={store}>
-    <App />,
+    <App />
   </Provider>,
 
   document.getElementById('root')
 );
+

@@ -27,7 +27,7 @@ class App extends React.Component {
                                     <RegisterComponent />
                             </Route>
                             <Route path="/">
-                                    <LoginComponent /><GameComponent /><UserComponent />
+                                    <div><LoginComponent /><UserComponent /></div>
                             </Route>
                     </Switch>
               </Router>
@@ -43,4 +43,4 @@ class App extends React.Component {
 
 }
 
- export default App;
+export default App;

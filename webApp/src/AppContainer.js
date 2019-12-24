@@ -7,6 +7,7 @@ import { newItem } from './store/actions/actions';
 import { getUser } from './store/actions/actions';
 import { updateRecord } from './store/actions/actions';
 import { newUser } from './store/actions/actions';
+import { url } from './store/actions/action-type';
 
 import { connect } from 'react-redux';
 import AppHeader from './components/AppHeader';
@@ -43,7 +44,7 @@ const mapStateToProps = (state) => {
       setSize: (size) => dispatch(setCurrentSize(size)),
       setPage: (direction, pagenum) => dispatch(setCurrentPage(direction, pagenum)),                              
       addNew: (isPrivate, gameDate, gameTime, description, url, nitems) => dispatch(newItem(isPrivate, gameDate, gameTime, description, url, nitems)),
-      getUser: () => dispatch(getUser('http://localhost:8080/username')),
+      getUser: () => dispatch(getUser(url+'username')),
       updateRecord: (firstName, lastName, description, url) => dispatch(updateRecord(firstName, lastName, description, url)),
       newUsers: (url, target) => dispatch(newUser(url, target)),
     };

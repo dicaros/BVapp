@@ -1,6 +1,6 @@
 import React from 'react';
 
-const loginurl = "http://localhost:8080"
+const loginurl = "http://192.168.1.104:8080"
 
 class LoginPage extends React.Component {
 

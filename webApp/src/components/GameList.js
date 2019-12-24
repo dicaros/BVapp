@@ -101,7 +101,7 @@ class GameList extends React.Component {
          if(this.props.loginsuccess && typeof this.props.items._embedded != 'undefined') {
           
           return (
-                   <table className='tablelist'>
+                   <table className='tablelist1'>
                        <TableHeader />
                        <TableBody  />
                        <TableFooter  />

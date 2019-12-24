@@ -1,15 +1,9 @@
-@media all and (max-width: 300px) {
-    .tablelist {
-        width: 100%;
-    }
-  }
- @media all and (min-width: 300px) {
-
 body {
     margin: 0px;
     font-style: normal;
     font-weight: normal;
     font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    background-color: magenta;
 }
 
 #bodylink {
@@ -55,6 +49,7 @@ button {
 header {
     margin: 0;
     display: block;
+    opacity: 80%;
     background-color: #000000; 
     box-shadow: 0px 7px 4px #999999;
     position: sticky;
@@ -98,9 +93,51 @@ section {
     width: 100%;  
 }
 
-  .tablelist {
-    width: 50%;
+.tablelist1 {
+    width: 450px;
+    height: 400px;
+    overflow: auto;
+    float: inline-start;
+    background-color: white;
+    margin: 10px;
+    padding: 0px;
 }
+
+    .tablelist2 {
+        width: 450px;
+        height: 400px;
+        float: inline-end;
+        overflow: auto;
+        border-style: solid;
+        background-color: white;
+        margin: 10px;
+        padding: 0px
+}
+
+/* mobile optimization */
+ @media only screen and (max-width: 600px) {
+        .tablelist1 {
+            width: 95%;
+            overflow: auto;
+            float: inline-start;
+            background-color: white;
+            margin: 10px;
+            height: 350px;            
+            padding: 0px;
+        }
+
+            .tablelist2 {
+                width: 95%;
+                height: 350px;
+                float: inline-end;
+                overflow: auto;
+                border-style: solid;
+                background-color: white;
+                margin: 10px;
+                padding: 0px;
+            }
+}
+
 
 td {
     text-align: left;
@@ -108,7 +145,16 @@ td {
 }
 
 #tdgamelist1 {
+    text-align: left;
+}
+
+#tduserlist {
     text-align: center;
+    font-weight: bold;
+    border-style: outset;
+    border-width: 0.5px;
+    padding: 3px;
+    margin: 0px;
 }
 
 .tdloginbutton {
@@ -138,9 +184,32 @@ th {
     width: 100%;
 }
 
+.userdetails {
+    width: 98%;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    vertical-align: top;
+    margin: 5px;
+}
+
+.userdetailsheader {
+    font-size: x-large;
+    font-weight: normal;
+
+}
+
 #userlogo {
     height: 35px;
     width: 35px;
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 20px;
+}
+
+#userpic {
+    height: 120px;
     display: block;
     margin-top: 0px;
     margin-bottom: 0px;
@@ -223,5 +292,3 @@ nav li > a {
     height: 2px;
     background-color: #71cee7;
   }
-
-}

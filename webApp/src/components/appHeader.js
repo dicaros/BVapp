@@ -1,8 +1,10 @@
 import React from 'react';
 import logo from '../img/BEVolej.gif';
 import usericon from '../img/UserIcon.png';
+import { url } from '../store/actions/action-type';
 
-const logouturl = "http://localhost:8080/logout"
+
+const logouturl = url+'logout'
 
 class AppHeader extends React.Component {
  

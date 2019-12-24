@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { url } from '../actions/action-type';
 
 export function page(state = 0, action) {
     switch (action.type) {
@@ -39,7 +40,7 @@ export function items(state = [], action) {
     }
 }
 
-export function listurl(state = 'http://localhost:8080/api/games', action) {
+export function listurl(state = url+'api/games', action) {
     switch (action.type) {
         case 'LIST_URL':
             return action.listurl;        default:
@@ -55,7 +56,7 @@ export function loginsuccessfull(state = null, action) {
     }
 }
 
-export function myuserurl(state = 'http://localhost:8080/api/myUserDetails', action) {
+export function myuserurl(state = url+'api/myUserDetails', action) {
     switch (action.type) {
         case 'MYUSER_URL':
             return action.myuserurl;        default:

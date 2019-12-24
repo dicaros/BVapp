@@ -1,14 +1,14 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { url } from '../store/actions/action-type';
 
-const url = "http://localhost:8080/signup"
 
 
 class RegisterUser extends React.Component {
  
  handleSubmit(event) {
     event.preventDefault();
-    this.props.newUsers(url, event.target);
+    this.props.newUsers(url+'signup', event.target);
   }
 
   render() {      
@@ -102,10 +102,8 @@ const Error4 = () => {
 
       return(
             <center>
-                <table width = '80%'><tbody><tr><td>
                         <RegisterForm /><Redir />
                         <br></br>
-                    </td></tr></tbody></table>
             </center>
         )
         
