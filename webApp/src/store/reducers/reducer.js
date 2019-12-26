@@ -1,6 +1,13 @@
 import { combineReducers } from 'redux';
 import { url } from '../actions/action-type';
 
+export function navigate(state = 'games', action) {
+    switch (action.type) {
+        case 'SET_NAVIGATE':
+            return action.navigate;        default:
+            return state;
+    }
+}
 export function page(state = 0, action) {
     switch (action.type) {
         case 'CURRENT_PAGE':
@@ -103,6 +110,7 @@ export default combineReducers({
     listurl,
     loginsuccessfull,
     myuserurl,
+    navigate,
     nitems,
     page,
     registration,

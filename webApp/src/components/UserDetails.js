@@ -17,7 +17,6 @@ class UserDetails extends React.Component {
    }
   } 
 
-
    refresh(){ this.props.fetchUserDetails(this.props.myuserurl) }
 
    render() {      
@@ -38,7 +37,10 @@ class UserDetails extends React.Component {
                                       <th className = 'userdetailsheader' height='120px'><center><img src={userpic} id='userpic' alt='O'></img></center></th>
                                   </tr>
                                   <tr key='002'>
-                                      <th className = 'userdetailsheader' height='30px'>{row.firstName} {row.lastName}</th>
+                                      <th className = 'userdetailsheader' height='30px'>{row.firstName} {row.lastName}
+                                      <h4 className = 'userdetailsheader2'>({row.myuser.email})</h4>
+                                      <h4 className = 'userdetailsheader2'>Member since: n/a</h4>
+                                      </th>
                                   </tr>
                               </thead>
                               <tbody>
@@ -63,8 +65,8 @@ class UserDetails extends React.Component {
                                                     <td id = 'tduserlist'>{row.phone}</td>
                                                 </tr>
                                                 <tr key='5' height='30px'>
-                                                    <td id = 'tduserlist'>Member since</td>
-                                                    <td id = 'tduserlist'>n/a</td>
+                                                    <td id = 'tduserlist'>Email</td>
+                                                    <td id = 'tduserlist'>{row.myuser.email}</td>
                                                 </tr>
                                   </tbody>
                                           </table>
@@ -82,7 +84,7 @@ class UserDetails extends React.Component {
            )
          }
                            
-         if(this.props.loginsuccess && typeof this.props.useritems._embedded != 'undefined') {
+         if(this.props.loginsuccess && typeof this.props.useritems._embedded != 'undefined' && this.props.navigate == 'games') {
           return (
                     <Table1 />            
                  );

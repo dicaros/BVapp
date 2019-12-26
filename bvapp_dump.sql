@@ -21,82 +21,6 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: employee; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.employee (
-    id integer NOT NULL,
-    first_name character varying(100),
-    last_name character varying(100),
-    description character varying(500),
-    myuser_id integer NOT NULL,
-    version integer NOT NULL
-);
-
-
-ALTER TABLE public.employee OWNER TO postgres;
-
---
--- Name: employee2; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.employee2 (
-    id integer NOT NULL,
-    first_name character varying(100),
-    last_name character varying(100),
-    description character varying(500),
-    myuser_id integer NOT NULL,
-    version integer NOT NULL
-);
-
-
-ALTER TABLE public.employee2 OWNER TO postgres;
-
---
--- Name: employee2_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.employee2_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.employee2_id_seq OWNER TO postgres;
-
---
--- Name: employee2_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.employee2_id_seq OWNED BY public.employee2.id;
-
-
---
--- Name: employee_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.employee_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.employee_id_seq OWNER TO postgres;
-
---
--- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.employee_id_seq OWNED BY public.employee.id;
-
-
---
 -- Name: game; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -168,82 +92,24 @@ CREATE SEQUENCE public.my_seq_gen
 ALTER TABLE public.my_seq_gen OWNER TO postgres;
 
 --
--- Name: my_user; Type: TABLE; Schema: public; Owner: postgres
+-- Name: my_user_detail; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.my_user (
-    id integer NOT NULL,
-    name character varying(100),
-    password character varying(100),
-    roles character varying(50)
-);
-
-
-ALTER TABLE public.my_user OWNER TO postgres;
-
---
--- Name: my_user_details; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.my_user_details (
-    id integer NOT NULL,
-    firstname character varying(100) NOT NULL,
-    lastname character varying(100) NOT NULL,
-    phone character varying(50) NOT NULL,
+CREATE TABLE public.my_user_detail (
+    id integer,
+    firstname character varying(100),
+    lastname character varying(100),
+    phone character varying(50),
     gpsx numeric(12,8),
     gpsy numeric(12,8),
-    playedcount integer NOT NULL,
-    noshowcount integer NOT NULL,
-    myuser_id integer NOT NULL,
-    version integer NOT NULL
+    playedcount integer,
+    noshowcount integer,
+    myuser_id integer,
+    version integer
 );
 
 
-ALTER TABLE public.my_user_details OWNER TO postgres;
-
---
--- Name: my_user_details_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.my_user_details_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.my_user_details_id_seq OWNER TO postgres;
-
---
--- Name: my_user_details_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.my_user_details_id_seq OWNED BY public.my_user_details.id;
-
-
---
--- Name: my_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.my_user_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.my_user_id_seq OWNER TO postgres;
-
---
--- Name: my_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.my_user_id_seq OWNED BY public.my_user.id;
-
+ALTER TABLE public.my_user_detail OWNER TO postgres;
 
 --
 -- Name: myuser; Type: TABLE; Schema: public; Owner: postgres
@@ -283,60 +149,6 @@ ALTER SEQUENCE public.myuser_id_seq OWNED BY public.myuser.id;
 
 
 --
--- Name: myuserdetails; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.myuserdetails (
-    id integer NOT NULL,
-    firstname character varying(100) NOT NULL,
-    lastname character varying(100) NOT NULL,
-    phone character varying(50) NOT NULL,
-    gpsx numeric(8,8),
-    gpsy numeric(8,8),
-    playedcount integer NOT NULL,
-    noshowcount integer NOT NULL
-);
-
-
-ALTER TABLE public.myuserdetails OWNER TO postgres;
-
---
--- Name: myuserdetails_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.myuserdetails_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.myuserdetails_id_seq OWNER TO postgres;
-
---
--- Name: myuserdetails_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.myuserdetails_id_seq OWNED BY public.myuserdetails.id;
-
-
---
--- Name: employee id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.employee ALTER COLUMN id SET DEFAULT nextval('public.employee_id_seq'::regclass);
-
-
---
--- Name: employee2 id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.employee2 ALTER COLUMN id SET DEFAULT nextval('public.employee2_id_seq'::regclass);
-
-
---
 -- Name: game id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -344,87 +156,10 @@ ALTER TABLE ONLY public.game ALTER COLUMN id SET DEFAULT nextval('public.game_id
 
 
 --
--- Name: my_user id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.my_user ALTER COLUMN id SET DEFAULT nextval('public.my_user_id_seq'::regclass);
-
-
---
--- Name: my_user_details id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.my_user_details ALTER COLUMN id SET DEFAULT nextval('public.my_user_details_id_seq'::regclass);
-
-
---
 -- Name: myuser id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.myuser ALTER COLUMN id SET DEFAULT nextval('public.myuser_id_seq'::regclass);
-
-
---
--- Name: myuserdetails id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.myuserdetails ALTER COLUMN id SET DEFAULT nextval('public.myuserdetails_id_seq'::regclass);
-
-
---
--- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.employee (id, first_name, last_name, description, myuser_id, version) FROM stdin;
-450	Frodo	Baggins	ring bearer	448	0
-451	Bilbo	Baggins	burglar	448	0
-452	Gandalf	the Grey	wizard	448	0
-453	Gandalf2	the Grey2	wizard	448	0
-454	Gandalf3	the Grey3	wizard	448	0
-455	Gandalf4	the Grey4	wizard	448	0
-456	Gandalf5	the Grey5	wizard	448	0
-457	Gandalf6	the Grey6	wizard	448	0
-458	Gandalf7	the Grey7	wizard	448	0
-459	Gandalf8	the Grey8	wizard	448	0
-460	Gandalf9	the Grey9	wizard	448	0
-461	Gandalf10	the Grey10	wizard	448	0
-462	Samwise	Gamgee	gardener	449	0
-463	Merry	Brandybuck	pony rider	449	0
-464	Peregrin	Took	pipe smoker	449	0
-465	Dummy character	Surname	Job updated	448	1
-475	Dummy character	Surname	Job updated	448	1
-476	Dummy character	Surname	Job updated	448	1
-477	Dummy character	Surname	Job	448	0
-478	Dummy character	Surname	Job	448	0
-479	Dummy character	Surname	Job	448	0
-480	Dummy character	Surname	Job	448	0
-481	\N	\N	this is a game that I just created	448	0
-482	\N	\N	this is a game that I just created	448	0
-483	\N	\N	this is a game that I just created	448	0
-484	\N	\N	this is a game that I just created	448	0
-485	\N	\N	this is a game that I just created	448	0
-\.
-
-
---
--- Data for Name: employee2; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.employee2 (id, first_name, last_name, description, myuser_id, version) FROM stdin;
-1	Frodozzo	Baggins	ring bearer	1	0
-2	Gandalf	the Grey	wizard	1	0
-3	Stefano	Di Caro	Test	1	0
-4	Aragorn	Elessar	Vagabond	1	0
-5	Carlo	Rossi	Accountant	1	0
-6	Gimli	Son of Gloin	Dwarf	1	0
-7	Legolas		elf	1	0
-8	Gloin	Father of Gimli	warrior	1	0
-9	Dummy character	Surname	Job updated	1	1
-10	Dummy character	Surname	Job	1	0
-11	Samwise	Gamgee	gardener	2	0
-12	Merry	Brandybuck	pony rider	2	0
-13	Peregrin	Took	pipe smoker	2	0
-\.
 
 
 --
@@ -452,26 +187,24 @@ COPY public.game (id, myuser_id, sportcenterid, priceperperson, isprivate, gamed
 524	1	1	10.00	t	2019-10-05	15:00:00	t	t	this is a game that I just created	0
 529	1	1	10.00	t	2019-10-05	15:00:00	t	t	this is a game that I just created	0
 530	1	1	10.00	t	2019-10-05	15:00:00	t	t	this is a game that I just created	0
+612	1	1	10.00	t	2019-10-05	15:00:00	t	t	this is a game that I just created	0
+613	1	1	10.00	t	2019-10-05	15:00:00	t	t	this is a game that I just created	0
+614	1	1	10.00	t	2019-10-05	15:00:00	t	t	this is a game that I just created	0
+615	1	1	10.00	t	2019-10-05	15:00:00	t	t	this is a game that I just created	0
+626	1	1	10.00	t	2019-10-05	15:00:00	t	t	this is a game that I just created	0
+627	1	1	10.00	t	2019-10-05	15:00:00	t	t	this is a game that I just created	0
 \.
 
 
 --
--- Data for Name: my_user; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: my_user_detail; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.my_user (id, name, password, roles) FROM stdin;
-307	greg	$2a$10$0WfvL7hMaAb/NR9Nmst7bOkduPQzcYuc2HXocw/sHHXvc9VNVBfe.	STD_USER
-308	oliver	$2a$10$wgiNEeTp05q8hfaf.5YIQe7kKtUOD4IJPJGjCpH4dyfLj6dfOdEjG	STD_USER
-\.
-
-
---
--- Data for Name: my_user_details; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.my_user_details (id, firstname, lastname, phone, gpsx, gpsy, playedcount, noshowcount, myuser_id, version) FROM stdin;
+COPY public.my_user_detail (id, firstname, lastname, phone, gpsx, gpsy, playedcount, noshowcount, myuser_id, version) FROM stdin;
 1	Stefano	Di Caro	+420722412479	50.08705770	14.41766190	0	0	1	0
 2	Enrico	Barone	+390112652788	45.06775500	7.68248900	0	0	2	0
+623	Michaela	Di Caro		0.00000000	0.00000000	0	0	622	0
+625	Piero	Sraffa		0.00000000	0.00000000	0	0	624	0
 \.
 
 
@@ -480,35 +213,11 @@ COPY public.my_user_details (id, firstname, lastname, phone, gpsx, gpsy, playedc
 --
 
 COPY public.myuser (id, name, password, roles, email) FROM stdin;
-2	oliver	$2a$10$wgiNEeTp05q8hfaf.5YIQe7kKtUOD4IJPJGjCpH4dyfLj6dfOdEjG	ROLE_USER	\N
-1	dicaros	$2a$10$0WfvL7hMaAb/NR9Nmst7bOkduPQzcYuc2HXocw/sHHXvc9VNVBfe.	ROLE_USER	\N
-534	greg	$2a$10$phqpiCx3BnIA6tQFfp1Y2.mSHmfB8PFXtWnsT/m.eiKAs.BXMpLWu	ROLE_USER	\N
-605	doc	$2a$10$4mgi9wVEPmLfrFm9xt6cw.GSXVfY77NyvVhEWc8G7cWsbfJnJp7kq	ROLE_USER	\N
-607	bene	$2a$10$qsixSoZ9vboMYPO7moUC0OeI6BwwKxnhmMB0AGrr9t8bb5JhvSLYi	ROLE_USER	\N
-608	stefano	$2a$10$UQuLrfoPb6rV98BYBi4ZP.XGL1.FQsGRtT/QErbg9xUEL8L0SsNVa	ROLE_USER	stefano@
+1	dicaros	$2a$10$0WfvL7hMaAb/NR9Nmst7bOkduPQzcYuc2HXocw/sHHXvc9VNVBfe.	ROLE_USER	dicaros@polimi.it
+622	misinka	$2a$10$dAhb6fL9dwW1wm0iut7SKefwHxuSHSfZ7MuKbhsApxxRnp9.zRWQu	ROLE_USER	misinka@misinka.cz
+2	barone	$2a$10$2EjQTA3jYgD9Qk3kqku3Uug4npUlCqeW.xbZY8hUP7GPkCgbRNLvm	ROLE_USER	dicaro@dicaro.it
+624	sraffa	$2a$10$.pTbp2p5vTWqw5AKOsT8QODqltDul3ulZSEls6MZtAHMwKbrQJ2tm	ROLE_USER	psraffa@unibocconi.it
 \.
-
-
---
--- Data for Name: myuserdetails; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.myuserdetails (id, firstname, lastname, phone, gpsx, gpsy, playedcount, noshowcount) FROM stdin;
-\.
-
-
---
--- Name: employee2_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.employee2_id_seq', 13, true);
-
-
---
--- Name: employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.employee_id_seq', 13, true);
 
 
 --
@@ -522,7 +231,7 @@ SELECT pg_catalog.setval('public.game_id_seq', 1, true);
 -- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.hibernate_sequence', 608, true);
+SELECT pg_catalog.setval('public.hibernate_sequence', 627, true);
 
 
 --
@@ -533,47 +242,10 @@ SELECT pg_catalog.setval('public.my_seq_gen', 1, false);
 
 
 --
--- Name: my_user_details_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.my_user_details_id_seq', 1, false);
-
-
---
--- Name: my_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.my_user_id_seq', 2, true);
-
-
---
 -- Name: myuser_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.myuser_id_seq', 2, true);
-
-
---
--- Name: myuserdetails_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.myuserdetails_id_seq', 1, false);
-
-
---
--- Name: employee2 employee2_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.employee2
-    ADD CONSTRAINT employee2_pkey PRIMARY KEY (id);
-
-
---
--- Name: employee employee_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.employee
-    ADD CONSTRAINT employee_pkey PRIMARY KEY (id);
 
 
 --
@@ -585,35 +257,11 @@ ALTER TABLE ONLY public.game
 
 
 --
--- Name: my_user_details my_user_details_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.my_user_details
-    ADD CONSTRAINT my_user_details_pkey PRIMARY KEY (id);
-
-
---
--- Name: my_user my_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.my_user
-    ADD CONSTRAINT my_user_pkey PRIMARY KEY (id);
-
-
---
 -- Name: myuser myuser_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.myuser
     ADD CONSTRAINT myuser_pkey PRIMARY KEY (id);
-
-
---
--- Name: myuserdetails myuserdetails_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.myuserdetails
-    ADD CONSTRAINT myuserdetails_pkey PRIMARY KEY (id);
 
 
 --

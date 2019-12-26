@@ -9,6 +9,7 @@ import { LOGIN_SUCCESS } from './action-type';
 import { MYUSER_URL } from './action-type';
 import { N_ITEMS } from './action-type';
 import { REGISTRATION_STATUS } from './action-type';
+import { SET_NAVIGATE } from './action-type';
 import { SET_USER } from './action-type';
 import { USER_FETCH_DATA_SUCCESS } from './action-type';
 
@@ -172,7 +173,7 @@ export function newItem(isPrivate, gameDate, gameTime, description, url, nitems)
 }
 
 export function newUser(url, target)  {
-    var updatedrecord = {name: target.username.value, password: target.password.value, confirmpassword: target.password2.value, email: target.email.value}
+    var updatedrecord = {name: target.username.value, firstname: target.firstname.value, lastname: target.lastname.value, password: target.password.value, confirmpassword: target.password2.value, email: target.email.value}
     return (dispatch) => {
     fetch(url, {
              method: "POST",
@@ -209,6 +210,13 @@ export function setCurrentSize(size) {
     return {
         type: CURRENT_SIZE,
         size: size
+    };
+}
+
+export function setNavigate(navigate) {
+    return {
+        type: SET_NAVIGATE,
+        navigate: navigate
     };
 }
 

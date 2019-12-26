@@ -1,6 +1,7 @@
 import React from 'react';
+import { url } from '../store/actions/action-type';
 
-const loginurl = "http://192.168.1.104:8080"
+const loginurl = url;
 
 class LoginPage extends React.Component {
 

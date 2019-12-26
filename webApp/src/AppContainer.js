@@ -1,6 +1,7 @@
 import { loadgames, loaduserdetails } from './store/actions/actions';
 import { setCurrentPage } from './store/actions/actions';
 import { setCurrentSize } from './store/actions/actions';
+import { setNavigate } from './store/actions/actions';
 import { thelogin } from './store/actions/actions';
 import { thelogout } from './store/actions/actions';
 import { newItem } from './store/actions/actions';
@@ -16,6 +17,7 @@ import GameList from './components/GameList';
 import UserDetails from './components/UserDetails';
 import LoginPage from './components/LoginPage';
 import RegisterUser from './components/RegisterUser';
+import CreateGame from './components/CreateGame';
 
 
 const mapStateToProps = (state) => {
@@ -27,6 +29,7 @@ const mapStateToProps = (state) => {
          items: state.items,
          myuserurl: state.myuserurl,
          nitems: state.nitems,
+         navigate: state.navigate,
          page: state.page,
          size: state.size,
          useritems: state.useritems,
@@ -41,6 +44,7 @@ const mapStateToProps = (state) => {
       fetchUserDetails: (url) => dispatch(loaduserdetails(url)),
       doLogin: (loginurl, target) => dispatch(thelogin(loginurl, target)),                                    
       doLogout: (logouturl) => dispatch(thelogout(logouturl)),
+      setNavigate: (navigate) => dispatch(setNavigate(navigate)),
       setSize: (size) => dispatch(setCurrentSize(size)),
       setPage: (direction, pagenum) => dispatch(setCurrentPage(direction, pagenum)),                              
       addNew: (isPrivate, gameDate, gameTime, description, url, nitems) => dispatch(newItem(isPrivate, gameDate, gameTime, description, url, nitems)),
@@ -55,5 +59,6 @@ const mapStateToProps = (state) => {
   export const UserComponent = connect(mapStateToProps, mapDispatchToProps)(UserDetails);
   export const LoginComponent = connect(mapStateToProps, mapDispatchToProps)(LoginPage);
   export const RegisterComponent = connect(mapStateToProps, mapDispatchToProps)(RegisterUser);
+  export const CreateComponent = connect(mapStateToProps, mapDispatchToProps)(CreateGame);
 
   export default HeaderComponent;

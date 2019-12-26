@@ -1,14 +1,10 @@
 package BVApp;
 
 import java.security.Principal;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,10 +28,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	    		@RequestBody UserDataFlow user, HttpServletRequest httpServletRequest) { 
 
 	    	MyuserRepository repo = context.getBean(MyuserRepository.class);
+	    	MyUserDetailsRepository repo2 = context.getBean(MyUserDetailsRepository.class);
 	    	
-	    	UserDataFlow newuser = new UserDataFlow(user.name, user.password, user.confirmpassword, user.email);	    	
-	    	UserResponse trysaveuser = newuser.saveUser(repo);
-
+	    	UserDataFlow newuser = new UserDataFlow(user.name, user.firstname, user.lastname, user.password, user.confirmpassword, user.email);	    	
+	    	UserResponse trysaveuser = newuser.saveUser(repo, repo2);
+	    	
+	    	
 	    	System.out.println(trysaveuser.resultdescription); 
 	    	
 	    	return trysaveuser;

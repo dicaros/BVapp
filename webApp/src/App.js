@@ -1,5 +1,6 @@
 import React from 'react'
 import { GameComponent } from './AppContainer';
+import { CreateComponent } from './AppContainer';
 import { HeaderComponent } from './AppContainer';
 import { LoginComponent } from './AppContainer';
 import { UserComponent } from './AppContainer';
@@ -27,7 +28,9 @@ class App extends React.Component {
                                     <RegisterComponent />
                             </Route>
                             <Route path="/">
-                                    <div><LoginComponent /><UserComponent /></div>
+                                    <div>
+                                        <center><GameComponent /><CreateComponent /><UserComponent /><LoginComponent /></center>
+                                    </div>
                             </Route>
                     </Switch>
               </Router>

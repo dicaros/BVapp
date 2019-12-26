@@ -3,7 +3,7 @@ body {
     font-style: normal;
     font-weight: normal;
     font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
-    background-color: magenta;
+    background-color: dodgerblue;
 }
 
 #bodylink {
@@ -34,6 +34,11 @@ button {
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius: 10px;
+}
+
+.creategameheader {
+    text-align: right;
+    width: 100%;
 }
 
 .submitbutton {
@@ -94,47 +99,46 @@ section {
 }
 
 .tablelist1 {
-    width: 450px;
-    height: 400px;
+    width: 50%;
+    height: 500px;
     overflow: auto;
-    float: inline-start;
     background-color: white;
+    border-style: inset;
+    border-width: 0.5px;
     margin: 10px;
-    padding: 0px;
+    padding: 10px;
+    display: inline-block;
 }
 
     .tablelist2 {
-        width: 450px;
-        height: 400px;
-        float: inline-end;
+        width: 20%;
+        height: 500px;
         overflow: auto;
-        border-style: solid;
+        border-style: inset;
+        border-width: 0.5px;
         background-color: white;
         margin: 10px;
-        padding: 0px
+        padding: 10px;
+        display: inline-block;
 }
 
 /* mobile optimization */
- @media only screen and (max-width: 600px) {
+ @media only screen and (max-width: 750px) {
         .tablelist1 {
             width: 95%;
-            overflow: auto;
-            float: inline-start;
-            background-color: white;
+            height: 100%;            
             margin: 10px;
-            height: 350px;            
-            padding: 0px;
+            padding: 5px;
+            display: table;
+            overflow: hidden;
         }
 
             .tablelist2 {
                 width: 95%;
                 height: 350px;
-                float: inline-end;
-                overflow: auto;
-                border-style: solid;
-                background-color: white;
                 margin: 10px;
-                padding: 0px;
+                padding: 5px;
+                visibility: hidden;
             }
 }
 
@@ -151,7 +155,7 @@ td {
 #tduserlist {
     text-align: center;
     font-weight: bold;
-    border-style: outset;
+    border-style: dotted;
     border-width: 0.5px;
     padding: 3px;
     margin: 0px;
@@ -195,7 +199,13 @@ th {
 .userdetailsheader {
     font-size: x-large;
     font-weight: normal;
+}
 
+.userdetailsheader2 {
+    font-size: small;
+    font-weight: normal;
+    padding: 1px;  
+    margin: 2px;
 }
 
 #userlogo {
@@ -222,9 +232,11 @@ th {
 /*           */
 
 nav li {
+    opacity: 100%;
     display: inline-block;
     list-style-type: none;
     position: relative;
+
   }
 
   nav a:hover {
@@ -291,4 +303,4 @@ nav li > a {
     width: 120px;
     height: 2px;
     background-color: #71cee7;
-  }
+}

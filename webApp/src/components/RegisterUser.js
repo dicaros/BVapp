@@ -65,10 +65,22 @@ const Error4 = () => {
                     </thead>
                     <tbody>
                       <tr height='25px'>
-                            <td width='200px'>UserName*</td>
+                            <td width='200px'>Username*</td>
                             <td><input type='text' name='username'/></td>
                             <td width = '20px'> </td>
                             <td className='signuperror'> <Error1 /></td>
+                      </tr>
+                      <tr height='25px'>
+                            <td width='200px'>First Name*</td>
+                            <td><input type='text' name='firstname'/></td>
+                            <td width = '20px'> </td>
+                            <td className='signuperror'></td>
+                      </tr>
+                      <tr height='25px'>
+                            <td width='200px'>Last Name*</td>
+                            <td><input type='text' name='lastname'/></td>
+                            <td width = '20px'> </td>
+                            <td className='signuperror'></td>
                       </tr>
                       <tr height='25px'>
                             <td>Email*</td>

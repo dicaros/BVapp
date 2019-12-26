@@ -25,9 +25,7 @@ public class Game {
 	private Boolean gameispast;
 	private String description;
 	
-
 	private @Version @JsonIgnore Long version;
-
 	private @ManyToOne Myuser myuser;
 
 	private Game() {}

@@ -4,14 +4,19 @@ import org.springframework.util.StringUtils;
 
 public class UserDataFlow {
 	public String name;
+	public String firstname;
+	public String lastname;
 	public String password;
 	public String confirmpassword;
 	public String email;
 
+
 	protected UserDataFlow() {}
 	
-	public UserDataFlow(String name, String password, String confirmpassword, String email) {
+	public UserDataFlow(String name, String firstname, String lastname, String password, String confirmpassword, String email) {
 		this.name = name;
+		this.firstname = firstname;
+		this.lastname = lastname;
 		this.password = password;
 		this.confirmpassword = confirmpassword;
 		this.email = email;
@@ -25,6 +30,22 @@ public class UserDataFlow {
 		this.name = name;
 	}
 
+	public String getLastName() {
+		return lastname;
+	}
+
+	public void setLastName(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getFirstName() {
+		return firstname;
+	}
+
+	public void setFirstName(String firstname) {
+		this.firstname = firstname;
+	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -49,7 +70,7 @@ public class UserDataFlow {
 		this.confirmpassword = confirmpassword;
 	}
 
-	public UserResponse saveUser(MyuserRepository repo)
+	public UserResponse saveUser(MyuserRepository repo, MyUserDetailsRepository repo2)
 	{	 
 		UserResponse usercheck = this.validateRegistration(this.password, this.confirmpassword, this.name, this.email, repo);
 
@@ -58,8 +79,12 @@ public class UserDataFlow {
 				Myuser myuser = new Myuser(
 						this.name, this.password, "ROLE_USER", this.email);
     					myuser = repo.save(myuser);	
+			
+    			MyUserDetail myuserdetail = new MyUserDetail(
+    					this.firstname, this.lastname, "", 0.0, 0.0, 0, 0, myuser);
+    					myuserdetail = repo2.save(myuserdetail);
 			}
-
+		
 		return usercheck;
 	}
 	
