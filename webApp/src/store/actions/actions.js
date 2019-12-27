@@ -4,6 +4,7 @@ import { encode } from "base-64";
 import { IS_ERROR } from './action-type';
 import { IS_LOADING } from './action-type';
 import { ITEMS_FETCH_DATA_SUCCESS } from './action-type';
+import { LIST_SPORTCENTER } from './action-type';
 import { LIST_URL } from './action-type';
 import { LOGIN_SUCCESS } from './action-type';
 import { MYUSER_URL } from './action-type';
@@ -11,8 +12,8 @@ import { N_ITEMS } from './action-type';
 import { REGISTRATION_STATUS } from './action-type';
 import { SET_NAVIGATE } from './action-type';
 import { SET_USER } from './action-type';
+import { SPORTCENTER_FETCH_DATA_SUCCESS } from './action-type';
 import { USER_FETCH_DATA_SUCCESS } from './action-type';
-
 
 import { store } from '../store'
 
@@ -59,11 +60,52 @@ export function itemsFetchDataSuccess(items) {
 }
 
 
+export function listsportcenter(listsportcenter) {
+    return {
+        type: LIST_SPORTCENTER,
+        listsportcenter: listsportcenter
+    };
+}
+
 export function listurl(listurl) {
     return {
         type: LIST_URL,
         listurl: listurl
     };
+}
+
+export function loadsportcenters(url, page, size) {
+    return (dispatch) => {
+            dispatch(isLoading(true)); 
+            fetch(url+'?page='+page+'&size='+size, {
+                                                        method: 'GET',
+                                                        credentials: 'include',
+                                                        headers: { 
+                                                                    'Content-Type': 'application/json',
+                                                        },
+            })
+            .then((res) => {
+                                dispatch(isLoading(false));
+                                if(res.status == '401') {
+                                                                dispatch(loginsuccessfull(false));
+                                                                console.log("unauthorized " + res.status);
+                                                        }
+                                else {
+                                                                console.log("success " + res.status);
+                                                                dispatch(sportcenterFetchDataSuccess(res));
+                                                                dispatch(loginsuccessfull(true));
+                                                                return res;
+                                }
+                        })
+            .then((res) => res.json())
+            .then((items) => dispatch(sportcenterFetchDataSuccess(items)))
+            .catch(error => {
+                                dispatch(isError(true));
+                                console.log("fail " + error.status)
+                            }
+
+                    );
+                        };
 }
 
 export function loadgames(url, page, size) {
@@ -231,6 +273,13 @@ export function setuser(username) {
     return {
         type: SET_USER,
         username: username
+    };
+}
+
+export function sportcenterFetchDataSuccess(sportcenteritems) {
+    return {
+        type: SPORTCENTER_FETCH_DATA_SUCCESS,
+        sportcenteritems: sportcenteritems
     };
 }
 

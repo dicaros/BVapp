@@ -5,25 +5,9 @@ var countpage = 0 + ' '
 
 class UserDetails extends React.Component {
 
-    componentDidMount() { 
-      console.log(this.props.loginsuccess)    
-                 this.refresh();
-   };
-
-   componentDidUpdate(prevProps) {
-    if(this.props.loginsuccess != prevProps.loginsuccess)
-    {
-     this.refresh();
-   }
-  } 
-
-   refresh(){ this.props.fetchUserDetails(this.props.myuserurl) }
-
    render() {      
 
-
-
-         const Table1 = () => {
+        const Table1 = () => {
            return(        
               this.props.useritems._embedded.myUserDetails.map ((row) =>                   
                    {

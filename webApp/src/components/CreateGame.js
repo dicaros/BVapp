@@ -3,55 +3,35 @@ import { url } from '../store/actions/action-type';
 
 class CreateGame extends React.Component {
 
-      componentDidMount() { 
-      console.log(this.props.loginsuccess)    
-                 this.refresh();
-   };
- 
-    componentDidUpdate(prevProps) {
-       if(this.props.page != prevProps.page || this.props.size != prevProps.size || this.props.loginsuccess != prevProps.loginsuccess || this.props.nitems != prevProps.nitems)
-       {
-        this.refresh();
-      }
-     } 
- 
-   async handleChange(event) {
-         await this.props.setSize(event.target.value);
-         await this.props.setPage('prev', this.props.listurl, 1, this.props.items.page.totalPages)
-   };
-
-   createnewgame () {
-        this.props.setNavigate('create');
-   }
- 
-   switchPage (direction) {
-         this.props.setPage(direction, this.props.items.page.totalPages)
-           };
-
-   async updateRecord(firstName, lastName, description, url) {  
-    if (this.props.loginsuccess) {
-       await  this.props.updateRecord(firstName, lastName, description, url)
-         this.refresh();
-      }
-    }
-
     handleSubmit(event) {
       event.preventDefault();
       this.props.newUsers(url+'signup', event.target);
     }
   
-
-   refresh(){ this.props.fetchGames(this.props.listurl, this.props.page, this.props.size) }
  
    render() {      
+
+      const Tablerow = () => {
+            return(        
+                    this.props.sportcenteritems._embedded.sportcenters.map ((row, index) =>                   
+                    {
+                      return(
+                              <a href='/' className='agamelist'><li className='ligamelist' key={index}>{row.name}<br/>
+                              </li></a>
+                          )})
+            )
+          }
 
     const RegisterForm = () => {
       return(
       <form className='tablelist1' method='POST' onSubmit={this.handleSubmit.bind(this)}> 
+      <div className='closewindowdiv' >
+            <span className='closewindowspan'><a id='bodylink'href = '/' onClick={() => this.props.setNavigate('create')}>X</a></span>
+            </div>
           <table>
             <thead>
             <tr>
-                    <th colSpan={4}></th>
+                    <th colSpan={4}><Tablerow /></th>
               </tr>
               <tr height='50px'>
                     <th colSpan={4}>Fill in your details:</th>
@@ -106,7 +86,7 @@ class CreateGame extends React.Component {
 )
 }
 
-if(this.props.loginsuccess && typeof this.props.items._embedded != 'undefined' && this.props.navigate == 'create') {
+if(this.props.loginsuccess && typeof this.props.sportcenteritems._embedded != 'undefined' && this.props.navigate == 'create') {
           
           return (
                        <center>

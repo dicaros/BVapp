@@ -47,6 +47,14 @@ export function items(state = [], action) {
     }
 }
 
+export function listsportcenter(state = url+'api/sportcenters', action) {
+    switch (action.type) {
+        case 'LIST_SPORTCENTER':
+            return action.listsportcenter;        default:
+            return state;
+    }
+}
+
 export function listurl(state = url+'api/games', action) {
     switch (action.type) {
         case 'LIST_URL':
@@ -79,6 +87,14 @@ export function nitems(state = 0, action) {
     }
 }
 
+export function sportcenteritems(state = [], action) {
+    switch (action.type) {
+        case 'SPORTCENTER_FETCH_DATA_SUCCESS':
+            return action.sportcenteritems;        default:
+            return state;
+    }
+}
+
 export function useritems(state = [], action) {
     switch (action.type) {
         case 'USER_FETCH_DATA_SUCCESS':
@@ -107,6 +123,7 @@ export default combineReducers({
     items,
     isError,
     isLoading,
+    listsportcenter,
     listurl,
     loginsuccessfull,
     myuserurl,
@@ -115,6 +132,7 @@ export default combineReducers({
     page,
     registration,
     size,
+    sportcenteritems,
     useritems,
     username,
 });

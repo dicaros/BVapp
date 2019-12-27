@@ -15,8 +15,6 @@ class LoginPage extends React.Component {
      this.props.doLogin(loginurl, event.target);
  }
  
-   refresh(){ this.props.fetchGames(this.props.listurl, this.props.page, this.props.size) }
- 
    render() {      
  
          const LoginForm = () => {

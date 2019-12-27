@@ -5,27 +5,12 @@ var countpage = 0 + ' '
 
 class GameList extends React.Component {
 
-    componentDidMount() { 
-      console.log(this.props.loginsuccess)    
-                 this.refresh();
-   };
- 
-    componentDidUpdate(prevProps) {
-       if(this.props.page != prevProps.page || this.props.size != prevProps.size || this.props.loginsuccess != prevProps.loginsuccess || this.props.nitems != prevProps.nitems)
-       {
-        this.refresh();
-      }
-     } 
  
    async handleChange(event) {
          await this.props.setSize(event.target.value);
          await this.props.setPage('prev', this.props.listurl, 1, this.props.items.page.totalPages)
    };
 
-createnewgame () {
-         this.props.setNavigate('create');
-   }
- 
    switchPage (direction) {
          this.props.setPage(direction, this.props.items.page.totalPages)
            };
@@ -36,10 +21,6 @@ createnewgame () {
          this.refresh();
       }
     }
-
-
-
-   refresh(){ this.props.fetchGames(this.props.listurl, this.props.page, this.props.size) }
  
    render() {      
 
@@ -47,22 +28,23 @@ createnewgame () {
                          return (
                                        <thead>
                                            <tr> 
-                                             <th>Game organizer / Date / Time / Description</th>
+                                              <th>
+                                              <div className='closewindowdiv'><span className = 'createbuttonspan'><button onClick={() => this.props.setNavigate('create')}>+ Create New</button></span>                                            
+                                                  Game organizer / Date / Time / Description</div>
+                                              </th>
                                            </tr>
                                        </thead>
                                  )
            };
- 
  
          const Tablerow = () => {
            return(        
                    this.props.items._embedded.games.map ((row, index) =>                   
                    {
                      return(
-                             <li key={index}>{row.myuser.name} - {row.gamedate}, {row.gametime}<br/>
-                             {row.description}<button id='button_delete' onClick={() => {handleDelete(row._links.self.href, this.props, this.props.listurl)}}>Delete</button>
-                             <a  id = 'bodylink' href = '#' onClick={() => this.updateRecord('Dummy character', 'Surname', 'Job updated', row._links.self.href)}>Update</a>
-                             </li>
+                             <a href='/' className='agamelist'><li className='ligamelist' key={index}>{row.myuser.name} - {row.gamedate}, {row.gametime}<br/>
+                             <i>{row.description}</i>
+                             </li></a>
                          )})
            )
          }
@@ -80,10 +62,6 @@ createnewgame () {
                                      return (
                                       countpage = this.props.items.page.totalPages + ' ',
                                        <tfoot>
-                                         <tr><td>
-                                           <br></br>
-                                           </td>
-                                         </tr>
                                          <tr id = 'trfooter'>
                                            <td>
                                                      <center>  <button onClick={() => this.switchPage('prev')}>Prev</button><span>&nbsp;&nbsp;</span>
@@ -100,11 +78,6 @@ createnewgame () {
                                                        </select>                                                   </center>
                                        </td>
                                
-                                     </tr>
-                                     <tr id = 'trfooter'>
-                                           <td>
-                                               <button onClick={() => this.createnewgame()}>+ Create New</button>                                            
-                                           </td>                           
                                      </tr>
                                  </tfoot>
                               );   

@@ -12,6 +12,8 @@ import {
 } from "react-router-dom";
 
 class App extends React.Component {
+
+
   render () {
     
     
@@ -21,7 +23,7 @@ class App extends React.Component {
     }
 
     const BodyRender = () => {
-              return(<section>
+              return(<section className = 'appbody'>
               <Router>
                      <Switch>
                             <Route path="/register" loginsuccess={this.props.loginsuccess}>

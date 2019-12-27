@@ -12,10 +12,12 @@ import org.springframework.stereotype.Component;
 public class SpringDataRestEventHandler {
 
 	private final MyuserRepository myuserRepository;
+	private final SportCenterRepository sportcenterrepository;
 
 	@Autowired
-	public SpringDataRestEventHandler(MyuserRepository myuserRepository) {
+	public SpringDataRestEventHandler(MyuserRepository myuserRepository, SportCenterRepository sportcenterrepository) {
 		this.myuserRepository = myuserRepository;
+		this.sportcenterrepository = sportcenterrepository;
 	}
 
 	@HandleBeforeCreate

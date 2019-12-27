@@ -1,4 +1,4 @@
-import { loadgames, loaduserdetails } from './store/actions/actions';
+import { loadgames, loaduserdetails, loadsportcenters} from './store/actions/actions';
 import { setCurrentPage } from './store/actions/actions';
 import { setCurrentSize } from './store/actions/actions';
 import { setNavigate } from './store/actions/actions';
@@ -19,12 +19,12 @@ import LoginPage from './components/LoginPage';
 import RegisterUser from './components/RegisterUser';
 import CreateGame from './components/CreateGame';
 
-
 const mapStateToProps = (state) => {
     return {
          isError: state.isError,
          isLoading: state.isLoading,
          loginsuccess: state.loginsuccessfull,
+         listsportcenter: state.listsportcenter,
          listurl: state.listurl,
          items: state.items,
          myuserurl: state.myuserurl,
@@ -32,6 +32,7 @@ const mapStateToProps = (state) => {
          navigate: state.navigate,
          page: state.page,
          size: state.size,
+         sportcenteritems: state.sportcenteritems,
          useritems: state.useritems,
          username: state.username,
          registration: state.registration
@@ -42,6 +43,7 @@ const mapStateToProps = (state) => {
   return {
       fetchGames: (url, page, size) => dispatch(loadgames(url, page, size)),
       fetchUserDetails: (url) => dispatch(loaduserdetails(url)),
+      fetchSportCenters: (url, page, size) => dispatch(loadsportcenters(url, page, size)),
       doLogin: (loginurl, target) => dispatch(thelogin(loginurl, target)),                                    
       doLogout: (logouturl) => dispatch(thelogout(logouturl)),
       setNavigate: (navigate) => dispatch(setNavigate(navigate)),
@@ -61,4 +63,4 @@ const mapStateToProps = (state) => {
   export const RegisterComponent = connect(mapStateToProps, mapDispatchToProps)(RegisterUser);
   export const CreateComponent = connect(mapStateToProps, mapDispatchToProps)(CreateGame);
 
-  export default HeaderComponent;
+  //export default HeaderComponent;

@@ -1,3 +1,16 @@
+.agamelist {
+    text-decoration: none;
+    font-style: normal;
+    font-weight: normal;
+    font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    color: #000000;    
+}
+
+.appbody {
+    margin-top: 80px;
+    z-index: 100;
+}
+
 body {
     margin: 0px;
     font-style: normal;
@@ -36,29 +49,40 @@ button {
 	border-bottom-left-radius: 10px;
 }
 
+.closewindowdiv {
+    position: relative;
+    font-size: x-large;
+}
+
+.closewindowspan {
+    position: absolute;
+    top: -5px;
+    right: 0px;
+}
+
 .creategameheader {
     text-align: right;
     width: 100%;
 }
 
-.submitbutton {
-    width: 120px;
-    background-color: lightskyblue;
-    border-style: solid;
-    border-color: darkgrey;
-    border-width: 1px;
-    height: 30px;
-    color: black;
+.createbuttonspan {
+    position: absolute;
+    top: -10px;
+    left: -10px;
 }
 
 header {
     margin: 0;
+    height: 80px;
     display: block;
-    opacity: 80%;
+    opacity: 100%;
     background-color: #000000; 
     box-shadow: 0px 7px 4px #999999;
-    position: sticky;
+    position: fixed;
     top: 0;
+    width: 100%;
+    z-index: 1000;
+
 }
 
 .headermenu_center {
@@ -72,6 +96,18 @@ header {
 
 .headermenu_right {
     width: 200px;
+}
+
+.ligamelist {
+    list-style-type: none;
+    border-bottom: black;
+    border-bottom-style: inset;
+    border-bottom-width: 0.5px;
+}
+
+.ligamelist:hover {
+    background-color: #71cee7;
+
 }
 
 #logo {
@@ -92,6 +128,16 @@ section {
 .signuperror {
     color: crimson;
     font-size: smaller;
+}
+
+.submitbutton {
+    width: 120px;
+    background-color: lightskyblue;
+    border-style: solid;
+    border-color: darkgrey;
+    border-width: 1px;
+    height: 30px;
+    color: black;
 }
 
 .tableheader {
@@ -150,6 +196,11 @@ td {
 
 #tdgamelist1 {
     text-align: left;
+    padding: 0px;
+    margin: 0px;
+    border-style: inset;
+    border-width: 0.5px;
+    padding: 3px;
 }
 
 #tduserlist {

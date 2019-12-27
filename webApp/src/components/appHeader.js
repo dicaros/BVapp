@@ -8,7 +8,7 @@ const logouturl = url+'logout'
 
 class AppHeader extends React.Component {
  
-constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
           showMenu: false
@@ -16,19 +16,31 @@ constructor(props) {
       this.menuShowToggle = this.menuShowToggle.bind(this);
     }
 
+    componentDidMount() { 
+      console.log(this.props.loginsuccess)    
+            this.props.fetchSportCenters(this.props.listsportcenter, this.props.page, this.props.size) 
+            this.props.fetchUserDetails(this.props.myuserurl)
+            this.props.getUser()   
+          
+      };
+  
+    componentDidUpdate(prevProps) {
+       if(this.props.page != prevProps.page || this.props.size != prevProps.size || this.props.loginsuccess != prevProps.loginsuccess || this.props.nitems != prevProps.nitems)
+       {
+        this.props.fetchGames(this.props.listurl, this.props.page, this.props.size)
+      }
+      if(this.props.loginsuccess != prevProps.loginsuccess)
+      {
+        this.props.fetchSportCenters(this.props.listsportcenter, this.props.page, this.props.size) 
+        this.props.fetchUserDetails(this.props.myuserurl)
+        this.props.getUser()   
+     }
+     } 
+  
+
     menuShowToggle = () => {
       this.setState({showMenu: !this.state.showMenu})
   }
-
-  componentDidUpdate(){
-    this.props.getUser();    
-  }
-
-  componentDidMount() { 
-    this.props.getUser();
- };
-
-
 
   logout(logouturl) {
     if (this.props.loginsuccess) {
@@ -41,11 +53,7 @@ async addNew(isPrivate, gameDate, gameTime, description) {
       if (this.props.loginsuccess) {
         await  this.props.addNew(isPrivate, gameDate, gameTime, description, this.props.listurl, this.props.items.page.totalElements)
       }
-      this.refresh();
     }
-
-    refresh(){ this.props.fetchGames(this.props.listurl, this.props.page, this.props.size) }
-
 
     render() {
 

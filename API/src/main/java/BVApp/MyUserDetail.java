@@ -21,13 +21,13 @@ public class MyUserDetail {
 	private Integer playedcount;
 	private Integer noshowcount;
 	
-
+	
 	private @Version @JsonIgnore Long version;
-
 	private @OneToOne Myuser myuser;
 
 	private MyUserDetail() {}
 
+	
 	public MyUserDetail(String firstname, String lastname, String phone, Double gpsx, Double gpsy, Integer playedcount, Integer noshowcount, Myuser myuser) {
 		this.firstname = firstname;
 		this.lastname = lastname;
