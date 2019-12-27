@@ -52,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	
-/*	   @Bean
+	   @Bean
 	    public CorsConfigurationSource corsConfigurationSource() {
 	        final CorsConfiguration configuration = new CorsConfiguration();
 	        configuration.setAllowedOrigins(List.of("*"));
@@ -67,5 +67,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	        source.registerCorsConfiguration("/**", configuration);
 	        return source;
 	    }
-*/	
+	
 }
