@@ -7,11 +7,11 @@ import { url } from '../store/actions/action-type';
 const logouturl = url+'logout'
 
 class AppHeader extends React.Component {
- 
+
   constructor(props) {
     super(props);
     this.state = {
-          showMenu: false
+          showMenu: false,
       }
       this.menuShowToggle = this.menuShowToggle.bind(this);
     }
@@ -26,21 +26,20 @@ class AppHeader extends React.Component {
   
     componentDidUpdate(prevProps) {
        if(this.props.page != prevProps.page || this.props.size != prevProps.size || this.props.loginsuccess != prevProps.loginsuccess || this.props.nitems != prevProps.nitems)
-       {
+        {
         this.props.fetchGames(this.props.listurl, this.props.page, this.props.size)
-      }
+        }
       if(this.props.loginsuccess != prevProps.loginsuccess)
-      {
+         {
         this.props.fetchSportCenters(this.props.listsportcenter, this.props.page, this.props.size) 
         this.props.fetchUserDetails(this.props.myuserurl)
         this.props.getUser()   
-     }
-     } 
-  
+        }
+     }  
 
     menuShowToggle = () => {
-      this.setState({showMenu: !this.state.showMenu})
-  }
+      this.setState({showMenu: !this.state.showMenu})   
+     }
 
   logout(logouturl) {
     if (this.props.loginsuccess) {
@@ -65,14 +64,15 @@ async addNew(isPrivate, gameDate, gameTime, description) {
 
                   <li>
                     <center>
-                      <img src={usericon} id='userlogo' alt='O'></img></center>
+                      <img src={usericon} className='userlogo' alt='O'></img></center>
                 </li>     
                 <li>
                   
                 <div className="container" onClick={this.menuShowToggle}>
-                      <div className="bar1"></div>
-                      <div className="bar2"></div>
-                      <div className="bar3"></div>
+                      {this.state.showMenu && <span className='ics'>X</span>} 
+                      {!this.state.showMenu && <center><div className='bar1'></div>
+                      <div className='bar1'></div>
+                      <div className='bar1'></div></center>}
                 </div> 
                     { this.state.showMenu && !this.props.loginsuccess && 
                     <ul>
@@ -85,8 +85,8 @@ async addNew(isPrivate, gameDate, gameTime, description) {
                     <ul>
                           <li><a  href = '#' onClick={() => this.logout(logouturl)}>Logout</a></li>
                           <li><a href="#">About...</a></li>
-                          <li><a id = 'topheaderlink' href = '#' onClick={() => this.addNew(true, '2019-10-05', '15:00:00', 'this is a game that I just created')}>Create New</a></li>
-                          <li><div id='line'></div></li>
+                          <li><a href = '#' onClick={() => this.addNew(true, '2019-10-05', '15:00:00', 'this is a game that I just created')}>Create New</a></li>
+                          <li><div className='line'></div></li>
                           <li><a href="#">{ this.props.username }</a></li>
                       </ul> }
                 </li>        
@@ -100,12 +100,12 @@ async addNew(isPrivate, gameDate, gameTime, description) {
 
       return(
      
-     <div id = 'topheader' ref = 'header'>
+     <div className = 'topheader' ref = 'header'>
        <table className = 'tableheader'>
          <thead>
          <tr>
             <td className = 'headermenu_left'>
-                 <a href='/'><img src = {logo} id='logo' alt='Logo'></img></a>
+                 <a href='/'><img src = {logo} className='logo' alt='Logo'></img></a>
             </td>
             <td className = 'headermenu_center'>
             </td>

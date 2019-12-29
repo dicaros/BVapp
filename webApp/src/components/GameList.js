@@ -28,7 +28,7 @@ class GameList extends React.Component {
                          return (
                                        <thead>
                                            <tr> 
-                                              <th>
+                                              <th className = 'gamelist'>
                                               <div className='closewindowdiv'><span className = 'createbuttonspan'><button onClick={() => this.props.setNavigate('create')}>+ Create New</button></span>                                            
                                                   Game organizer / Date / Time / Description</div>
                                               </th>
@@ -42,7 +42,7 @@ class GameList extends React.Component {
                    this.props.items._embedded.games.map ((row, index) =>                   
                    {
                      return(
-                             <a href='/' className='agamelist'><li className='ligamelist' key={index}>{row.myuser.name} - {row.gamedate}, {row.gametime}<br/>
+                             <a key={index} href='/' className='gamelist'><li className='gamelist' key={index}>{row.myuser.name} - {row.gamedate}, {row.gametime}<br/>
                              <i>{row.description}</i>
                              </li></a>
                          )})
@@ -52,7 +52,7 @@ class GameList extends React.Component {
          const TableBody = () => {                       
                                     return (<tbody> 
                                                 <tr>
-                                                     <td id = 'tdgamelist1' width='20%'>
+                                                     <td className = 'gamelist' width='20%'>
                                                           <Tablerow/>
                                                      </td>    
                                                 </tr>                         

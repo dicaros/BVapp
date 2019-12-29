@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { url } from '../actions/action-type';
 
-export function navigate(state = 'games', action) {
+export function navigate(state = 'create', action) {
     switch (action.type) {
         case 'SET_NAVIGATE':
             return action.navigate;        default:

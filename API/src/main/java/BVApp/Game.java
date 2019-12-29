@@ -17,6 +17,7 @@ public class Game {
 
 	private @Id @GeneratedValue Long id; // automatically generated primary ID
 	private Long sportcenterid;
+	private Integer kurt;
 	private Double priceperperson;
 	private Boolean isprivate;
 	private Date gamedate;
@@ -31,9 +32,10 @@ public class Game {
 	private Game() {}
 	
 
-	public Game(Long sportcenterid,	Double priceperperson,	Boolean isprivate,	Date gamedate,	Time gametime,	Boolean gameisfull,	Boolean gameispast,	String description, Myuser myuser) 
+	public Game(Long sportcenterid,	Integer kurt, Double priceperperson,	Boolean isprivate,	Date gamedate,	Time gametime,	Boolean gameisfull,	Boolean gameispast,	String description, Myuser myuser) 
 	{
 		this.sportcenterid = sportcenterid;
+		this.kurt = kurt;
 		this.priceperperson = priceperperson;
 		this.isprivate = isprivate;
 		this.gamedate = gamedate;
@@ -51,6 +53,7 @@ public class Game {
 		Game game = (Game) o;
 		return Objects.equals(id, game.id) &&
 			Objects.equals(sportcenterid, game.sportcenterid) &&
+			Objects.equals(kurt, game.kurt) &&
 			Objects.equals(priceperperson, game.priceperperson) &&
 			Objects.equals(isprivate, game.isprivate) &&			
 			Objects.equals(gamedate, game.gamedate) &&
@@ -65,7 +68,7 @@ public class Game {
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, sportcenterid, priceperperson, isprivate, gamedate, gametime, gameisfull, gameispast, description, version, myuser);
+		return Objects.hash(id, kurt, sportcenterid, priceperperson, isprivate, gamedate, gametime, gameisfull, gameispast, description, version, myuser);
 	}
 
 	public Long getId() {
@@ -82,6 +85,14 @@ public class Game {
 
 	public void setSportcenter(Long sportcenterid) {
 		this.sportcenterid = sportcenterid;
+	}
+	
+	public Integer getKurt() {
+		return kurt;
+	}
+
+	public void setKurt(Integer kurt) {
+		this.kurt = kurt;
 	}
 	
 	public Double getPriceperperson() {
@@ -161,6 +172,7 @@ public class Game {
 		return "Employee{" +
 			"id=" + id +
 			", sportcenterid='" + sportcenterid + '\'' +
+			", kurt='" + kurt + '\'' +
 			", priceperperson='" + priceperperson + '\'' +
 			", isprivate='" + isprivate + '\'' +
 			", gamedate='" + gamedate + '\'' +

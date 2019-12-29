@@ -30,9 +30,7 @@ class App extends React.Component {
                                     <RegisterComponent />
                             </Route>
                             <Route path="/">
-                                    <div>
-                                        <center><GameComponent /><CreateComponent /><UserComponent /><LoginComponent /></center>
-                                    </div>
+                                       <center><GameComponent /><CreateComponent /><UserComponent /><LoginComponent /></center>
                             </Route>
                     </Switch>
               </Router>
@@ -42,7 +40,7 @@ class App extends React.Component {
     }
 
     
-    return (  <div id = 'main'><HeaderRender />
+    return (  <div><HeaderRender />
     <BodyRender /></div>)   
           }
 
