@@ -191,7 +191,7 @@ export function myuserurl(myuserurl) {
 }
 
 export function newItem(isPrivate, gameDate, gameTime, description, url, nitems)  {
-    var updatedrecord = {sportcenter: 1, priceperperson: 10, isprivate: isPrivate, gamedate: gameDate, gametime: gameTime, gameisfull: true, gameispast: true, description: description}
+    var updatedrecord = {sportcenter: 1, kurt: 1, priceperperson: 50, isprivate: isPrivate, gamedate: gameDate, gametime: gameTime, gameisfull: true, gameispast: true, description: description}
     fetch(url, {
              method: "POST",
              credentials: 'include',

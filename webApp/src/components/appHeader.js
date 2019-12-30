@@ -85,7 +85,7 @@ async addNew(isPrivate, gameDate, gameTime, description) {
                     <ul>
                           <li><a  href = '#' onClick={() => this.logout(logouturl)}>Logout</a></li>
                           <li><a href="#">About...</a></li>
-                          <li><a href = '#' onClick={() => this.addNew(true, '2019-10-05', '15:00:00', 'this is a game that I just created')}>Create New</a></li>
+                          <li><a href = '#' onClick={() => this.addNew(true, '2019-10-05', '15:00:00', 'ciao a tutti')}>Create New</a></li>
                           <li><div className='line'></div></li>
                           <li><a href="#">{ this.props.username }</a></li>
                       </ul> }
