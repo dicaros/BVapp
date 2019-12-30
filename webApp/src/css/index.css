@@ -105,10 +105,6 @@ a.gamelist {
     color: #000000;    
 }
 
-a.gamelist.active {
-    background-color: yellow;
-}
-
 /* 3 - BUTTONS */
 
 button {
@@ -428,8 +424,8 @@ nav li > a {
 .squarebox {
     width: 180px;
 }
-.redsquare {
-    background: red;
+.squareselected {
+    background: yellow;
     border: 1px solid #999;
     float: left;
     font-size: 12px;

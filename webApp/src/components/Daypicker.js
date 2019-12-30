@@ -1,6 +1,7 @@
 import React from 'react';
 import { currentday } from '../functions/functions.js'
 import { daystring } from '../functions/functions.js'
+import { dayoftheweek } from '../functions/functions.js'
 import { convertmonthtostring } from '../functions/functions.js'
 
 var thisday = currentday();
@@ -15,7 +16,7 @@ function SquareTop(props) {
 
 function Square(props) {
     var classname = 'square'
-    if (props.value == props.day) classname = 'redsquare'
+    if (props.value == props.day) classname = 'squareselected'
     return (
         <div className={classname} 
         onClick={props.onClick}
@@ -24,13 +25,6 @@ function Square(props) {
       </div>
     );
   }
-
-function dayoftheweek(day, month, year)
-{
-    var d = new Date(year, month-1, day);
-    var dayoftheweek = [daystring[d.getDay()], d.getDay()]
-    return dayoftheweek;
-}
 
 class Daypicker extends React.Component {
 

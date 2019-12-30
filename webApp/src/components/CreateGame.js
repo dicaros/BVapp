@@ -1,7 +1,7 @@
 import React from 'react';
 import { url } from '../store/actions/action-type';
-import { Hourselect } from '../functions/timeselect.js'
-import { Kurtselect } from '../functions/timeselect.js'
+import { Hourselect } from '../functions/functions.js'
+import { Kurtselect } from '../functions/functions.js'
 import { currentday } from '../functions/functions.js'
 import { convertmonthtoint } from '../functions/functions.js'
 import { convertmonthtostring } from '../functions/functions.js'
@@ -9,7 +9,6 @@ import { convertmonthtostring } from '../functions/functions.js'
 
 import Daypicker from './Daypicker.js'
 import Monthpicker from './Monthpicker.js'
-import GameList from './GameList';
 
 var thisday = currentday()
 
@@ -28,10 +27,11 @@ class CreateGame extends React.Component {
             }
       }
 
-    handleSubmit(event) {
+async  handleSubmit(event) {
       event.preventDefault();
-      this.props.addNew(event.target.isprivate.checked, this.state.selectedyear+'-'+this.state.selectedmonth+'-'+this.state.selectedday, this.state.timeselection+':00', event.target.comments.value, url+'api/games', this.props.nitems, event.target.priceperperson.value, this.state.kurtselection);
-
+     await this.props.addNew(this.state.selectedCenter, event.target.isprivate.checked, this.state.selectedyear+'-'+("00" + this.state.selectedmonth).slice(-2)+'-'+("00" + this.state.selectedday).slice(-2), this.state.timeselection+':00', event.target.comments.value, url+'api/games', this.props.nitems, event.target.priceperperson.value, this.state.kurtselection);
+     await this.props.setNavigate('games')
+      window.location.reload();      
 }
 
 
@@ -85,7 +85,7 @@ class CreateGame extends React.Component {
                     {
                       return(
                               <a key={index} href='#' className='gamelist'>
-                                    <li key={index} className={ this.classNameCenter(row.id) } onClick={() => this.handleChangeSportCenter(row.id)}><b>{row.name}</b> ({row.street})<br/></li></a>
+                                    <li key={index} className={ this.classNameCenter(row.id) } onClick={() => this.handleChangeSportCenter(row.id)}><b>{row.name}</b> ({row.street} - <a href={row.website} className='bodylink'>{row.website}</a>)></li></a>
                           )})
             )
           }
@@ -169,7 +169,7 @@ class CreateGame extends React.Component {
                         <td className='newgame' colSpan={4}>How much per person?</td>
                   </tr>
                   <tr height='25px'>
-                        <td colSpan={3}><input type='text' name='priceperperson'/></td>
+                        <td colSpan={3}><input type='text' name='priceperperson'/> CZK</td>
                         <td className='signuperror'></td>
                 </tr>
                 <tr height='30px'>

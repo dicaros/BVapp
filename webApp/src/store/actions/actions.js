@@ -77,7 +77,7 @@ export function listurl(listurl) {
 export function loadsportcenters(url, page, size) {
     return (dispatch) => {
             dispatch(isLoading(true)); 
-            fetch(url+'?page='+page+'&size='+size, {
+            fetch(url+'?page='+page+'&size='+size+'&sort=name,asc', {
                                                         method: 'GET',
                                                         credentials: 'include',
                                                         headers: { 
@@ -111,7 +111,7 @@ export function loadsportcenters(url, page, size) {
 export function loadgames(url, page, size) {
             return (dispatch) => {
                     dispatch(isLoading(true)); 
-                    fetch(url+'?page='+page+'&size='+size, {
+                    fetch(url+'?page='+page+'&size='+size+'&sort=gamedate&sort=gametime', {
                                                                 method: 'GET',
                                                                 credentials: 'include',
                                                                 headers: { 
@@ -190,8 +190,8 @@ export function myuserurl(myuserurl) {
     };
 }
 
-export function newItem(isPrivate, gameDate, gameTime, description, url, nitems, priceperperson, kurt)  {
-    var updatedrecord = {sportcenter: 1, kurt: kurt, priceperperson: priceperperson, isprivate: isPrivate, gamedate: gameDate, gametime: gameTime, gameisfull: false, gameispast: false, description: description}
+export function newGame(sportcenterid, isPrivate, gameDate, gameTime, description, url, nitems, priceperperson, kurt)  {
+    var updatedrecord = {sportcenter: sportcenterid, kurt: kurt, priceperperson: priceperperson, isprivate: isPrivate, gamedate: gameDate, gametime: gameTime, gameisfull: false, gameispast: false, description: description}
     fetch(url, {
              method: "POST",
              credentials: 'include',

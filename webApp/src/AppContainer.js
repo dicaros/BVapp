@@ -4,7 +4,7 @@ import { setCurrentSize } from './store/actions/actions';
 import { setNavigate } from './store/actions/actions';
 import { thelogin } from './store/actions/actions';
 import { thelogout } from './store/actions/actions';
-import { newItem } from './store/actions/actions';
+import { newGame } from './store/actions/actions';
 import { getUser } from './store/actions/actions';
 import { updateRecord } from './store/actions/actions';
 import { newUser } from './store/actions/actions';
@@ -49,7 +49,7 @@ const mapStateToProps = (state) => {
       setNavigate: (navigate) => dispatch(setNavigate(navigate)),
       setSize: (size) => dispatch(setCurrentSize(size)),
       setPage: (direction, pagenum) => dispatch(setCurrentPage(direction, pagenum)),                              
-      addNew: (isPrivate, gameDate, gameTime, description, url, nitems, priceperperson, kurt) => dispatch(newItem(isPrivate, gameDate, gameTime, description, url, nitems, priceperperson, kurt)),
+      addNew: (sportcenterid, isPrivate, gameDate, gameTime, description, url, nitems, priceperperson, kurt) => dispatch(newGame(sportcenterid, isPrivate, gameDate, gameTime, description, url, nitems, priceperperson, kurt)),
       getUser: () => dispatch(getUser(url+'username')),
       updateRecord: (firstName, lastName, description, url) => dispatch(updateRecord(firstName, lastName, description, url)),
       newUsers: (url, target) => dispatch(newUser(url, target)),

@@ -1,5 +1,4 @@
 import React from 'react';
-import { handleDelete } from '../functions/functions'
 
 var countpage = 0 + ' '
 
@@ -42,7 +41,7 @@ class GameList extends React.Component {
                    this.props.items._embedded.games.map ((row, index) =>                   
                    {
                      return(
-                             <a key={index} href='/' className='gamelist'><li className='gamelist' key={index}>{row.myuser.name} - {row.gamedate}, {row.gametime}<br/>
+                             <a key={index} href='/' className='gamelist'><li className='gamelist' key={index}>{row.gamedate} {row.myuser.name} - {row.gamedate}, {row.gametime}<br/>
                              <i>{row.description}</i>
                              </li></a>
                          )})
