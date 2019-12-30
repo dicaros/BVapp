@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,7 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private SpringDataJpaUserDetailsService userDetailsService;
 
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
@@ -67,5 +69,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	        source.registerCorsConfiguration("/**", configuration);
 	        return source;
 	    }
+	   
+	   @Bean
+	   public RepositoryRestConfigurer repositoryRestConfigurer()
+	   {
+	       return RepositoryRestConfigurer.withConfig(config -> {
+	           config.exposeIdsFor(Sportcenter.class);
+	       });
+	   }
 	
 }

@@ -105,6 +105,10 @@ a.gamelist {
     color: #000000;    
 }
 
+a.gamelist.active {
+    background-color: yellow;
+}
+
 /* 3 - BUTTONS */
 
 button {
@@ -314,9 +318,18 @@ li.gamelist {
     width: 100%;
 }
 
+li.gamelistselected
+    {
+    list-style-type: none;
+    border-bottom: black;
+    border-bottom-style: inset;
+    border-bottom-width: 0.5px;
+    width: 100%;
+    background-color: yellow;
+    }
+
 li.gamelist:hover {
     background-color: #71cee7;
-
 }
 
 ul.gamelist {

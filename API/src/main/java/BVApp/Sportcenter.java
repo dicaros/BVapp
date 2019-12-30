@@ -26,8 +26,9 @@ public class Sportcenter {
 
 	private Sportcenter() {}
 	
-	public Sportcenter(String name,	String street,	String city, String postcode, String country, Double gpsx, Double gpsy,	String website) 
+	public Sportcenter(Long id, String name,	String street,	String city, String postcode, String country, Double gpsx, Double gpsy,	String website) 
 	{
+		this.id = id;
 		this.name = name;
 		this.street = street;
 		this.city = city;

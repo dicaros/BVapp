@@ -15,10 +15,10 @@ export const USER_FETCH_DATA_SUCCESS = 'USER_FETCH_DATA_SUCCESS'
 export const REGISTRATION_STATUS = 'REGISTRATION_STATUS'
 
 // IP local
-//export const url = 'http://192.168.0.101:8080/'
+export const url = 'http://192.168.0.101:8080/'
 
 // local
 //export const url = 'http://localhost:8080/'
 
 // AWS
-export const url = 'http://3.121.231.189:8080/'
+//export const url = 'http://3.121.231.189:8080/'

@@ -9,6 +9,7 @@ import { convertmonthtostring } from '../functions/functions.js'
 
 import Daypicker from './Daypicker.js'
 import Monthpicker from './Monthpicker.js'
+import GameList from './GameList';
 
 var thisday = currentday()
 
@@ -23,15 +24,16 @@ class CreateGame extends React.Component {
                   selectedmonth: thisday[1],
                   selectedmonthstring: convertmonthtostring(thisday[1]),
                   selectedyear: thisday[0],
-                  priceperperson: null
-
+                  selectedCenter: null,
             }
       }
 
     handleSubmit(event) {
       event.preventDefault();
-      this.props.newUsers(url+'signup', event.target);
-    }
+      this.props.addNew(event.target.isprivate.checked, this.state.selectedyear+'-'+this.state.selectedmonth+'-'+this.state.selectedday, this.state.timeselection+':00', event.target.comments.value, url+'api/games', this.props.nitems, event.target.priceperperson.value, this.state.kurtselection);
+
+}
+
 
     handleChangeTime(event) {
             this.setState({
@@ -46,41 +48,44 @@ class CreateGame extends React.Component {
                   })                   
       };
  
-      handleChangeDay(i) {
+    handleChangeDay(i) {
             this.setState({
                 selectedday: i,
         })
         }
 
         
-      handleChangeMonth(event) {
+    handleChangeMonth(event) {
             this.setState({
                   selectedmonth: convertmonthtoint(event.target.value),
                   selectedmonthstring: event.target.value
             })
       };
 
-      handleChangePrice() {
-            this.setState({
-                  priceperperson: document.getElementsByName("priceperperson")[0].value,
-            })
-      };
-
-      handleChangeYear(i) {
+    handleChangeYear(i) {
             if(i == 0)
                     this.setState({selectedyear: this.state.selectedyear-1})
             else if (i == 1) this.setState({selectedyear: this.state.selectedyear+1})
         }
         
-  
+      handleChangeSportCenter(id) {
+            this.setState({selectedCenter: id})
+        }
+
+        classNameCenter(id) {
+                  if(this.state.selectedCenter == id)
+                        return ('gamelistselected')
+                  else return ('gamelist')
+        }
 
    render() {      
       const SportCenterList = () => {
-            return(        
+            return(  
                     this.props.sportcenteritems._embedded.sportcenters.map ((row, index) =>                   
                     {
                       return(
-                              <a key={index} href='#' className='gamelist'><li key={index} className='gamelist'><b>{row.name}</b> ({row.street})<br/></li></a>
+                              <a key={index} href='#' className='gamelist'>
+                                    <li key={index} className={ this.classNameCenter(row.id) } onClick={() => this.handleChangeSportCenter(row.id)}><b>{row.name}</b> ({row.street})<br/></li></a>
                           )})
             )
           }

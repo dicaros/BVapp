@@ -190,8 +190,8 @@ export function myuserurl(myuserurl) {
     };
 }
 
-export function newItem(isPrivate, gameDate, gameTime, description, url, nitems)  {
-    var updatedrecord = {sportcenter: 1, kurt: 1, priceperperson: 50, isprivate: isPrivate, gamedate: gameDate, gametime: gameTime, gameisfull: true, gameispast: true, description: description}
+export function newItem(isPrivate, gameDate, gameTime, description, url, nitems, priceperperson, kurt)  {
+    var updatedrecord = {sportcenter: 1, kurt: kurt, priceperperson: priceperperson, isprivate: isPrivate, gamedate: gameDate, gametime: gameTime, gameisfull: false, gameispast: false, description: description}
     fetch(url, {
              method: "POST",
              credentials: 'include',

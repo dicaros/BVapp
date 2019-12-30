@@ -49,7 +49,7 @@ const mapStateToProps = (state) => {
       setNavigate: (navigate) => dispatch(setNavigate(navigate)),
       setSize: (size) => dispatch(setCurrentSize(size)),
       setPage: (direction, pagenum) => dispatch(setCurrentPage(direction, pagenum)),                              
-      addNew: (isPrivate, gameDate, gameTime, description, url, nitems) => dispatch(newItem(isPrivate, gameDate, gameTime, description, url, nitems)),
+      addNew: (isPrivate, gameDate, gameTime, description, url, nitems, priceperperson, kurt) => dispatch(newItem(isPrivate, gameDate, gameTime, description, url, nitems, priceperperson, kurt)),
       getUser: () => dispatch(getUser(url+'username')),
       updateRecord: (firstName, lastName, description, url) => dispatch(updateRecord(firstName, lastName, description, url)),
       newUsers: (url, target) => dispatch(newUser(url, target)),
