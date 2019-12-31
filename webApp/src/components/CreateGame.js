@@ -29,13 +29,12 @@ class CreateGame extends React.Component {
 
 async  handleSubmit(event) {
       event.preventDefault();
-     await this.props.addNew(this.state.selectedCenter, event.target.isprivate.checked, this.state.selectedyear+'-'+("00" + this.state.selectedmonth).slice(-2)+'-'+("00" + this.state.selectedday).slice(-2), this.state.timeselection+':00', event.target.comments.value, url+'api/games', this.props.nitems, event.target.priceperperson.value, this.state.kurtselection);
-     await this.props.setNavigate('games')
+               await this.props.addNew(this.state.selectedCenter, event.target.isprivate.checked, this.state.selectedyear+'-'+("00" + this.state.selectedmonth).slice(-2)+'-'+("00" + this.state.selectedday).slice(-2), this.state.timeselection+':00', event.target.comments.value, url+'api/games', this.props.nitems, event.target.priceperperson.value, this.state.kurtselection);
+               await this.props.setNavigate('games')
       window.location.reload();      
 }
 
-
-    handleChangeTime(event) {
+      handleChangeTime(event) {
             this.setState({
                   timeselection: event.target.value,
             })
@@ -89,125 +88,135 @@ async  handleSubmit(event) {
                           )})
             )
           }
-    const RegisterForm = () => {
-      return(
-      <form className='tablelist1' method='POST' onSubmit={this.handleSubmit.bind(this)}> 
-      <div className='closewindowdiv' >
-            <span className='closewindowspan'><a className='bodylink'href = '/' onClick={() => this.props.setNavigate('create')}>X</a></span>
-            </div>
-          <table className='sportcenterlist'>
-            <thead>
-           
-             </thead>
-            <tbody>
-                  <tr height='30px'>
-                        <td className='newgame' colSpan={4}>Where? </td>
-                  </tr>
-                  <tr>
-                        <td className = 'gamelist' colSpan={4}>
-                              <ul className='gamelist'><SportCenterList /></ul>
-                        </td>
-                  </tr>
+
+
+      const RegisterForm = () => {
+return (
+      <div>
+      <form method='POST' onSubmit={this.handleSubmit.bind(this)}> 
+      <table>
+      <tbody>
+            <tr height='30px'>
+                  <td className='newgame' colSpan={4}>Where? </td>
+            </tr>
+            <tr>
+                  <td className = 'sportcenterlist' colSpan={4}>
+                        <ul className='sportcenterlist'><SportCenterList /></ul>
+                  </td>
+            </tr>
+      
+            <tr height='30px'>
+                  <td className='newgame' colSpan={4}>Which day?</td>
+            </tr>
             
-                  <tr height='30px'>
-                        <td className='newgame' colSpan={4}>Which day?</td>
-                  </tr>
+            <tr height='25px'>
                   
-                  <tr height='25px'>
-                        
-                        <td colSpan={3}>
-                        
-                              <div className ='squarebox'>
-                                    <center>
-                                          <a className = 'bodylink' href ='#' onClick={() => this.handleChangeYear(0)}> {' << '} </a>
+                  <td colSpan={3}>
+                  
+                        <div className ='squarebox'>
+                              <center>
+                                    <a className = 'bodylink' href ='#' onClick={() => this.handleChangeYear(0)}> {' << '} </a>
+                                    
+                                    <select value={this.state.selectedmonthstring} onChange={this.handleChangeMonth.bind(this)}> 
+                                                <Monthpicker />
+                                    </select>
+
+                                    <span> </span>{this.state.selectedyear}
                                           
-                                          <select value={this.state.selectedmonthstring} onChange={this.handleChangeMonth.bind(this)}> 
-                                                      <Monthpicker />
-                                          </select>
+                                    <a className = 'bodylink' href ='#' onClick={() => this.handleChangeYear(1)}> {' >> '} </a>
+                                    
+                                    <Daypicker 
+                                                selectedday ={this.state.selectedday}
+                                                selectedmonth = {this.state.selectedmonth}
+                                                selectedyear = {this.state.selectedyear}
+                                                onClick={(i) => this.handleChangeDay(i)}
+                                    />
+                              </center>
+                        </div>
+                        
+                  </td>
 
-                                          <span> </span>{this.state.selectedyear}
-                                                
-                                          <a className = 'bodylink' href ='#' onClick={() => this.handleChangeYear(1)}> {' >> '} </a>
-                                          
-                                          <Daypicker 
-                                                      selectedday ={this.state.selectedday}
-                                                      selectedmonth = {this.state.selectedmonth}
-                                                      selectedyear = {this.state.selectedyear}
-                                                      onClick={(i) => this.handleChangeDay(i)}
-                                          />
-                                    </center>
-                              </div>
-                              
-                        </td>
+                  <td className='signuperror'></td>
+            </tr>
+            <tr height='30px'>
 
-                        <td className='signuperror'></td>
-                  </tr>
-                  <tr height='30px'>
+                  <td className='newgame' colSpan={4}>What time?</td>
+            </tr>
+            <tr height='25px'>
+                  <td colSpan={3}>  
+                        <select value={this.state.timeselection} onChange={this.handleChangeTime.bind(this)}>
+                              <Hourselect />
+                        </select>
+                  </td>
+                  <td className='signuperror'></td>
+            </tr>
+            <tr height='30px'>
+                  <td className='newgame' colSpan={4}>Which court?</td>
+            </tr>
+            <tr height='25px' colSpan={3}>
+                  <td>  
+                        <select value={this.state.kurtselection} onChange={this.handleChangeKurt.bind(this)}>
+                              <Kurtselect />
+                        </select>
+                  </td>
+                  <td className='signuperror'></td>
+            </tr>
+            <tr height='30px'>
+                  <td className='newgame' colSpan={4}>How much per person?</td>
+            </tr>
+            <tr height='25px'>
+                  <td colSpan={3}><input type='text' name='priceperperson'/> CZK</td>
+                  <td className='signuperror'></td>
+          </tr>
+          <tr height='30px'>
+                  <td className='newgame' colSpan={3}>Private game? <input type='checkbox' name='isprivate'/></td>
+                  <td ></td>
+            </tr>
 
-                        <td className='newgame' colSpan={4}>What time?</td>
-                  </tr>
-                  <tr height='25px'>
-                        <td colSpan={3}>  
-                              <select value={this.state.timeselection} onChange={this.handleChangeTime.bind(this)}>
-                                    <Hourselect />
-                              </select>
-                        </td>
-                        <td className='signuperror'></td>
-                  </tr>
-                  <tr height='30px'>
-                        <td className='newgame' colSpan={4}>Which court?</td>
-                  </tr>
-                  <tr height='25px' colSpan={3}>
-                        <td>  
-                              <select value={this.state.kurtselection} onChange={this.handleChangeKurt.bind(this)}>
-                                    <Kurtselect />
-                              </select>
-                        </td>
-                        <td className='signuperror'></td>
-                  </tr>
-                  <tr height='30px'>
-                        <td className='newgame' colSpan={4}>How much per person?</td>
-                  </tr>
-                  <tr height='25px'>
-                        <td colSpan={3}><input type='text' name='priceperperson'/> CZK</td>
-                        <td className='signuperror'></td>
-                </tr>
-                <tr height='30px'>
-                        <td className='newgame' colSpan={3}>Private game? <input type='checkbox' name='isprivate'/></td>
-                        <td ></td>
-                  </tr>
-
-                <tr height='30px'>
-                        <td className='newgame' colSpan={4}>Extra comments</td>
-                  </tr>
-                  <tr height='25px'>
-                        <td colSpan={3}><textarea className = 'description' name='comments'/></td>
-                        <td className='signuperror'></td>
-                </tr>
-              </tbody>
-            <tfoot>
-
+          <tr height='30px'>
+                  <td className='newgame' colSpan={4}>Extra comments</td>
+            </tr>
+            <tr height='25px'>
+                  <td colSpan={3}><textarea className = 'description' name='comments'/></td>
+                  <td className='signuperror'></td>
+          </tr>
+        </tbody>
+        <tfoot>
               <tr height='60px'>
                     <td className='loginbutton' colSpan={4}><button name="done"  type="submit" className='submitbutton' >Done</button></td>
               </tr>
             </tfoot>
-          </table>
-</form>
-)
-}
 
-if(this.props.loginsuccess && typeof this.props.sportcenteritems._embedded != 'undefined' && this.props.navigate == 'create') {
-          
-          return (
-                       <center>
-                         <RegisterForm />
-                       </center>
-                 );
-         }
-         else {
-          return '';
-        }
-     }
+        </table>
+        </form></div>
+
+)
+
+      }
+
+     const RegisterPage = () => {
+      return(      
+          <table className='tablelist1'>
+            <thead><tr>
+                  <th>
+                  <div className='closewindowdiv' >
+                         <span className='closewindowspan'>
+                               <button className='bodylink'href = '#' onClick={() => this.props.setNavigate('games')}>
+                                     X</button>
+                         </span>
+                   </div>
+                   </th>
+                   </tr>
+            </thead>
+            <tbody><tr><td>
+                  <RegisterForm />
+                  </td></tr>
+            </tbody>
+          </table>
+      )
+}         
+          return (<RegisterPage />);
  }
+}
  
 export default CreateGame;

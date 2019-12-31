@@ -68,7 +68,7 @@ class UserDetails extends React.Component {
            )
          }
                            
-         if(this.props.loginsuccess && typeof this.props.useritems._embedded != 'undefined' && this.props.navigate == 'games') {
+         if(this.props.loginsuccess && typeof this.props.useritems._embedded != 'undefined') {
           return (
                     <Table1 />            
                  );

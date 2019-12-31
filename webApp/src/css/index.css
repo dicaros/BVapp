@@ -5,7 +5,7 @@ body {
     font-style: normal;
     font-weight: normal;
     font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
-    background-color: dodgerblue;
+    background-color: burlywood;
 }
 
 header {
@@ -16,6 +16,7 @@ header {
     background-color: #000000; 
     box-shadow: 0px 7px 4px #999999;
     position: fixed;
+    left: 0;
     top: 0;
     width: 100%;
     z-index: 1000;
@@ -72,6 +73,7 @@ h4.userdetailsheader {
             padding: 5px;
             display: table;
             overflow: hidden;
+            background-color: white;
         }
 
             .tablelist2 {
@@ -142,6 +144,10 @@ div.closewindowdiv {
     font-size: x-large;
 }
 
+div.gameorganizer {
+    position: relative;
+}
+
 div.topheader {
     text-align: right;
     font-size: 110%;
@@ -209,6 +215,17 @@ span.ics {
 
 }
 
+span.gameorganizer {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+
+span.today {
+    font-weight: bold;
+    font-size: larger;
+}
+
 
 /* 5 - TABLE */
 
@@ -274,6 +291,15 @@ td.newgame {
     border-style: none;
 }
 
+td.sportcenterlist {
+    text-align: left;
+    padding: 3px;
+    margin: 0px;
+    border-style: inset;
+    border-width: 0.5px;
+}
+
+
 td.userlist {
     text-align: center;
     font-weight: bold;
@@ -330,11 +356,20 @@ li.gamelist:hover {
 
 ul.gamelist {
     overflow-y: auto;
+    height: 380px;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+ul.sportcenterlist {
+    overflow-y: auto;
     height: 60px;
     width: 100%;
     padding: 0px;
     margin: 0px;
 }
+
 
 /* 7 - IMG */
 
@@ -372,7 +407,6 @@ nav li {
     display: inline-block;
     list-style-type: none;
     position: relative;
-
   }
 
 nav a:hover {
@@ -417,6 +451,7 @@ nav li > a {
     color: #71cee7;
     margin-top: 5px;
     margin-left: 10px;
+    width: 110px;
  }
 
 /*/ Date Picker */

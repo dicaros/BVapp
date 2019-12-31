@@ -1,3 +1,5 @@
+
+import { url } from './action-type';
 import { CURRENT_PAGE } from './action-type';
 import { CURRENT_SIZE } from './action-type';
 import { encode } from "base-64";
@@ -190,9 +192,20 @@ export function myuserurl(myuserurl) {
     };
 }
 
-export function newGame(sportcenterid, isPrivate, gameDate, gameTime, description, url, nitems, priceperperson, kurt)  {
-    var updatedrecord = {sportcenter: sportcenterid, kurt: kurt, priceperperson: priceperperson, isprivate: isPrivate, gamedate: gameDate, gametime: gameTime, gameisfull: false, gameispast: false, description: description}
-    fetch(url, {
+export function newGame(sportcenterid, isPrivate, gameDate, gameTime, description, urlsport, nitems, priceperperson, kurt)  {
+    var updatedrecord = {    
+                            sportcenter: url+'api/sportcenters/'+sportcenterid,
+                            kurt: kurt, 
+                            priceperperson: priceperperson, 
+                            isprivate: isPrivate, 
+                            gamedate: gameDate, 
+                            gametime: gameTime,
+                            gameisfull: false, 
+                            gameispast: false, 
+                            description: description,
+                        }
+
+    fetch(urlsport, {
              method: "POST",
              credentials: 'include',
              headers: { 
@@ -202,7 +215,7 @@ export function newGame(sportcenterid, isPrivate, gameDate, gameTime, descriptio
           })
 .then(res => { 
                 console.log('update request:' + res.status);
-     }
+            }
          ).catch(error =>
            { 
                  console.log('update request error:' + error.status)

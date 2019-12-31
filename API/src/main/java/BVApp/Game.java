@@ -4,9 +4,12 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
@@ -16,7 +19,6 @@ import net.minidev.json.annotate.JsonIgnore;
 public class Game {
 
 	private @Id @GeneratedValue Long id; // automatically generated primary ID
-	private Long sportcenterid;
 	private Integer kurt;
 	private Double priceperperson;
 	private Boolean isprivate;
@@ -28,13 +30,13 @@ public class Game {
 	
 	private @Version @JsonIgnore Long version;
 	private @ManyToOne Myuser myuser;
-
+	private @ManyToOne Sportcenter sportcenter;
+	
 	private Game() {}
 	
-
-	public Game(Long sportcenterid,	Integer kurt, Double priceperperson,	Boolean isprivate,	Date gamedate,	Time gametime,	Boolean gameisfull,	Boolean gameispast,	String description, Myuser myuser) 
+	public Game(Sportcenter sportcenter,	Integer kurt, Double priceperperson,	Boolean isprivate,	Date gamedate,	Time gametime,	Boolean gameisfull,	Boolean gameispast,	String description, Myuser myuser) 
 	{
-		this.sportcenterid = sportcenterid;
+		this.sportcenter = sportcenter;
 		this.kurt = kurt;
 		this.priceperperson = priceperperson;
 		this.isprivate = isprivate;
@@ -52,7 +54,7 @@ public class Game {
 		if (o == null || getClass() != o.getClass()) return false;
 		Game game = (Game) o;
 		return Objects.equals(id, game.id) &&
-			Objects.equals(sportcenterid, game.sportcenterid) &&
+			Objects.equals(sportcenter, game.sportcenter) &&
 			Objects.equals(kurt, game.kurt) &&
 			Objects.equals(priceperperson, game.priceperperson) &&
 			Objects.equals(isprivate, game.isprivate) &&			
@@ -68,7 +70,7 @@ public class Game {
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, kurt, sportcenterid, priceperperson, isprivate, gamedate, gametime, gameisfull, gameispast, description, version, myuser);
+		return Objects.hash(id, kurt, sportcenter, priceperperson, isprivate, gamedate, gametime, gameisfull, gameispast, description, version, myuser);
 	}
 
 	public Long getId() {
@@ -79,12 +81,12 @@ public class Game {
 		this.id = id;
 	}
 
-	public Long getSportcenter() {
-		return sportcenterid;
+	public Sportcenter getSportcenter() {
+		return sportcenter;
 	}
 
-	public void setSportcenter(Long sportcenterid) {
-		this.sportcenterid = sportcenterid;
+	public void setSportcenter(Sportcenter sportcenter) {
+		this.sportcenter = sportcenter;
 	}
 	
 	public Integer getKurt() {
@@ -171,7 +173,7 @@ public class Game {
 	public String toString() {
 		return "Employee{" +
 			"id=" + id +
-			", sportcenterid='" + sportcenterid + '\'' +
+			", sportcenterid='" + sportcenter + '\'' +
 			", kurt='" + kurt + '\'' +
 			", priceperperson='" + priceperperson + '\'' +
 			", isprivate='" + isprivate + '\'' +

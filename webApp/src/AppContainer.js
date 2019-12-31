@@ -18,6 +18,7 @@ import UserDetails from './components/UserDetails';
 import LoginPage from './components/LoginPage';
 import RegisterUser from './components/RegisterUser';
 import CreateGame from './components/CreateGame';
+import MainContainer from './components/MainContainer';
 
 const mapStateToProps = (state) => {
     return {
@@ -55,12 +56,11 @@ const mapStateToProps = (state) => {
       newUsers: (url, target) => dispatch(newUser(url, target)),
     };
   };
-  
+
   export const HeaderComponent = connect(mapStateToProps, mapDispatchToProps)(AppHeader);
   export const GameComponent = connect(mapStateToProps, mapDispatchToProps)(GameList);
   export const UserComponent = connect(mapStateToProps, mapDispatchToProps)(UserDetails);
   export const LoginComponent = connect(mapStateToProps, mapDispatchToProps)(LoginPage);
   export const RegisterComponent = connect(mapStateToProps, mapDispatchToProps)(RegisterUser);
   export const CreateComponent = connect(mapStateToProps, mapDispatchToProps)(CreateGame);
-
-  //export default HeaderComponent;
+  export const MainComponent = connect(mapStateToProps, mapDispatchToProps)(MainContainer);

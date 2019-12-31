@@ -10,5 +10,4 @@ public interface SportCenterRepository extends PagingAndSortingRepository<Sportc
 
 	void delete(Sportcenter sportcenter);
 	
-	
 }

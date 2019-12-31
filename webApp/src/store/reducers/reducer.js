@@ -15,7 +15,7 @@ export function page(state = 0, action) {
             return state;
     }
 }
-export function size(state = 10, action) {
+export function size(state = 1000000, action) {
     switch (action.type) {
         case 'CURRENT_SIZE':
             return action.size;        default:

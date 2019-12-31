@@ -1,9 +1,7 @@
 import React from 'react'
-import { GameComponent } from './AppContainer';
-import { CreateComponent } from './AppContainer';
+import { MainComponent } from './AppContainer';
 import { HeaderComponent } from './AppContainer';
 import { LoginComponent } from './AppContainer';
-import { UserComponent } from './AppContainer';
 import { RegisterComponent } from './AppContainer';
 import {
   BrowserRouter as Router,
@@ -11,12 +9,13 @@ import {
   Route,
 } from "react-router-dom";
 
+import { Provider } from 'react-redux';
+import { store } from './store/store';
+
 class App extends React.Component {
 
 
-  render () {
-    
-    
+  render () {   
 
     const HeaderRender = () => {
       return (<header><HeaderComponent /></header>)
@@ -26,11 +25,11 @@ class App extends React.Component {
               return(<section className = 'appbody'>
               <Router>
                      <Switch>
-                            <Route path="/register" loginsuccess={this.props.loginsuccess}>
+                            <Route path="/register">
                                     <RegisterComponent />
                             </Route>
                             <Route path="/">
-                                       <center><GameComponent /><CreateComponent /><UserComponent /><LoginComponent /></center>
+                                      <MainComponent />
                             </Route>
                     </Switch>
               </Router>
@@ -38,12 +37,14 @@ class App extends React.Component {
                     
                 )
     }
-
     
-    return (  <div><HeaderRender />
-    <BodyRender /></div>)   
-          }
-
+    return (  
+            <Provider store={store}>
+                    <HeaderRender />
+                    <BodyRender />
+            </Provider>
+          )      
+    }
 }
 
 export default App;

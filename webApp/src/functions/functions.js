@@ -32,9 +32,15 @@ export function currentday (date) {
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
-        var todaydate = [yyyy, mm, dd];
+        var hh = String(today.getHours()).padStart(2, '0');
+        var min = String(today.getMinutes()).padStart(2, '0')
+        var sec = String(today.getSeconds()).padStart(2, '0')
+        var todaydate = [yyyy, mm, dd, hh, min, sec];
     return todaydate;
 }
+
+export function todaydash(datetime) { return (''+ datetime[0] + '-' + datetime[1] + '-' + datetime[2])}
+export function timedash(datetime) { return (''+ datetime[3] + ':' + datetime[4] + ':' + datetime[5])}
 
 export function dayoftheweek(day, month, year)
 {
