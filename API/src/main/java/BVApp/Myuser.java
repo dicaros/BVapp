@@ -21,6 +21,8 @@ public class Myuser {
 	private @JsonIgnore String password;
 	private String roles;
 	private String email;
+	private String firstname;
+	private String lastname;
 
 	public void setPassword(String password) {
 		this.password = PASSWORD_ENCODER.encode(password); // encrypt password
@@ -28,13 +30,14 @@ public class Myuser {
 
 	protected Myuser() {}
 
-	public Myuser(String name, String password, String roles, String  email) {
+	public Myuser(String name, String password, String roles, String  email, String firstname, String lastname) {
 
 		this.name = name;
 		this.setPassword(password);
 		this.roles = roles;
 		this.email = email;
-		
+		this.firstname = firstname;
+		this.lastname = lastname;		
 	}
 
 	@Override
@@ -46,13 +49,15 @@ public class Myuser {
 			Objects.equals(name, myuser.name) &&
 			Objects.equals(password, myuser.password) &&
 			Objects.equals(roles, myuser.roles) &&
-			Objects.equals(email, myuser.email);
+			Objects.equals(email, myuser.email) &&
+			Objects.equals(firstname, myuser.firstname) &&
+			Objects.equals(lastname, myuser.lastname);
 	}
 
 	@Override
 	public int hashCode() {
 
-		int result = Objects.hash(id, name, password, email);
+		int result = Objects.hash(id, name, password, email, firstname, lastname);
 		result = 31 * result + Objects.hashCode(roles);
 		return result;
 	}
@@ -63,6 +68,22 @@ public class Myuser {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstname;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstname = firstName;
+	}
+
+	public String getLastName() {
+		return lastname;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastname = lastName;
 	}
 
 	public String getName() {
@@ -98,6 +119,8 @@ public class Myuser {
 	public String toString() {
 		return "Myuser{" +
 			"id=" + id +
+			", firstName='" + firstname + '\'' +
+			", lastName='" + lastname + '\'' +
 			", name='" + name + '\'' +
 			", roles=" + roles +
 			", email=" + email +

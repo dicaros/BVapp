@@ -1,5 +1,7 @@
 package BVApp;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,4 +21,6 @@ public interface GameRepository extends PagingAndSortingRepository<Game, Long> {
 	@PreAuthorize("#game?.myuser?.name == authentication?.name")
 	void delete(@Param("game") Game game);
 
+	Optional<Game> findById(Long id);
+	
 }

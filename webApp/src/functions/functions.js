@@ -63,7 +63,6 @@ export function handleDelete(deleteurl, props, url) {
   .then(res => {
      console.log()
     })                  
-
 };
 
 export const Hourselect = () => {

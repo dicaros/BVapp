@@ -1,7 +1,5 @@
 import React from 'react';
-import { url } from '../store/actions/action-type';
-
-const loginurl = url;
+import { url } from '../constants/constants'
 
 class LoginPage extends React.Component {
 
@@ -12,7 +10,7 @@ class LoginPage extends React.Component {
  
  handleSubmit(event) {
      event.preventDefault();
-     this.props.doLogin(loginurl, event.target);
+     this.props.doLogin(url, event.target);
  }
  
    render() {      

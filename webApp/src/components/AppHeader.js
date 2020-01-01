@@ -1,8 +1,7 @@
 import React from 'react';
 import logo from '../img/BEVolej.gif';
 import usericon from '../img/UserIcon.png';
-import { url } from '../store/actions/action-type';
-
+import { url } from '../constants/constants'
 
 const logouturl = url+'logout'
 
@@ -17,29 +16,36 @@ class AppHeader extends React.Component {
     }
 
     componentDidMount() { 
-      console.log(this.props.loginsuccess)    
-            this.props.fetchSportCenters(this.props.listsportcenter, this.props.page, this.props.size) 
-            this.props.fetchUserDetails(this.props.myuserurl)
-            this.props.getUser()   
-          
-      };
+            //(request, url, params)
+            this.props.fetchData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime')
+            this.props.fetchData('api/sportcenters', url, '?page=0&size=1000&sort=name')
+            this.props.fetchData('api/myUserDetails', url, '')
+            this.props.getUser()
+          };
   
     componentDidUpdate(prevProps) {
-       if(this.props.page != prevProps.page || this.props.size != prevProps.size || this.props.loginsuccess != prevProps.loginsuccess || this.props.nitems != prevProps.nitems)
+
+     if(!this.props.isLoading && (this.props.page != prevProps.page || this.props.size != prevProps.size || this.props.loginsuccess != prevProps.loginsuccess || this.props.nitems != prevProps.nitems))
         {
-        this.props.fetchGames(this.props.listurl, this.props.page, this.props.size)
+          this.props.fetchData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime')
         }
-      if(this.props.loginsuccess != prevProps.loginsuccess)
-         {
-        this.props.fetchSportCenters(this.props.listsportcenter, this.props.page, this.props.size) 
-        this.props.fetchUserDetails(this.props.myuserurl)
-        this.props.getUser()   
+     if(this.props.loginsuccess != prevProps.loginsuccess && !this.props.isLoading) 
+        {
+          this.props.fetchData('api/sportcenters', url, '?page=0&size=1000&sort=name')
+          this.props.fetchData('api/myUserDetails', url, '')
+          this.props.getUser()  
+       }  
+    }
+
+    handleNavigate(param) {
+          this.props.setNavigate(param)
+          this.setState({showMenu: !this.state.showMenu})   
         }
-     }  
 
     menuShowToggle = () => {
       this.setState({showMenu: !this.state.showMenu})   
      }
+  
 
   logout(logouturl) {
     if (this.props.loginsuccess) {
@@ -85,11 +91,11 @@ async addNew(isPrivate, gameDate, gameTime, description) {
                     <ul>
                           <li><a  href = '#' onClick={() => this.logout(logouturl)}>Logout</a></li>
                           <li><a href="#">About...</a></li>
-                          <li><a href = '#' onClick={() => this.addNew(true, '2019-10-05', '15:00:00', 'ciao a tutti')}>Create New</a></li>
+                          <li><a href = '#' onClick={() => this.handleNavigate('create')}>Create New</a></li>
                           <li><div className='line'></div></li>
                           <li><a href="#">{ this.props.username }</a></li>
                       </ul> }
-                </li>        
+                </li>
             </ul>
       </nav>
           

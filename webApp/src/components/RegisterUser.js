@@ -1,8 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { url } from '../store/actions/action-type';
-
-
+import { url } from '../constants/constants'
 
 class RegisterUser extends React.Component {
  

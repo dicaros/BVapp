@@ -13,14 +13,11 @@ import net.minidev.json.annotate.JsonIgnore;
 public class MyUserDetail {
 
 	private @Id @GeneratedValue Long id; // automatically generated primary ID
-	private String firstname;
-	private String lastname;
 	private String phone;
 	private Double gpsx;
 	private Double gpsy;
 	private Integer playedcount;
-	private Integer noshowcount;
-	
+	private Integer noshowcount;	
 	
 	private @Version @JsonIgnore Long version;
 	private @OneToOne Myuser myuser;
@@ -28,9 +25,7 @@ public class MyUserDetail {
 	private MyUserDetail() {}
 
 	
-	public MyUserDetail(String firstname, String lastname, String phone, Double gpsx, Double gpsy, Integer playedcount, Integer noshowcount, Myuser myuser) {
-		this.firstname = firstname;
-		this.lastname = lastname;
+	public MyUserDetail(String phone, Double gpsx, Double gpsy, Integer playedcount, Integer noshowcount, Myuser myuser) {
 		this.phone = phone;
 		this.gpsx = gpsx;
 		this.gpsy = gpsy;
@@ -45,8 +40,6 @@ public class MyUserDetail {
 		if (o == null || getClass() != o.getClass()) return false;
 		MyUserDetail myuserdetails = (MyUserDetail) o;
 		return Objects.equals(id, myuserdetails.id) &&
-			Objects.equals(firstname, myuserdetails.firstname) &&
-			Objects.equals(lastname, myuserdetails.lastname) &&
 			Objects.equals(phone, myuserdetails.phone) &&
 			Objects.equals(gpsx, myuserdetails.gpsx) &&
 			Objects.equals(gpsy, myuserdetails.gpsy) &&
@@ -57,7 +50,7 @@ public class MyUserDetail {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, firstname, lastname, phone, gpsx, gpsy, playedcount, noshowcount, myuser);
+		return Objects.hash(id, phone, gpsx, gpsy, playedcount, noshowcount, myuser);
 	}
 
 	public Long getId() {
@@ -66,22 +59,6 @@ public class MyUserDetail {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getFirstName() {
-		return firstname;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstname = firstName;
-	}
-
-	public String getLastName() {
-		return lastname;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastname = lastName;
 	}
 
 	public String getPhone() {
@@ -145,8 +122,6 @@ public class MyUserDetail {
 	public String toString() {
 		return "MyUserDetails{" +
 			"id=" + id +
-			", firstName='" + firstname + '\'' +
-			", lastName='" + lastname + '\'' +
 						", phone='" + phone + '\'' +
 						", gpsx='" + gpsx + '\'' +
 						", gpsy='" + gpsy + '\'' +

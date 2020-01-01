@@ -77,11 +77,11 @@ public class UserDataFlow {
 		if(usercheck.checkfailed == false)
 			{
 				Myuser myuser = new Myuser(
-						this.name, this.password, "ROLE_USER", this.email);
+						this.name, this.password, "ROLE_USER", this.email, this.firstname, this.lastname);
     					myuser = repo.save(myuser);	
 			
     			MyUserDetail myuserdetail = new MyUserDetail(
-    					this.firstname, this.lastname, "", 0.0, 0.0, 0, 0, myuser);
+    					"", 0.0, 0.0, 0, 0, myuser);
     					myuserdetail = repo2.save(myuserdetail);
 			}
 		

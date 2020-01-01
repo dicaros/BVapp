@@ -1,5 +1,5 @@
 import React from 'react';
-import { url } from '../store/actions/action-type';
+import { url } from '../constants/constants'
 import { Hourselect } from '../functions/functions.js'
 import { Kurtselect } from '../functions/functions.js'
 import { currentday } from '../functions/functions.js'
@@ -83,12 +83,10 @@ async  handleSubmit(event) {
                     this.props.sportcenteritems._embedded.sportcenters.map ((row, index) =>                   
                     {
                       return(
-                              <a key={index} href='#' className='gamelist'>
-                                    <li key={index} className={ this.classNameCenter(row.id) } onClick={() => this.handleChangeSportCenter(row.id)}><b>{row.name}</b> ({row.street} - <a href={row.website} className='bodylink'>{row.website}</a>)></li></a>
+                                    <li key={index} className={ this.classNameCenter(row.id) } onClick={() => this.handleChangeSportCenter(row.id)}><b>{row.name}</b> ({row.street} - <a  target="_blank" href={row.website} className='bodylink'>{row.website}</a>)></li>
                           )})
             )
-          }
-
+      }
 
       const RegisterForm = () => {
 return (
@@ -196,7 +194,7 @@ return (
 
      const RegisterPage = () => {
       return(      
-          <table className='tablelist1'>
+          <table className='tablesportcenters'>
             <thead><tr>
                   <th>
                   <div className='closewindowdiv' >

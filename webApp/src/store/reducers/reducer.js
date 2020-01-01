@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { url } from '../actions/action-type';
 
 export function navigate(state = 'games', action) {
     switch (action.type) {
@@ -22,6 +21,15 @@ export function size(state = 1000000, action) {
             return state;
     }
 }
+
+export function currentgame(state = 0, action) {
+    switch (action.type) {
+        case 'CURRENT_GAME':
+            return action.currentgame;        default:
+            return state;
+    }
+}
+
 export function isError(state = false, action) {
     switch (action.type) {
         case 'IS_ERROR':
@@ -33,7 +41,7 @@ export function isError(state = false, action) {
 
 export function isLoading(state = false, action) {
     switch (action.type) {
-        case 'ITEMS_IS_LOADING':
+        case 'IS_LOADING':
             return action.isLoading;        default:
             return state;
     }
@@ -47,22 +55,6 @@ export function items(state = [], action) {
     }
 }
 
-export function listsportcenter(state = url+'api/sportcenters', action) {
-    switch (action.type) {
-        case 'LIST_SPORTCENTER':
-            return action.listsportcenter;        default:
-            return state;
-    }
-}
-
-export function listurl(state = url+'api/games', action) {
-    switch (action.type) {
-        case 'LIST_URL':
-            return action.listurl;        default:
-            return state;
-    }
-}
-
 export function loginsuccessfull(state = null, action) {
     switch (action.type) {
         case 'LOGIN_SUCCESS':
@@ -71,18 +63,18 @@ export function loginsuccessfull(state = null, action) {
     }
 }
 
-export function myuserurl(state = url+'api/myUserDetails', action) {
-    switch (action.type) {
-        case 'MYUSER_URL':
-            return action.myuserurl;        default:
-            return state;
-    }
-}
-
 export function nitems(state = 0, action) {
     switch (action.type) {
         case 'N_ITEMS':
             return action.nitems;        default:
+            return state;
+    }
+}
+
+export function gameparticipantsitems(state = [], action) {
+    switch (action.type) {
+        case 'GAMEPARTICIPANT_FETCH_DATA_SUCCESS':
+            return action.gameparticipantsitems;        default:
             return state;
     }
 }
@@ -111,6 +103,14 @@ export function registration(state = [], action) {
     }
 }
 
+export function singlegameitems(state = [], action) {
+    switch (action.type) {
+        case 'SINGLEGAME_FETCH_DATA_SUCCESS':
+            return action.singlegameitems;        default:
+            return state;
+    }
+}
+
 export function username(state = 'Guest', action) {
     switch (action.type) {
         case 'SET_USER':
@@ -120,17 +120,17 @@ export function username(state = 'Guest', action) {
 }
 
 export default combineReducers({
+    currentgame,
+    gameparticipantsitems,
     items,
     isError,
     isLoading,
-    listsportcenter,
-    listurl,
     loginsuccessfull,
-    myuserurl,
     navigate,
     nitems,
     page,
     registration,
+    singlegameitems,
     size,
     sportcenteritems,
     useritems,

@@ -1,5 +1,5 @@
 import React from 'react';
-import userpic from '../img/userfotodefault.jpg';
+import userpic from '../img/userfotodefault.jpg'
 
 var countpage = 0 + ' '
 
@@ -7,15 +7,15 @@ class UserDetails extends React.Component {
 
    render() {      
 
-        const Table1 = () => {
-           return(        
-              this.props.useritems._embedded.myUserDetails.map ((row) =>                   
+      const Table1 = () => {
+        return(        
+
+              this.props.useritems._embedded.myUserDetails.map ((row, index) =>                   
                    {
                      if(row.myuser.name == this.props.username)
                      {
-                        let udetails = [row.playedcount, row.noShowCount, row.lastName, row.phone, 'n/a'];
                         return(
-                          <table className = 'tablelist2'>
+                          <table key={index} className = 'tableuser1'>
                               <thead>
                                   <tr key='001'>
                                       <th className = 'userdetailsheader' height='120px'><center><img src={userpic} className='userpic' alt='O'></img></center></th>
@@ -66,16 +66,11 @@ class UserDetails extends React.Component {
                   )}
                })
            )
-         }
+    }
                            
-         if(this.props.loginsuccess && typeof this.props.useritems._embedded != 'undefined') {
           return (
                     <Table1 />            
                  );
-         }
-         else {
-          return ''
-        }
      }
  }
  

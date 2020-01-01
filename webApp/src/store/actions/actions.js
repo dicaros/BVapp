@@ -1,26 +1,27 @@
-
-import { url } from './action-type';
-import { CURRENT_PAGE } from './action-type';
-import { CURRENT_SIZE } from './action-type';
 import { encode } from "base-64";
-import { IS_ERROR } from './action-type';
-import { IS_LOADING } from './action-type';
-import { ITEMS_FETCH_DATA_SUCCESS } from './action-type';
-import { LIST_SPORTCENTER } from './action-type';
-import { LIST_URL } from './action-type';
-import { LOGIN_SUCCESS } from './action-type';
-import { MYUSER_URL } from './action-type';
-import { N_ITEMS } from './action-type';
-import { REGISTRATION_STATUS } from './action-type';
-import { SET_NAVIGATE } from './action-type';
-import { SET_USER } from './action-type';
-import { SPORTCENTER_FETCH_DATA_SUCCESS } from './action-type';
-import { USER_FETCH_DATA_SUCCESS } from './action-type';
-
 import { store } from '../store'
+import { url } from '../../constants/constants'
+import { CURRENT_GAME, CURRENT_PAGE, CURRENT_SIZE, IS_ERROR, IS_LOADING, 
+            ITEMS_FETCH_DATA_SUCCESS, LOGIN_SUCCESS, N_ITEMS, REGISTRATION_STATUS, SET_NAVIGATE, 
+            SET_USER, SINGLEGAME_FETCH_DATA_SUCCESS, SPORTCENTER_FETCH_DATA_SUCCESS, 
+            USER_FETCH_DATA_SUCCESS, GAMEPARTICIPANT_FETCH_DATA_SUCCESS } from './action-type';
+
+export function gameparticipantFetchDataSuccess(gameparticipantsitems) {
+    return {
+               type: GAMEPARTICIPANT_FETCH_DATA_SUCCESS,
+               gameparticipantsitems: gameparticipantsitems
+               };
+           }
+            
+export function singlegameFetchDataSuccess(singlegameitems) {
+            return {
+                       type: SINGLEGAME_FETCH_DATA_SUCCESS,
+                       singlegameitems: singlegameitems
+                       };
+                   }
 
 export function getUser(userurl) {
-    return (dispatch) => {fetch(userurl, {
+    return (dispatch) => {fetch(url+'username', {
         method: 'GET',
         credentials: 'include',
         headers: { 
@@ -47,148 +48,88 @@ export function isError(bool) {
     };
 }
 
-export function isLoading(bool) {
+export function isLoading(input) {
     return {
         type: IS_LOADING,
-        isLoading: bool
+        isLoading: input
     };
 }
 
 export function itemsFetchDataSuccess(items) {
     return {
         type: ITEMS_FETCH_DATA_SUCCESS,
-        items
+        items: items
     };
 }
 
+export function loadData(request, url, params) {
 
-export function listsportcenter(listsportcenter) {
-    return {
-        type: LIST_SPORTCENTER,
-        listsportcenter: listsportcenter
-    };
-}
-
-export function listurl(listurl) {
-    return {
-        type: LIST_URL,
-        listurl: listurl
-    };
-}
-
-export function loadsportcenters(url, page, size) {
-    return (dispatch) => {
-            dispatch(isLoading(true)); 
-            fetch(url+'?page='+page+'&size='+size+'&sort=name,asc', {
-                                                        method: 'GET',
-                                                        credentials: 'include',
-                                                        headers: { 
-                                                                    'Content-Type': 'application/json',
-                                                        },
-            })
-            .then((res) => {
-                                dispatch(isLoading(false));
-                                if(res.status == '401') {
-                                                                dispatch(loginsuccessfull(false));
-                                                                console.log("unauthorized " + res.status);
-                                                        }
-                                else {
-                                                                console.log("success " + res.status);
-                                                                dispatch(sportcenterFetchDataSuccess(res));
-                                                                dispatch(loginsuccessfull(true));
-                                                                return res;
-                                }
-                        })
-            .then((res) => res.json())
-            .then((items) => dispatch(sportcenterFetchDataSuccess(items)))
-            .catch(error => {
-                                dispatch(isError(true));
-                                console.log("fail " + error.status)
-                            }
-
-                    );
-                        };
-}
-
-export function loadgames(url, page, size) {
             return (dispatch) => {
+
                     dispatch(isLoading(true)); 
-                    fetch(url+'?page='+page+'&size='+size+'&sort=gamedate&sort=gametime', {
+                // start GET request
+                    fetch(url+request+params  , {
                                                                 method: 'GET',
                                                                 credentials: 'include',
                                                                 headers: { 
                                                                             'Content-Type': 'application/json',
                                                                 },
                     })
+                // evaluate get request
                     .then((res) => {
-                                        dispatch(isLoading(false));
+                                        dispatch(isLoading(true));
                                         if(res.status == '401') {
                                                                         dispatch(loginsuccessfull(false));
                                                                         console.log("unauthorized " + res.status);
                                                                 }
                                         else {
                                                                         console.log("success " + res.status);
-                                                                        dispatch(itemsFetchDataSuccess(res));
+                                                                        if(request == 'api/games')
+                                                                                    dispatch(itemsFetchDataSuccess(res));
+                                                                        if(request == 'api/sportcenters')
+                                                                                    dispatch(sportcenterFetchDataSuccess(res));                                                
+                                                                        if(request == 'api/myUserDetails')
+                                                                                    dispatch(userFetchDataSuccess(res));
+                                                                        if(request == 'api/gameparticipants')
+                                                                                    dispatch(gameparticipantFetchDataSuccess(res));
+                                                                        if(request == 'api/game2')
+                                                                                    dispatch(singlegameFetchDataSuccess(res));
+
                                                                         dispatch(loginsuccessfull(true));
                                                                         return res;
+                                                                        
                                         }
                                 })
+                    // format result to json
                     .then((res) => res.json())
-                    .then((items) => dispatch(itemsFetchDataSuccess(items)))
+                    // confirm data get success
+                    .then((items) => {
+                            if(request == 'api/games')
+                                dispatch(itemsFetchDataSuccess(items))
+                            if(request == 'api/sportcenters')
+                                dispatch(sportcenterFetchDataSuccess(items));                                                
+                            if(request == 'api/myUserDetails')
+                                dispatch(userFetchDataSuccess(items));
+                            if(request == 'api/gameparticipants')
+                                dispatch(gameparticipantFetchDataSuccess(items));
+                            if(request == 'api/game2')
+                                dispatch(singlegameFetchDataSuccess(items));
+                                dispatch(isLoading(false))
+                            }
+                                )
+                    // error handling
                     .catch(error => {
                                         dispatch(isError(true));
                                         console.log("fail " + error.status)
-                                    }
-
+                    }
                             );
-                                };
-    }
-
-export function loaduserdetails(url) {
-        return (dispatch) => {
-                dispatch(isLoading(true)); 
-                fetch(url, {
-                                                            method: 'GET',
-                                                            credentials: 'include',
-                                                            headers: { 
-                                                                        'Content-Type': 'application/json',
-                                                            },
-                })
-                .then((res) => {
-                                    dispatch(isLoading(false));
-                                    if(res.status == '401') {
-                                                                    dispatch(loginsuccessfull(false));
-                                                                    console.log("unauthorized " + res.status);
-                                                            }
-                                    else {
-                                                                    console.log("success " + res.status);
-                                                                    dispatch(userFetchDataSuccess(res));
-                                                                    dispatch(loginsuccessfull(true));
-                                                                    return res;
-                                    }
-                            })
-                .then((res) => res.json())
-                .then((items) => dispatch(userFetchDataSuccess(items)))
-                .catch(error => {
-                                    dispatch(isError(true));
-                                    console.log("fail " + error.status)
-                                }
-
-                        );
-                            };
+            };
 }
 
 export function loginsuccessfull(bool) {
     return {
         type: LOGIN_SUCCESS,
         loginsuccess: bool
-    };
-}
-
-export function myuserurl(myuserurl) {
-    return {
-        type: MYUSER_URL,
-        myuserurl: myuserurl
     };
 }
 
@@ -259,6 +200,13 @@ export function setCurrentPage(direction, pagenum) {
         page: thepage
       }
   
+}
+
+export function setCurrentGame(id) {
+    return {
+        type: CURRENT_GAME,
+        currentgame: id
+    };
 }
 
 export function setCurrentSize(size) {
