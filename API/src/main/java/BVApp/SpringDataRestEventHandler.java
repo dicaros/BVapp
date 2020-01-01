@@ -34,4 +34,12 @@ public class SpringDataRestEventHandler {
 		Myuser myuser = this.myuserRepository.findByName(name);
 		game.setMyuser(myuser);
 	}
+	@HandleBeforeCreate
+	@HandleBeforeSave
+	public void applyUserInformationUsingSecurityContext3(Gameparticipant gameparticipant) 
+{
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+		Myuser myuser = this.myuserRepository.findByName(name);
+		gameparticipant.setMyuser(myuser);
+	}
 }
