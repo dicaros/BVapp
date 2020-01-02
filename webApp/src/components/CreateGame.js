@@ -181,7 +181,18 @@ return (
         </tbody>
         <tfoot>
               <tr height='60px'>
-                    <td className='loginbutton' colSpan={4}><button name="done"  type="submit" className='submitbutton' >Done</button></td>
+                    <td className='loginbutton' colSpan={4}>
+                          <button name="done"  type="submit" className='submitbutton' >
+                          Done
+                          </button>
+                          <div className='closewindowdiv' >
+                         <span className='closewindowspan'>
+                               <button className='bodylink'href = '#' onClick={() => this.props.setNavigate('games')}>
+                                     X</button>
+                         </span>
+                   </div>
+
+                   </td>
               </tr>
             </tfoot>
 

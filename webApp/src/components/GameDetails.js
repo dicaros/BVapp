@@ -35,9 +35,6 @@ class GameDetails extends React.Component {
                           };
  
          const PlayersDetail = () => {
-            var i = 0;
-            for (i==0;i<5;i++)
-            {
               var placeholder = 'join this game'
             return(      
 
@@ -103,7 +100,7 @@ class GameDetails extends React.Component {
                           {typeof this.props.gameparticipantsitems[3] != 'undefined' && 
                            <img src = {userpic}  className='userpic' alt='O'></img>}
                            
-                            3
+                            4
                            <br />
                              {typeof this.props.gameparticipantsitems[3] != 'undefined' && 
                              this.props.gameparticipantsitems[3].myuser.firstName + ' ' 
@@ -118,9 +115,9 @@ class GameDetails extends React.Component {
 
                 </tr>                      
 
-)
-            }
-         }
+      )
+            
+}
 
 
          const GameDetails = () => {
@@ -128,13 +125,27 @@ class GameDetails extends React.Component {
           return(
               <tr>
                   <td className = 'gamelist' width='25%' colSpan = {4}>
-                        {   this.props.singlegameitems != null 
-                          && typeof this.props.singlegameitems.id != 'undefined'
-                            && this.props.singlegameitems.sportcenter.name
-                            
-                            } 
+                        {   typeof this.props.singlegameitems.id != 'undefined'
+                            && 
+                             this.props.singlegameitems.sportcenter.name + ' ' + 
+                              this.props.singlegameitems.id }
+                           <br />   
+                        {   typeof this.props.singlegameitems.id != 'undefined'
+                            && this.props.singlegameitems.gamedate
+                              } 
                            <br />
-                    
+                        { typeof this.props.singlegameitems.id != 'undefined'
+                            && 'Starts at '+String(this.props.singlegameitems.gametime).substring(0, 5)}                    
+                          <br />{'You will pay: '}   
+                        {   typeof this.props.singlegameitems.id != 'undefined'
+                            && this.props.singlegameitems.priceperperson + ' CZK'
+                              } 
+   
+                           <br />{'Message from the organizer: '}   
+                        {   typeof this.props.singlegameitems.id != 'undefined'
+                            && this.props.singlegameitems.description
+                              } 
+
                   </td>
               </tr>
               )
