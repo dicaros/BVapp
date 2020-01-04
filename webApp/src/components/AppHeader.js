@@ -11,8 +11,12 @@ class AppHeader extends React.Component {
     super(props);
     this.state = {
           showMenu: false,
+          list1: 'listmenuhidden',
+          bar3: 'bar3',
+          bar2: 'bar2',
+          bar1: 'bar1'
       }
-      this.menuShowToggle = this.menuShowToggle.bind(this);
+      //this.menuShowToggle = this.menuShowToggle.bind(this);
     }
 
     componentDidMount() { 
@@ -24,39 +28,42 @@ class AppHeader extends React.Component {
           };
   
     componentDidUpdate(prevProps) {
-
-     if(!this.props.isLoading && (this.props.page != prevProps.page || this.props.size != prevProps.size || this.props.loginsuccess != prevProps.loginsuccess || this.props.nitems != prevProps.nitems))
-        {
-          this.props.fetchData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime')
-        }
-     if(this.props.loginsuccess != prevProps.loginsuccess && !this.props.isLoading) 
-        {
-          this.props.fetchData('api/sportcenters', url, '?page=0&size=1000&sort=name')
-          this.props.fetchData('api/myUserDetails', url, '')
-          this.props.getUser()  
-       }  
-    }
+  
+              if (this.props.loginsuccess != prevProps.loginsuccess)
+                {
+                    this.props.fetchData('api/sportcenters', url, '?page=0&size=1000&sort=name')
+                    this.props.fetchData('api/myUserDetails', url, '')
+                    this.props.fetchData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime')
+                    this.props.getUser()  
+                }
+              }
 
     handleNavigate(param) {
           this.props.setNavigate(param)
           this.setState({showMenu: !this.state.showMenu})   
         }
 
-    menuShowToggle = () => {
-      this.setState({showMenu: !this.state.showMenu})   
-     }
+  async menuShowToggle () {
+      await this.setState({showMenu: !this.state.showMenu})
+
+      if(this.state.showMenu)
+        this.setState({list1: 'listmenu',
+                      bar3: 'bar3clicked',
+                      bar2: 'listmenuhidden',
+                      bar1: 'bar1clicked'
+                    })
+      else if (!this.state.showMenu)
+        this.setState({list1: 'listmenuhidden',
+                        bar3: 'bar3',
+                        bar2: 'bar2',
+                        bar1: 'bar1'})
+       }
   
 
-  logout(logouturl) {
+  async logout(logouturl) {
     if (this.props.loginsuccess) {
-       this.setState({showMenu: false})
-       this.props.doLogout(logouturl);
-      }
-    }
-
-async addNew(isPrivate, gameDate, gameTime, description) {
-      if (this.props.loginsuccess) {
-        await  this.props.addNew(isPrivate, gameDate, gameTime, description, this.props.listurl, this.props.items.page.totalElements)
+      this.setState({list1: 'listmenuhidden'})
+      this.props.doLogout(logouturl);
       }
     }
 
@@ -69,37 +76,32 @@ async addNew(isPrivate, gameDate, gameTime, description) {
               <ul>
 
                   <li>
-                    <center>
-                      <img src={usericon} className='userlogo' alt='O'></img></center>
+                      <img src={usericon} className='userlogo' alt='O'></img>
                 </li>     
                 <li>
                   
-                <div className="container" onClick={this.menuShowToggle}>
-                      {this.state.showMenu && <span className='ics'>X</span>} 
-                      {!this.state.showMenu && <center><div className='bar1'></div>
-                      <div className='bar1'></div>
-                      <div className='bar1'></div></center>}
-                </div> 
-                    { this.state.showMenu && !this.props.loginsuccess && 
-                    <ul>
-                          <li><a href = '/' onClick={() => this.logout(logouturl)}>Login</a></li>
-                          <li><a href="/register">Register</a></li>
-                          <li><a href="#">About...</a></li>
-                      </ul> }
+                <div className="container" onClick={() => this.menuShowToggle()}>                    
+                      <div className={this.state.bar1}></div>
+                      <div className={this.state.bar2}></div>
+                      <div className={this.state.bar3}></div>
+                 </div> 
 
-                      { this.state.showMenu && this.props.loginsuccess && 
-                    <ul>
-                          <li><a  href = '#' onClick={() => this.logout(logouturl)}>Logout</a></li>
+
+                    <ul className={this.state.list1}>
+                          {!this.props.loginsuccess && <li><a href = '/' onClick={() => this.logout(logouturl)}>Login</a></li>}
+                          {this.props.loginsuccess && <li><a  href = '#' onClick={() => this.logout(logouturl)}>Logout</a></li>}
+
+                          {!this.props.loginsuccess && <li><a href="/register">Register</a></li>}
+                          
                           <li><a href="#">About...</a></li>
-                          <li><a href = '#' onClick={() => this.handleNavigate('create')}>Create New</a></li>
                           <li><div className='line'></div></li>
                           <li><a href="#">{ this.props.username }</a></li>
-                      </ul> }
+                      </ul> 
+
                 </li>
             </ul>
-      </nav>
-          
-       
+
+      </nav>  
         )
       
       }

@@ -74,7 +74,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	   public RepositoryRestConfigurer repositoryRestConfigurer()
 	   {
 	       return RepositoryRestConfigurer.withConfig(config -> {
-	           config.exposeIdsFor(Sportcenter.class, Game.class);
+	           config.exposeIdsFor(Sportcenter.class, Game.class, Gameparticipant.class);
 	       });
 	   }
 	

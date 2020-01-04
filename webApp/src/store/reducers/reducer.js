@@ -58,7 +58,7 @@ export function items(state = [], action) {
 export function loginsuccessfull(state = null, action) {
     switch (action.type) {
         case 'LOGIN_SUCCESS':
-            return action.loginsuccess;        default:
+            return action.loginsuccessfull;        default:
             return state;
     }
 }
@@ -103,6 +103,14 @@ export function registration(state = [], action) {
     }
 }
 
+export function joingame(state = [], action) {
+    switch (action.type) {
+        case 'JOINGAME_STATUS':
+            return action.joingame;        default:
+            return state;
+    }
+}
+
 export function singlegameitems(state = [], action) {
     switch (action.type) {
         case 'SINGLEGAME_FETCH_DATA_SUCCESS':
@@ -125,6 +133,7 @@ export default combineReducers({
     items,
     isError,
     isLoading,
+    joingame,
     loginsuccessfull,
     navigate,
     nitems,

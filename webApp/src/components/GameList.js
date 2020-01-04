@@ -20,7 +20,7 @@ class GameList extends React.Component {
 
 async handleSelectGame(id) {
     await this.props.setGame(id)
-    await this.props.fetchData('api/gameparticipants', url, '?id='+id)
+    await this.props.fetchData('api/gameparticipantsget', url, '?id='+id)
     await this.props.fetchData('api/game2', url, '?id='+id)
     this.props.setNavigate('gamedetails')           
 }
@@ -62,10 +62,10 @@ async handleSelectGame(id) {
                                             {(row.gamedate == todaydash(currentday())) && 'Today, '}
                                             {(row.gamedate == todaydash(currentday(tomorrow))) && 'Tomorrow, '}
                                             {(row.gamedate > todaydash(currentday(tomorrow))) && row.gamedate+ ', '}
-                                            {String(row.gametime).substring(0, 5) + ' '}
-                                           @{(row._embedded.sportcenter.name) + ', '} </span> 
+                                            {String(row.gametime).substring(0, 5) + ' '}</span> 
+                                           <br></br>
+                                           @{(row._embedded.sportcenter.name) + ', '} 
                                             {row._embedded.sportcenter.street}
-                                            <br/><i>{row.description} - {row.id}</i>
                                         <span className='gameorganizer'>Organized by: {row.myuser.name}</span>
                                   </li>
                             </div>

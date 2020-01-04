@@ -56,9 +56,22 @@ export function handleDelete(deleteurl, props, url) {
     headers: {'content-type': 'application/json'},
     credentials: 'include'
   })
+  
   .then(res => {
         res.json();
-        props.fetchData(url, props.page, 10);
+        props.fetchData(url);
+  })
+  .then(res => {
+     console.log()
+    })                  
+};
+
+export function handleQuit(deleteurl) {
+  fetch(deleteurl,
+  {
+    method: 'DELETE',
+    headers: {'content-type': 'application/json'},
+    credentials: 'include'
   })
   .then(res => {
      console.log()

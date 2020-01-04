@@ -13,8 +13,5 @@ public class SpringDataRestCustomization implements RepositoryRestConfigurer {
     			.addMapping("/**")			
     			.allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH")
     			.allowedOrigins("*");
-    
-    
-
   }
 }

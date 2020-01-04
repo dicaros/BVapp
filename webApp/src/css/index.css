@@ -53,6 +53,17 @@ h4.userdetailsheader {
     display: inline-block;
 }
 
+.tablegamesdetail {
+    width: 50%;
+    height: 500px;
+    overflow: auto;
+    background-color: white;
+    border-style: inset;
+    border-width: 0.5px;
+    margin: 10px;
+    padding: 10px;
+}
+
 .tableuser1 {
         width: 20%;
         height: 500px;
@@ -74,7 +85,7 @@ h4.userdetailsheader {
     border-width: 0.5px;
     margin: 10px;
     padding: 10px;
-    display: inline-block;
+
 }
 
 
@@ -192,18 +203,36 @@ div.topheader {
 
 /* menu icon - start*/
 /*           */
-  div.bar1 {
+
+  div.bar1, div.bar2, div.bar3 {
     width: 35px;
     height: 4px;
     background-color: #71cee7;
     margin: 6px 0;
   }
 
+  div.bar1clicked{
+    -webkit-transform: rotate(-45deg) translate(1px, -1px) ;
+    transform: rotate(-45deg) translate(1px, -1px) ;
+    width: 35px;
+    height: 4px;
+    background-color: #71cee7;
+    margin: 6px 0;
+}
+
+  div.bar3clicked{
+         -webkit-transform: rotate(45deg) translate(-9px, -9px) ;
+         transform: rotate(45deg) translate(-9px, -9px) ;
+         width: 35px;
+         height: 4px;
+         background-color: #71cee7;
+         margin: 6px 0;
+}
+
   div.container {
     display: inline-block;
     cursor: pointer;
     padding: 0px;
-    align-content: center;
   } 
  
   div.line {
@@ -212,6 +241,16 @@ div.topheader {
     height: 2px;
     background-color: #71cee7;
 }
+
+.listmenu {
+    visibility: visible;
+}
+
+.listmenuhidden {
+    visibility: hidden;
+}
+
+
 
 /* menu icon - end*/
 
@@ -226,9 +265,15 @@ section.appbody {
     z-index: 100;
 }
 
-span.closewindowspan {
+span.closewindowspantop {
     position: absolute;
     top: -5px;
+    right: 0px;
+}
+
+span.closewindowspanbottom {
+    position: absolute;
+    top: -25px;
     right: 0px;
 }
 

@@ -27,18 +27,17 @@ class CreateGame extends React.Component {
             }
       }
 
-async  handleSubmit(event) {
-      event.preventDefault();
-               await this.props.addNew(this.state.selectedCenter, event.target.isprivate.checked, this.state.selectedyear+'-'+("00" + this.state.selectedmonth).slice(-2)+'-'+("00" + this.state.selectedday).slice(-2), this.state.timeselection+':00', event.target.comments.value, url+'api/games', this.props.nitems, event.target.priceperperson.value, this.state.kurtselection);
+async handleSubmit(event) {
+               await this.props.addNew(this.state.selectedCenter, event.target.isprivate.checked, this.state.selectedyear+'-'+("00" + this.state.selectedmonth).slice(-2)+'-'+("00" + this.state.selectedday).slice(-2), this.state.timeselection+':00', event.target.comments.value, url+'api/games', this.props.nitems, event.target.priceperperson.value, this.state.kurtselection)
                await this.props.setNavigate('games')
-      window.location.reload();      
-}
+               window.location.reload();
+      }
 
       handleChangeTime(event) {
             this.setState({
                   timeselection: event.target.value,
             })
-                      
+                   
       };
   
     handleChangeKurt(event) {
@@ -185,14 +184,7 @@ return (
                           <button name="done"  type="submit" className='submitbutton' >
                           Done
                           </button>
-                          <div className='closewindowdiv' >
-                         <span className='closewindowspan'>
-                               <button className='bodylink'href = '#' onClick={() => this.props.setNavigate('games')}>
-                                     X</button>
-                         </span>
-                   </div>
-
-                   </td>
+                     </td>
               </tr>
             </tfoot>
 
@@ -206,14 +198,15 @@ return (
      const RegisterPage = () => {
       return(      
           <table className='tablesportcenters'>
-            <thead><tr>
+            <thead width = '100%'><tr>
                   <th>
-                  <div className='closewindowdiv' >
-                         <span className='closewindowspan'>
-                               <button className='bodylink'href = '#' onClick={() => this.props.setNavigate('games')}>
-                                     X</button>
-                         </span>
-                   </div>
+                              <div className='closewindowdiv' >
+                                    <span className='closewindowspantop'>
+                                          <button className='bodylink'href = '#' onClick={() => this.props.setNavigate('games')}>
+                                                X
+                                          </button>
+                                    </span>
+                              </div>
                    </th>
                    </tr>
             </thead>
@@ -221,6 +214,12 @@ return (
                   <RegisterForm />
                   </td></tr>
             </tbody>
+            <tfoot>
+                  <tr>
+                        <td>
+                        </td>
+                  </tr>
+            </tfoot>
           </table>
       )
 }         

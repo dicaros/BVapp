@@ -1,9 +1,29 @@
 import React from 'react';
 import userpic from '../img/userfotodefault.jpg'
+import { url } from '../constants/constants'
+import { handleQuit } from '../functions/functions'
 
 class GameDetails extends React.Component {
 
-    
+  constructor(props) {
+    super(props);
+          this.state = {
+                alreadysigned: 0,
+                mypos: 0,
+          }
+        }
+
+
+async jointhisgame (id) {
+      await this.props.signupGame(url+'api/gameparticipantspost', id, false, this.props.singlegameitems.id)
+      this.props.setNavigate('games')
+  }
+
+async quitthisgame (id) {
+    await handleQuit(url+'api/gameparticipants/'+id)
+    this.props.setNavigate('games')
+}
+
 
    render() {      
          const TableHeader = () => {
@@ -12,7 +32,7 @@ class GameDetails extends React.Component {
                     <tr>
                       <th colSpan = {4}>
                       <div className='closewindowdiv' >
-                          <span className='closewindowspan'>
+                          <span className='closewindowspantop'>
                               <button className='bodylink'href = '#' onClick={() => this.props.setNavigate('games')}>
                               X</button>
                           </span>
@@ -35,96 +55,61 @@ class GameDetails extends React.Component {
                           };
  
          const PlayersDetail = () => {
-              var placeholder = 'join this game'
-            return(      
+            var x = [1, 2, 3, 4];
+            var placeholder = 'join this game'
+            var leavegame = 'cancel registration'
 
-              <tr>
-                      <td className = 'gamelist' width='25%'>
-                                  
+            var z = 0;
+            
+          if(this.state.alreadysigned==0)
+            for(z==0;z<this.props.gameparticipantsitems.length;z++)      
+            {
+                if(this.props.gameparticipantsitems[z].myuser.name == this.props.username)
+                   {
+                      this.setState({alreadysigned: 1,
+                      mypos: z+1 })                    
+                  }
+            }
+
+            return(  
+
+                x.map ((row, index) =>                   
+                {
+                  var y = index;
+                    return(
+                      <td key={index} className = 'gamelist' width='25%'>                                 
                                   <li className='gameparticipant'>
                                   <center> 
-                                  {typeof this.props.gameparticipantsitems[0] != 'undefined' && 
-                                   <img src = {userpic}  className='userpic' alt='O'></img>}
-                                   
-                                   1
+                                  {typeof this.props.gameparticipantsitems[y] != 'undefined' && 
+                                   <img src = {userpic}  className='userpic' alt='O'></img>}                        
+                                   {row}
                                    <br />
-                                     {typeof this.props.gameparticipantsitems[0] != 'undefined' && 
-                                     this.props.gameparticipantsitems[0].myuser.firstName + ' '
-                                      + this.props.gameparticipantsitems[0].myuser.lastName}
-                                     
-                                     {typeof this.props.gameparticipantsitems[0] == 'undefined' 
-                                     && <a href='#'>{placeholder}</a>}
+                                     {typeof this.props.gameparticipantsitems[y] != 'undefined' && 
+                                     this.props.gameparticipantsitems[y].myuser.firstName + ' '
+                                      + this.props.gameparticipantsitems[y].myuser.lastName}
+                                      <br></br>                               
+                                     {typeof this.props.gameparticipantsitems[y] == 'undefined' && this.state.alreadysigned == 0
+                                     && (row-1)==this.props.gameparticipantsitems.length && 
+                                     <a href='#' onClick={() => this.jointhisgame(row)}>{placeholder}</a>}
+
+                                    {(row == this.state.mypos) && typeof this.props.gameparticipantsitems[y] != 'undefined'
+                                     && <a href='#' onClick={() => this.quitthisgame(this.props.gameparticipantsitems[y].id)}> {leavegame}</a>}
+                                    
                                      </center>
                                   </li>
                           </td>            
-              <td className = 'gamelist' width='25%'>
-                          
-                          <li className='gameparticipant'>
-                          <center>
-                          {typeof this.props.gameparticipantsitems[1] != 'undefined' && 
-                           <img src = {userpic}  className='userpic' alt='O'></img>}
-                           
-                            2
-                           <br />
-                             {typeof this.props.gameparticipantsitems[1] != 'undefined' && 
-                             this.props.gameparticipantsitems[1].myuser.firstName + ' ' 
-                             + this.props.gameparticipantsitems[1].myuser.lastName}
-                             
-                             {typeof this.props.gameparticipantsitems[1] == 'undefined' && 
-                             <a href='#'>{placeholder}</a>}
-                             </center>
-                          </li>
-                  </td>            
-                  <td className = 'gamelist' width='25%'>
-                          
-                          <li className='gameparticipant'>
-                          <center>
-                          {typeof this.props.gameparticipantsitems[2] != 'undefined' && 
-                           <img src = {userpic}  className='userpic' alt='O'></img>}
-                           
-                            3
-                           <br />
-                             {typeof this.props.gameparticipantsitems[2] != 'undefined' && 
-                             this.props.gameparticipantsitems[2].myuser.firstName + ' ' 
-                             + this.props.gameparticipantsitems[2].myuser.lastName}
-                             
-                             {typeof this.props.gameparticipantsitems[2] == 'undefined' && 
-                             <a href='#'>{placeholder}</a>}
-                             </center>
-                          </li>
-                  </td>            
-                  <td className = 'gamelist' width='25%'>
-                          
-                          <li className='gameparticipant'>
-                          <center>
-                          {typeof this.props.gameparticipantsitems[3] != 'undefined' && 
-                           <img src = {userpic}  className='userpic' alt='O'></img>}
-                           
-                            4
-                           <br />
-                             {typeof this.props.gameparticipantsitems[3] != 'undefined' && 
-                             this.props.gameparticipantsitems[3].myuser.firstName + ' ' 
-                             + this.props.gameparticipantsitems[3].myuser.lastName}
-                             
-                             {typeof this.props.gameparticipantsitems[3] == 'undefined' && 
-                             <a href='#'>{placeholder}</a>}
-                             </center>
-                          </li>
-                  </td>            
-
-
-                </tr>                      
-
-      )
-            
-}
+                        )
+                      }
+                 )
+                )     
+              }
 
 
          const GameDetails = () => {
 
           return(
               <tr>
-                  <td className = 'gamelist' width='25%' colSpan = {4}>
+                  <td className = '' width='25%' colSpan = {4}>
                         {   typeof this.props.singlegameitems.id != 'undefined'
                             && 
                              this.props.singlegameitems.sportcenter.name + ' ' + 
@@ -155,36 +140,12 @@ class GameDetails extends React.Component {
                                     return (<tbody> 
                                                           <GameDetails />
                                                           <PlayerDetailsHeader />
-                                                          <PlayersDetail/>
+                                                          <tr><PlayersDetail/></tr>
                                             </tbody>)
            }
-/*                 const TableFooter = () => {
-                                     return (
-                                      countpage = this.props.items.page.totalPages + ' ',
-                                       <tfoot>
-                                         <tr id = 'trfooter'>
-                                           <td>
-                                                     <center>  <button onClick={() => this.switchPage('prev')}>Prev</button><span>&nbsp;&nbsp;</span>
-                                                       <button onClick={() => this.switchPage('next')}>Next</button><span>&nbsp;&nbsp;</span>
-                                  
-                                                       {this.props.page+1}/{countpage}
-                                                       
-                                                        <select value={this.props.size} onChange={this.handleChange.bind(this)}>
-                                                           <option value={5}>5</option>
-                                                           <option value={10}>10</option>
-                                                           <option value={20}>20</option>
-                                                           <option value={50}>50</option>
-                                                           <option value={100}>100</option>
-                                                       </select>                                                   </center>
-                                       </td>
-                               
-                                     </tr>
-                                 </tfoot>
-                              );   
-                           }
-  */      
+
           return (
-                   <table className='tablegames'>
+                   <table className='tablegamesdetail'>
                        <TableHeader />
                        <TableBody  />
                    </table>

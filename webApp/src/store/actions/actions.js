@@ -2,7 +2,7 @@ import { encode } from "base-64";
 import { store } from '../store'
 import { url } from '../../constants/constants'
 import { CURRENT_GAME, CURRENT_PAGE, CURRENT_SIZE, IS_ERROR, IS_LOADING, 
-            ITEMS_FETCH_DATA_SUCCESS, LOGIN_SUCCESS, N_ITEMS, REGISTRATION_STATUS, SET_NAVIGATE, 
+            ITEMS_FETCH_DATA_SUCCESS, JOINGAME_STATUS, LOGIN_SUCCESS, N_ITEMS, REGISTRATION_STATUS, SET_NAVIGATE, 
             SET_USER, SINGLEGAME_FETCH_DATA_SUCCESS, SPORTCENTER_FETCH_DATA_SUCCESS, 
             USER_FETCH_DATA_SUCCESS, GAMEPARTICIPANT_FETCH_DATA_SUCCESS } from './action-type';
 
@@ -20,8 +20,10 @@ export function singlegameFetchDataSuccess(singlegameitems) {
                        };
                    }
 
-export function getUser(userurl) {
-    return (dispatch) => {fetch(url+'username', {
+                   // getUser gets the current username and checks if the application is still logged
+export function getUser() {
+    return (dispatch) => {
+        fetch(url+'username', {
         method: 'GET',
         credentials: 'include',
         headers: { 
@@ -29,14 +31,23 @@ export function getUser(userurl) {
               },
      })
      .then((res) => {
-        if(res.status!='401') {
-            return res.text()
+        console.log("res stage " + res.status)
+        
+        if(res.status=='401') {
+            dispatch(loginsuccessfull(false));
+            return ('Guest')        
         }
         else {
-            return ('Guest')
+            dispatch(loginsuccessfull(true));
+            return res.text()       
         }
+        
+        
     }).then((data) => {
-        dispatch(setuser(data))
+                if(typeof data!= 'undefined') {
+                    dispatch(setuser(data))
+                }
+                console.log("data value " + data)
         })
     }
 }
@@ -79,7 +90,6 @@ export function loadData(request, url, params) {
                     .then((res) => {
                                         dispatch(isLoading(true));
                                         if(res.status == '401') {
-                                                                        dispatch(loginsuccessfull(false));
                                                                         console.log("unauthorized " + res.status);
                                                                 }
                                         else {
@@ -90,12 +100,11 @@ export function loadData(request, url, params) {
                                                                                     dispatch(sportcenterFetchDataSuccess(res));                                                
                                                                         if(request == 'api/myUserDetails')
                                                                                     dispatch(userFetchDataSuccess(res));
-                                                                        if(request == 'api/gameparticipants')
+                                                                        if(request == 'api/gameparticipantsget')
                                                                                     dispatch(gameparticipantFetchDataSuccess(res));
                                                                         if(request == 'api/game2')
                                                                                     dispatch(singlegameFetchDataSuccess(res));
 
-                                                                        dispatch(loginsuccessfull(true));
                                                                         return res;
                                                                         
                                         }
@@ -110,7 +119,7 @@ export function loadData(request, url, params) {
                                 dispatch(sportcenterFetchDataSuccess(items));                                                
                             if(request == 'api/myUserDetails')
                                 dispatch(userFetchDataSuccess(items));
-                            if(request == 'api/gameparticipants')
+                            if(request == 'api/gameparticipantsget')
                                 dispatch(gameparticipantFetchDataSuccess(items));
                             if(request == 'api/game2')
                                 dispatch(singlegameFetchDataSuccess(items));
@@ -129,7 +138,7 @@ export function loadData(request, url, params) {
 export function loginsuccessfull(bool) {
     return {
         type: LOGIN_SUCCESS,
-        loginsuccess: bool
+        loginsuccessfull: bool
     };
 }
 
@@ -187,6 +196,25 @@ export function newUser(url, target)  {
     }
 }
 
+export function signupGame(url, playernumber, noshow, game_id)  {
+    var updatedrecord = { playernumber: playernumber, noshow: noshow, gameid: game_id }
+    return (dispatch) => {
+    fetch(url, {
+             method: "POST",
+             credentials: 'include',
+             headers: { 
+               'Content-Type': 'application/json',
+            },
+             body: JSON.stringify(updatedrecord)
+          })
+          .then(res => res.json())
+          .then(items => {            
+                var response = items;
+                dispatch(setjoingame(response));
+        })
+    }
+}
+
 export function setCurrentPage(direction, pagenum) {
     var thepage = store.getState().page
       if(direction == 'next' && store.getState().page+1<pagenum) {
@@ -230,6 +258,13 @@ export function setregistration(registration) {
     };
 }
 
+export function setjoingame(param) {
+    return {
+        type: JOINGAME_STATUS,
+        joingame: param
+    };
+}
+
 export function setuser(username) {
     return {
         type: SET_USER,
@@ -246,7 +281,6 @@ export function sportcenterFetchDataSuccess(sportcenteritems) {
 
 export function thelogin(loginurl, target)  {
                return (dispatch) => {
-                dispatch(loginsuccessfull(false));
                   fetch(loginurl, {
                         method: "POST",
                         credentials: 'include',
@@ -264,15 +298,15 @@ export function thelogin(loginurl, target)  {
                         {
                             dispatch(loginsuccessfull(true))
                                        }
-                        else {
-                            dispatch(loginsuccessfull(false));
-                        }
                             console.log("log in " + res.status);
+                            dispatch(isLoading(false));
                     })
             .then(res => {
+                dispatch(isLoading(false));
                 if(res.status != '401')
                 {
                         dispatch(setuser(target.username.value));
+                        dispatch(loginsuccessfull(true))
                 }
             })
                     .catch(error =>
@@ -280,6 +314,7 @@ export function thelogin(loginurl, target)  {
                           if(error.status=='401')
                           {
                             dispatch(loginsuccessfull(false));
+                            dispatch(isLoading(false));
                         }
                             console.log("not logged " + error.status)
               })
