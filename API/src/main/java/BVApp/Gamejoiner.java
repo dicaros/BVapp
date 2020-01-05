@@ -1,26 +1,21 @@
 package BVApp;
 
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
+
 public class Gamejoiner {
-		public Integer playernumber;
 		public Boolean noshow;
 		public Long gameid;
 
 		protected Gamejoiner() {}
 		
-		public Gamejoiner(Integer playernumber, Boolean noshow, Long gameid) {
-			this.playernumber = playernumber;
+		public Gamejoiner(Boolean noshow, Long gameid) {
 			this.noshow = noshow;
 			this.gameid = gameid;
 		}
-		
-		public Integer getPlayernumber() {
-			return playernumber;
-		}
-
-		public void setPlayernumber(Integer playernumber) {
-			this.playernumber = playernumber;
-		}
-
+	
 		public Boolean getNoshow() {
 			return noshow;
 		}
@@ -36,4 +31,89 @@ public class Gamejoiner {
 		public void setGame(Long gameid) {
 			this.gameid = gameid;
 		}
+		
+		public Gamejoinerresponse addPlayer(Gamejoiner gamejoiner, Myuser user, GameRepository gamerepo, GameparticipantRepository gamepartrepo, int maxplayers) 
+		
+		{
+		
+	    	// get selected game based on game ID
+	        Optional<Game> game = gamerepo.findById(gamejoiner.gameid);	        
+	        Game singlegame = game.get();
+	        
+	        // list with all game participants for selected game
+	        List<Gameparticipant> players = (List<Gameparticipant>) gamepartrepo.findAllByGameId(gamejoiner.gameid);
+
+	    	// create an empty response object	    	
+	    	Gamejoinerresponse tryjoingame = new Gamejoinerresponse(false,false,false,false, "");	    	
+    	
+	    	// check for number of participants:
+			if(players.size() == maxplayers)
+			{
+				tryjoingame.setFailed(true);
+				tryjoingame.setgameisfull(true);
+				tryjoingame.setDescription(tryjoingame.resultdescription + "This game is full. ");
+			}
+
+			//get current date and time in sql format
+			java.sql.Date nowdate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+			java.sql.Time nowtime = new java.sql.Time(Calendar.getInstance().getTime().getTime());
+			
+			//check that game is in the past
+			if(singlegame.getGamedate().compareTo(nowdate) < 0 || (singlegame.getGamedate().compareTo(nowdate) == 0 && singlegame.getGametime().compareTo(nowtime)< 0))
+			{
+				tryjoingame.setFailed(true);
+				tryjoingame.setgameispast(true);
+				tryjoingame.setDescription(tryjoingame.resultdescription + "This game is in the past. ");
+			}
+	    	
+			//check if the user already signed in
+			Iterator<Gameparticipant> playeriterator = players.iterator();
+			while (playeriterator.hasNext()) {
+					if(playeriterator.next().getMyuser() == user)
+					{
+						tryjoingame.setFailed(true);
+						tryjoingame.setalreadysigned(true);
+						tryjoingame.setDescription(tryjoingame.resultdescription + "You already signed for this game! ");
+					}						
+			}			
+			
+			int found = 0;
+			int notfound = 0;
+			
+			int i = 0;
+			int y = 0;
+			for(y = 1; y <= maxplayers ; y++)
+				{
+				for(i=0; i < players.size() ; i++)
+					{											
+							if(y == players.get(i).getPlayernumber())
+							{
+								found = 1+found;
+							}
+					}
+					if (found < y)
+					{
+						notfound = y;
+						break;
+					}
+				}
+			
+			// assign lower available player number to the current player
+				if(!tryjoingame.getFailed())
+						{		
+													
+		    	// create the current instance of gameparticipant
+		        Gameparticipant gameparticipant = new Gameparticipant(notfound, false, user, game.get());
+				
+				// store the game participant in the game participant list
+		        gameparticipant = gamepartrepo.save(gameparticipant);	    	
+						};
+						
+		        System.out.println(tryjoingame.resultdescription);    	
+	    	
+		        
+	    	return tryjoingame;		
+			
+		}
+		
 }

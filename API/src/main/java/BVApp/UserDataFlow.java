@@ -80,8 +80,7 @@ public class UserDataFlow {
 						this.name, this.password, "ROLE_USER", this.email, this.firstname, this.lastname);
     					myuser = repo.save(myuser);	
 			
-    			MyUserDetail myuserdetail = new MyUserDetail(
-    					"", 0.0, 0.0, 0, 0, myuser);
+    			MyUserDetail myuserdetail = new MyUserDetail("", 0.0, 0.0, 0, 0, myuser);
     					myuserdetail = repo2.save(myuserdetail);
 			}
 		

@@ -14,8 +14,8 @@ class GameDetails extends React.Component {
         }
 
 
-async jointhisgame (id) {
-      await this.props.signupGame(url+'api/gameparticipantspost', id, false, this.props.singlegameitems.id)
+async jointhisgame () {
+      await this.props.signupGame(url+'api/gameparticipantspost', false, this.props.singlegameitems.id)
       this.props.setNavigate('games')
   }
 
@@ -88,11 +88,11 @@ async quitthisgame (id) {
                                      this.props.gameparticipantsitems[y].myuser.firstName + ' '
                                       + this.props.gameparticipantsitems[y].myuser.lastName}
                                       <br></br>                               
-                                     {typeof this.props.gameparticipantsitems[y] == 'undefined' && this.state.alreadysigned == 0
-                                     && (row-1)==this.props.gameparticipantsitems.length && 
-                                     <a href='#' onClick={() => this.jointhisgame(row)}>{placeholder}</a>}
+                                     {typeof this.props.gameparticipantsitems[y] == 'undefined' /*&& this.state.alreadysigned == 0
+                                     && (row-1)==this.props.gameparticipantsitems.length*/ && 
+                                     <a href='#' onClick={() => this.jointhisgame()}>{placeholder}</a>}
 
-                                    {(row == this.state.mypos) && typeof this.props.gameparticipantsitems[y] != 'undefined'
+                                    {/*(row == this.state.mypos) && */typeof this.props.gameparticipantsitems[y] != 'undefined' 
                                      && <a href='#' onClick={() => this.quitthisgame(this.props.gameparticipantsitems[y].id)}> {leavegame}</a>}
                                     
                                      </center>

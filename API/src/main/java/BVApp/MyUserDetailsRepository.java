@@ -17,9 +17,9 @@ import org.springframework.security.access.prepost.PreFilter;
 /*@PreAuthorize("hasRole('ROLE_USER')")*/
 public interface MyUserDetailsRepository extends CrudRepository<MyUserDetail, Long> { // enable paging support
 	
-/*	@Override
-	@PreAuthorize("#myuserdetails?.myuser == null or #myuserdetails?.myuser?.name == authentication?.name")*/
-	MyUserDetail save(/*@Param("myuserdetails")*/ MyUserDetail myuserdetails);
+	@Override
+	@PreAuthorize("#myuserdetails?.myuser == null or #myuserdetails?.myuser?.name == authentication?.name")
+	MyUserDetail save(@Param("myuserdetails") MyUserDetail myuserdetails);
 
 /*	@Override
 	@Query(value = "select a.id, firstname, lastname, phone, gpsx, gpsy, playedcount, noshowcount, myuser_id, version from my_user_details a left join myuser b on b.id = a.myuser_id where b.name = " , nativeQuery = true)

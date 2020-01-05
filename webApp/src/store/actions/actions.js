@@ -196,8 +196,8 @@ export function newUser(url, target)  {
     }
 }
 
-export function signupGame(url, playernumber, noshow, game_id)  {
-    var updatedrecord = { playernumber: playernumber, noshow: noshow, gameid: game_id }
+export function signupGame(url,  noshow, game_id)  {
+    var updatedrecord = { noshow: noshow, gameid: game_id }
     return (dispatch) => {
     fetch(url, {
              method: "POST",

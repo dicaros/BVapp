@@ -47,21 +47,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	    
 	    @RequestMapping(value = "/api/gameparticipantspost", method = RequestMethod.POST, produces = "application/json")
 	    @ResponseBody
-	    public String signupforagame(@RequestBody Gamejoiner gamejoiner, HttpServletRequest httpServletRequest, Principal principal) { 
+	    public Gamejoinerresponse signupforagame(@RequestBody Gamejoiner gamejoiner, HttpServletRequest httpServletRequest, Principal principal) { 
 
-	    	MyuserRepository repo5 = context.getBean(MyuserRepository.class);
-	    	Myuser myuser = repo5.findByName(principal.getName());
+	    	MyuserRepository userrepo = context.getBean(MyuserRepository.class);
+	    	GameRepository gamerepo = context.getBean(GameRepository.class);
+	        GameparticipantRepository gamepartrepo = context.getBean(GameparticipantRepository.class);    	
 	    	
-	    	GameRepository repo6 = context.getBean(GameRepository.class);
-	        Optional<Game> game = repo6.findById(gamejoiner.gameid);
-
-	       	GameparticipantRepository repo7 = context.getBean(GameparticipantRepository.class);    	
-	    	Gameparticipant joinedgame = new Gameparticipant(gamejoiner.playernumber, gamejoiner.noshow, myuser, game.get());	    	    		    		
-	    	
-	    	joinedgame = repo7.save(joinedgame);
-	    	
-	    	return "ok";
+	        // get current user from the logged user ID
+	    	Myuser myuser = userrepo.findByName(principal.getName());
+	        
+	        Gamejoinerresponse tryjoingame = gamejoiner.addPlayer(gamejoiner, myuser, gamerepo, gamepartrepo, 4);
+	        
+	        return tryjoingame;
+	        
 	    }	
+	    
 	    
 	    @RequestMapping(value = "/api/gameparticipantsget", method = RequestMethod.GET, produces = "application/json")
 	    @ResponseBody

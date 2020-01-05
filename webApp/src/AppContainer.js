@@ -43,7 +43,7 @@ const mapStateToProps = (state) => {
       setGame: (id) => dispatch(setCurrentGame(id)),
       setSize: (size) => dispatch(setCurrentSize(size)),
       setPage: (direction, pagenum) => dispatch(setCurrentPage(direction, pagenum)),                              
-      signupGame: (url, playernumber, noshow, game_id) => dispatch(signupGame(url, playernumber, noshow, game_id)),
+      signupGame: (url, noshow, game_id) => dispatch(signupGame(url, noshow, game_id)),
       addNew: (sportcenterid, isPrivate, gameDate, gameTime, description, url, nitems, priceperperson, kurt) => dispatch(newGame(sportcenterid, isPrivate, gameDate, gameTime, description, url, nitems, priceperperson, kurt)),
       getUser: () => dispatch(getUser()),
       updateRecord: (firstName, lastName, description, url) => dispatch(updateRecord(firstName, lastName, description, url)),

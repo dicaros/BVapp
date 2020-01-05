@@ -52,7 +52,7 @@ async handleSelectGame(id) {
             return(                    
                   this.props.items._embedded.games.map ((row, index) =>                   
                    {
-                     if(row.gamedate > todaydash(currentday()) || (row.gamedate == todaydash(currentday()) && row.gametime >= timedash(currentday())))
+                     if(true || row.gamedate > todaydash(currentday()) || (row.gamedate == todaydash(currentday()) && row.gametime >= timedash(currentday())))
                      {
                      return(
                              <div key={index} className='gameorganizer'>
