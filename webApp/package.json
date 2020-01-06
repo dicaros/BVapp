@@ -1,6 +1,6 @@
 {
-  "homepage": "https://dicaros.github.io/webApp",
-  "name": "webApp",
+  "homepage": "http://localhost:4080/bvapp/",
+  "name": "bvapp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
