@@ -62,8 +62,10 @@ class AppHeader extends React.Component {
 
   async logout(logouturl) {
     if (this.props.loginsuccess) {
-      this.setState({list1: 'listmenuhidden'})
+     await this.menuShowToggle()
+     await this.setState({list1: 'listmenuhidden'})
       this.props.doLogout(logouturl);
+
       }
     }
 
@@ -89,7 +91,7 @@ class AppHeader extends React.Component {
 
                     <ul className={this.state.list1}>
                           {!this.props.loginsuccess && <li><a href = '/' onClick={() => this.logout(logouturl)}>Login</a></li>}
-                          {this.props.loginsuccess && <li><a  href = '#' onClick={() => this.logout(logouturl)}>Logout</a></li>}
+                          {this.props.loginsuccess && <li><a  href = '/' onClick={() => this.logout(logouturl)}>Logout</a></li>}
 
                           {!this.props.loginsuccess && <li><a href="/register">Register</a></li>}
                           

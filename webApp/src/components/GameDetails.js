@@ -77,7 +77,7 @@ async quitthisgame (id) {
                 {
                   var y = index;
                     return(
-                      <td key={index} className = 'gamelist' width='25%'>                                 
+                      <td key={index} className = 'gameparticipant' width='25%'>                                 
                                   <li className='gameparticipant'>
                                   <center> 
                                   {typeof this.props.gameparticipantsitems[y] != 'undefined' && 
@@ -88,11 +88,11 @@ async quitthisgame (id) {
                                      this.props.gameparticipantsitems[y].myuser.firstName + ' '
                                       + this.props.gameparticipantsitems[y].myuser.lastName}
                                       <br></br>                               
-                                     {typeof this.props.gameparticipantsitems[y] == 'undefined' /*&& this.state.alreadysigned == 0
-                                     && (row-1)==this.props.gameparticipantsitems.length*/ && 
+                                     {typeof this.props.gameparticipantsitems[y] == 'undefined' && this.state.alreadysigned == 0
+                                     && (row-1)==this.props.gameparticipantsitems.length && 
                                      <a href='#' onClick={() => this.jointhisgame()}>{placeholder}</a>}
 
-                                    {/*(row == this.state.mypos) && */typeof this.props.gameparticipantsitems[y] != 'undefined' 
+                                    {(row == this.state.mypos) && typeof this.props.gameparticipantsitems[y] != 'undefined' 
                                      && <a href='#' onClick={() => this.quitthisgame(this.props.gameparticipantsitems[y].id)}> {leavegame}</a>}
                                     
                                      </center>

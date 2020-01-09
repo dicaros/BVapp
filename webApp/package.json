@@ -1,6 +1,6 @@
 {
-  "homepage": "http://localhost:4080/bvapp/",
-  "name": "bvapp",
+  "homepage": "http://52.57.132.245/",
+  "name": "BVapp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -8,10 +8,10 @@ class LoginPage extends React.Component {
   //      this.refresh();
   // };
  
- async handleSubmit(event) {
+ handleSubmit(event) {
      event.preventDefault();
      this.props.doLogin(url, event.target);   
- }
+}
  
    render() {      
  
