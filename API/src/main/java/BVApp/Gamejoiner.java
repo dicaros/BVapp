@@ -59,13 +59,17 @@ public class Gamejoiner {
 			java.sql.Time nowtime = new java.sql.Time(Calendar.getInstance().getTime().getTime());
 			
 			//check that game is in the past
-			if(singlegame.getGamedate().compareTo(nowdate) < 0 || (singlegame.getGamedate().compareTo(nowdate) == 0 && singlegame.getGametime().compareTo(nowtime)< 0))
-			{
-				tryjoingame.setFailed(true);
-				tryjoingame.setgameispast(true);
-				tryjoingame.setDescription(tryjoingame.resultdescription + "This game is in the past. ");
-			}
-	    	
+				// game is before today
+			if(singlegame.getGamedate().toLocalDate().compareTo(nowdate.toLocalDate()) < 0 ||
+					// game is today but time is past 
+					(singlegame.getGamedate().toLocalDate().equals(nowdate.toLocalDate()) && singlegame.getGametime().toLocalTime().compareTo(nowtime.toLocalTime()) < 0))
+					{
+				
+						tryjoingame.setFailed(true);
+						tryjoingame.setgameispast(true);
+						tryjoingame.setDescription(tryjoingame.resultdescription + "This game is in the past. ");
+					}
+			    			
 			//check if the user already signed in
 			Iterator<Gameparticipant> playeriterator = players.iterator();
 			while (playeriterator.hasNext()) {
@@ -82,6 +86,7 @@ public class Gamejoiner {
 			
 			int i = 0;
 			int y = 0;
+			// assign lower available player number to the current player
 			for(y = 1; y <= maxplayers ; y++)
 				{
 				for(i=0; i < players.size() ; i++)
@@ -98,7 +103,6 @@ public class Gamejoiner {
 					}
 				}
 			
-			// assign lower available player number to the current player
 				if(!tryjoingame.getFailed())
 						{		
 													
@@ -112,7 +116,7 @@ public class Gamejoiner {
 		        System.out.println(tryjoingame.resultdescription);    	
 	    	
 		        
-	    	return tryjoingame;		
+	    	return tryjoingame;
 			
 		}
 		

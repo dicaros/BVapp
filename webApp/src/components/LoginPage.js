@@ -36,6 +36,9 @@ class LoginPage extends React.Component {
                                  <td>Password</td>
                                  <td><input type='password' name='password'/></td>
                            </tr>
+                           <tr height='25px'>
+                                    <td colSpan={2} className='signuperror'>{this.props.loginerror && 'Wrong username or password'}</td>
+                           </tr>
                            </tbody>
                          <tfoot>
 

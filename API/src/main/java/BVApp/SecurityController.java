@@ -7,9 +7,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.data.repository.Repository;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,8 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	
 	    @RequestMapping(value = "/signup", method = RequestMethod.POST, produces = "application/json")
 	    @ResponseBody
-	    public UserResponse signup(/*Model uiModel,*/
-	    		@RequestBody UserDataFlow user, HttpServletRequest httpServletRequest) { 
+	    public UserResponse signup(@RequestBody UserDataFlow user, HttpServletRequest httpServletRequest) { 
 
 	    	MyuserRepository repo = context.getBean(MyuserRepository.class);
 	    	MyUserDetailsRepository repo2 = context.getBean(MyUserDetailsRepository.class);
@@ -43,7 +40,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	    	
 	    	return trysaveuser;
 	    }	
-	    
 	    
 	    @RequestMapping(value = "/api/gameparticipantspost", method = RequestMethod.POST, produces = "application/json")
 	    @ResponseBody
@@ -62,7 +58,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	        
 	    }	
 	    
-	    
 	    @RequestMapping(value = "/api/gameparticipantsget", method = RequestMethod.GET, produces = "application/json")
 	    @ResponseBody
 	    public List<Gameparticipant> list(@RequestParam Long id) {
@@ -78,6 +73,5 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	        Optional<Game> game = repo4.findById(id);
 	        return game;
 	    }
-
 	    	    
 }

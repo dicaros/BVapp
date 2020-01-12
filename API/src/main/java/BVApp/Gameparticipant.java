@@ -1,19 +1,11 @@
 package BVApp;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Version;
-
-import net.minidev.json.annotate.JsonIgnore;
 
 @Entity // declare that this class is meant for storage in a dbs table
 public class Gameparticipant {
@@ -24,6 +16,7 @@ public class Gameparticipant {
 	private @ManyToOne Myuser myuser;
 	private @ManyToOne Game game;
 	
+	@SuppressWarnings("unused")
 	private Gameparticipant() {}
 	
 	public Gameparticipant(Integer playernumber, Boolean noshow, Myuser myuser, Game game) 

@@ -17,6 +17,7 @@ const mapStateToProps = (state) => {
          gameparticipantsitems: state.gameparticipantsitems,
          isError: state.isError,
          isLoading: state.isLoading,
+         loginerror: state.loginerror,
          loginsuccess: state.loginsuccessfull,
          listsportcenter: state.listsportcenter,
          items: state.items,

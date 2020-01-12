@@ -17,21 +17,24 @@ public class MyUserDetail {
 	private Double gpsx;
 	private Double gpsy;
 	private Integer playedcount;
-	private Integer noshowcount;	
+	private Integer noshowcount;
 	
 	private @Version @JsonIgnore Long version;
 	private @OneToOne Myuser myuser;
+	private java.sql.Date mydate;
 
+	@SuppressWarnings("unused")
 	private MyUserDetail() {}
 
 	
-	public MyUserDetail(String phone, Double gpsx, Double gpsy, Integer playedcount, Integer noshowcount, Myuser myuser) {
+	public MyUserDetail(String phone, Double gpsx, Double gpsy, Integer playedcount, Integer noshowcount, Myuser myuser, java.sql.Date mydate) {
 		this.phone = phone;
 		this.gpsx = gpsx;
 		this.gpsy = gpsy;
 		this.playedcount = playedcount;
 		this.noshowcount = noshowcount;
 		this.myuser = myuser;
+		this.mydate = mydate;
 	}
 
 	@Override
@@ -109,13 +112,20 @@ public class MyUserDetail {
 		this.version = version;
 	}
 
-
 	public Myuser getMyuser() {
 		return myuser;
 	}
 
 	public void setMyuser(Myuser myuser) {
 		this.myuser = myuser;
+	}
+		
+	public void setMydate(java.sql.Date mydate) {
+		this.mydate = mydate;
+	}
+
+	public java.sql.Date getMydate() {
+		return mydate;
 	}
 
 	@Override
@@ -129,6 +139,7 @@ public class MyUserDetail {
 						", noShowCount='" + noshowcount + '\'' +		
 			", version=" + version +
 			", myuser=" + myuser +
+			", mydate=" + mydate +
 			'}';
 	}
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import userpic from '../img/userfotodefault.jpg'
 import { url } from '../constants/constants'
 import { handleQuit } from '../functions/functions'
+import { currentday, timedash, todaydash } from '../functions/functions'
 
 class GameDetails extends React.Component {
 
@@ -55,6 +56,7 @@ async quitthisgame (id) {
                           };
  
          const PlayersDetail = () => {
+            var tomorrow = new Date(Date.now()+1*24*60*60*1000);
             var x = [1, 2, 3, 4];
             var placeholder = 'join this game'
             var leavegame = 'cancel registration'
@@ -76,29 +78,47 @@ async quitthisgame (id) {
                 x.map ((row, index) =>                   
                 {
                   var y = index;
+
+                  if(typeof this.props.gameparticipantsitems[y] != 'undefined') {
                     return(
                       <td key={index} className = 'gameparticipant' width='25%'>                                 
                                   <li className='gameparticipant'>
-                                  <center> 
-                                  {typeof this.props.gameparticipantsitems[y] != 'undefined' && 
-                                   <img src = {userpic}  className='userpic' alt='O'></img>}                        
-                                   {row}
-                                   <br />
-                                     {typeof this.props.gameparticipantsitems[y] != 'undefined' && 
-                                     this.props.gameparticipantsitems[y].myuser.firstName + ' '
-                                      + this.props.gameparticipantsitems[y].myuser.lastName}
-                                      <br></br>                               
-                                     {typeof this.props.gameparticipantsitems[y] == 'undefined' && this.state.alreadysigned == 0
-                                     && (row-1)==this.props.gameparticipantsitems.length && 
-                                     <a href='#' onClick={() => this.jointhisgame()}>{placeholder}</a>}
+                                      <center> 
+                                          { <img src = {userpic}  className='userpic' alt='O'></img>}                        
+                                          {row}
+                                          <br />
+                                          { this.props.gameparticipantsitems[y].myuser.firstName + ' '
+                                            + this.props.gameparticipantsitems[y].myuser.lastName}
+                                          <br></br>                               
+                                          { this.state.alreadysigned == 0
+                                            && (row-1)==this.props.gameparticipantsitems.length && 
+                                            <a href='#' onClick={() => this.jointhisgame()}>{placeholder}</a>}
 
-                                    {(row == this.state.mypos) && typeof this.props.gameparticipantsitems[y] != 'undefined' 
-                                     && <a href='#' onClick={() => this.quitthisgame(this.props.gameparticipantsitems[y].id)}> {leavegame}</a>}
+                                          {((row == this.state.mypos) && 
+                                            (this.props.singlegameitems.gamedate > todaydash(currentday(tomorrow)) || 
+                                            (this.props.singlegameitems.gamedate == todaydash(currentday(tomorrow)) && this.props.singlegameitems.gametime >= timedash(currentday(tomorrow)))))
+                                            && <a href='#' onClick={() => this.quitthisgame(this.props.gameparticipantsitems[y].id)}> {leavegame}</a>}
                                     
+                                        {  ((row == this.state.mypos) && 
+                                            (this.props.singlegameitems.gamedate < todaydash(currentday(tomorrow)) || 
+                                            (this.props.singlegameitems.gamedate == todaydash(currentday(tomorrow)) && this.props.singlegameitems.gametime <= timedash(currentday(tomorrow)))))
+                                            && <span className = 'signuperror'>'You can only sign out from a game at least 24 hours in advance'</span>
+                                        }
                                      </center>
                                   </li>
                           </td>            
                         )
+                      }
+                      else {
+                        return <td className = 'gameparticipant' width='25%'> 
+
+                              <li className='gameparticipant'>
+                                    { <img src = {'../img/userfotodefault.jpg'}  className='userpic' alt='0'></img>}                        
+
+                              </li>
+
+                          </td>;
+                      }
                       }
                  )
                 )     
@@ -106,34 +126,34 @@ async quitthisgame (id) {
 
 
          const GameDetails = () => {
-
+          if(typeof this.props.singlegameitems.id != 'undefined') {
           return(
               <tr>
-                  <td className = '' width='25%' colSpan = {4}>
-                        {   typeof this.props.singlegameitems.id != 'undefined'
-                            && 
-                             this.props.singlegameitems.sportcenter.name + ' ' + 
-                              this.props.singlegameitems.id }
-                           <br />   
-                        {   typeof this.props.singlegameitems.id != 'undefined'
-                            && this.props.singlegameitems.gamedate
-                              } 
-                           <br />
-                        { typeof this.props.singlegameitems.id != 'undefined'
-                            && 'Starts at '+String(this.props.singlegameitems.gametime).substring(0, 5)}                    
-                          <br />{'You will pay: '}   
-                        {   typeof this.props.singlegameitems.id != 'undefined'
-                            && this.props.singlegameitems.priceperperson + ' CZK'
-                              } 
-   
-                           <br />{'Message from the organizer: '}   
-                        {   typeof this.props.singlegameitems.id != 'undefined'
-                            && this.props.singlegameitems.description
-                              } 
-
+                  <td className = '' colSpan = {3}>                                      
+                            {this.props.singlegameitems.sportcenter.name} {this.props.singlegameitems.id}
+                             <br />
+                            {this.props.singlegameitems.gamedate}
+                             <br />
+                            Starts at {String(this.props.singlegameitems.gametime).substring(0, 5)}
+                             <br />
+                            Court n. {this.props.singlegameitems.kurt}
+                             <br />You will pay: {this.props.singlegameitems.priceperperson} CZK
+                             <br />Message from the organizer: 
+                            {this.props.singlegameitems.description}
+                  </td>
+                  <td>
+                            This game is organized by: <br></br>
+                            {this.props.singlegameitems.myuser.firstName + ' ' + this.props.singlegameitems.myuser.lastName}
                   </td>
               </tr>
               )
+            }
+            else { return ( <tr>
+                              <td className = '' colSpan = {3}> </td>
+                              <td></td>
+                            </tr>)
+            }
+
          }
 
          const TableBody = () => {                       

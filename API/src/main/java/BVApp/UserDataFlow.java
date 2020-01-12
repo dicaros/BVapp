@@ -1,5 +1,7 @@
 package BVApp;
 
+import java.util.Calendar;
+
 import org.springframework.util.StringUtils;
 
 public class UserDataFlow {
@@ -80,7 +82,9 @@ public class UserDataFlow {
 						this.name, this.password, "ROLE_USER", this.email, this.firstname, this.lastname);
     					myuser = repo.save(myuser);	
 			
-    			MyUserDetail myuserdetail = new MyUserDetail("", 0.0, 0.0, 0, 0, myuser);
+				java.sql.Date nowdate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+    			MyUserDetail myuserdetail = new MyUserDetail("", 0.0, 0.0, 0, 0, myuser, nowdate);
     					myuserdetail = repo2.save(myuserdetail);
 			}
 		

@@ -18,7 +18,7 @@ class CreateGame extends React.Component {
       super(props);
             this.state = {
                   timeselection: '20:00',
-                  kurtselecton: 1,
+                  kurtselection: 1,
                   selectedday: thisday[2],
                   selectedmonth: thisday[1],
                   selectedmonthstring: convertmonthtostring(thisday[1]),

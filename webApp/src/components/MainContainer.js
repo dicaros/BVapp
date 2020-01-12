@@ -5,6 +5,13 @@ class MainContainer extends React.Component {
   
    render() {
      return (<center>
+
+               
+               {this.props.loginsuccess && this.props.isLoading && 'Loading...'}
+               
+               {this.props.isError && !this.props.isLoading && "error message"}
+               
+
                 {this.props.loginsuccess && !this.props.isLoading && 
                 (this.props.navigate == 'games') && 
                 typeof this.props.useritems._embedded != 'undefined' &&
@@ -23,7 +30,7 @@ class MainContainer extends React.Component {
                 typeof this.props.sportcenteritems._embedded != 'undefined' && 
                 <CreateComponent />}
 
-                {!this.props.loginsuccess && this.props.loginsuccess != null 
+                {!this.props.loginsuccess && !this.props.isLoading
                  && <LoginComponent />}
 
               </center>)

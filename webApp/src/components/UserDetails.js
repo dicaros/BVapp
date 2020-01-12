@@ -23,7 +23,7 @@ class UserDetails extends React.Component {
                                   <tr key='002'>
                                       <th className = 'userdetailsheader' height='30px'>{row.firstName} {row.lastName}
                                       <h4 className = 'userdetailsheader'>({row.myuser.email})</h4>
-                                      <h4 className = 'userdetailsheader'>Member since: n/a</h4>
+                                      <h4 className = 'userdetailsheader'>Member since: {row.mydate}</h4>
                                       </th>
                                   </tr>
                               </thead>

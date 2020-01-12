@@ -33,7 +33,7 @@ export function currentgame(state = 0, action) {
 export function isError(state = false, action) {
     switch (action.type) {
         case 'IS_ERROR':
-            return action.hasErrored;        default:
+            return action.isError;        default:
             return state;
     }
 
@@ -51,6 +51,14 @@ export function items(state = [], action) {
     switch (action.type) {
         case 'ITEMS_FETCH_DATA_SUCCESS':
             return action.items;        default:
+            return state;
+    }
+}
+
+export function loginerror(state = false, action) {
+    switch (action.type) {
+        case 'LOGIN_ERROR':
+            return action.loginerror;        default:
             return state;
     }
 }
@@ -134,6 +142,7 @@ export default combineReducers({
     isError,
     isLoading,
     joingame,
+    loginerror,
     loginsuccessfull,
     navigate,
     nitems,

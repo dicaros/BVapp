@@ -21,10 +21,13 @@ class AppHeader extends React.Component {
 
     componentDidMount() { 
             //(request, url, params)
+            this.props.getUser()
+
+            if(this.props.loginsuccess) {
             this.props.fetchData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime')
             this.props.fetchData('api/sportcenters', url, '?page=0&size=1000&sort=name')
             this.props.fetchData('api/myUserDetails', url, '')
-            this.props.getUser()
+            }
           };
   
     componentDidUpdate(prevProps) {
@@ -65,7 +68,6 @@ class AppHeader extends React.Component {
      await this.menuShowToggle()
      await this.setState({list1: 'listmenuhidden'})
       this.props.doLogout(logouturl);
-
       }
     }
 

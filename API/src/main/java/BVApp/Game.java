@@ -4,12 +4,9 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
@@ -26,15 +23,17 @@ public class Game {
 	private Time gametime;
 	private Boolean gameisfull;
 	private Boolean gameispast;
+	private Boolean gameiscancelled;
 	private String description;
 	
 	private @Version @JsonIgnore Long version;
 	private @ManyToOne Myuser myuser;
 	private @ManyToOne Sportcenter sportcenter;
 	
+	@SuppressWarnings("unused")
 	private Game() {}
 	
-	public Game(Sportcenter sportcenter,	Integer kurt, Double priceperperson,	Boolean isprivate,	Date gamedate,	Time gametime,	Boolean gameisfull,	Boolean gameispast,	String description, Myuser myuser) 
+	public Game(Sportcenter sportcenter,	Integer kurt, Double priceperperson,	Boolean isprivate,	Date gamedate,	Time gametime,	Boolean gameisfull,	Boolean gameispast,	Boolean gameiscancelled, String description, Myuser myuser) 
 	{
 		this.sportcenter = sportcenter;
 		this.kurt = kurt;
@@ -44,6 +43,7 @@ public class Game {
 		this.gametime = gametime;
 		this.gameisfull = gameisfull; 
 		this.gameispast = gameispast;
+		this.gameiscancelled = gameiscancelled;
 		this.description = description;
 		this.myuser = myuser;
 	}
@@ -129,6 +129,15 @@ public class Game {
 		this.gameisfull = gameisfull;
 	}
 	
+	public Boolean getGameiscancelled() {
+		return gameiscancelled;
+	}
+
+	public void setGameiscancelled(Boolean gameiscancelled) {
+		this.gameiscancelled = gameiscancelled;
+	}
+	
+	
 	public Date getGamedate() {
 		return gamedate;
 	}
@@ -181,6 +190,7 @@ public class Game {
 			", gametime='" + gametime + '\'' +
 			", gameisfull='" + gameispast + '\'' +
 			", gameispast='" + gameispast + '\'' +			
+			", gameiscancelled='" + gameiscancelled + '\'' +
 			", description='" + description + '\'' +
 			", version=" + version +
 			", myuser=" + myuser +

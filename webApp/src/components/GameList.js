@@ -2,8 +2,6 @@ import React from 'react';
 import { currentday, timedash, todaydash } from '../functions/functions'
 import { url } from '../constants/constants'
 
-var countpage = 0 + ' '
-
 class GameList extends React.Component {
 
     // not used
@@ -62,7 +60,10 @@ async handleSelectGame(id) {
                                             {(row.gamedate == todaydash(currentday())) && 'Today, '}
                                             {(row.gamedate == todaydash(currentday(tomorrow))) && 'Tomorrow, '}
                                             {(row.gamedate > todaydash(currentday(tomorrow))) && row.gamedate+ ', '}
-                                            {String(row.gametime).substring(0, 5) + ' '}</span> 
+                                            {String(row.gametime).substring(0, 5) + ' '}
+                                            {(row.isprivate && ' - Private')}
+                                            </span> 
+                                            
                                            <br></br>
                                            @{(row._embedded.sportcenter.name) + ', '} 
                                             {row._embedded.sportcenter.street}

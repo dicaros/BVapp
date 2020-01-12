@@ -24,6 +24,7 @@ public class Sportcenter {
 	
 	private @Version @JsonIgnore Long version;
 
+	@SuppressWarnings("unused")
 	private Sportcenter() {}
 	
 	public Sportcenter(Long id, String name,	String street,	String city, String postcode, String country, Double gpsx, Double gpsy,	String website) 

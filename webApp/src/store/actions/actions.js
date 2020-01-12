@@ -4,7 +4,7 @@ import { url } from '../../constants/constants'
 import { CURRENT_GAME, CURRENT_PAGE, CURRENT_SIZE, IS_ERROR, IS_LOADING, 
             ITEMS_FETCH_DATA_SUCCESS, JOINGAME_STATUS, LOGIN_SUCCESS, N_ITEMS, REGISTRATION_STATUS, SET_NAVIGATE, 
             SET_USER, SINGLEGAME_FETCH_DATA_SUCCESS, SPORTCENTER_FETCH_DATA_SUCCESS, 
-            USER_FETCH_DATA_SUCCESS, GAMEPARTICIPANT_FETCH_DATA_SUCCESS } from './action-type';
+            USER_FETCH_DATA_SUCCESS, GAMEPARTICIPANT_FETCH_DATA_SUCCESS, LOGIN_ERROR } from './action-type';
 
 export function gameparticipantFetchDataSuccess(gameparticipantsitems) {
     return {
@@ -20,9 +20,10 @@ export function singlegameFetchDataSuccess(singlegameitems) {
                        };
                    }
 
-                   // getUser gets the current username and checks if the application is still logged
+// getUser gets the current username and checks if the application is still logged
 export function getUser() {
     return (dispatch) => {
+        dispatch(isError(false));
         fetch(url+'username', {
         method: 'GET',
         credentials: 'include',
@@ -35,27 +36,35 @@ export function getUser() {
         
         if(res.status=='401') {
             dispatch(loginsuccessfull(false));
+            dispatch(isError(false));
             return ('Guest')        
         }
         else {
             dispatch(loginsuccessfull(true));
             return res.text()       
-        }
-        
-        
+        }        
     }).then((data) => {
                 if(typeof data!= 'undefined') {
                     dispatch(setuser(data))
                 }
                 console.log("data value " + data)
-        })
+        })                    
+    .catch(error => {
+            if(error.status != 'undefined')
+            {
+            dispatch(isLoading(false))
+            dispatch(isError(true));
+            console.log("fail getting user: " + error.status)
+        }
+    }
+);
     }
 }
 
 export function isError(bool) {
     return {
         type: IS_ERROR,
-        hasErrored: bool
+        isError: bool
     };
 }
 
@@ -78,6 +87,7 @@ export function loadData(request, url, params) {
             return (dispatch) => {
 
                     dispatch(isLoading(true)); 
+                    dispatch(isError(false));
                 // start GET request
                     fetch(url+request+params  , {
                                                                 method: 'GET',
@@ -94,24 +104,11 @@ export function loadData(request, url, params) {
                                                                 }
                                         else {
                                                                         console.log("success " + res.status);
-                                                                        if(request == 'api/games')
-                                                                                    dispatch(itemsFetchDataSuccess(res));
-                                                                        if(request == 'api/sportcenters')
-                                                                                    dispatch(sportcenterFetchDataSuccess(res));                                                
-                                                                        if(request == 'api/myUserDetails')
-                                                                                    dispatch(userFetchDataSuccess(res));
-                                                                        if(request == 'api/gameparticipantsget')
-                                                                                    dispatch(gameparticipantFetchDataSuccess(res));
-                                                                        if(request == 'api/game2')
-                                                                                    dispatch(singlegameFetchDataSuccess(res));
-
-                                                                        return res;
-                                                                        
+                                                                        return res;                                          
                                         }
                                 })
-                    // format result to json
-                    .then((res) => res.json())
-                    // confirm data get success
+                    .then(res => res.json())
+                    // get result based on keyword
                     .then((items) => {
                             if(request == 'api/games')
                                 dispatch(itemsFetchDataSuccess(items))
@@ -128,11 +125,22 @@ export function loadData(request, url, params) {
                                 )
                     // error handling
                     .catch(error => {
+                                if(error.status!='undefined')
+                                     {
+                                        dispatch(isLoading(false))
                                         dispatch(isError(true));
-                                        console.log("fail " + error.status)
+                                        console.log("fail loading data: " + error.status)
+                                    }
                     }
                             );
             };
+}
+
+export function loginerror(bool) {
+    return {
+        type: LOGIN_ERROR,
+        loginerror: bool
+    };
 }
 
 export function loginsuccessfull(bool) {
@@ -152,6 +160,7 @@ export function newGame(sportcenterid, isPrivate, gameDate, gameTime, descriptio
                             gametime: gameTime,
                             gameisfull: false, 
                             gameispast: false, 
+                            gameiscancelled: false,
                             description: description,
                         }
 
@@ -296,11 +305,14 @@ export function thelogin(loginurl, target)  {
            .then(res => { 
                         if(res.status != '401')
                         {
-                            dispatch(loginsuccessfull(true))
+                            dispatch(loginsuccessfull(true));
+                            dispatch(loginerror(false))
                                        }
+                        else {dispatch(loginerror(true))}
                             console.log("log in " + res.status);
                             dispatch(isLoading(false));
-                    })
+                        }
+                    )
             .then(res => {
                 dispatch(isLoading(false));
                 if(res.status != '401')
@@ -311,11 +323,6 @@ export function thelogin(loginurl, target)  {
             })
                     .catch(error =>
                       { 
-                          if(error.status=='401')
-                          {
-                            dispatch(loginsuccessfull(false));
-                            dispatch(isLoading(false));
-                        }
                             console.log("not logged " + error.status)
               })
       }
@@ -331,7 +338,16 @@ export function thelogin(loginurl, target)  {
                        dispatch(loginsuccessfull(false));
                        dispatch(setuser('Guest'));
                        console.log("log out " + res.status)
-           })
+           })                  
+        .catch(error =>
+            { 
+                if(error.status=='401')
+                {
+                  dispatch(loginsuccessfull(false));
+                }
+                  dispatch(isLoading(false));
+                  console.log("not logged " + error.status)
+            })
        }  
 }
 
