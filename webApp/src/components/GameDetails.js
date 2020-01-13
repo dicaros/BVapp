@@ -90,10 +90,7 @@ async quitthisgame (id) {
                                           { this.props.gameparticipantsitems[y].myuser.firstName + ' '
                                             + this.props.gameparticipantsitems[y].myuser.lastName}
                                           <br></br>                               
-                                          { this.state.alreadysigned == 0
-                                            && (row-1)==this.props.gameparticipantsitems.length && 
-                                            <a href='#' onClick={() => this.jointhisgame()}>{placeholder}</a>}
-
+                               
                                           {((row == this.state.mypos) && 
                                             (this.props.singlegameitems.gamedate > todaydash(currentday(tomorrow)) || 
                                             (this.props.singlegameitems.gamedate == todaydash(currentday(tomorrow)) && this.props.singlegameitems.gametime >= timedash(currentday(tomorrow)))))
@@ -113,8 +110,14 @@ async quitthisgame (id) {
                         return <td className = 'gameparticipant' width='25%'> 
 
                               <li className='gameparticipant'>
-                                    { <img src = {'../img/userfotodefault.jpg'}  className='userpic' alt='0'></img>}                        
-
+                      {// <img src = {'../img/userfotodefault.jpg'}  className='userpic' alt='0' color = '#ffffff'></img>
+                      }                     
+                                <center>   
+                                    <br></br>                               
+                                          { this.state.alreadysigned == 0
+                                            && (row-1)==this.props.gameparticipantsitems.length && 
+                                            <a href='#' onClick={() => this.jointhisgame()}>{placeholder}</a>}
+                                </center> 
                               </li>
 
                           </td>;
