@@ -1,4 +1,4 @@
-import { getUser, loadData, newGame, newUser, setCurrentGame, setCurrentPage, setCurrentSize,
+import { cancelGame, getUser, loadData, newGame, newUser, setCurrentGame, setCurrentPage, setCurrentSize,
           setNavigate, signupGame, thelogin, thelogout, updateRecord } from './store/actions/actions';
 
 import { connect } from 'react-redux';
@@ -37,6 +37,7 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
   return {
+      cancelGame: (url) => dispatch(cancelGame(url)),
       fetchData: (request, url, sort, page, size) => dispatch(loadData(request, url, sort, page, size)),
       doLogin: (loginurl, target) => dispatch(thelogin(loginurl, target)),                                    
       doLogout: (logouturl) => dispatch(thelogout(logouturl)),

@@ -19,7 +19,7 @@ class GameList extends React.Component {
 async handleSelectGame(id) {
     await this.props.setGame(id)
     await this.props.fetchData('api/gameparticipantsget', url, '?id='+id)
-    await this.props.fetchData('api/game2', url, '?id='+id)
+    await this.props.fetchData('api/singlegame', url, '?id='+id)
     this.props.setNavigate('gamedetails')           
 }
 
@@ -62,6 +62,7 @@ async handleSelectGame(id) {
                                             {(row.gamedate > todaydash(currentday(tomorrow))) && row.gamedate+ ', '}
                                             {String(row.gametime).substring(0, 5) + ' '}
                                             {(row.isprivate && ' - Private')}
+                                            {(row.gameiscancelled && ' - Cancelled')}
                                             </span> 
                                             
                                            <br></br>

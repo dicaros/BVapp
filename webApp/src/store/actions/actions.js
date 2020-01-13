@@ -6,6 +6,26 @@ import { CURRENT_GAME, CURRENT_PAGE, CURRENT_SIZE, IS_ERROR, IS_LOADING,
             SET_USER, SINGLEGAME_FETCH_DATA_SUCCESS, SPORTCENTER_FETCH_DATA_SUCCESS, 
             USER_FETCH_DATA_SUCCESS, GAMEPARTICIPANT_FETCH_DATA_SUCCESS, LOGIN_ERROR } from './action-type';
 
+export function cancelGame(url)  {
+                var updatedrecord = {gameiscancelled: true}
+                return (dispatch) => {
+                fetch(url, {
+                         method: "PATCH",
+                         credentials: 'include',
+                         headers: { 
+                           'Content-Type': 'application/json',
+                        },
+                         body: JSON.stringify(updatedrecord)
+                      })
+                      .then(res => res.json())
+                      .then(items => {            
+                            var response = items;
+                            console.log(response);
+                    })
+                }
+            }
+            
+
 export function gameparticipantFetchDataSuccess(gameparticipantsitems) {
     return {
                type: GAMEPARTICIPANT_FETCH_DATA_SUCCESS,
@@ -118,7 +138,7 @@ export function loadData(request, url, params) {
                                 dispatch(userFetchDataSuccess(items));
                             if(request == 'api/gameparticipantsget')
                                 dispatch(gameparticipantFetchDataSuccess(items));
-                            if(request == 'api/game2')
+                            if(request == 'api/singlegame')
                                 dispatch(singlegameFetchDataSuccess(items));
                                 dispatch(isLoading(false))
                             }

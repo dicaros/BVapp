@@ -196,4 +196,15 @@ public class Game {
 			", myuser=" + myuser +
 			'}';
 	}
+	
+	public Gameresponse saveGame() {
+	
+			Gameresponse response = new Gameresponse(false, false, false, false, false, "");
+			
+			
+			
+		
+			return response; 
+	}
+	
 }

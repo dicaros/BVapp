@@ -15,6 +15,10 @@ class GameDetails extends React.Component {
         }
 
 
+cancelthisgame() {
+        this.props.cancelGame(url+'api/games/'+this.props.singlegameitems.id)
+      }
+
 async jointhisgame () {
       await this.props.signupGame(url+'api/gameparticipantspost', false, this.props.singlegameitems.id)
       this.props.setNavigate('games')
@@ -33,6 +37,7 @@ async quitthisgame (id) {
                     <tr>
                       <th colSpan = {4}>
                       <div className='closewindowdiv' >
+                            {typeof this.props.singlegameitems.id != 'undefined' && this.props.singlegameitems.gameiscancelled && 'Cancelled'}
                           <span className='closewindowspantop'>
                               <button className='bodylink'href = '#' onClick={() => this.props.setNavigate('games')}>
                               X</button>
@@ -116,6 +121,7 @@ async quitthisgame (id) {
                                     <br></br>                               
                                           { this.state.alreadysigned == 0
                                             && (row-1)==this.props.gameparticipantsitems.length && 
+                                            !this.props.singlegameitems.gameiscancelled &&
                                             <a href='#' onClick={() => this.jointhisgame()}>{placeholder}</a>}
                                 </center> 
                               </li>
@@ -141,12 +147,17 @@ async quitthisgame (id) {
                              <br />
                             Court n. {this.props.singlegameitems.kurt}
                              <br />You will pay: {this.props.singlegameitems.priceperperson} CZK
-                             <br />Message from the organizer: 
-                            {this.props.singlegameitems.description}
+                             <br />Message from the organizer: {this.props.singlegameitems.description}
                   </td>
                   <td>
-                            This game is organized by: <br></br>
+                            <p>This game is organized by: <br></br>
                             {this.props.singlegameitems.myuser.firstName + ' ' + this.props.singlegameitems.myuser.lastName}
+                            </p>
+                            <p>
+                            {this.props.singlegameitems.myuser.name == this.props.username && 
+                            !this.props.singlegameitems.gameiscancelled &&
+                            <a href='#' onClick={() => this.cancelthisgame()}>Cancel this game</a>}
+                            </p>
                   </td>
               </tr>
               )

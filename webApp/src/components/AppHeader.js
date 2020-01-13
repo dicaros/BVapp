@@ -32,11 +32,11 @@ class AppHeader extends React.Component {
   
     componentDidUpdate(prevProps) {
   
-              if (this.props.loginsuccess != prevProps.loginsuccess)
+        if (this.props.loginsuccess != prevProps.loginsuccess)
                 {
+                    this.props.fetchData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime')
                     this.props.fetchData('api/sportcenters', url, '?page=0&size=1000&sort=name')
                     this.props.fetchData('api/myUserDetails', url, '')
-                    this.props.fetchData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime')
                     this.props.getUser()  
                 }
               }

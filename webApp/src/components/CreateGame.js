@@ -171,7 +171,7 @@ return (
             </tr>
 
           <tr height='30px'>
-                  <td className='newgame' colSpan={4}>Extra comments</td>
+                  <td className='newgame' colSpan={4}>Extra comments (500 chars max)</td>
             </tr>
             <tr height='25px'>
                   <td colSpan={3}><textarea className = 'description' name='comments'/></td>
