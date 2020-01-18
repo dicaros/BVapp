@@ -48,7 +48,7 @@ class CreateGame extends React.Component {
       }
 
       componentDidUpdate(prevProps) {
-  
+
             if (this.props.gameresponse.checkfailed != prevProps.gameresponse.checkfailed)
                     {
                         if(this.props.gameresponse.checkfailed)

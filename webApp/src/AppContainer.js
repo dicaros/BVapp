@@ -10,7 +10,9 @@ import UserDetails from './components/UserDetails';
 import LoginPage from './components/LoginPage';
 import RegisterUser from './components/RegisterUser';
 import CreateGame from './components/CreateGame';
+import UserProfile from './components/UserProfile';
 import MainContainer from './components/MainContainer';
+
 
 const mapStateToProps = (state) => {
     return {
@@ -63,3 +65,4 @@ const mapStateToProps = (state) => {
   export const MainComponent = connect(mapStateToProps, mapDispatchToProps)(MainContainer);
   export const RegisterComponent = connect(mapStateToProps, mapDispatchToProps)(RegisterUser);
   export const UserComponent = connect(mapStateToProps, mapDispatchToProps)(UserDetails);
+  export const UserProfileComponent = connect(mapStateToProps, mapDispatchToProps)(UserProfile);

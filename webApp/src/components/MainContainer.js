@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreateComponent, GameComponent, LoginComponent, UserComponent, GameDetailsComponent } from '../AppContainer';
+import { CreateComponent, GameComponent, LoginComponent, UserComponent, GameDetailsComponent, UserProfileComponent } from '../AppContainer';
 
 class MainContainer extends React.Component {
   
@@ -13,14 +13,19 @@ class MainContainer extends React.Component {
                
 
                 {this.props.loginsuccess && !this.props.isLoading && 
-                (this.props.navigate == 'games') && 
+                (this.props.navigate == 'games' || this.props.navigate == 'userp') && 
                 typeof this.props.useritems._embedded != 'undefined' &&
                 <UserComponent />}
                 
                 {this.props.loginsuccess && !this.props.isLoading && 
                 (this.props.navigate == 'games') && 
                 typeof this.props.items._embedded != 'undefined' &&
-                <GameComponent />}                
+                <GameComponent />}          
+
+                {this.props.loginsuccess && !this.props.isLoading && 
+                (this.props.navigate == 'userp') && 
+                typeof this.props.items._embedded != 'undefined' &&
+                <UserProfileComponent />}          
 
                 {this.props.loginsuccess && !this.props.isLoading && this.props.navigate == 'gamedetails' &&
                 typeof this.props.singlegameitems != 'undefined' && 

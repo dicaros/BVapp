@@ -28,4 +28,7 @@ public interface GameparticipantRepository extends PagingAndSortingRepository<Ga
 	// find all game participants based on game id
 	List<Gameparticipant> findAllByGameId(Long id);
 	
+	// find all games based on user id	
+	List<Gameparticipant> findAllByMyuserId(Long id);
+	
 }

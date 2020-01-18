@@ -24,9 +24,10 @@ class AppHeader extends React.Component {
             this.props.getUser()
 
             if(this.props.loginsuccess) {
-            this.props.fetchData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime')
-            this.props.fetchData('api/sportcenters', url, '?page=0&size=1000&sort=name')
-            this.props.fetchData('api/myUserDetails', url, '')
+                  this.props.fetchData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime')
+                  this.props.fetchData('api/sportcenters', url, '?page=0&size=1000&sort=name')
+                  this.props.fetchData('api/gameparticipants', url, '?page=0&size=1000&sort=name')
+                  this.props.fetchData('api/myUserDetails', url, '')
             }
           };
   
@@ -36,14 +37,16 @@ class AppHeader extends React.Component {
                 {
                     this.props.fetchData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime')
                     this.props.fetchData('api/sportcenters', url, '?page=0&size=1000&sort=name')
+                    this.props.fetchData('api/gameparticipants', url, '?page=0&size=1000&sort=name')
                     this.props.fetchData('api/myUserDetails', url, '')
                     this.props.getUser()  
                 }
           }
           
-    handleNavigate(param) {
+  handleNavigate(param) {
           this.props.setNavigate(param)
           this.setState({showMenu: !this.state.showMenu})   
+          this.menuShowToggle();
         }
 
   async menuShowToggle () {
@@ -80,7 +83,7 @@ class AppHeader extends React.Component {
               <ul>
 
                   <li>
-                      <img src={usericon} className='userlogo' alt='O'></img>
+                      <img src={usericon} onClick={() => this.props.setNavigate('userp')} className='userlogo' alt='O'></img>
                 </li>     
                 <li>
                   
@@ -94,11 +97,13 @@ class AppHeader extends React.Component {
                     <ul className={this.state.list1}>
                           {!this.props.loginsuccess && <li><a href = '/' onClick={() => this.logout(logouturl)}>Login</a></li>}
                           {this.props.loginsuccess && <li><a  href = '/' onClick={() => this.logout(logouturl)}>Logout</a></li>}
-
                           {!this.props.loginsuccess && !this.props.isError && <li><a href="/register">Register</a></li>}
-                          
+
+                          {this.props.loginsuccess && <li><a href="#" onClick={() => this.handleNavigate('games')}>Game list</a></li>}
+                          {this.props.loginsuccess && <li><a href="#" onClick={() => this.handleNavigate('create')}>Create game</a></li>}
+
                           <li><div className='line'></div></li>
-                          <li><a href="#">{ this.props.username }</a></li>
+                          <li><a href="#" onClick={() => this.handleNavigate('userp')}>{ this.props.username }</a></li>
                       </ul> 
 
                 </li>

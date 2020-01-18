@@ -21,6 +21,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		private ApplicationContext context;
 	    
 		// expose API endpoint for listing the participant for the selected game   
+	    @RequestMapping(value = "/api/gameparticipantsbyuser", method = RequestMethod.GET, produces = "application/json")
+	    @ResponseBody
+	    public List<Gameparticipant> gamelist(@RequestParam Long id) {
+	        GameparticipantRepository repo3 = context.getBean(GameparticipantRepository.class);
+	        List<Gameparticipant> game = (List<Gameparticipant>) repo3.findAllByMyuserId(id);
+	        return game;
+	    }
+		
+		// expose API endpoint for listing the participant for the selected game   
 	    @RequestMapping(value = "/api/gameparticipantsget", method = RequestMethod.GET, produces = "application/json")
 	    @ResponseBody
 	    public List<Gameparticipant> list(@RequestParam Long id) {
