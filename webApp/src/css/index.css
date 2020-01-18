@@ -104,6 +104,15 @@ h4.userdetailsheader {
             background-color: white;
         }
 
+        .tablegamesdetail {
+            width: 100%;
+            height: 100%;            
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+            background-color: white;
+        }
+
             .tableuser1 {
                 height: 0px;
                 margin: 0px;

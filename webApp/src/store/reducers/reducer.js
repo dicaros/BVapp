@@ -39,7 +39,7 @@ export function isError(state = false, action) {
 
 }
 
-export function isLoading(state = false, action) {
+export function isLoading(state = null, action) {
     switch (action.type) {
         case 'IS_LOADING':
             return action.isLoading;        default:
@@ -83,6 +83,14 @@ export function gameparticipantsitems(state = [], action) {
     switch (action.type) {
         case 'GAMEPARTICIPANT_FETCH_DATA_SUCCESS':
             return action.gameparticipantsitems;        default:
+            return state;
+    }
+}
+
+export function gameresponse(state = {checkfailed: true}, action) {
+    switch (action.type) {
+        case 'GAMERESPONSE_STATUS':
+            return action.gameresponse;        default:
             return state;
     }
 }
@@ -138,6 +146,7 @@ export function username(state = 'Guest', action) {
 export default combineReducers({
     currentgame,
     gameparticipantsitems,
+    gameresponse,
     items,
     isError,
     isLoading,

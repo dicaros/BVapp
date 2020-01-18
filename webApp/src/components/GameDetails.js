@@ -14,9 +14,9 @@ class GameDetails extends React.Component {
           }
         }
 
-
-cancelthisgame() {
-        this.props.cancelGame(url+'api/games/'+this.props.singlegameitems.id)
+async cancelthisgame() {
+       await this.props.cancelGame(url+'api/games/'+this.props.singlegameitems.id)
+       this.props.setNavigate('games')
       }
 
 async jointhisgame () {
@@ -37,7 +37,7 @@ async quitthisgame (id) {
                     <tr>
                       <th colSpan = {4}>
                       <div className='closewindowdiv' >
-                            {typeof this.props.singlegameitems.id != 'undefined' && this.props.singlegameitems.gameiscancelled && 'Cancelled'}
+                            {typeof this.props.singlegameitems.id != 'undefined' && this.props.singlegameitems.gameiscancelled && 'This game is cancelled'}
                           <span className='closewindowspantop'>
                               <button className='bodylink'href = '#' onClick={() => this.props.setNavigate('games')}>
                               X</button>
@@ -138,7 +138,7 @@ async quitthisgame (id) {
           if(typeof this.props.singlegameitems.id != 'undefined') {
           return(
               <tr>
-                  <td className = '' colSpan = {3}>                                      
+                  <td className = 'gameparticipant' colSpan = {3}>                                      
                             {this.props.singlegameitems.sportcenter.name} {this.props.singlegameitems.id}
                              <br />
                             {this.props.singlegameitems.gamedate}
@@ -149,7 +149,7 @@ async quitthisgame (id) {
                              <br />You will pay: {this.props.singlegameitems.priceperperson} CZK
                              <br />Message from the organizer: {this.props.singlegameitems.description}
                   </td>
-                  <td>
+                  <td className = 'gameparticipant' >
                             <p>This game is organized by: <br></br>
                             {this.props.singlegameitems.myuser.firstName + ' ' + this.props.singlegameitems.myuser.lastName}
                             </p>

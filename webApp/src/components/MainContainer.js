@@ -9,7 +9,7 @@ class MainContainer extends React.Component {
                
                {this.props.loginsuccess && this.props.isLoading && 'Loading...'}
                
-               {this.props.isError && !this.props.isLoading && "error message"}
+               {this.props.isError && !this.props.isLoading && "Server connection error, please try again later"}
                
 
                 {this.props.loginsuccess && !this.props.isLoading && 

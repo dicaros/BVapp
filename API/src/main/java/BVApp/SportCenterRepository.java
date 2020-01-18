@@ -1,5 +1,7 @@
 package BVApp;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -9,5 +11,8 @@ public interface SportCenterRepository extends PagingAndSortingRepository<Sportc
 	void deleteById(Long id);
 
 	void delete(Sportcenter sportcenter);
+	
+	Optional<Sportcenter> findById(Long id);
+
 	
 }

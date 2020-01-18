@@ -1,5 +1,5 @@
 import { cancelGame, getUser, loadData, newGame, newUser, setCurrentGame, setCurrentPage, setCurrentSize,
-          setNavigate, signupGame, thelogin, thelogout, updateRecord } from './store/actions/actions';
+          setgameresponse, setNavigate, signupGame, thelogin, thelogout, updateRecord } from './store/actions/actions';
 
 import { connect } from 'react-redux';
 
@@ -15,6 +15,7 @@ import MainContainer from './components/MainContainer';
 const mapStateToProps = (state) => {
     return {
          gameparticipantsitems: state.gameparticipantsitems,
+         gameresponse: state.gameresponse,
          isError: state.isError,
          isLoading: state.isLoading,
          loginerror: state.loginerror,
@@ -43,6 +44,7 @@ const mapStateToProps = (state) => {
       doLogout: (logouturl) => dispatch(thelogout(logouturl)),
       setNavigate: (navigate) => dispatch(setNavigate(navigate)),
       setGame: (id) => dispatch(setCurrentGame(id)),
+      setgameresponse: (gameresponse) => dispatch(setgameresponse(gameresponse)),
       setSize: (size) => dispatch(setCurrentSize(size)),
       setPage: (direction, pagenum) => dispatch(setCurrentPage(direction, pagenum)),                              
       signupGame: (url, noshow, game_id) => dispatch(signupGame(url, noshow, game_id)),

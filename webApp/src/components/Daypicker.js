@@ -4,10 +4,11 @@ import { daystring } from '../functions/functions.js'
 import { dayoftheweek } from '../functions/functions.js'
 import { convertmonthtostring } from '../functions/functions.js'
 
-var thisday = currentday();
+var today = currentday(new Date(Date.now()));
+
 
 function SquareTop(props) {
- 
+
     return (
       <div className='square'>
           {props.value}
@@ -16,10 +17,11 @@ function SquareTop(props) {
 
 function Square(props) {
     var classname = 'square'
-    if (props.value == props.day) classname = 'squareselected'
+    if (props.value == props.day)
+            classname = 'squareselected'
     return (
         <div className={classname} 
-        onClick={props.onClick}
+        onClick={props.onClick} key={props.value}
       >
         {props.value}       
       </div>
@@ -31,21 +33,21 @@ class Daypicker extends React.Component {
  renderSquareTop(i) {
             return (
               <SquareTop
-                value={i}
               />
             );
           } 
 
   renderSquare(i) {
+    
+    
     return (
-      <Square
-        value={i}
-        day={this.props.selectedday}
-        onClick={() => this.props.onClick(i)}
-      />
-    );
+                  <Square
+                    value={i}
+                    day={this.props.selectedday}
+                    onClick={() => this.props.onClick(i)}
+    />)   
+   
   } 
-
 
 numberofdays(year, monthint) {
     var ndays = 31;
@@ -60,7 +62,6 @@ numberofdays(year, monthint) {
 
 render() {
 
-
   var ndays = this.numberofdays(this.props.selectedyear, this.props.selectedmonth)
   const items = [];
   var firstofthemonth = dayoftheweek(1, this.props.selectedmonth, this.props.selectedyear)
@@ -68,12 +69,12 @@ render() {
   var z = 0;
   for (z = 0; z<7; z++)
   {
-    items.push(<div className="date1" />)
+    items.push(<div key={z} className="date1" />)
     items.push(this.renderSquareTop(daystring[z]))
   }
   for (x = 0; x<7; x++)
   {
-    items.push(<div className="date1" />)
+    items.push(<div className="date1" key={x+8}/>)
       var y = 0;
       var pushedvalue;
       for (y = 0; y<7; y++)   

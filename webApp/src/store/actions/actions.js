@@ -1,15 +1,15 @@
 import { encode } from "base-64";
 import { store } from '../store'
 import { url } from '../../constants/constants'
-import { CURRENT_GAME, CURRENT_PAGE, CURRENT_SIZE, IS_ERROR, IS_LOADING, 
+import { CURRENT_GAME, CURRENT_PAGE, CURRENT_SIZE, IS_ERROR, IS_LOADING, GAMERESPONSE_STATUS, 
             ITEMS_FETCH_DATA_SUCCESS, JOINGAME_STATUS, LOGIN_SUCCESS, N_ITEMS, REGISTRATION_STATUS, SET_NAVIGATE, 
             SET_USER, SINGLEGAME_FETCH_DATA_SUCCESS, SPORTCENTER_FETCH_DATA_SUCCESS, 
             USER_FETCH_DATA_SUCCESS, GAMEPARTICIPANT_FETCH_DATA_SUCCESS, LOGIN_ERROR } from './action-type';
 
-export function cancelGame(url)  {
+export function cancelGame(cancelurl)  {
                 var updatedrecord = {gameiscancelled: true}
                 return (dispatch) => {
-                fetch(url, {
+                fetch(cancelurl, {
                          method: "PATCH",
                          credentials: 'include',
                          headers: { 
@@ -21,6 +21,7 @@ export function cancelGame(url)  {
                       .then(items => {            
                             var response = items;
                             console.log(response);
+                            dispatch(loadData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime'))
                     })
                 }
             }
@@ -70,14 +71,14 @@ export function getUser() {
                 console.log("data value " + data)
         })                    
     .catch(error => {
-            if(error.status != 'undefined')
-            {
-            dispatch(isLoading(false))
-            dispatch(isError(true));
-            console.log("fail getting user: " + error.status)
-        }
-    }
-);
+                        if(typeof error.status == 'undefined')
+                                {
+                                    dispatch(isLoading(false))
+                                    dispatch(isError(true));
+                                    console.log("connection to server failed: " + error.status)
+                                }
+                    }
+            );
     }
 }
 
@@ -145,14 +146,11 @@ export function loadData(request, url, params) {
                                 )
                     // error handling
                     .catch(error => {
-                                if(error.status!='undefined')
-                                     {
                                         dispatch(isLoading(false))
-                                        dispatch(isError(true));
                                         console.log("fail loading data: " + error.status)
-                                    }
-                    }
-                            );
+                                    
+                            }
+                       );
             };
 }
 
@@ -170,21 +168,17 @@ export function loginsuccessfull(bool) {
     };
 }
 
-export function newGame(sportcenterid, isPrivate, gameDate, gameTime, description, urlsport, nitems, priceperperson, kurt)  {
-    var updatedrecord = {    
-                            sportcenter: url+'api/sportcenters/'+sportcenterid,
-                            kurt: kurt, 
-                            priceperperson: priceperperson, 
-                            isprivate: isPrivate, 
-                            gamedate: gameDate, 
-                            gametime: gameTime,
-                            gameisfull: false, 
-                            gameispast: false, 
-                            gameiscancelled: false,
-                            description: description,
-                        }
+export function nitems(nitems) {
+    return {
+        type: N_ITEMS,
+        nitems: nitems+1
+        }
+}
 
-    fetch(urlsport, {
+export function newGame(sportcenterid, isPrivate, gameDate, gameTime, description, urlsport, nitems, priceperperson, kurt)  {
+    var updatedrecord = {   sportcenterid: sportcenterid, kurt: kurt, priceperperson: priceperperson, isprivate: isPrivate, gamedate: gameDate, gametime: gameTime, gameisfull: false, gameispast: false, gameiscancelled: false, description: description }
+
+    return (dispatch) => {   fetch(urlsport, {
              method: "POST",
              credentials: 'include',
              headers: { 
@@ -192,19 +186,22 @@ export function newGame(sportcenterid, isPrivate, gameDate, gameTime, descriptio
              },
              body: JSON.stringify(updatedrecord)
           })
-.then(res => { 
-                console.log('update request:' + res.status);
-            }
-         ).catch(error =>
+        .then(res => res.json())
+        .then(items =>{
+            var response = items;
+            dispatch(setgameresponse(response));
+            dispatch(nitems(nitems+1));
+            console.log(response);
+        })
+        .catch(error =>
            { 
-                 console.log('update request error:' + error.status)
-   })
-
-   return {
-    type: N_ITEMS,
-    nitems: nitems+1
+                 console.log(error.status)
+        })
+    
     }
 }
+
+
 
 export function newUser(url, target)  {
     var updatedrecord = {name: target.username.value, firstname: target.firstname.value, lastname: target.lastname.value, password: target.password.value, confirmpassword: target.password2.value, email: target.email.value}
@@ -284,6 +281,13 @@ export function setregistration(registration) {
     return {
         type: REGISTRATION_STATUS,
         registration: registration
+    };
+}
+
+export function setgameresponse(gameresponse) {
+    return {
+        type: GAMERESPONSE_STATUS,
+        gameresponse: gameresponse
     };
 }
 

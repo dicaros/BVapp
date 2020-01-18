@@ -12,7 +12,27 @@ import Monthpicker from './Monthpicker.js'
 
 var thisday = currentday()
 
+
+
 class CreateGame extends React.Component {
+
+      Error1 = () => {
+                 if (typeof this.props.gameresponse.datepast != 'undefined' && this.props.gameresponse.datepast) 
+                       {
+                        return (' the selected date is in the past')
+                        }
+                 else
+                       return ''
+           }
+
+       Error2 = () => {
+            if (typeof this.props.gameresponse.priceinvalid != 'undefined' && this.props.gameresponse.priceinvalid) 
+                  {
+                   return (' invalid price')
+                   }
+            else
+                  return ''
+      }
 
       constructor(props) {
       super(props);
@@ -23,15 +43,32 @@ class CreateGame extends React.Component {
                   selectedmonth: thisday[1],
                   selectedmonthstring: convertmonthtostring(thisday[1]),
                   selectedyear: thisday[0],
-                  selectedCenter: null,
+                  selectedCenter: 1,
             }
       }
 
+      componentDidUpdate(prevProps) {
+  
+            if (this.props.gameresponse.checkfailed != prevProps.gameresponse.checkfailed)
+                    {
+                        if(this.props.gameresponse.checkfailed)
+                              this.props.setNavigate('create');
+                        else 
+                              {
+                                    this.props.fetchData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime')
+                                    this.props.setNavigate('games');
+                                    this.props.setgameresponse({ checkfailed: true })
+                    }
+                  }
+            }
+
+      
 async handleSubmit(event) {
-               await this.props.addNew(this.state.selectedCenter, event.target.isprivate.checked, this.state.selectedyear+'-'+("00" + this.state.selectedmonth).slice(-2)+'-'+("00" + this.state.selectedday).slice(-2), this.state.timeselection+':00', event.target.comments.value, url+'api/games', this.props.nitems, event.target.priceperperson.value, this.state.kurtselection)
-               await this.props.setNavigate('games')
-               window.location.reload();
-      }
+      event.preventDefault();
+       this.props.addNew(this.state.selectedCenter, event.target.isprivate.checked, this.state.selectedyear+'-'+("00" + this.state.selectedmonth).slice(-2)+'-'+("00" + this.state.selectedday).slice(-2), this.state.timeselection+':00', event.target.comments.value, url+'api/newgame', this.props.nitems, event.target.priceperperson.value, this.state.kurtselection)
+       this.props.setNavigate('create')
+       //    window.location.reload();
+         }
 
       handleChangeTime(event) {
             this.setState({
@@ -94,21 +131,21 @@ return (
       <table>
       <tbody>
             <tr height='30px'>
-                  <td className='newgame' colSpan={4}>Where? </td>
+                  <td className='newgame'>Where? </td>
             </tr>
             <tr>
-                  <td className = 'sportcenterlist' colSpan={4}>
+                  <td className = 'sportcenterlist'>
                         <ul className='sportcenterlist'><SportCenterList /></ul>
                   </td>
             </tr>
       
             <tr height='30px'>
-                  <td className='newgame' colSpan={4}>Which day?</td>
+                  <td className='newgame'>Which day?</td>
             </tr>
             
             <tr height='25px'>
                   
-                  <td colSpan={3}>
+                  <td>
                   
                         <div className ='squarebox'>
                               <center>
@@ -129,58 +166,59 @@ return (
                                                 onClick={(i) => this.handleChangeDay(i)}
                                     />
                               </center>
+                                   
                         </div>
-                        
+
                   </td>
 
-                  <td className='signuperror'></td>
+            </tr>
+            <tr>
+                  <td className='signuperror'><this.Error1 /></td>
             </tr>
             <tr height='30px'>
 
-                  <td className='newgame' colSpan={4}>What time?</td>
+                  <td className='newgame'>What time?</td>
             </tr>
             <tr height='25px'>
-                  <td colSpan={3}>  
+                  <td>  
                         <select value={this.state.timeselection} onChange={this.handleChangeTime.bind(this)}>
                               <Hourselect />
                         </select>
                   </td>
-                  <td className='signuperror'></td>
             </tr>
             <tr height='30px'>
-                  <td className='newgame' colSpan={4}>Which court?</td>
+                  <td className='newgame'>Which court?</td>
             </tr>
-            <tr height='25px' colSpan={3}>
+            <tr height='25px'>
                   <td>  
                         <select value={this.state.kurtselection} onChange={this.handleChangeKurt.bind(this)}>
                               <Kurtselect />
                         </select>
                   </td>
-                  <td className='signuperror'></td>
             </tr>
             <tr height='30px'>
-                  <td className='newgame' colSpan={4}>How much per person?</td>
+                  <td className='newgame'>How much per person?</td>
             </tr>
             <tr height='25px'>
-                  <td colSpan={3}><input type='text' name='priceperperson'/> CZK</td>
-                  <td className='signuperror'></td>
+                  <td><input type='text' name='priceperperson'/> CZK</td>
           </tr>
+          <tr>
+                  <td className='signuperror'><this.Error2 /></td>
+            </tr>
           <tr height='30px'>
-                  <td className='newgame' colSpan={3}>Private game? <input type='checkbox' name='isprivate'/></td>
-                  <td ></td>
+                  <td className='newgame' >Private game? <input type='checkbox' name='isprivate'/></td>
             </tr>
 
           <tr height='30px'>
-                  <td className='newgame' colSpan={4}>Extra comments (500 chars max)</td>
+                  <td className='newgame'>Extra comments (500 chars max)</td>
             </tr>
             <tr height='25px'>
-                  <td colSpan={3}><textarea className = 'description' name='comments'/></td>
-                  <td className='signuperror'></td>
+                  <td><textarea className = 'description' name='comments'/></td>
           </tr>
         </tbody>
         <tfoot>
               <tr height='60px'>
-                    <td className='loginbutton' colSpan={4}>
+                    <td className='loginbutton'>
                           <button name="done"  type="submit" className='submitbutton' >
                           Done
                           </button>

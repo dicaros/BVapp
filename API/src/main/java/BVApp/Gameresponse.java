@@ -64,6 +64,15 @@ public class Gameresponse{
 
 		public void setDescription(String resultdescription) {
 			this.resultdescription = resultdescription;
-		}
+		};
 		
+		public boolean checkisint(String string) {
+				try   {
+						Integer.parseInt(string);
+							return true;
+						} catch (NumberFormatException ex)
+						{
+								return false;
+						}
+			}
 }

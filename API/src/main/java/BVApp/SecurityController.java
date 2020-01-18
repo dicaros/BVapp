@@ -49,22 +49,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	        
 	    }	
 	    
-	/*	// expose API endpoint for creating a new game   
+		// expose API endpoint for creating a new game   
 	    @RequestMapping(value = "/api/newgame", method = RequestMethod.POST, produces = "application/json")
 	    // receive a user object from the API call and use it to create a new myuser and userdetails. Return the validation results
 	    @ResponseBody
-	    public Gameresponse newgame(@RequestBody Game game, HttpServletRequest httpServletRequest) { 
-	    	// get the current user and userdetails repository info from the context
-	    	MyuserRepository repo = context.getBean(MyuserRepository.class);
-	    	// create a new user object with the received information 
-	    	Game newgame = new Game(user.name, user.firstname, user.lastname, user.password, user.confirmpassword, user.email);	    	
-	    	// save the user in myuser and myuserdetail
-	    	Gameresponse trysavegame = newgame.saveGame();
-	    	// print the result from the request to the console
-	    	System.out.println(trysavegame.resultdescription); 
-	    	// return the result from the request as API response	    	
-	    	return trysavegame;
-	    }*/
+	    // get a game object with a post request 
+	    public Gameresponse newgame(@RequestBody Gamecreate gamecreate, HttpServletRequest httpServletRequest, Principal principal) { 
+	    	// get the current user repository info from the context
+	    	MyuserRepository userrepo = context.getBean(MyuserRepository.class);
+	    	// get the current user object
+	    	Myuser myuser = userrepo.findByName(principal.getName());
+	    	
+	    	GameRepository gamerepo = context.getBean(GameRepository.class);
+	    	
+	    	SportCenterRepository sportrepo = context.getBean(SportCenterRepository.class);
+	    	Sportcenter sportcenter = sportrepo.findById(gamecreate.getSportcenterid()).get();
+	    	
+	    	Gameresponse response = gamecreate.createGame(gamecreate, myuser, sportcenter, gamerepo);			    	
+
+	    	return response;
+	    }
 
 		// expose API endpoint for signing a new user. This resource doesn't require login   
 	    @RequestMapping(value = "/signup", method = RequestMethod.POST, produces = "application/json")

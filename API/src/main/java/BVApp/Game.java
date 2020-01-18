@@ -182,7 +182,6 @@ public class Game {
 	public String toString() {
 		return "Employee{" +
 			"id=" + id +
-			", sportcenterid='" + sportcenter + '\'' +
 			", kurt='" + kurt + '\'' +
 			", priceperperson='" + priceperperson + '\'' +
 			", isprivate='" + isprivate + '\'' +
@@ -195,16 +194,6 @@ public class Game {
 			", version=" + version +
 			", myuser=" + myuser +
 			'}';
-	}
-	
-	public Gameresponse saveGame() {
-	
-			Gameresponse response = new Gameresponse(false, false, false, false, false, "");
-			
-			
-			
-		
-			return response; 
 	}
 	
 }

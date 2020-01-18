@@ -11,9 +11,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 public interface GameRepository extends PagingAndSortingRepository<Game, Long> { // enable paging support
 
 	// only the owner of a game can delete that game
+	// do not expose save method (use /api/newgame instead)
 	@SuppressWarnings("unchecked")
 	@Override
 	@PreAuthorize("#game?.myuser == null or #game?.myuser?.name == authentication?.name")
+	@RestResource(exported = false) 
 	Game save(@Param("game") Game game);
 
 	// do not expose delete method for Games

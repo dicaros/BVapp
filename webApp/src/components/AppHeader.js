@@ -39,8 +39,8 @@ class AppHeader extends React.Component {
                     this.props.fetchData('api/myUserDetails', url, '')
                     this.props.getUser()  
                 }
-              }
-
+          }
+          
     handleNavigate(param) {
           this.props.setNavigate(param)
           this.setState({showMenu: !this.state.showMenu})   
@@ -95,9 +95,8 @@ class AppHeader extends React.Component {
                           {!this.props.loginsuccess && <li><a href = '/' onClick={() => this.logout(logouturl)}>Login</a></li>}
                           {this.props.loginsuccess && <li><a  href = '/' onClick={() => this.logout(logouturl)}>Logout</a></li>}
 
-                          {!this.props.loginsuccess && <li><a href="/register">Register</a></li>}
+                          {!this.props.loginsuccess && !this.props.isError && <li><a href="/register">Register</a></li>}
                           
-                          <li><a href="#">About...</a></li>
                           <li><div className='line'></div></li>
                           <li><a href="#">{ this.props.username }</a></li>
                       </ul> 
