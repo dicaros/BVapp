@@ -24,7 +24,7 @@ class MainContainer extends React.Component {
 
                 {this.props.loginsuccess && !this.props.isLoading && 
                 (this.props.navigate == 'userp') && 
-                typeof this.props.items._embedded != 'undefined' &&
+                typeof this.props.usergamesitems != 'undefined' &&
                 <UserProfileComponent />}          
 
                 {this.props.loginsuccess && !this.props.isLoading && this.props.navigate == 'gamedetails' &&
@@ -35,8 +35,9 @@ class MainContainer extends React.Component {
                 typeof this.props.sportcenteritems._embedded != 'undefined' && 
                 <CreateComponent />}
 
-                {!this.props.loginsuccess && !this.props.isLoading
-                 && <LoginComponent />}
+                {!this.props.loginsuccess && !this.props.isLoading && !this.props.isError
+                 && <LoginComponent />
+                 }
 
               </center>)
     }

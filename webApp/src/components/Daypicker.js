@@ -1,11 +1,7 @@
 import React from 'react';
-import { currentday } from '../functions/functions.js'
 import { daystring } from '../functions/functions.js'
 import { dayoftheweek } from '../functions/functions.js'
 import { convertmonthtostring } from '../functions/functions.js'
-
-var today = currentday(new Date(Date.now()));
-
 
 function SquareTop(props) {
 

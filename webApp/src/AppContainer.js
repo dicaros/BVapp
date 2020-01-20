@@ -32,9 +32,11 @@ const mapStateToProps = (state) => {
          singlegameitems: state.singlegameitems,         
          sportcenteritems: state.sportcenteritems,
          useritems: state.useritems,
-         username: state.username,
+         myuseritems: state.myuseritems,
          registration: state.registration,
-         currentgame: state.currentgame
+         currentgame: state.currentgame,
+         usergamesitems: state.usergamesitems,
+         username: state.username
        };
   };
   

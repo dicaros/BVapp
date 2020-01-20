@@ -202,6 +202,7 @@ button.submitbutton {
 div.closewindowdiv {
     position: relative;
     font-size: x-large;
+    width: '100%';
 }
 
 div.gameorganizer {
@@ -312,6 +313,12 @@ span.ics {
 span.gameorganizer {
     position: absolute;
     top: 20px;
+    right: 10px;
+}
+
+span.gameorganizer2 {
+    position: absolute;
+    top: 0px;
     right: 10px;
 }
 
@@ -465,6 +472,14 @@ li.gamelist:hover {
 ul.gamelist {
     overflow-y: auto;
     height: 380px;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+ul.gamelist1 {
+    overflow-y: auto;
+    height: 100px;
     width: 100%;
     padding: 0px;
     margin: 0px;

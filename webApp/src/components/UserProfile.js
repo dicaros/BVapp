@@ -1,34 +1,71 @@
 import React from 'react';
 import { url } from '../constants/constants'
+import { currentday, todaydash } from '../functions/functions'
+
 
 class UserProfile extends React.Component {
  
+      componentDidMount() { 
+            if(this.props.loginsuccess) {
+                  
+            }
+          };
+
  
- 
+        async handleSelectGame(id) {
+            await this.props.setGame(id)
+            await this.props.fetchData('api/gameparticipantsget', url, '?id='+id)
+            await this.props.fetchData('api/singlegame', url, '?id='+id)
+            this.props.setNavigate('gamedetails')           
+        }
+
    render() {      
  
-    const Tablerow = () => {
-      return(                    
-            this.props.items._embedded.games.map ((row, index) =>                   
-             {
-                if(row.myuser.name == 'dicaros')
-                {
-               return(
-                       <div key={index} className='gameorganizer'>
-                            <li onClick={() => this.handleSelectGame(row.id)} 
-                                className='gamelist' key={index}>
-                                  <span className='today'> 
+      const List1 = () => {
+            return (
+                  <thead width='100%'>
+                         <tr> 
+                              <th className = 'gamelist'>
+                                    <div className='closewindowdiv'><span className = 'createbuttonspan'><button onClick={() => this.props.setNavigate('create')}>+ Create New</button></span>                                            
+                                    <span className='closewindowspantop'>
+                                          <button className='bodylink'href = '#' onClick={() => this.props.setNavigate('games')}>
+                                                X
+                                          </button>
+                                    </span>
+                                    <br></br>Games you recently played</div>
+                               </th>
+                              </tr>
+                   <tr>
+                        <td className = 'gamelist' width='20%'>
+                             <ul className='gamelist1'><Tablerow1 /></ul>
+                        </td>    
+                   </tr>              
+                   </thead>           
+                    )
+      };
 
-                                      {row.gamedate+ ', '}
-                                      {String(row.gametime).substring(0, 5) + ' '}
-                                      {(row.isprivate && ' - Private')}
-                                      {(row.gameiscancelled && ' - Cancelled')}
-                                      </span> 
+    const Tablerow1 = () => {
+      return(                    
+            this.props.usergamesitems.map ((row, index) => 
+             {
+                if(row.game.gamedate < todaydash(currentday()))
+                {
+                          return(
+                              <div key={index} className='gameorganizer'>
+
+                                          <li onClick={() => this.handleSelectGame(row.game.id)} 
+                                           className='gamelist' key={index}>
+                                           <span className='today'> 
+
+                                          {row.game.gamedate+ ', '}
+                                          {String(row.game.gametime).substring(0, 5) + ' '}
+                                          {(row.isprivate && ' - Private')}
+                                          {(row.gameiscancelled && ' - Cancelled')}
+                                          </span> 
                                       
-                                     <br></br>
-                                     @{(row._embedded.sportcenter.name) + ', '} 
-                                      {row._embedded.sportcenter.street}
-                                  <span className='gameorganizer'>Organized by: {row.myuser.name}</span>
+                                          @{(row.game.sportcenter.name) + ', '} 
+                                          {row.game.sportcenter.street}
+                                    <span className='gameorganizer2'>Organized by: {row.game.myuser.name}</span>
                             </li>
                       </div>
                    )
@@ -36,23 +73,63 @@ class UserProfile extends React.Component {
               }
             )
      )
-   }
-  
-   const TableBody = () => {                       
-                              return (<tbody> 
-                                          <tr>
-                                               <td className = 'gamelist' width='20%'>
-                                                    <ul className='gamelist'><Tablerow/></ul>
-                                               </td>    
-                                          </tr>                         
-                                      </tbody>)
-     }
-  
+}
 
-          return (
-                   <table className='tablegames'>
-                           <TableBody  />
-                   </table>
+const List2 = () => {
+      return (
+            <tbody>
+              <tr> 
+                      <th className = 'gamelist'>
+                              <div className='closewindowdiv'>       
+                              Upcoming games</div>
+                         </th>
+                        </tr>
+             <tr>
+                  <td className = 'gamelist' width='20%'>
+                       <ul className='gamelist1'><Tablerow2 /></ul>
+                  </td>    
+             </tr>      
+             </tbody>                   
+              )
+};
+
+const Tablerow2 = () => {
+      return(                    
+            this.props.usergamesitems.map ((row, index) => 
+             {
+                if(row.game.gamedate > todaydash(currentday()))
+                {
+                          return(
+                              <div key={index} className='gameorganizer'>
+
+                                          <li onClick={() => this.handleSelectGame(row.game.id)} 
+                                           className='gamelist' key={index}>
+                                           <span className='today'> 
+
+                                          {row.game.gamedate+ ', '}
+                                          {String(row.game.gametime).substring(0, 5) + ' '}
+                                          {(row.isprivate && ' - Private')}
+                                          {(row.gameiscancelled && ' - Cancelled')}
+                                          </span> 
+                                      
+                                          @{(row.game.sportcenter.name) + ', '} 
+                                          {row.game.sportcenter.street}
+                                    <span className='gameorganizer2'>Organized by: {row.game.myuser.name}</span>
+                            </li>
+                      </div>
+                   )
+                }
+              }
+            )
+     )
+}
+
+
+
+          return (<table className='tablegames'>     
+                                          <List1 />
+                                          <List2 />
+                </table>
                  );
      }
  }

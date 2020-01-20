@@ -1,6 +1,8 @@
 package BVApp;
 
 import java.security.Principal;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +27,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	    @ResponseBody
 	    public List<Gameparticipant> gamelist(@RequestParam Long id) {
 	        GameparticipantRepository repo3 = context.getBean(GameparticipantRepository.class);
+
 	        List<Gameparticipant> game = (List<Gameparticipant>) repo3.findAllByMyuserId(id);
+	        
+	        // sort games by date descending 
+	        Comparator<Gameparticipant> compareByGameDate = (Gameparticipant g1, Gameparticipant g2) -> g1.getGame().getGamedate().compareTo(g2.getGame().getGamedate());        
+	        Collections.sort(game, compareByGameDate.reversed());
+	        
 	        return game;
 	    }
 		
@@ -106,12 +114,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	        return game;
 	    }
 	    
-		// get the username. Expose a username API endpoint
-	    @RequestMapping(value = "/username", method = RequestMethod.GET)
+		// get the current user's details. Expose a username API endpoint
+	    @RequestMapping(value = "api/user", method = RequestMethod.GET, produces = "application/json")
 	    @ResponseBody
 			// return a string with the username
-	    public String currentUserName(Principal principal) {
-	        return principal.getName();
+	    public Myuser currentUserName(Principal principal) {
+	    	MyuserRepository userrepo = context.getBean(MyuserRepository.class);
+	    	Myuser myuser = userrepo.findByName(principal.getName());
+	        return myuser;
 	    }  
 	    
 }

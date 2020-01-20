@@ -202,8 +202,7 @@ public class Gamecreate {
         						gamecreate.getGamedate(), gamecreate.getGametime(), false, false, false, gamecreate.getDescription(), myuser);
     					gamerepo.save(newgame);    					
     			}
-    	System.out.println(gamecreate.priceperperson);
-    	System.out.println(response.checkisint(gamecreate.priceperperson));
+
 		return response;
 			}
 	

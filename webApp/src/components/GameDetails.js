@@ -6,6 +6,9 @@ import { currentday, timedash, todaydash } from '../functions/functions'
 
 class GameDetails extends React.Component {
 
+
+
+  
   constructor(props) {
     super(props);
           this.state = {

@@ -43,7 +43,7 @@ class CreateGame extends React.Component {
                   selectedmonth: thisday[1],
                   selectedmonthstring: convertmonthtostring(thisday[1]),
                   selectedyear: thisday[0],
-                  selectedCenter: 1,
+                  selectedCenter: 1
             }
       }
 
@@ -104,7 +104,8 @@ async handleSubmit(event) {
         }
         
       handleChangeSportCenter(id) {
-            this.setState({selectedCenter: id})
+            this.setState({selectedCenter: id,
+            })
         }
 
         classNameCenter(id) {
@@ -140,7 +141,9 @@ return (
             </tr>
       
             <tr height='30px'>
-                  <td className='newgame'>Which day?</td>
+                  <td className='newgame'>Which day?
+                  {this.props.sportcenteritems._embedded.sportcenters[1].name}
+                  </td>
             </tr>
             
             <tr height='25px'>
@@ -192,7 +195,9 @@ return (
             <tr height='25px'>
                   <td>  
                         <select value={this.state.kurtselection} onChange={this.handleChangeKurt.bind(this)}>
-                              <Kurtselect />
+                              <Kurtselect 
+                                    number = {30}
+                                    />
                         </select>
                   </td>
             </tr>

@@ -21,14 +21,15 @@ class AppHeader extends React.Component {
 
     componentDidMount() { 
             //(request, url, params)
-            this.props.getUser()
+            this.props.fetchData('api/user', url, '')
 
             if(this.props.loginsuccess) {
                   this.props.fetchData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime')
                   this.props.fetchData('api/sportcenters', url, '?page=0&size=1000&sort=name')
-                  this.props.fetchData('api/gameparticipants', url, '?page=0&size=1000&sort=name')
+                  this.props.fetchData('api/gameparticipants', url, '')
                   this.props.fetchData('api/myUserDetails', url, '')
-            }
+                  this.props.fetchData('api/gameparticipantsbyuser', url, '?id=200')
+                }
           };
   
     componentDidUpdate(prevProps) {
@@ -37,10 +38,11 @@ class AppHeader extends React.Component {
                 {
                     this.props.fetchData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime')
                     this.props.fetchData('api/sportcenters', url, '?page=0&size=1000&sort=name')
-                    this.props.fetchData('api/gameparticipants', url, '?page=0&size=1000&sort=name')
+                    this.props.fetchData('api/gameparticipants', url, '')
                     this.props.fetchData('api/myUserDetails', url, '')
-                    this.props.getUser()  
-                }
+                    this.props.fetchData('api/user', url, '')
+                    this.props.fetchData('api/gameparticipantsbyuser', url, '?id=200')
+                  }
           }
           
   handleNavigate(param) {

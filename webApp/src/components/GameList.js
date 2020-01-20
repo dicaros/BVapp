@@ -87,31 +87,7 @@ async handleSelectGame(id) {
                                                 </tr>                         
                                             </tbody>)
            }
-/*                 const TableFooter = () => {
-                                     return (
-                                      countpage = this.props.items.page.totalPages + ' ',
-                                       <tfoot>
-                                         <tr id = 'trfooter'>
-                                           <td>
-                                                     <center>  <button onClick={() => this.switchPage('prev')}>Prev</button><span>&nbsp;&nbsp;</span>
-                                                       <button onClick={() => this.switchPage('next')}>Next</button><span>&nbsp;&nbsp;</span>
-                                  
-                                                       {this.props.page+1}/{countpage}
-                                                       
-                                                        <select value={this.props.size} onChange={this.handleChange.bind(this)}>
-                                                           <option value={5}>5</option>
-                                                           <option value={10}>10</option>
-                                                           <option value={20}>20</option>
-                                                           <option value={50}>50</option>
-                                                           <option value={100}>100</option>
-                                                       </select>                                                   </center>
-                                       </td>
-                               
-                                     </tr>
-                                 </tfoot>
-                              );   
-                           }
-  */      
+
           return (
                    <table className='tablegames'>
                        <TableHeader />

@@ -2,12 +2,15 @@ import { encode } from "base-64";
 import { store } from '../store'
 import { url } from '../../constants/constants'
 import { CURRENT_GAME, CURRENT_PAGE, CURRENT_SIZE, IS_ERROR, IS_LOADING, GAMERESPONSE_STATUS, 
-            ITEMS_FETCH_DATA_SUCCESS, JOINGAME_STATUS, LOGIN_SUCCESS, N_ITEMS, REGISTRATION_STATUS, SET_NAVIGATE, 
+            ITEMS_FETCH_DATA_SUCCESS, JOINGAME_STATUS, LOGIN_SUCCESS, MYUSER_FETCH_DATA_SUCCESS, N_ITEMS, REGISTRATION_STATUS, 
+            SET_NAVIGATE, USERGAMES_FETCH_DATA_SUCCESS, 
             SET_USER, SINGLEGAME_FETCH_DATA_SUCCESS, SPORTCENTER_FETCH_DATA_SUCCESS, 
             USER_FETCH_DATA_SUCCESS, GAMEPARTICIPANT_FETCH_DATA_SUCCESS, LOGIN_ERROR } from './action-type';
 
 export function cancelGame(cancelurl)  {
-                var updatedrecord = {gameiscancelled: true}
+                var updatedrecord = {
+                                        gameiscancelled: true
+                                    }
                 return (dispatch) => {
                 fetch(cancelurl, {
                          method: "PATCH",
@@ -23,6 +26,9 @@ export function cancelGame(cancelurl)  {
                             console.log(response);
                             dispatch(loadData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime'))
                     })
+                    .catch(error => {
+                        console.log('error: ' + error);
+                    })
                 }
             }
             
@@ -34,6 +40,21 @@ export function gameparticipantFetchDataSuccess(gameparticipantsitems) {
                };
            }
             
+export function myuserFetchDataSuccess(myuseritems) {
+            return {
+                       type: MYUSER_FETCH_DATA_SUCCESS,
+                       myuseritems: myuseritems
+                       };
+                   }
+
+export function usergamesFetchDataSuccess(usergamesitems) {
+                    return {
+                               type: USERGAMES_FETCH_DATA_SUCCESS,
+                               usergamesitems: usergamesitems
+                               };
+                           }
+        
+
 export function singlegameFetchDataSuccess(singlegameitems) {
             return {
                        type: SINGLEGAME_FETCH_DATA_SUCCESS,
@@ -122,13 +143,22 @@ export function loadData(request, url, params) {
                                         dispatch(isLoading(true));
                                         if(res.status == '401') {
                                                                         console.log("unauthorized " + res.status);
+                                                                        dispatch(loginsuccessfull(false));
+                                                                   if(request == 'api/user') {
+                                                                        dispatch(setuser('Guest'));
+                                                                    }
                                                                 }
                                         else {
                                                                         console.log("success " + res.status);
-                                                                        return res;                                          
+                                                                        if(request == 'api/user') 
+                                                                        {
+                                                                            dispatch(loginsuccessfull(true));    
+                                                                            }
+                                                                        
                                         }
+                                        return res.json();  
                                 })
-                    .then(res => res.json())
+                    //.then(res => res.json())
                     // get result based on keyword
                     .then((items) => {
                             if(request == 'api/games')
@@ -141,14 +171,27 @@ export function loadData(request, url, params) {
                                 dispatch(gameparticipantFetchDataSuccess(items));
                             if(request == 'api/singlegame')
                                 dispatch(singlegameFetchDataSuccess(items));
-                                dispatch(isLoading(false))
+                            if(request == 'api/user')
+                                {
+                                     dispatch(myuserFetchDataSuccess(items));
+                                     if(store.getState().loginsuccessfull)
+                                        dispatch(setuser(items.name));
+                                 }
+                            if(request == 'api/gameparticipantsbyuser')
+                                 dispatch(usergamesFetchDataSuccess(items));
+                                 
+                            dispatch(isLoading(false))
                             }
-                                )
+                        )
                     // error handling
                     .catch(error => {
-                                        dispatch(isLoading(false))
-                                        console.log("fail loading data: " + error.status)
-                                    
+                        if(typeof error.status == 'undefined' && request == 'api/user')
+                                {
+                                    dispatch(isLoading(false))
+                                    dispatch(isError(true));
+                                    console.log("connection to server failed: " + error)
+                                }
+                             dispatch(isLoading(false))
                             }
                        );
             };
@@ -331,6 +374,7 @@ export function thelogin(loginurl, target)  {
                         {
                             dispatch(loginsuccessfull(true));
                             dispatch(loginerror(false))
+                            dispatch(setNavigate('games'))
                                        }
                         else {dispatch(loginerror(true))}
                             console.log("log in " + res.status);
@@ -343,6 +387,7 @@ export function thelogin(loginurl, target)  {
                 {
                         dispatch(setuser(target.username.value));
                         dispatch(loginsuccessfull(true))
+                        dispatch(setNavigate('games'))
                 }
             })
                     .catch(error =>

@@ -111,6 +111,14 @@ export function useritems(state = [], action) {
     }
 }
 
+export function myuseritems(state = [], action) {
+    switch (action.type) {
+        case 'MYUSER_FETCH_DATA_SUCCESS':
+            return action.myuseritems;        default:
+            return state;
+    }
+}
+
 export function registration(state = [], action) {
     switch (action.type) {
         case 'REGISTRATION_STATUS':
@@ -135,7 +143,15 @@ export function singlegameitems(state = [], action) {
     }
 }
 
-export function username(state = 'Guest', action) {
+export function usergamesitems(state = [], action) {
+    switch (action.type) {
+        case 'USERGAMES_FETCH_DATA_SUCCESS':
+            return action.usergamesitems;        default:
+            return state;
+    }
+}
+
+export function username(state = null, action) {
     switch (action.type) {
         case 'SET_USER':
             return action.username;        default:
@@ -153,6 +169,7 @@ export default combineReducers({
     joingame,
     loginerror,
     loginsuccessfull,
+    myuseritems,
     navigate,
     nitems,
     page,
@@ -160,6 +177,7 @@ export default combineReducers({
     singlegameitems,
     size,
     sportcenteritems,
+    usergamesitems,
     useritems,
-    username,
+    username
 });

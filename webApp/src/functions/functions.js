@@ -108,11 +108,11 @@ export const Hourselect = () => {
        )
 }
 
-export const Kurtselect = () => {
+export const Kurtselect = (props) => {
     var i = 0;
     var kurtarray = []
 
-    for (i=0;i<40;i++)
+    for (i=0;i<props.number;i++)
       { kurtarray[i]=i+1; }
 
     return (

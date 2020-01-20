@@ -51,7 +51,7 @@ class LoginPage extends React.Component {
           )
          }
  
-        if(!this.props.loginsuccess && this.props.loginsuccess != null) {
+        if(!this.props.loginsuccess && this.props.loginsuccess != null || true) {
            return(
                  <center><LoginForm />
                     <br></br>
