@@ -19,17 +19,17 @@ class GameDetails extends React.Component {
 
 async cancelthisgame() {
        await this.props.cancelGame(url+'api/games/'+this.props.singlegameitems.id)
-       this.props.setNavigate('games')
+       this.props.doNavigate('games')
       }
 
 async jointhisgame () {
       await this.props.signupGame(url+'api/gameparticipantspost', false, this.props.singlegameitems.id)
-      this.props.setNavigate('games')
+      this.props.doNavigate('games')
   }
 
 async quitthisgame (id) {
     await handleQuit(url+'api/gameparticipants/'+id)
-    this.props.setNavigate('games')
+    this.props.doNavigate('games')
 }
 
 
@@ -42,7 +42,7 @@ async quitthisgame (id) {
                       <div className='closewindowdiv' >
                             {typeof this.props.singlegameitems.id != 'undefined' && this.props.singlegameitems.gameiscancelled && 'This game is cancelled'}
                           <span className='closewindowspantop'>
-                              <button className='bodylink'href = '#' onClick={() => this.props.setNavigate('games')}>
+                              <button className='bodylink'href = '#' onClick={() => this.props.doNavigate('')}>
                               X</button>
                           </span>
                       </div>
@@ -55,7 +55,7 @@ async quitthisgame (id) {
          const PlayerDetailsHeader = () => {
                          return (
                                        <tr> 
-                                              <td className = 'gamelist' colSpan={4}>
+                                              <td colSpan={4}>
                                                     <div className='closewindowdiv'>                                            
                                                     Players for this game</div>
                                               </td>
@@ -141,7 +141,7 @@ async quitthisgame (id) {
           if(typeof this.props.singlegameitems.id != 'undefined') {
           return(
               <tr>
-                  <td className = 'gameparticipant' colSpan = {3}>                                      
+                  <td className = 'gameparticipant2' colSpan = {3}>                                      
                             {this.props.singlegameitems.sportcenter.name} {this.props.singlegameitems.id}
                              <br />
                             {this.props.singlegameitems.gamedate}
@@ -152,7 +152,7 @@ async quitthisgame (id) {
                              <br />You will pay: {this.props.singlegameitems.priceperperson} CZK
                              <br />Message from the organizer: {this.props.singlegameitems.description}
                   </td>
-                  <td className = 'gameparticipant' >
+                  <td className = 'gameparticipant2' >
                             <p>This game is organized by: <br></br>
                             {this.props.singlegameitems.myuser.firstName + ' ' + this.props.singlegameitems.myuser.lastName}
                             </p>

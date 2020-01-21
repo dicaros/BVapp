@@ -46,7 +46,7 @@ const mapStateToProps = (state) => {
       fetchData: (request, url, sort, page, size) => dispatch(loadData(request, url, sort, page, size)),
       doLogin: (loginurl, target) => dispatch(thelogin(loginurl, target)),                                    
       doLogout: (logouturl) => dispatch(thelogout(logouturl)),
-      setNavigate: (navigate) => dispatch(setNavigate(navigate)),
+      doNavigate: (input) => dispatch(setNavigate(input)),
       setGame: (id) => dispatch(setCurrentGame(id)),
       setgameresponse: (gameresponse) => dispatch(setgameresponse(gameresponse)),
       setSize: (size) => dispatch(setCurrentSize(size)),

@@ -16,19 +16,33 @@ class UserProfile extends React.Component {
             await this.props.setGame(id)
             await this.props.fetchData('api/gameparticipantsget', url, '?id='+id)
             await this.props.fetchData('api/singlegame', url, '?id='+id)
-            this.props.setNavigate('gamedetails')           
+            this.props.doNavigate('gamedetails')           
         }
 
    render() {      
  
+     const TabbedMenu = () => {
+          return(
+                    <div class="tab">
+                         <button class="tablinks" onclick="openCity(event, 'London')">Your games</button>
+                         <button class="tablinks" onclick="openCity(event, 'Paris')">Your data</button>
+                    </div>
+               )
+     }
+
       const List1 = () => {
             return (
                   <thead width='100%'>
+                         <tr>
+                              <th>                                    
+                                   <TabbedMenu />
+                              </th>
+                         </tr>
                          <tr> 
                               <th className = 'gamelist'>
-                                    <div className='closewindowdiv'><span className = 'createbuttonspan'><button onClick={() => this.props.setNavigate('create')}>+ Create New</button></span>                                            
+                                    <div className='closewindowdiv'>
                                     <span className='closewindowspantop'>
-                                          <button className='bodylink'href = '#' onClick={() => this.props.setNavigate('games')}>
+                                          <button className='bodylink'href = '#' onClick={() => this.props.doNavigate('')}>
                                                 X
                                           </button>
                                     </span>

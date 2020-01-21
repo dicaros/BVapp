@@ -46,7 +46,7 @@ class AppHeader extends React.Component {
           }
           
   handleNavigate(param) {
-          this.props.setNavigate(param)
+          this.props.doNavigate(param)
           this.setState({showMenu: !this.state.showMenu})   
           this.menuShowToggle();
         }
@@ -85,7 +85,7 @@ class AppHeader extends React.Component {
               <ul>
 
                   <li>
-                      <img src={usericon} onClick={() => this.props.setNavigate('userp')} className='userlogo' alt='O'></img>
+                      <img src={usericon} onClick={() => this.props.doNavigate('userp')} className='userlogo' alt='O'></img>
                 </li>     
                 <li>
                   

@@ -50,6 +50,7 @@ h4.userdetailsheader {
     margin: 10px;
     padding: 10px;
     display: inline-block;
+    border-radius: 10px;
 }
 
 .tablegamesdetail {
@@ -61,6 +62,8 @@ h4.userdetailsheader {
     border-width: 0.5px;
     margin: 10px;
     padding: 10px;
+    border-radius: 10px;
+
 }
 
 .tableuser1 {
@@ -73,6 +76,8 @@ h4.userdetailsheader {
         margin: 10px;
         padding: 10px;
         display: inline-block;
+        border-radius: 10px;
+
 }
 
 .tablesportcenters {
@@ -84,6 +89,7 @@ h4.userdetailsheader {
     border-width: 0.5px;
     margin: 10px;
     padding: 10px;
+    border-radius: 10px;
 
 }
 
@@ -92,8 +98,13 @@ h4.userdetailsheader {
  @media only screen and (max-width: 750px) {
 
     td.gameparticipant {
-        display: table-row
-    }
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 10px;
+        border-color: black;
+        display: table-row;
+     }
+     
 
        .tablegames {
             width: 100%;
@@ -133,7 +144,7 @@ h4.userdetailsheader {
             }
     
 
-            span.gameorganizer {
+            span.gameorganizer, span.gameorganizer2 {
                     visibility: hidden;
                 }                
 
@@ -330,6 +341,7 @@ span.today {
 
 /* 5 - TABLE */
 
+
 table.sportcenterlist {
     margin: 0px;
     padding: 5px;
@@ -372,8 +384,14 @@ td {
 }
 
 td.gameparticipant {
-    border-width: 0.2px;
+    border-width: 0.5px;
     border-style: solid;
+    border-radius: 10px;
+    border-color: black;
+}
+
+td.gameparticipant2 {
+    border-style: none;
 }
 
 td.loginbutton {
@@ -454,7 +472,6 @@ li.gameparticipant {
     display: inline;
 }
 
-
 li.gamelistselected
     {
     list-style-type: none;
@@ -468,6 +485,7 @@ li.gamelistselected
 li.gamelist:hover {
     background-color: #71cee7;
 }
+
 
 ul.gamelist {
     overflow-y: auto;
@@ -637,4 +655,44 @@ nav li > a {
   }
   .status {
     margin-bottom: 10px;
+  }
+
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 50%;
+  }
+  
+  .tab button {
+    background-color: inherit;
+    color: black;
+    float: left;
+    border: none;
+    border-right: 1px solid #ccc;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0px;
+    width: 50%;
+    height: 30px;
+  }
+  
+  .tab button:hover {
+    background-color: #ddd;
+  }
+  
+  .tab button2 {
+    background-color: #ccc;
+    color: black;
+    float: left;
+    border: none;
+    border-right: 1px solid #ccc;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0px;
+    width: 50%;
+    height: 30px;
   }

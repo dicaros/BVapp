@@ -313,11 +313,22 @@ export function setCurrentSize(size) {
     };
 }
 
-export function setNavigate(navigate) {
-    return {
-        type: SET_NAVIGATE,
-        navigate: navigate
-    };
+export function setNavigate(input) {
+        return(dispatch) => {var tempvar = []
+        tempvar = store.getState().navigate;
+        if(input == '')
+            tempvar.pop();
+        else
+            tempvar.push(input);
+     
+        dispatch(loadData('api/user', url, ''))
+
+        return {
+            type: SET_NAVIGATE,
+            navigate: tempvar
+        };
+    }
+    
 }
 
 export function setregistration(registration) {

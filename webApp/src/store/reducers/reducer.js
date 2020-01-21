@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-export function navigate(state = 'games', action) {
+export function navigate(state = ['games'], action) {
     switch (action.type) {
         case 'SET_NAVIGATE':
             return action.navigate;        default:

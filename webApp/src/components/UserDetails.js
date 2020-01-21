@@ -18,7 +18,7 @@ class UserDetails extends React.Component {
                           <table key={index} className = 'tableuser1'>
                               <thead>
                                   <tr key='001'>
-                                      <th className = 'userdetailsheader' height='120px'><center><img src={userpic} onClick={() => this.props.setNavigate('userp')} className='userpic' alt='O'></img></center></th>
+                                      <th className = 'userdetailsheader' height='120px'><center><img src={userpic} onClick={() => this.props.doNavigate('userp')} className='userpic' alt='O'></img></center></th>
                                   </tr>
                                   <tr key='002'>
                                       <th className = 'userdetailsheader' height='30px'>{row.firstName} {row.lastName}

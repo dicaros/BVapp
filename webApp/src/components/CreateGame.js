@@ -245,7 +245,7 @@ return (
                   <th>
                               <div className='closewindowdiv' >
                                     <span className='closewindowspantop'>
-                                          <button className='bodylink'href = '#' onClick={() => this.props.setNavigate('games')}>
+                                          <button className='bodylink'href = '#' onClick={() => this.props.doNavigate('')}>
                                                 X
                                           </button>
                                     </span>

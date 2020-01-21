@@ -13,25 +13,27 @@ class MainContainer extends React.Component {
                
 
                 {this.props.loginsuccess && !this.props.isLoading && 
-                (this.props.navigate == 'games' || this.props.navigate == 'userp') && 
+                (this.props.navigate[this.props.navigate.length-1] == 'games' || this.props.navigate[this.props.navigate.length-1] == 'userp') && 
                 typeof this.props.useritems._embedded != 'undefined' &&
                 <UserComponent />}
                 
                 {this.props.loginsuccess && !this.props.isLoading && 
-                (this.props.navigate == 'games') && 
+                (this.props.navigate[this.props.navigate.length-1] == 'games') && 
                 typeof this.props.items._embedded != 'undefined' &&
                 <GameComponent />}          
 
                 {this.props.loginsuccess && !this.props.isLoading && 
-                (this.props.navigate == 'userp') && 
+                (this.props.navigate[this.props.navigate.length-1] == 'userp') && 
                 typeof this.props.usergamesitems != 'undefined' &&
                 <UserProfileComponent />}          
 
-                {this.props.loginsuccess && !this.props.isLoading && this.props.navigate == 'gamedetails' &&
+                {this.props.loginsuccess && !this.props.isLoading && 
+                this.props.navigate[this.props.navigate.length-1] == 'gamedetails' &&
                 typeof this.props.singlegameitems != 'undefined' && 
                 <GameDetailsComponent />}
 
-                {this.props.loginsuccess && !this.props.isLoading && this.props.navigate == 'create' && 
+                {this.props.loginsuccess && !this.props.isLoading && 
+                this.props.navigate[this.props.navigate.length-1] == 'create' && 
                 typeof this.props.sportcenteritems._embedded != 'undefined' && 
                 <CreateComponent />}
 
