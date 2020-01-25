@@ -7,6 +7,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(exported = false)
 public interface MyuserRepository extends JpaRepository<Myuser, Long> {
 
+// no access restrictions. This is needed to allow registration (see SecurityController)
+	
 	@SuppressWarnings("unchecked")
 	Myuser save(Myuser myuser);
 

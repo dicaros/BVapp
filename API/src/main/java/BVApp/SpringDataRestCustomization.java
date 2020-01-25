@@ -1,4 +1,6 @@
-package BVApp;
+// no in use
+
+/*package BVApp;
 
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -14,4 +16,4 @@ public class SpringDataRestCustomization implements RepositoryRestConfigurer {
     			.allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH")
     			.allowedOrigins("*");
   }
-}
+}*/

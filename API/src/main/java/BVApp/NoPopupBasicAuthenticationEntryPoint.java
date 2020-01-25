@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
+// this is to avoid a username/password browser popup appearing when the React front-end tries to connect to the API 
 public class NoPopupBasicAuthenticationEntryPoint implements AuthenticationEntryPoint {
-
+	
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
         AuthenticationException authException) throws IOException, ServletException {

@@ -1,5 +1,7 @@
 package BVApp;
 
+//contains validation results from creating a new game
+
 public class Gameresponse{
 		
 		public Boolean checkfailed;

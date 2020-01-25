@@ -6,6 +6,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 
+//define repository for sportcenters
+
+//only users or admins can modify
 @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 public interface SportCenterRepository extends PagingAndSortingRepository<Sportcenter, Long> { // enable paging support
 

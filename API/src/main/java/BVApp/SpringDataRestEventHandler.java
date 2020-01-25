@@ -7,6 +7,10 @@ import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+// assign context information to creation of new records.
+// whenever a new game, gameparticipant or user details are created they are automatically linked with the user that created them
+// the user id is automatically assigned in the SQL table
+
 @Component
 @RepositoryEventHandler
 public class SpringDataRestEventHandler {

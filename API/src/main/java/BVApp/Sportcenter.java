@@ -9,6 +9,8 @@ import javax.persistence.Version;
 
 import net.minidev.json.annotate.JsonIgnore;
 
+// sportcenter sql object
+
 @Entity // declare that this class is meant for storage in a dbs table
 public class Sportcenter {
 

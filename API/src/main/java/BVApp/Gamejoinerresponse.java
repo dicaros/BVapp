@@ -1,5 +1,7 @@
 package BVApp;
 
+// contains validation results from joining a game
+
 public class Gamejoinerresponse{
 		
 		public Boolean checkfailed;

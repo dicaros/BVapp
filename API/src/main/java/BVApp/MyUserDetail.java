@@ -1,5 +1,7 @@
 package BVApp;
 
+// other details for users that can be accessed from the API
+
 import java.util.Objects;
 
 import javax.persistence.Entity;

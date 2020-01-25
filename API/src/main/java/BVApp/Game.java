@@ -3,7 +3,6 @@ package BVApp;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Objects;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,7 +11,9 @@ import javax.persistence.Version;
 
 import net.minidev.json.annotate.JsonIgnore;
 
-@Entity // declare that this class is meant for storage in a dbs table
+// Game sql object
+
+@Entity // declares that this class is meant for storage in a dbs table
 public class Game {
 
 	private @Id @GeneratedValue Long id; // automatically generated primary ID

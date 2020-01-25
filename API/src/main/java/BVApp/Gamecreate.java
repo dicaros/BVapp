@@ -5,6 +5,8 @@ import java.sql.Time;
 import java.util.Calendar;
 import java.util.Objects;
 
+// this class is needed to validate a game before passing it to the Game entity and return a response from the validation
+
 public class Gamecreate {
 
 	private Integer kurt;
@@ -156,9 +158,11 @@ public class Gamecreate {
 	}
 	
 	Gameresponse createGame(Gamecreate gamecreate, Myuser myuser, Sportcenter sportcenter, GameRepository gamerepo) {
+
+		// create a new empty response
 		Gameresponse response = new Gameresponse (false, false, false, false, false, "");
 		
-    	
+    	// checks if a valid Sportcenter value has been supplied, updates the gameresponse otherwise 
     	if(gamecreate.sportcenterid < 1)
     		{
 					response.setFailed(true);
@@ -170,6 +174,7 @@ public class Gamecreate {
 		java.sql.Date nowdate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 		java.sql.Time nowtime = new java.sql.Time(Calendar.getInstance().getTime().getTime());
     	
+    	// checks if a future date/time value has been input, updates the gameresponse otherwise
 		// game is before today
 	if(gamecreate.getGamedate().toLocalDate().compareTo(nowdate.toLocalDate()) < 0 ||
 			// game is today but time is past 
@@ -180,7 +185,7 @@ public class Gamecreate {
 				response.setDescription(response.resultdescription + "The game is in the past. ");
 			}
 
-	
+	// checks that a date/time value has been input, updates the gameresponse otherwise
 		if(gamecreate.gamedate == null || gamecreate.gametime == null)
 			{
 				response.setFailed(true);
@@ -188,7 +193,7 @@ public class Gamecreate {
 				response.setDescription(response.resultdescription + "You must specify a date. ");
 				}
 
-    	
+    	// checks that a price value has been provided, updates the gameresponse otherwise
 		if(!response.checkisint(gamecreate.priceperperson) || gamecreate.priceperperson == "")
 		{
 			response.setFailed(true);
@@ -196,6 +201,7 @@ public class Gamecreate {
 			response.setDescription(response.resultdescription + "A valid price must be entered. ");
 		}
 		
+    	// if all checks are successful the new game is created
     	if(!response.checkfailed)
     			{
         				Game newgame = new Game(sportcenter, gamecreate.getKurt(), (double) Integer.parseInt(gamecreate.getPriceperperson()), gamecreate.getIsprivate(),     			

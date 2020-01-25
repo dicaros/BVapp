@@ -17,13 +17,13 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableWebSecurity // security policy for this app. Overrides default Spring Boot settings
+@EnableGlobalMethodSecurity(prePostEnabled = true) // Enable method-level security
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+	// security
 	@Autowired
 	private SpringDataJpaUserDetailsService userDetailsService;
-
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -35,19 +35,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.cors().and()
+			.cors().and() // enable cors
 			.authorizeRequests()
-				.antMatchers("/signup", "/built/**", "/main.css").permitAll()
-				.anyRequest().authenticated()
+				.antMatchers("/signup").permitAll() // grants unconditional access to certain paths
+				.anyRequest().authenticated() // anything else requires authentication to be accessed
 				.and()
 			.formLogin()
-				.defaultSuccessUrl("/api/", true)
+				.defaultSuccessUrl("/api/", true) // defaults to /api on login
 				.permitAll()
 				.and()
-			.httpBasic()
-			.authenticationEntryPoint(new NoPopupBasicAuthenticationEntryPoint())
+			.httpBasic() // basic login
+			.authenticationEntryPoint(new NoPopupBasicAuthenticationEntryPoint()) // prevents the default username/password browser popup from appearing when the React front-end tries to connect to the API
 				.and()	
-			.csrf().disable()
+			.csrf().disable() // !!!!!!!!!!!!!! basic authentication is on and csrf disabled, to be changed for prod release (cross-site request forgery)
 			.logout()
 				.logoutSuccessUrl("/");
 	}
@@ -56,19 +56,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	   @Bean
 	    public CorsConfigurationSource corsConfigurationSource() {
 	        final CorsConfiguration configuration = new CorsConfiguration();
-	        configuration.setAllowedOrigins(List.of("*"));
+	        configuration.setAllowedOrigins(List.of("*")); // !!!!!!!!!!!!!! for demo purpose all origins allowed. To be changed to react server once in Prod
 	        configuration.setAllowedMethods(List.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
-	        // setAllowCredentials(true) is important, otherwise:
-	        // The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.
 	        configuration.setAllowCredentials(true);
-	        // setAllowedHeaders is important! Without it, OPTIONS preflight request
-	        // will fail with 403 Invalid CORS request
+	        // setAllowedHeaders to prevent fail with 403 Invalid CORS request
 	        configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
 	        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	        source.registerCorsConfiguration("/**", configuration);
 	        return source;
 	    }
 	   
+	   // expose IDs for specific objects. This is needed by front-end app to be able to filter requests
 	   @Bean
 	   public RepositoryRestConfigurer repositoryRestConfigurer()
 	   {

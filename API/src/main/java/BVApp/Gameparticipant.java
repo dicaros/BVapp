@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+// Users that are signed up to a specific game
+
 @Entity // declare that this class is meant for storage in a dbs table
 public class Gameparticipant {
 

@@ -18,6 +18,7 @@ public class SpringDataJpaUserDetailsService implements UserDetailsService {
 		this.repository = repository;
 	}
 
+	
 	@Override
 	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
 		Myuser myuser = this.repository.findByName(name);

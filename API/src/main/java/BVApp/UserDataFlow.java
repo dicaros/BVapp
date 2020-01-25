@@ -1,5 +1,7 @@
 package BVApp;
 
+//contains validation results from creating a new user
+
 import java.util.Calendar;
 
 import org.springframework.util.StringUtils;
@@ -76,6 +78,7 @@ public class UserDataFlow {
 	{	 
 		UserResponse usercheck = this.validateRegistration(this.password, this.confirmpassword, this.name, this.email, repo);
 
+		// if the usercheck is successful then create a new user
 		if(usercheck.checkfailed == false)
 			{
 				Myuser myuser = new Myuser(
@@ -91,10 +94,13 @@ public class UserDataFlow {
 		return usercheck;
 	}
 	
+	// validate a new user request and return the result
 	public UserResponse validateRegistration(String password1, String password2, String name, String email, MyuserRepository repo)
-	{	
+	{			
+		// create a new empty user response 
 		UserResponse usercheck = new UserResponse(false, false, false, false, false, false, false, false, "");
 
+		// name cannot be null or empty
 		if(name == null || name.equals(""))
 		{
 			usercheck.setFailed(true);
@@ -102,6 +108,7 @@ public class UserDataFlow {
 			usercheck.setDescription(usercheck.resultdescription + "The name field cannot be blank. ");
 		}
 
+		// the two passwords supplied must match
 		if(!password1.equals(password2))
 		{
 			usercheck.setFailed(true);
@@ -109,6 +116,7 @@ public class UserDataFlow {
 			usercheck.setDescription(usercheck.resultdescription + "The two passwords must match. ");
 		}
 
+		// the password cannot be null or empty
 		if(password1 == null || password1.equals(""))
 		{
 			usercheck.setFailed(true);
@@ -116,13 +124,15 @@ public class UserDataFlow {
 			usercheck.setDescription(usercheck.resultdescription + "The password field cannot be blank.");
 		}
 
+		// the password must at least be 8 chars long
 		if(password1.length() < 8)
 		{
 			usercheck.setFailed(true);
 			usercheck.setpsswshort(true);
 			usercheck.setDescription(usercheck.resultdescription + "The password should be at least 8 characters long.");
 		}
-		
+
+		// the username must be unique (search for existing username)
 		Myuser findusername = repo.findByName(name);
 		if(findusername != null)
 		{
@@ -131,6 +141,7 @@ public class UserDataFlow {
 			usercheck.setDescription(usercheck.resultdescription + "The usename already exists. ");
 		}
 
+		// only one user can be created with one email (search for already existing emails)
 		Myuser finduseremail = repo.findByEmail(email);
 		if(finduseremail != null)
 		{
@@ -139,6 +150,7 @@ public class UserDataFlow {
 			usercheck.setDescription(usercheck.resultdescription + "This email has already been registered. ");
 		}
 		
+		// a valid email address should contain one and only one "@" symbol		
 		int count = StringUtils.countOccurrencesOf(email, "@");
 		if(count != 1 || email.length() < 5)
 		{

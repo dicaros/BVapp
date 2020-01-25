@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+// this class is used to validate, sort and add players to an existing game and return the result of the validation
+
 public class Gamejoiner {
 		public Boolean noshow;
 		public Long gameid;

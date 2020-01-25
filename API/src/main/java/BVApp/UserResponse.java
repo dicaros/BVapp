@@ -1,5 +1,7 @@
 package BVApp;
 
+//contains validation results from creating a new user
+
 public class UserResponse {
 		
 		public Boolean checkfailed;
