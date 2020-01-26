@@ -32,5 +32,8 @@ public interface GameparticipantRepository extends CrudRepository<Gameparticipan
 	
 	// find all games based on user id	
 	List<Gameparticipant> findAllByMyuserId(Long id);
+
+	// find all games based on user name	
+	List<Gameparticipant> findAllByMyuserName(String name);
 	
 }

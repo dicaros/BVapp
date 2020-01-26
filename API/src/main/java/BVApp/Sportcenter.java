@@ -23,13 +23,14 @@ public class Sportcenter {
 	private Double gpsx;
 	private Double gpsy;
 	private String website;
+	private Long kurtmax;
 	
 	private @Version @JsonIgnore Long version;
 
 	@SuppressWarnings("unused")
 	private Sportcenter() {}
 	
-	public Sportcenter(Long id, String name,	String street,	String city, String postcode, String country, Double gpsx, Double gpsy,	String website) 
+	public Sportcenter(Long id, String name, String street,	String city, String postcode, String country, Double gpsx, Double gpsy,	String website, Long kurtmax) 
 	{
 		this.id = id;
 		this.name = name;
@@ -40,6 +41,7 @@ public class Sportcenter {
 		this.gpsx = gpsx; 
 		this.gpsy = gpsy;
 		this.website = website;
+		this.kurtmax = kurtmax;
 	}
 
 	@Override
@@ -55,8 +57,10 @@ public class Sportcenter {
 			Objects.equals(country, sportcenter.country) &&
 			Objects.equals(gpsx, sportcenter.gpsx) &&
 			Objects.equals(gpsy, sportcenter.gpsy) &&
-			Objects.equals(website, sportcenter.website);
-	}
+			Objects.equals(website, sportcenter.website) &&
+			Objects.equals(kurtmax, sportcenter.kurtmax);
+
+	}	
 
 	@Override
 	public int hashCode() {
@@ -143,6 +147,14 @@ public class Sportcenter {
 	public void setVersion(Long version) {
 		this.version = version;
 	}
+	
+	public Long getKurtmax() {
+		return kurtmax;
+	}
+
+	public void setKurtmax(Long kurtmax) {
+		this.kurtmax = kurtmax;
+	}
 
 	@Override
 	public String toString() {
@@ -156,6 +168,7 @@ public class Sportcenter {
 			", gpsx='" + gpsx + '\'' +
 			", gpsy='" + gpsy + '\'' +			
 			", website='" + website +
+			", kurtmax='" + kurtmax +
 
 			'}';
 	}

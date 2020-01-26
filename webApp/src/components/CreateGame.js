@@ -12,32 +12,13 @@ import Monthpicker from './Monthpicker.js'
 
 var thisday = currentday()
 
-
-
 class CreateGame extends React.Component {
-
-      Error1 = () => {
-                 if (typeof this.props.gameresponse.datepast != 'undefined' && this.props.gameresponse.datepast) 
-                       {
-                        return (' the selected date is in the past')
-                        }
-                 else
-                       return ''
-           }
-
-       Error2 = () => {
-            if (typeof this.props.gameresponse.priceinvalid != 'undefined' && this.props.gameresponse.priceinvalid) 
-                  {
-                   return (' invalid price')
-                   }
-            else
-                  return ''
-      }
-
+ 
       constructor(props) {
       super(props);
             this.state = {
                   timeselection: '20:00',
+                  kurtsize: null,
                   kurtselection: 1,
                   selectedday: thisday[2],
                   selectedmonth: thisday[1],
@@ -47,34 +28,35 @@ class CreateGame extends React.Component {
             }
       }
 
-      componentDidUpdate(prevProps) {
-
-            if (this.props.gameresponse.checkfailed != prevProps.gameresponse.checkfailed)
-                    {
-                        if(this.props.gameresponse.checkfailed)
-                              this.props.setNavigate('create');
-                        else 
-                              {
-                                    this.props.fetchData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime')
-                                    this.props.setNavigate('games');
-                                    this.props.setgameresponse({ checkfailed: true })
-                    }
-                  }
+       Error1 = () => {
+                  if (typeof this.props.gameresponse.datepast != 'undefined' && this.props.gameresponse.datepast) 
+                        {
+                         return (' the selected date is in the past')
+                         }
+                  else
+                        return ''
             }
+ 
+        Error2 = () => {
+             if (typeof this.props.gameresponse.priceinvalid != 'undefined' && this.props.gameresponse.priceinvalid) 
+                   {
+                    return (' invalid price')
+                    }
+             else
+                   return ''
+       }
+ 
 
       
-async handleSubmit(event) {
-      event.preventDefault();
-       this.props.addNew(this.state.selectedCenter, event.target.isprivate.checked, this.state.selectedyear+'-'+("00" + this.state.selectedmonth).slice(-2)+'-'+("00" + this.state.selectedday).slice(-2), this.state.timeselection+':00', event.target.comments.value, url+'api/newgame', this.props.nitems, event.target.priceperperson.value, this.state.kurtselection)
-       this.props.setNavigate('create')
-       //    window.location.reload();
-         }
+      handleSubmit(event) {
+            event.preventDefault();
+             this.props.addNew(this.state.selectedCenter, event.target.isprivate.checked, this.state.selectedyear+'-'+("00" + this.state.selectedmonth).slice(-2)+'-'+("00" + this.state.selectedday).slice(-2), this.state.timeselection+':00', event.target.comments.value, url+'api/newgame', this.props.nitems, event.target.priceperperson.value, this.state.kurtselection)
+      }
 
       handleChangeTime(event) {
             this.setState({
                   timeselection: event.target.value,
             })
-                   
       };
   
     handleChangeKurt(event) {
@@ -114,13 +96,14 @@ async handleSubmit(event) {
                   else return ('gamelist')
         }
 
+
    render() {      
       const SportCenterList = () => {
             return(  
                     this.props.sportcenteritems._embedded.sportcenters.map ((row, index) =>                   
                     {
-                      return(
-                                    <li key={index} className={ this.classNameCenter(row.id) } onClick={() => this.handleChangeSportCenter(row.id)}><b>{row.name}</b> ({row.street} - <a  target="_blank" href={row.website} className='bodylink'>{row.website}</a>)></li>
+                        return(
+                                    <li key={index} className={ this.classNameCenter(row.id) } onClick={() => this.handleChangeSportCenter(row.id)}><b>{this.state.selectedCenter}{row.id}{row.name}</b> ({row.street} - <a  target="_blank" href={row.website} className='bodylink'>{row.website}</a>)></li>
                           )})
             )
       }
@@ -142,7 +125,6 @@ return (
       
             <tr height='30px'>
                   <td className='newgame'>Which day?
-                  {this.props.sportcenteritems._embedded.sportcenters[1].name}
                   </td>
             </tr>
             
@@ -180,7 +162,9 @@ return (
             </tr>
             <tr height='30px'>
 
-                  <td className='newgame'>What time?</td>
+                  <td className='newgame'>What time?
+                  {this.props.sportcenteritems._embedded.sportcenters[this.state.selectedCenter-1].name}
+                  </td>
             </tr>
             <tr height='25px'>
                   <td>  
@@ -196,7 +180,7 @@ return (
                   <td>  
                         <select value={this.state.kurtselection} onChange={this.handleChangeKurt.bind(this)}>
                               <Kurtselect 
-                                    number = {30}
+                                    number = {this.props.sportcenteritems._embedded.sportcenters[this.state.selectedCenter-1].kurtmax}
                                     />
                         </select>
                   </td>

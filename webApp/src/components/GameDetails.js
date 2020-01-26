@@ -5,11 +5,8 @@ import { handleQuit } from '../functions/functions'
 import { currentday, timedash, todaydash } from '../functions/functions'
 
 class GameDetails extends React.Component {
-
-
-
-  
-  constructor(props) {
+ 
+constructor(props) {
     super(props);
           this.state = {
                 alreadysigned: 0,

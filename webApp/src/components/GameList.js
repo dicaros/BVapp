@@ -18,12 +18,14 @@ class GameList extends React.Component {
 
 async handleSelectGame(id) {
     await this.props.setGame(id)
-    await this.props.fetchData('api/gameparticipantsget', url, '?id='+id)
-    await this.props.fetchData('api/singlegame', url, '?id='+id)
     this.props.doNavigate('gamedetails')           
 }
 
-   async updateRecord(firstName, lastName, description, url) {  
+async handleCreateGame() {
+    this.props.doNavigate('create')           
+}
+
+ async updateRecord(firstName, lastName, description, url) {  
     if (this.props.loginsuccess) {
        await  this.props.updateRecord(firstName, lastName, description, url)
          this.refresh();
@@ -38,7 +40,7 @@ async handleSelectGame(id) {
                                        <thead>
                                            <tr> 
                                               <th className = 'gamelist'>
-                                              <div className='closewindowdiv'><span className = 'createbuttonspan'><button onClick={() => this.props.doNavigate('create')}>+ Create New</button></span>
+                                              <div className='closewindowdiv'><span className = 'createbuttonspan'><button onClick={() => this.handleCreateGame()}>+ Create New</button></span>
                                                  <br></br>Games near your location</div>
                                               </th>
                                            </tr>

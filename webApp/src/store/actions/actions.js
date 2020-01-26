@@ -94,7 +94,6 @@ export function getUser() {
     .catch(error => {
                         if(typeof error.status == 'undefined')
                                 {
-                                    dispatch(isLoading(false))
                                     dispatch(isError(true));
                                     console.log("connection to server failed: " + error.status)
                                 }
@@ -128,7 +127,6 @@ export function loadData(request, url, params) {
 
             return (dispatch) => {
 
-                    dispatch(isLoading(true)); 
                     dispatch(isError(false));
                 // start GET request
                     fetch(url+request+params  , {
@@ -140,7 +138,6 @@ export function loadData(request, url, params) {
                     })
                 // evaluate get request
                     .then((res) => {
-                                        dispatch(isLoading(true));
                                         if(res.status == '401') {
                                                                         console.log("unauthorized " + res.status);
                                                                         dispatch(loginsuccessfull(false));
@@ -165,7 +162,7 @@ export function loadData(request, url, params) {
                                 dispatch(itemsFetchDataSuccess(items))
                             if(request == 'api/sportcenters')
                                 dispatch(sportcenterFetchDataSuccess(items));                                                
-                            if(request == 'api/myUserDetails')
+                            if(request == 'api/myUserDetails' || request == 'api/myuserdet')
                                 dispatch(userFetchDataSuccess(items));
                             if(request == 'api/gameparticipantsget')
                                 dispatch(gameparticipantFetchDataSuccess(items));
@@ -179,19 +176,15 @@ export function loadData(request, url, params) {
                                  }
                             if(request == 'api/gameparticipantsbyuser')
                                  dispatch(usergamesFetchDataSuccess(items));
-                                 
-                            dispatch(isLoading(false))
-                            }
+                                 }
                         )
                     // error handling
                     .catch(error => {
                         if(typeof error.status == 'undefined' && request == 'api/user')
                                 {
-                                    dispatch(isLoading(false))
                                     dispatch(isError(true));
                                     console.log("connection to server failed: " + error)
                                 }
-                             dispatch(isLoading(false))
                             }
                        );
             };
@@ -232,6 +225,8 @@ export function newGame(sportcenterid, isPrivate, gameDate, gameTime, descriptio
         .then(res => res.json())
         .then(items =>{
             var response = items;
+            if(!response.checkfailed)
+                dispatch(setNavigate('games'));
             dispatch(setgameresponse(response));
             dispatch(nitems(nitems+1));
             console.log(response);
@@ -315,17 +310,42 @@ export function setCurrentSize(size) {
 
 export function setNavigate(input) {
         return(dispatch) => {var tempvar = []
+        
+        dispatch(isLoading(true));
         tempvar = store.getState().navigate;
         if(input == '')
             tempvar.pop();
-        else
-            tempvar.push(input);
-     
+        else if (tempvar[tempvar.length-1] != input)
+             tempvar.push(input);
+            
         dispatch(loadData('api/user', url, ''))
 
+        if(tempvar[tempvar.length-1] == 'games')
+        {
+            dispatch(loadData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime'))
+            dispatch(loginsuccessfull(true));
+            dispatch(loadData('api/myuserdet', url, ''))
+        }
+
+        if(tempvar[tempvar.length-1] == 'userp')
+            {
+            dispatch(loadData('api/gameparticipantsbyuser', url, '?name=' + store.getState().username))
+            dispatch(loadData('api/myuserdet', url, ''))
+            }
+        if(tempvar[tempvar.length-1] == 'create')
+                dispatch(loadData('api/sportcenters', url, '?page=0&size=1000&sort=name'))
+
+        if(tempvar[tempvar.length-1] == 'gamedetails')
+                {    
+                    dispatch(loadData('api/gameparticipantsget', url, '?id='+store.getState().currentgame))
+                    dispatch(loadData('api/singlegame', url, '?id='+store.getState().currentgame))
+                }
+        dispatch(isLoading(false))
+        
         return {
             type: SET_NAVIGATE,
-            navigate: tempvar
+            navigate: tempvar,
+
         };
     }
     
@@ -389,11 +409,9 @@ export function thelogin(loginurl, target)  {
                                        }
                         else {dispatch(loginerror(true))}
                             console.log("log in " + res.status);
-                            dispatch(isLoading(false));
                         }
                     )
             .then(res => {
-                dispatch(isLoading(false));
                 if(res.status != '401')
                 {
                         dispatch(setuser(target.username.value));

@@ -1,21 +1,37 @@
 import React from 'react';
-import { url } from '../constants/constants'
 import { currentday, todaydash } from '../functions/functions'
 
 
 class UserProfile extends React.Component {
- 
-      componentDidMount() { 
-            if(this.props.loginsuccess) {
-                  
-            }
-          };
 
- 
+constructor(props) {
+          super(props);
+          this.state = {
+                buttonclass1: 'tabbedheaderbutton1',
+                buttonclass2: 'tabbedheaderbutton2',
+                userboxvisible: 1
+            }
+            //this.menuShowToggle = this.menuShowToggle.bind(this);
+          }
+
+        handleSelectTab1() {
+               this.setState({
+                       buttonclass1: 'tabbedheaderbutton1',
+                       buttonclass2: 'tabbedheaderbutton2',
+                       userboxvisible: 1
+             })
+        }
+
+        handleSelectTab2() {
+          this.setState({
+                  buttonclass1: 'tabbedheaderbutton2',
+                  buttonclass2: 'tabbedheaderbutton1',
+                  userboxvisible: 2
+        })
+   }
+
         async handleSelectGame(id) {
             await this.props.setGame(id)
-            await this.props.fetchData('api/gameparticipantsget', url, '?id='+id)
-            await this.props.fetchData('api/singlegame', url, '?id='+id)
             this.props.doNavigate('gamedetails')           
         }
 
@@ -23,37 +39,30 @@ class UserProfile extends React.Component {
  
      const TabbedMenu = () => {
           return(
-                    <div class="tab">
-                         <button class="tablinks" onclick="openCity(event, 'London')">Your games</button>
-                         <button class="tablinks" onclick="openCity(event, 'Paris')">Your data</button>
-                    </div>
+                    <left>
+                          <div className='closewindowdiv'>
+                              <div className="tabbedheader">
+                                   <button className={this.state.buttonclass1} onClick={() => this.handleSelectTab1()}>Your games</button>
+                                   <button className={this.state.buttonclass2} onClick={() => this.handleSelectTab2()}>Your data</button>
+                              </div>
+                              <span className='closewindowspantop'>
+                                   <button className='bodylink'href = '#' onClick={() => this.props.doNavigate('')}>
+                                                X
+                                   </button>
+                              </span>
+                         </div>
+                    </left>
                )
      }
 
       const List1 = () => {
             return (
-                  <thead width='100%'>
+                  <thead className='userboxhead' width='100%'>
                          <tr>
                               <th>                                    
                                    <TabbedMenu />
                               </th>
                          </tr>
-                         <tr> 
-                              <th className = 'gamelist'>
-                                    <div className='closewindowdiv'>
-                                    <span className='closewindowspantop'>
-                                          <button className='bodylink'href = '#' onClick={() => this.props.doNavigate('')}>
-                                                X
-                                          </button>
-                                    </span>
-                                    <br></br>Games you recently played</div>
-                               </th>
-                              </tr>
-                   <tr>
-                        <td className = 'gamelist' width='20%'>
-                             <ul className='gamelist1'><Tablerow1 /></ul>
-                        </td>    
-                   </tr>              
                    </thead>           
                     )
       };
@@ -89,22 +98,65 @@ class UserProfile extends React.Component {
      )
 }
 
-const List2 = () => {
+const UserGames = () => {
       return (
             <tbody>
-              <tr> 
-                      <th className = 'gamelist'>
-                              <div className='closewindowdiv'>       
-                              Upcoming games</div>
-                         </th>
-                        </tr>
-             <tr>
-                  <td className = 'gamelist' width='20%'>
-                       <ul className='gamelist1'><Tablerow2 /></ul>
-                  </td>    
-             </tr>      
+                 <tr> 
+                           <th className = 'gamelist'>
+                                <div className='closewindowdiv'>
+                                    <br></br>Games you recently played</div>
+                               </th>
+                              </tr>
+                   <tr>
+                        <td className = 'gamelist' width='20%'>
+                             <ul className='gamelist1'><Tablerow1 /></ul>
+                        </td>    
+                   </tr>              
+               <tr> 
+                         <th className = 'gamelist'>
+                                   <div className='closewindowdiv'>       
+                                   Upcoming games</div>
+                              </th>
+                         </tr>
+               <tr>
+                    <td className = 'gamelist' width='20%'>
+                         <ul className='gamelist1'><Tablerow2 /></ul>
+                    </td>    
+               </tr>      
              </tbody>                   
               )
+};
+
+const UserRow1 = () => {
+     return(                    
+                             <div  className='gameorganizer'>
+<ul>
+                              <li>
+                            
+                              </li>
+                              </ul>
+                         </div>
+
+    )
+}
+
+const UserStuff = () => {
+     return (
+           <tbody>
+                <tr> 
+                          <th className = 'gamelist'>
+                               <div className='closewindowdiv'>
+                                   <br></br>Your user details</div>
+                              </th>
+                             </tr>
+               <tr>
+                        <td className = 'gamelist' width='20%'>
+                             <ul className='gamelist1'><UserRow1 /></ul>
+                        </td>    
+                   </tr>           
+  
+            </tbody>                   
+             )
 };
 
 const Tablerow2 = () => {
@@ -142,7 +194,10 @@ const Tablerow2 = () => {
 
           return (<table className='tablegames'>     
                                           <List1 />
-                                          <List2 />
+                                          {this.state.userboxvisible == 2 && 
+                                          <UserStuff />}
+                                          {this.state.userboxvisible == 1 && 
+                                          <UserGames />}
                 </table>
                  );
      }

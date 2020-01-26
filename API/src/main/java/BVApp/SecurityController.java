@@ -27,10 +27,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 		// expose API endpoint for listing the participant for the selected game   
 	    @RequestMapping(value = "/api/gameparticipantsbyuser", method = RequestMethod.GET, produces = "application/json")
 	    @ResponseBody
-	    public List<Gameparticipant> gamelist(@RequestParam Long id) {
-	        GameparticipantRepository repo3 = context.getBean(GameparticipantRepository.class);
+	    public List<Gameparticipant> gamelist(@RequestParam String name) {
+	        GameparticipantRepository repo = context.getBean(GameparticipantRepository.class);
 
-	        List<Gameparticipant> game = (List<Gameparticipant>) repo3.findAllByMyuserId(id);
+	        List<Gameparticipant> game = (List<Gameparticipant>) repo.findAllByMyuserName(name);
 	        
 	        // sort games by date descending 
 	        Comparator<Gameparticipant> compareByGameDate = (Gameparticipant g1, Gameparticipant g2) -> g1.getGame().getGamedate().compareTo(g2.getGame().getGamedate());        
@@ -43,8 +43,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	    @RequestMapping(value = "/api/gameparticipantsget", method = RequestMethod.GET, produces = "application/json")
 	    @ResponseBody
 	    public List<Gameparticipant> list(@RequestParam Long id) {
-	        GameparticipantRepository repo3 = context.getBean(GameparticipantRepository.class);
-	        List<Gameparticipant> game = (List<Gameparticipant>) repo3.findAllByGameId(id);
+	        GameparticipantRepository repo = context.getBean(GameparticipantRepository.class);
+	        List<Gameparticipant> game = (List<Gameparticipant>) repo.findAllByGameId(id);
 	        return game;
 	    }
 
@@ -111,9 +111,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	    @RequestMapping(value = "/api/singlegame", method = RequestMethod.GET, produces = "application/json")
 	    @ResponseBody
 	    public Optional<Game> singlegame(@RequestParam Long id) {
-	        GameRepository repo4 = context.getBean(GameRepository.class);
-	        Optional<Game> game = repo4.findById(id);
+	        GameRepository repo = context.getBean(GameRepository.class);
+	        Optional<Game> game = repo.findById(id);
 	        return game;
+	    }
+	    
+		// expose API endpoint for extracting a single sportcenter   
+	    @RequestMapping(value = "/api/singlesportcenter", method = RequestMethod.GET, produces = "application/json")
+	    @ResponseBody
+	    public Optional<Sportcenter> singlesportcenter(@RequestParam Long id) {
+	        SportCenterRepository repo = context.getBean(SportCenterRepository.class);
+	        Optional<Sportcenter> sportcenter = repo.findById(id);
+	        return sportcenter;
 	    }
 	    
 		// get the current user's details. Expose a username API endpoint
@@ -124,6 +133,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	    	MyuserRepository userrepo = context.getBean(MyuserRepository.class);
 	    	Myuser myuser = userrepo.findByName(principal.getName());
 	        return myuser;
+	    }  
+
+	    @RequestMapping(value = "api/myuserdet", method = RequestMethod.GET, produces = "application/json")
+	    @ResponseBody
+	    public List<MyUserDetail> currentUserDet(Principal principal) {
+	    	
+	    	MyUserDetailsRepository userrepo = context.getBean(MyUserDetailsRepository.class);
+	    	List<MyUserDetail> myuserdet = (List<MyUserDetail>) userrepo.findAllByMyuserName(principal.getName());
+
+	    	return myuserdet;
 	    }  
 	    
 }

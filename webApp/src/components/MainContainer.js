@@ -3,45 +3,59 @@ import { CreateComponent, GameComponent, LoginComponent, UserComponent, GameDeta
 
 class MainContainer extends React.Component {
   
+
+   componentDidMount() { 
+      //(request, url, params)
+            this.props.doNavigate('games')
+   };
+
+   
+    
    render() {
-     return (<center>
 
-               
-               {this.props.loginsuccess && this.props.isLoading && 'Loading...'}
-               
-               {this.props.isError && !this.props.isLoading && "Server connection error, please try again later"}
-               
+      const Displaycomponent = () => {
+            if(this.props.loginsuccess && this.props.isLoading)
+               return ('Loading...')
 
-                {this.props.loginsuccess && !this.props.isLoading && 
-                (this.props.navigate[this.props.navigate.length-1] == 'games' || this.props.navigate[this.props.navigate.length-1] == 'userp') && 
-                typeof this.props.useritems._embedded != 'undefined' &&
-                <UserComponent />}
-                
-                {this.props.loginsuccess && !this.props.isLoading && 
-                (this.props.navigate[this.props.navigate.length-1] == 'games') && 
-                typeof this.props.items._embedded != 'undefined' &&
-                <GameComponent />}          
+            if(this.props.isError && !this.props.isLoading)
+               return('Server connection error, please try again later')
 
-                {this.props.loginsuccess && !this.props.isLoading && 
-                (this.props.navigate[this.props.navigate.length-1] == 'userp') && 
-                typeof this.props.usergamesitems != 'undefined' &&
-                <UserProfileComponent />}          
+            if(this.props.loginsuccess && !this.props.isLoading)
+               {
+                  if(this.props.navigate[this.props.navigate.length-1] == 'games' && 
+                  typeof this.props.items._embedded != 'undefined' && typeof this.props.useritems[0].id != 'undefined')
+                     {
+                        return(<div><UserComponent /><GameComponent /></div>)
+                     }
+                   if(this.props.navigate[this.props.navigate.length-1] == 'userp' && 
+                   typeof this.props.usergamesitems != 'undefined' && typeof this.props.useritems[0].id != 'undefined')
+                     {
+                        return(<div><UserComponent /><UserProfileComponent /></div>)
+                     }
+                  if(this.props.navigate[this.props.navigate.length-1] == 'gamedetails' &&
+                  typeof this.props.singlegameitems != 'undefined')
+                       {
+                        return(<GameDetailsComponent />)
+                       }
+                  if(this.props.navigate[this.props.navigate.length-1] == 'create' && 
+                  typeof this.props.sportcenteritems._embedded != 'undefined')
+                            {
+                              return(<CreateComponent />)
+                            }
+               }
+            
+            if(!this.props.loginsuccess && !this.props.isLoading && !this.props.isError)
+               {
+                  return(<LoginComponent />)
+               }
 
-                {this.props.loginsuccess && !this.props.isLoading && 
-                this.props.navigate[this.props.navigate.length-1] == 'gamedetails' &&
-                typeof this.props.singlegameitems != 'undefined' && 
-                <GameDetailsComponent />}
+            else return null
 
-                {this.props.loginsuccess && !this.props.isLoading && 
-                this.props.navigate[this.props.navigate.length-1] == 'create' && 
-                typeof this.props.sportcenteritems._embedded != 'undefined' && 
-                <CreateComponent />}
+      }
 
-                {!this.props.loginsuccess && !this.props.isLoading && !this.props.isError
-                 && <LoginComponent />
-                 }
-
-              </center>)
+     return (
+               <center><Displaycomponent /></center>
+              )
     }
 }
  
