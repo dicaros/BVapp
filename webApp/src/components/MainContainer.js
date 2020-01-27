@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreateComponent, GameComponent, LoginComponent, UserComponent, GameDetailsComponent, UserProfileComponent } from '../AppContainer';
+import { CreateComponent, GameComponent, LoginComponent, UserComponent, GameDetailsComponent, UserProfileComponent, RegisterComponent } from '../AppContainer';
 
 class MainContainer extends React.Component {
   
@@ -42,11 +42,16 @@ class MainContainer extends React.Component {
                             {
                               return(<CreateComponent />)
                             }
-               }
+                     }
             
-            if(!this.props.loginsuccess && !this.props.isLoading && !this.props.isError)
+            if(!this.props.loginsuccess && !this.props.isLoading && !this.props.isError && this.props.navigate[this.props.navigate.length-1] != 'register')
                {
                   return(<LoginComponent />)
+               }
+
+               if(!this.props.loginsuccess && !this.props.isLoading && !this.props.isError && this.props.navigate[this.props.navigate.length-1] == 'register')
+               {
+                  return(<RegisterComponent />)   
                }
 
             else return null

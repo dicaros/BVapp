@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { url } from '../constants/constants'
 
 class RegisterUser extends React.Component {
@@ -12,8 +11,8 @@ class RegisterUser extends React.Component {
   render() {      
     const Redir = () => {
       if (this.props.registration.checkfailed == false || this.props.loginsuccess)
-        return (<Redirect to='/' />)                
-      else return('');
+        this.props.doNavigate('login')
+      return('');
   }
 
   const Error1 = () => {

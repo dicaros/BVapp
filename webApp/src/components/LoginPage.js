@@ -10,7 +10,7 @@ class LoginPage extends React.Component {
  
  handleSubmit(event) {
      event.preventDefault();
-     this.props.doLogin(url, event.target);   
+     this.props.doLogin(url, event.target);
 }
  
    render() {      
@@ -55,7 +55,7 @@ class LoginPage extends React.Component {
            return(
                  <center><LoginForm />
                     <br></br>
-                    <div>New user? Register at this <a href='/register'>link</a></div>
+                    <div>New user? Register at this <a href='#' onClick = {() => this.props.doNavigate('register')}>link</a></div>
                  </center>
              )
              

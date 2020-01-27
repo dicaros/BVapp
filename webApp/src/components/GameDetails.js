@@ -137,7 +137,7 @@ async quitthisgame (id) {
          const GameDetails = () => {
           if(typeof this.props.singlegameitems.id != 'undefined') {
           return(
-              <tr>
+              <tr className = 'gameparticipant2'>
                   <td className = 'gameparticipant2' colSpan = {3}>                                      
                             {this.props.singlegameitems.sportcenter.name} {this.props.singlegameitems.id}
                              <br />
@@ -174,7 +174,7 @@ async quitthisgame (id) {
                                     return (<tbody> 
                                                           <GameDetails />
                                                           <PlayerDetailsHeader />
-                                                          <tr><PlayersDetail/></tr>
+                                                          <tr className='gameparticipant'><PlayersDetail/></tr>   
                                             </tbody>)
            }
 
