@@ -1,6 +1,10 @@
 import React from 'react';
 import { currentday, timedash, todaydash } from '../functions/functions'
-import { url } from '../constants/constants'
+import locked from '../img/lock.png'
+import cancelled from '../img/stop.png'
+import tick from '../img/tick.png'
+
+
 
 class GameList extends React.Component {
 
@@ -63,8 +67,11 @@ async handleCreateGame() {
                                             {(row.gamedate == todaydash(currentday(tomorrow))) && 'Tomorrow, '}
                                             {(row.gamedate > todaydash(currentday(tomorrow))) && row.gamedate+ ', '}
                                             {String(row.gametime).substring(0, 5) + ' '}
-                                            {(row.isprivate && ' - Private')}
-                                            {(row.gameiscancelled && ' - Cancelled')}
+                                            
+                                            {(row.isprivate && <img src = {locked}  className='locked' alt='O'></img>)}
+                                            {(row.gameisfull && ' - Confirmed! ')} 
+                                            {(row.gameisfull && <img src = {tick}  className='locked' alt='O'></img>)}
+                                            {(row.gameiscancelled && <img src = {cancelled}  className='locked' alt='O'></img>)}
                                             </span> 
                                             
                                            <br></br>

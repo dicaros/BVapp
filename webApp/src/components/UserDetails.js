@@ -18,7 +18,7 @@ class UserDetails extends React.Component {
                                   <tr key='002'>
                                       <th className = 'userdetailsheader' height='30px'>{this.props.useritems[0].myuser.firstName} {this.props.useritems[0].myuser.lastName}
                                       <h4 className = 'userdetailsheader'>({this.props.useritems[0].myuser.email})</h4>
-                                      <h4 className = 'userdetailsheader'>Member since: {this.props.useritems.mydate}</h4>
+                                      <h4 className = 'userdetailsheader'>Member since: {this.props.useritems[0].mydate}</h4>
                                       </th>
                                   </tr>
                               </thead>
@@ -37,11 +37,11 @@ class UserDetails extends React.Component {
                                                 </tr>
                                                 <tr key='3' height='30px'>
                                                     <td className = 'userlist'>Games Missed</td>
-                                                    <td className = 'userlist'>{this.props.useritems[0].myuser.noShowCount}</td>
+                                                    <td className = 'userlist'>{this.props.useritems[0].noShowCount}</td>
                                                 </tr>
                                                 <tr  key='4' height='30px'>
                                                     <td className = 'userlist'>Phone number</td>
-                                                    <td className = 'userlist'>{this.props.useritems[0].myuser.phone}</td>
+                                                    <td className = 'userlist'>{this.props.useritems[0].phone}</td>
                                                 </tr>
                                                 <tr key='5' height='30px'>
                                                     <td className = 'userlist'>Email</td>

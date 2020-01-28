@@ -86,7 +86,7 @@ async quitthisgame (id) {
 
                   if(typeof this.props.gameparticipantsitems[y] != 'undefined') {
                     return(
-                      <td key={index} className = 'gameparticipant' width='25%'>                                 
+                      <td key={index} className = 'gameparticipant'>                                 
                                   <li className='gameparticipant'>
                                       <center> 
                                           { <img src = {userpic}  className='userpic' alt='O'></img>}                        
@@ -112,7 +112,7 @@ async quitthisgame (id) {
                         )
                       }
                       else {
-                        return <td className = 'gameparticipant' width='25%'> 
+                        return <td className = 'gameparticipant'> 
 
                               <li className='gameparticipant'>
                       {// <img src = {'../img/userfotodefault.jpg'}  className='userpic' alt='0' color = '#ffffff'></img>
@@ -148,6 +148,11 @@ async quitthisgame (id) {
                             Court n. {this.props.singlegameitems.kurt}
                              <br />You will pay: {this.props.singlegameitems.priceperperson} CZK
                              <br />Message from the organizer: {this.props.singlegameitems.description}
+                             <br />
+                             <br /><b>This game is 
+                                        {this.props.singlegameitems.isprivate && ' private'}
+                                        {!this.props.singlegameitems.isprivate && ' public'}
+                             </b>
                   </td>
                   <td className = 'gameparticipant2' >
                             <p>This game is organized by: <br></br>
@@ -163,8 +168,7 @@ async quitthisgame (id) {
               )
             }
             else { return ( <tr>
-                              <td className = '' colSpan = {3}> </td>
-                              <td></td>
+                              <td className = '' colSpan = {4}> </td>
                             </tr>)
             }
 

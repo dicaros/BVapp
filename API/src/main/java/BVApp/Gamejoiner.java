@@ -88,6 +88,7 @@ public class Gamejoiner {
 			
 			int i = 0;
 			int y = 0;
+			
 			// assign lower available player number to the current player
 			for(y = 1; y <= maxplayers ; y++)
 				{
@@ -111,8 +112,15 @@ public class Gamejoiner {
 		    	// create the current instance of gameparticipant
 		        Gameparticipant gameparticipant = new Gameparticipant(notfound, false, user, game.get());
 				
+		        // if this is the last gameparticipant set game as full
+		        if(notfound == maxplayers)
+		        {
+		        	singlegame.setGameisfull(true);
+		        	singlegame = gamerepo.save(singlegame);
+		        }
 				// store the game participant in the game participant list
-		        gameparticipant = gamepartrepo.save(gameparticipant);	    	
+		        gameparticipant = gamepartrepo.save(gameparticipant);
+		        
 						};
 						
 		        System.out.println(tryjoingame.resultdescription);    	

@@ -13,14 +13,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 public interface GameRepository extends PagingAndSortingRepository<Game, Long> { // enable paging support
 
-	// only the owner of a game can delete that game
 	// do not expose save method (use /api/newgame instead)
 	@SuppressWarnings("unchecked")
-	@Override
-	@PreAuthorize("#game?.myuser == null or #game?.myuser?.name == authentication?.name")
-//	@RestResource(exported = false) 
+//	@Override
+//	@PreAuthorize("#game?.myuser == null or #game?.myuser?.name == authentication?.name")
+	@RestResource(exported = false) 
 	Game save(@Param("game") Game game);
-
+	
 	// do not expose delete method for Games
 	@Override
 	@PreAuthorize("@gameRepository.findById(#id)?.myuser?.name  == authentication?.name")
