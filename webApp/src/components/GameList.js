@@ -69,9 +69,8 @@ async handleCreateGame() {
                                             {String(row.gametime).substring(0, 5) + ' '}
                                             
                                             {(row.isprivate && <img src = {locked}  className='locked' alt='O'></img>)}
-                                            {(row.gameisfull && ' - Confirmed! ')} 
-                                            {(row.gameisfull && <img src = {tick}  className='locked' alt='O'></img>)}
-                                            {(row.gameiscancelled && <img src = {cancelled}  className='locked' alt='O'></img>)}
+                                            {(row.gameisfull && <img src = {tick} title='Game is on!'  className='locked' alt='O'></img>)}
+                                            {(row.gameiscancelled && <img src = {cancelled} className='locked' alt='O'></img>)}
                                             </span> 
                                             
                                            <br></br>
