@@ -5,8 +5,7 @@ body {
     font-style: normal;
     font-weight: normal;
     font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
-    background-color: burlywood
-    ;
+    background-color: burlywood;
 }
 
 header {
@@ -35,112 +34,141 @@ h4.userdetailsheader {
 
 }
 
+.maindiv {
+    height: 500px;
+    display: inline-table;
+    width: 100%;
+}
+
 .signuperror {
     color: crimson;
     font-size: smaller;
 }
 
-.tablegames, .tablesportcenters {
+.tablegames  {
     width: 50%;
     height: 500px;
     overflow: auto;
     background-color: white;
-    border-style: inset;
-    border-width: 0.5px;
     margin: 10px;
     padding: 10px;
-    display: inline-block;
+    display: inline-table;
+    border: solid #ccc 1px;
     border-radius: 10px;
+    vertical-align: top;
 }
 
-.tablegamesdetail, .tablesportcenters {
+.tablegamesdetail {
     width: 50%;
     height: 500px;
     overflow: auto;
     background-color: white;
-    border-style: inset;
-    border-width: 0.5px;
+    border: solid #ccc 1px;
     margin: 10px;
     padding: 10px;
     display: inline-table;
     border-radius: 10px;
+    vertical-align: top;
+}
+
+.tablesportcenters {
+    width: 50%;
+    height: 500px;
+    overflow: auto;
+    background-color: white;
+    border: solid #ccc 1px;
+    margin: 10px;
+    padding: 10px;
+    display: inline-table;
+    border-radius: 10px;
+    vertical-align: top;
+    text-align: center;
 }
 
 .tableuser1 {
         width: 20%;
         height: 500px;
         overflow: auto;
-        border-style: inset;
-        border-width: 0.5px;
+        border: solid #ccc 1px;
         background-color: white;
         margin: 10px;
         padding: 10px;
-        display: inline-block;
+        display: inline-table;
         border-radius: 10px;
-
+        vertical-align: top;
+        text-align: center;
 }
 
 /* mobile optimization */
  @media only screen and (max-width: 1024px) {
 
+    tbody.gamelist {
+        border: solid #ccc 1px;
+        background-color: white;
+        display: block;
+        width: 98%;
+        margin: 0px;
+        padding: 0px;
+
+    }
 
     tr.gameparticipant {
+        margin: 5px;
         vertical-align: top;
-        width: 50%;
+        display: inline-table;
+        width: 95%;
+        border: solid #ccc 1px;
+        border-radius: 15px;
     }
 
     td.gameparticipant {
-        border-width: 1px;
-        border-style: solid;
-        border-radius: 10px;
-        border-color: black;
         display: table-row;
         padding-top: 10px;
-        width: 100%;
      }
      
      td.gameparticipant2 {
-        border-width: 1px;
-        border-style: solid;
-        border-radius: 10px;
-        border-color: black;
-        display: table-row;
+        display: inline-table;
         padding-top: 10px;
-        width: 100%;
+        width: 80%;
      }
-     
+     tr.gameparticipant2 {
+        display: table-row;
+        width: 100%;
+
+     } 
 
        .tablegames {
             width: 100%;
-            height: 100%;            
             margin: 0px;
             padding: 0px;
             overflow: hidden;
-            background-color: white;
+            display: table-row;
         }
 
-        .tablegamesdetail {
+        .tablegamesdetail  {
             width: 100%;
-            height: 100%;            
             margin: 0px;
             padding: 0px;
             overflow: hidden;
-            background-color: white;  
         }
 
-            .tableuser1 {
+
+        .tableuser1 {
                 height: 0px;
                 margin: 0px;
                 padding: 0px;
                 visibility: hidden;
+                display: none;
+                height: 0px;
             }
+
             body {
                 overflow: auto;
             }
 
             .tablesportcenters {
                 width: 100%;
-                height: 100%;            
+                height: 80%;            
                 margin: 0px;
                 padding: 0px;
                 overflow: hidden;
@@ -152,6 +180,10 @@ h4.userdetailsheader {
                     visibility: hidden;
                 }                
 
+
+                li.gamelist {
+                    background-color: white;
+                }
                 li.gamelist:hover {
                     background-color: white;
                 }
@@ -207,9 +239,7 @@ button {
 button.submitbutton {
     width: 120px;
     background-color: lightskyblue;
-    border-style: solid;
-    border-color: darkgrey;
-    border-width: 1px;
+    border: solid #ccc 1px;
     height: 30px;
     color: black;
 }
@@ -390,16 +420,14 @@ td {
 }
 
 td.gameparticipant {
-    border-width: 0.5px;
-    border-style: solid;
+    border: solid #ccc 1px;
     border-radius: 10px;
-    border-color: black;
     padding-top: 10px;
     width: 25%;
 }
 
 td.gameparticipant2 {
-    border-style: none;
+    border-bottom: solid #ccc 1px;
     padding: 15px;
 }
 
@@ -411,10 +439,18 @@ td.loginbutton {
 
 td.gamelist {
     text-align: left;
+    vertical-align: top;
     padding: 3px;
     margin: 0px;
-    border-style: inset;
-    border-width: 0.5px;
+    border: none;
+}
+
+div.newgame {
+    text-align: center;
+}
+
+table.newgame {
+    display: inline;
 }
 
 td.newgame {
@@ -422,22 +458,19 @@ td.newgame {
     padding: 0px;
     margin: 0px;
     border-style: none;
+    border-top: solid #ccc 1px;
+
 }
 
 td.sportcenterlist {
     text-align: left;
     padding: 3px;
     margin: 0px;
-    border-style: inset;
-    border-width: 2px;
 }
 
 
 td.userlist {
     text-align: center;
-    font-weight: bold;
-    border-style: dotted;
-    border-width: 0.5px;
     padding: 3px;
     margin: 0px;
 }
@@ -452,14 +485,14 @@ th {
 th.userdetailsheader {
     font-size: x-large;
     font-weight: normal;
-    width: 10000px;
+    text-align: center;
  }
 
 th.gamelist {
     text-align: right;
     padding: 0px;
     margin: 0px;
-    border-style: none;
+    border-bottom: solid #ccc 2px;
     padding: 3px;
     height: 30px;
 }
@@ -469,14 +502,26 @@ tr.gameparticipant {
     vertical-align: top;
 }
 
+tr.userdetailsheader {
+        display: inline-table;
+        width:  80%;
+        border-bottom: #bbb solid 1px;
+ }
+
+ table.userprofile {
+     width: 100%;
+ }
+
+ td.userprofile {
+    height: 10px;
+    vertical-align: top;
+}
 
 /* 6 - LIST */
 
 li.gamelist {
     list-style-type: none;
-    border-bottom: black;
-    border-bottom-style: inset;
-    border-bottom-width: 0.5px;
+    border-bottom: solid #ccc 1px;
     width: 100%;
 }
 
@@ -488,9 +533,7 @@ li.gameparticipant {
 li.gamelistselected
     {
     list-style-type: none;
-    border-bottom: black;
-    border-bottom-style: inset;
-    border-bottom-width: 0.5px;
+    border: solid #ccc 1px;
     width: 100%;
     background-color: yellow;
     }
@@ -502,6 +545,7 @@ li.gamelist:hover {
 
 ul.gamelist {
     overflow-y: auto;
+    overflow-x: hidden;
     height: 380px;
     width: 100%;
     padding: 0px;
@@ -518,6 +562,7 @@ ul.gamelist1 {
 
 ul.gameparticipant {
     overflow-y: auto;
+    overflow-x: hidden;
     height: 380px;
     width: 100%;
     padding: 0px;
@@ -526,10 +571,16 @@ ul.gameparticipant {
 
 ul.sportcenterlist {
     overflow-y: auto;
+    overflow-x: hidden;
     height: 100px;
     width: 100%;
     padding: 0px;
     margin: 0px;
+}
+
+li.sportcenterlist {
+    margin: 0px;
+    border-bottom: solid 1px #ccc;
 }
 
 
@@ -558,11 +609,9 @@ img.userlogo {
 
 img.userpic {
     height: 120px;
-    display: block;
-    margin-top: 0px;
+    padding-top: 40px;
+    padding-bottom: 0px;
     margin-bottom: 0px;
-    margin-left: 0px;
-    margin-right: 20px;
 }
 
 /* 8 navigation */
@@ -626,7 +675,7 @@ nav li > a {
 }
 .squareselected {
     background: yellow;
-    border: 1px solid #999;
+    border: solid #ccc 1px;
     float: left;
     font-size: 12px;
     font-weight: normal;
@@ -641,7 +690,7 @@ nav li > a {
 
 .square {
     background: #fff;
-    border: 1px solid #999;
+    border: solid #ccc 1px;
     float: left;
     font-size: 12px;
     font-weight: normal;

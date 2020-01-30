@@ -103,18 +103,18 @@ class CreateGame extends React.Component {
                     this.props.sportcenteritems._embedded.sportcenters.map ((row, index) =>                   
                     {
                         return(
-                                    <li key={index} className={ this.classNameCenter(row.id) } onClick={() => this.handleChangeSportCenter(row.id)}><b>{this.state.selectedCenter}{row.id}{row.name}</b> ({row.street} - <a  target="_blank" href={row.website} className='bodylink'>{row.website}</a>)></li>
+                                    <li key={index} className='sportcenterlist' onClick={() => this.handleChangeSportCenter(row.id)}><b>{this.state.selectedCenter}{row.id}{row.name}</b> ({row.street} - <a  target="_blank" href={row.website} className='bodylink'>{row.website}</a>)></li>
                           )})
             )
       }
 
       const RegisterForm = () => {
 return (
-      <div>
+      <div className = 'newgame'>
       <form method='POST' onSubmit={this.handleSubmit.bind(this)}> 
-      <table>
+      <table className = 'newgame'>
       <tbody>
-            <tr height='30px'>
+            <tr className='newgame' height='30px'>
                   <td className='newgame'>Where? </td>
             </tr>
             <tr>
@@ -123,7 +123,7 @@ return (
                   </td>
             </tr>
       
-            <tr height='30px'>
+            <tr height='30px' className='newgame'>
                   <td className='newgame'>Which day?
                   </td>
             </tr>
@@ -160,7 +160,7 @@ return (
             <tr>
                   <td className='signuperror'><this.Error1 /></td>
             </tr>
-            <tr height='30px'>
+            <tr height='30px' className='newgame'>
 
                   <td className='newgame'>What time?
                   {this.props.sportcenteritems._embedded.sportcenters[this.state.selectedCenter-1].name}
@@ -173,7 +173,7 @@ return (
                         </select>
                   </td>
             </tr>
-            <tr height='30px'>
+            <tr height='30px' className='newgame'>
                   <td className='newgame'>Which court?</td>
             </tr>
             <tr height='25px'>
@@ -185,7 +185,7 @@ return (
                         </select>
                   </td>
             </tr>
-            <tr height='30px'>
+            <tr height='30px' className='newgame'>
                   <td className='newgame'>How much per person?</td>
             </tr>
             <tr height='25px'>
@@ -194,11 +194,11 @@ return (
           <tr>
                   <td className='signuperror'><this.Error2 /></td>
             </tr>
-          <tr height='30px'>
+          <tr height='30px' className='newgame'>
                   <td className='newgame' >Private game? <input type='checkbox' name='isprivate'/></td>
             </tr>
 
-          <tr height='30px'>
+          <tr height='30px' className='newgame'>
                   <td className='newgame'>Extra comments (500 chars max)</td>
             </tr>
             <tr height='25px'>

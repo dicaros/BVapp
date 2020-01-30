@@ -129,13 +129,40 @@ const UserGames = () => {
 
 const UserRow1 = () => {
      return(                    
-                             <div  className='gameorganizer'>
-<ul>
-                              <li>
-                            
-                              </li>
-                              </ul>
-                         </div>
+                              <table className = 'userprofile'>
+                                   <tbody>
+                                   <tr className='userprofile'>
+                                        <td className='userprofile'>
+                                        {this.props.myuseritems.firstName} {this.props.myuseritems.lastName}
+                                        </td>
+                                   </tr>
+                                   <tr className='userprofile'>
+                                   <td className='userprofile'>
+                                        {this.props.myuseritems.roles}
+                                        </td>
+                                   </tr>
+                                   <tr className='userprofile'>
+                                   <td className='userprofile'>
+                                        {this.props.useritems[0].myuser.email}
+                                        </td>
+                                   </tr>
+                                   <tr className='userprofile'>
+                                   <td className='userprofile'>
+                                        {this.props.useritems[0].phone}
+                                        </td>
+                                   </tr>
+                                   <tr className='userprofile'>
+                                   <td className='userprofile'>
+                                        {this.props.useritems[0].playedcount}
+                                        </td>
+                                   </tr>
+                                   <tr className='userprofile'>
+                                   <td className='userprofile'>
+                                        {this.props.useritems[0].noShowCount}
+                                        </td>
+                                   </tr>
+                                   </tbody>
+                              </table>
 
     )
 }
@@ -146,12 +173,12 @@ const UserStuff = () => {
                 <tr> 
                           <th className = 'gamelist'>
                                <div className='closewindowdiv'>
-                                   <br></br>Your user details</div>
+                                   Your user details</div>
                               </th>
                              </tr>
                <tr>
                         <td className = 'gamelist' width='20%'>
-                             <ul className='gamelist1'><UserRow1 /></ul>
+                             <UserRow1 />
                         </td>    
                    </tr>           
   

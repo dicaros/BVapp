@@ -25,12 +25,12 @@ class MainContainer extends React.Component {
                   if(this.props.navigate[this.props.navigate.length-1] == 'games' && 
                   typeof this.props.items._embedded != 'undefined' && typeof this.props.useritems[0].id != 'undefined')
                      {
-                        return(<div><UserComponent /><GameComponent /></div>)
+                        return(<div className='maindiv'><UserComponent /><GameComponent /></div>)
                      }
                    if(this.props.navigate[this.props.navigate.length-1] == 'userp' && 
                    typeof this.props.usergamesitems != 'undefined' && typeof this.props.useritems[0].id != 'undefined')
                      {
-                        return(<div><UserComponent /><UserProfileComponent /></div>)
+                        return(<div className='maindiv'><UserComponent /><UserProfileComponent /></div>)
                      }
                   if(this.props.navigate[this.props.navigate.length-1] == 'gamedetails' &&
                   typeof this.props.singlegameitems != 'undefined')

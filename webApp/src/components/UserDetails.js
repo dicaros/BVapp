@@ -12,18 +12,18 @@ class UserDetails extends React.Component {
 
                           <table className = 'tableuser1'>
                               <thead>
-                                  <tr key='001'>
-                                      <th className = 'userdetailsheader' height='120px'><center><img src={userpic} onClick={() => this.props.doNavigate('userp')} className='userpic' alt='O'></img></center></th>
+                                  <tr className = 'userdetailsheader' key='001'>
+                                      <th className = 'userdetailsheader'><img src={userpic} onClick={() => this.props.doNavigate('userp')} className='userpic' alt='O'></img></th>
                                   </tr>
-                                  <tr key='002'>
-                                      <th className = 'userdetailsheader' height='30px'>{this.props.useritems[0].myuser.firstName} {this.props.useritems[0].myuser.lastName}
-                                      <h4 className = 'userdetailsheader'>({this.props.useritems[0].myuser.email})</h4>
+                                  <tr className = 'userdetailsheader' key='002'>
+                                      <th className = 'userdetailsheader'>{this.props.useritems[0].myuser.firstName} {this.props.useritems[0].myuser.lastName}
+                                      <h4 className = 'userdetailsheader'>({this.props.useritems[0].myuser.name})</h4>
                                       <h4 className = 'userdetailsheader'>Member since: {this.props.useritems[0].mydate}</h4>
                                       </th>
                                   </tr>
                               </thead>
                               <tbody>
-                                <tr key='0'>
+                                <tr className = 'userdetailsheader' key='0'>
                                   <td>
                                       <table className='userdetails'>
 
@@ -52,12 +52,7 @@ class UserDetails extends React.Component {
                                     </td>
                                   </tr>
                                </tbody>
-                               <tfoot>
-                                   <tr key='003'>
-                                      <td></td>                             
-                                   </tr>
-                              </tfoot>
-                          </table>
+                           </table>
                  
            )
     }

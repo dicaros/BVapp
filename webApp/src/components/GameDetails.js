@@ -54,7 +54,7 @@ async quitthisgame (id) {
                                        <tr> 
                                               <td colSpan={4}>
                                                     <div className='closewindowdiv'>                                            
-                                                    Players for this game</div>
+                                                    <center>Players for this game</center></div>
                                               </td>
                                            </tr>
                                  )
@@ -89,8 +89,9 @@ async quitthisgame (id) {
                       <td key={index} className = 'gameparticipant'>                                 
                                   <li className='gameparticipant'>
                                       <center> 
+                                      {row}
                                           { <img src = {userpic}  className='userpic' alt='O'></img>}                        
-                                          {row}
+
                                           <br />
                                           { this.props.gameparticipantsitems[y].myuser.firstName + ' '
                                             + this.props.gameparticipantsitems[y].myuser.lastName}

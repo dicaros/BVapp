@@ -88,8 +88,8 @@ async handleCreateGame() {
          }
 
          const TableBody = () => {                       
-                                    return (<tbody> 
-                                                <tr>
+                                    return (<tbody className = 'gamelist'> 
+                                                <tr >
                                                      <td className = 'gamelist' width='20%'>
                                                           <ul className='gamelist'><Tablerow/></ul>
                                                      </td>    
