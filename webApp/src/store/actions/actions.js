@@ -261,6 +261,7 @@ export function newUser(url, target)  {
 }
 
 export function signupGame(url,  noshow, game_id)  {
+    // noshow for a single game defaults to "false"
     var updatedrecord = { noshow: noshow, gameid: game_id }
     return (dispatch) => {
     fetch(url, {
