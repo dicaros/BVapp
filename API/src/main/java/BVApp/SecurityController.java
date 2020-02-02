@@ -116,14 +116,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	        return game;
 	    }
 	    
-		// expose API endpoint for extracting a single sportcenter   
+/*		// expose API endpoint for extracting a single sportcenter   
 	    @RequestMapping(value = "/api/singlesportcenter", method = RequestMethod.GET, produces = "application/json")
 	    @ResponseBody
 	    public Optional<Sportcenter> singlesportcenter(@RequestParam Long id) {
 	        SportCenterRepository repo = context.getBean(SportCenterRepository.class);
 	        Optional<Sportcenter> sportcenter = repo.findById(id);
 	        return sportcenter;
-	    }
+	    }*/
 	    
 		// get the current user's details. Expose a username API endpoint
 	    @RequestMapping(value = "api/user", method = RequestMethod.GET, produces = "application/json")
@@ -135,6 +135,36 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	        return myuser;
 	    }  
 
+		// get the current user's details. Expose a username API endpoint
+	    @RequestMapping(value = "api/deleteuser", method = RequestMethod.DELETE, produces = "application/json")
+	    @ResponseBody
+			// return a string with the username
+	    public String deletecurrentUserName(Principal principal) {
+	    	MyuserRepository userrepo = context.getBean(MyuserRepository.class);
+	    	MyUserDetailsRepository userdetarepo = context.getBean(MyUserDetailsRepository.class);
+	    	GameRepository gamerepo = context.getBean(GameRepository.class);
+	        GameparticipantRepository playerrepo = context.getBean(GameparticipantRepository.class);
+
+	    	//get current username
+	    	Myuser currentuser = userrepo.findByName(principal.getName());
+	    	
+	    	// delete child relationship
+	    	userdetarepo.deleteAllByMyuserId(currentuser.getId());
+	    	gamerepo.deleteAllByMyuserId(currentuser.getId());
+	    	// remove player from games
+	    	playerrepo.deleteAllByMyuserId(currentuser.getId());
+	    	
+	    	// delete user
+	    	userrepo.deleteByName(principal.getName());
+	    	
+	    	
+	    	
+	    	String message = "user " + principal.getName() + " deleted";
+	    	
+	    	return message;
+	    }
+
+	    
 	    @RequestMapping(value = "api/myuserdet", method = RequestMethod.GET, produces = "application/json")
 	    @ResponseBody
 	    public List<MyUserDetail> currentUserDet(Principal principal) {

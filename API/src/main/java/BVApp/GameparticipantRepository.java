@@ -2,10 +2,13 @@ package BVApp;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 // define repository for Game Participants
@@ -27,6 +30,11 @@ public interface GameparticipantRepository extends CrudRepository<Gameparticipan
 			nativeQuery = true)
 	void deleteById(@Param("id") Long id);
 
+	// do not expose delete my userid method
+	@RestResource(exported = false)
+	@Transactional
+	void deleteAllByMyuserId(@Param("id") Long id);
+	
 	// find all game participants based on game id
 	List<Gameparticipant> findAllByGameId(Long id);
 	

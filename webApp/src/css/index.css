@@ -186,6 +186,7 @@ h4.userdetailsheader {
                 }
                 li.gamelist:hover {
                     background-color: white;
+                    cursor: pointer
                 }
                 li.gameparticipant {
                     list-style-type: none;
@@ -540,6 +541,7 @@ li.gamelistselected
 
 li.gamelist:hover {
     background-color: #71cee7;
+    cursor: pointer;
 }
 
 
@@ -581,6 +583,18 @@ ul.sportcenterlist {
 li.sportcenterlist {
     margin: 0px;
     border-bottom: solid 1px #ccc;
+}
+
+li.sportcenterlistselected {
+    margin: 0px;
+    border-bottom: solid 1px #ccc;
+    background: yellow;
+}
+
+
+li.sportcenterlist:hover {
+    background-color: #71cee7;
+    cursor: pointer;
 }
 
 
@@ -701,6 +715,7 @@ nav li > a {
     padding: 0;
     text-align: center;
     width: 24px;
+    cursor: pointer;
 }
 
   .square:focus {

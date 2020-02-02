@@ -2,6 +2,8 @@ package BVApp;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -17,19 +19,24 @@ public interface MyUserDetailsRepository extends CrudRepository<MyUserDetail, Lo
 	@RestResource(exported = false)
 	MyUserDetail save(@Param("myuserdetails") MyUserDetail myuserdetails);
 		
-	@Override
+	//@Override
 // user details can only be deleted by the same user
-	@PreAuthorize("@myuserdetailsrepository.findById(#id)?.myuser?.name  == authentication?.name")
-	void deleteById(@Param("id") Long id);
+/*	@PreAuthorize("@myuserdetailsrepository.findById(#id)?.myuser?.name  == authentication?.name")
+	void deleteById(@Param("id") Long id);*/
 
+	// do not expose delete my userid method
+	@RestResource(exported = false)
+	@Transactional
+	void deleteAllByMyuserId(@Param("id") Long id);
+	
 //	@PostFilter("filterObject.myuser.getName() == principal.username")
 //    @Override
 //    List<MyUserDetail> findAll();
 
-	@Override
+	//@Override
 // user details can only be deleted by the same user
-	@PreAuthorize("#myuserdetails?.myuser?.name == authentication?.name")
-	void delete(@Param("myuserdetails") MyUserDetail myuserdetails);
+/*	@PreAuthorize("#myuserdetails?.myuser?.name == authentication?.name")
+	void delete(@Param("myuserdetails") MyUserDetail myuserdetails);*/
 
 	  List<MyUserDetail> findAllByMyuserName(@PathVariable("name") String name);
 	

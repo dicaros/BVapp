@@ -125,7 +125,7 @@ public class UserDataFlow {
 		}
 
 		// the password must at least be 8 chars long
-		if(password1.length() < 8)
+		if(password1.length() < 8 || password1.length() > 200)
 		{
 			usercheck.setFailed(true);
 			usercheck.setpsswshort(true);

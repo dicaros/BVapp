@@ -1,5 +1,7 @@
 package BVApp;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
@@ -15,5 +17,9 @@ public interface MyuserRepository extends JpaRepository<Myuser, Long> {
 	Myuser findByName(String name);
 
 	Myuser findByEmail(String email);
+	
+	@Transactional
+	void deleteByName(String name);
+	
 
 }

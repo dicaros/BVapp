@@ -90,7 +90,7 @@ class CreateGame extends React.Component {
             })
         }
 
-        classNameCenter(id) {
+      classNameCenter(id) {
                   if(this.state.selectedCenter == id)
                         return ('gamelistselected')
                   else return ('gamelist')
@@ -103,7 +103,7 @@ class CreateGame extends React.Component {
                     this.props.sportcenteritems._embedded.sportcenters.map ((row, index) =>                   
                     {
                         return(
-                                    <li key={index} className='sportcenterlist' onClick={() => this.handleChangeSportCenter(row.id)}><b>{this.state.selectedCenter}{row.id}{row.name}</b> ({row.street} - <a  target="_blank" href={row.website} className='bodylink'>{row.website}</a>)></li>
+                                    <li key={index} className={this.classNameCenter(row.id)} onClick={() => this.handleChangeSportCenter(row.id)}><b>{row.name}</b> ({row.street} - <a  target="_blank" href={row.website} className='bodylink'>{row.website}</a>)></li>
                           )})
             )
       }
@@ -163,7 +163,6 @@ return (
             <tr height='30px' className='newgame'>
 
                   <td className='newgame'>What time?
-                  {this.props.sportcenteritems._embedded.sportcenters[this.state.selectedCenter-1].name}
                   </td>
             </tr>
             <tr height='25px'>

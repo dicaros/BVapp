@@ -2,9 +2,11 @@ package BVApp;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,7 +16,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 // user sql object
 
 @Entity
+
 public class Myuser {
+
+	@OneToMany(cascade = CascadeType.ALL,
+	        mappedBy = "id", orphanRemoval = true)
 
 	public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
