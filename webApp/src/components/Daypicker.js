@@ -97,6 +97,3 @@ render() {
 }
 
 export default Daypicker;
-
-
-

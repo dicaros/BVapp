@@ -1,7 +1,7 @@
 import React from 'react';
 import userpic from '../img/userfotodefault.jpg'
 
-var countpage = 0 + ' '
+//var countpage = 0 + ' '
 
 class UserDetails extends React.Component {
 

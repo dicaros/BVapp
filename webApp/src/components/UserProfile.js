@@ -39,7 +39,7 @@ constructor(props) {
  
      const TabbedMenu = () => {
           return(
-                    <left>
+                    <h1>
                           <div className='closewindowdiv'>
                               <div className="tabbedheader">
                                    <button className={this.state.buttonclass1} onClick={() => this.handleSelectTab1()}>Your games</button>
@@ -51,7 +51,7 @@ constructor(props) {
                                    </button>
                               </span>
                          </div>
-                    </left>
+                    </h1>
                )
      }
 

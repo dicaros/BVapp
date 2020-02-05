@@ -87,7 +87,7 @@ async quitthisgame (id) {
                   if(typeof this.props.gameparticipantsitems[y] != 'undefined') {
                     return(
                       <td key={index} className = 'gameparticipant'>                                 
-                                  <li className='gameparticipant'>
+                                  <li key={index} className='gameparticipant'>
                                       <center> 
                                       {row}
                                           { <img src = {userpic}  className='userpic' alt='O'></img>}                        

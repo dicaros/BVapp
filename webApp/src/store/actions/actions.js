@@ -124,9 +124,7 @@ export function itemsFetchDataSuccess(items) {
 }
 
 export function loadData(request, url, params) {
-
             return (dispatch) => {
-
                     dispatch(isError(false));
                 // start GET request
                     fetch(url+request+params  , {
@@ -321,34 +319,34 @@ export function setNavigate(input) {
             
         dispatch(loadData('api/user', url, ''))
 
-        if(tempvar[tempvar.length-1] == 'games')
-        {
-            dispatch(loadData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime'))
-            dispatch(loginsuccessfull(true));
-            dispatch(loadData('api/myuserdet', url, ''))
-        }
-
-        if(tempvar[tempvar.length-1] == 'userp')
+            if(tempvar[tempvar.length-1] == 'games')
             {
-            dispatch(loadData('api/gameparticipantsbyuser', url, '?name=' + store.getState().username))
-            dispatch(loadData('api/myuserdet', url, ''))
+                dispatch(loadData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime'))
+                dispatch(loginsuccessfull(true));
+                dispatch(loadData('api/myuserdet', url, ''))
             }
-        if(tempvar[tempvar.length-1] == 'create')
-                dispatch(loadData('api/sportcenters', url, '?page=0&size=1000&sort=name'))
 
-        if(tempvar[tempvar.length-1] == 'gamedetails')
-                {    
-                    dispatch(loadData('api/gameparticipantsget', url, '?id='+store.getState().currentgame))
-                    dispatch(loadData('api/singlegame', url, '?id='+store.getState().currentgame))
+            if(tempvar[tempvar.length-1] == 'userp')
+                {
+                dispatch(loadData('api/gameparticipantsbyuser', url, '?name=' + store.getState().username))
+                dispatch(loadData('api/myuserdet', url, ''))
                 }
-        dispatch(isLoading(false))
-        
-        return {
-            type: SET_NAVIGATE,
-            navigate: tempvar,
+            if(tempvar[tempvar.length-1] == 'create')
+                    dispatch(loadData('api/sportcenters', url, '?page=0&size=1000&sort=name'))
 
-        };
-    }
+            if(tempvar[tempvar.length-1] == 'gamedetails')
+                    {    
+                        dispatch(loadData('api/gameparticipantsget', url, '?id='+store.getState().currentgame))
+                        dispatch(loadData('api/singlegame', url, '?id='+store.getState().currentgame))
+                    }
+            dispatch(isLoading(false))
+            
+            return {
+                type: SET_NAVIGATE,
+                navigate: tempvar,
+
+            };
+        }
     
 }
 
