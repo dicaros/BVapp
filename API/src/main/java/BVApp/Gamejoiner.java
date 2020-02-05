@@ -119,8 +119,7 @@ public class Gamejoiner {
 		        	singlegame = gamerepo.save(singlegame);
 		        }
 				// store the game participant in the game participant list
-		        gameparticipant = gamepartrepo.save(gameparticipant);
-		        
+		        gameparticipant = gamepartrepo.save(gameparticipant);		        
 						};
 						
 		        System.out.println(tryjoingame.resultdescription);    	
