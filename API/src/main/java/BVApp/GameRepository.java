@@ -18,8 +18,8 @@ public interface GameRepository extends PagingAndSortingRepository<Game, Long> {
 	// do not expose save method (use /api/newgame instead)
 	@SuppressWarnings("unchecked")
 //	@Override
-//	@PreAuthorize("#game?.myuser == null or #game?.myuser?.name == authentication?.name")
-	@RestResource(exported = false) 
+//	@PreAuthorize("#game?.myuser == null or #game?.myuser?.name == authentication?.name"
+//	@RestResource(exported = false) 
 	Game save(@Param("game") Game game);
 	
 	// do not expose delete method for Games
@@ -40,7 +40,5 @@ public interface GameRepository extends PagingAndSortingRepository<Game, Long> {
 	void delete(@Param("game") Game game);*/
 	
 	Optional<Game> findById(Long id);
-	
-	
-	
+		
 }

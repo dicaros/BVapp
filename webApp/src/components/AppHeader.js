@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../img/BEVolej.gif';
+//import logo from '../img/BEVolej.gif';
 import usericon from '../img/UserIcon.png';
 import { url } from '../constants/constants'
 
@@ -35,7 +35,9 @@ class AppHeader extends React.Component {
                       bar1: 'bar1clicked'
                     })
       else if (!this.state.showMenu)
-        this.setState({list1: 'listmenuhidden',
+  
+  
+      this.setState({list1: 'listmenuhidden',
                         bar3: 'bar3',
                         bar2: 'bar2',
                         bar1: 'bar1'})
@@ -97,7 +99,7 @@ class AppHeader extends React.Component {
          <thead>
          <tr>
             <td className = 'headermenu_left'>
-                 <a href='/'><img src = {logo} className='logo' alt='Logo'></img></a>
+                 <a href='/'><img src = '{logo}' className='logo' alt='Logo'></img></a>
             </td>
             <td className = 'headermenu_center'>
             </td>

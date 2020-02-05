@@ -7,12 +7,21 @@ import { CURRENT_GAME, CURRENT_PAGE, CURRENT_SIZE, IS_ERROR, IS_LOADING, GAMERES
             SET_USER, SINGLEGAME_FETCH_DATA_SUCCESS, SPORTCENTER_FETCH_DATA_SUCCESS, 
             USER_FETCH_DATA_SUCCESS, GAMEPARTICIPANT_FETCH_DATA_SUCCESS, LOGIN_ERROR } from './action-type';
 
-export function cancelGame(cancelurl)  {
-                var updatedrecord = {
+ 
+export function updateGame(urlupdate, param)  {
+                var updatedrecord = []; 
+                
+                if (param == 'cancel')
+                            updatedrecord = {
                                         gameiscancelled: true
                                     }
+                else if (param == 'open')
+                            updatedrecord = {
+                                            gameisfull: false
+                                }
+                    
                 return (dispatch) => {
-                fetch(cancelurl, {
+                fetch(urlupdate, {
                          method: "PATCH",
                          credentials: 'include',
                          headers: { 
@@ -23,7 +32,6 @@ export function cancelGame(cancelurl)  {
                       .then(res => res.json())
                       .then(items => {            
                             var response = items;
-                            console.log(response);
                             dispatch(loadData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime'))
                     })
                     .catch(error => {

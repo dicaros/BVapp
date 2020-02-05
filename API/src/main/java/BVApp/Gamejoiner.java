@@ -107,23 +107,22 @@ public class Gamejoiner {
 				}
 			
 				if(!tryjoingame.getFailed())
-						{		
-													
+						{									
 		    	// create the current instance of gameparticipant
 		        Gameparticipant gameparticipant = new Gameparticipant(notfound, false, user, game.get());
-				
-		        // if this is the last gameparticipant set game as full
-		        if(notfound == maxplayers)
-		        {
-		        	singlegame.setGameisfull(true);
-		        	singlegame = gamerepo.save(singlegame);
-		        }
+		        
 				// store the game participant in the game participant list
 		        gameparticipant = gamepartrepo.save(gameparticipant);		        
-						};
-						
-		        System.out.println(tryjoingame.resultdescription);    	
-	    	
+
+		        // if this is the last gameparticipant set game as full
+		        if(players.size()+1 == maxplayers)
+		        	{
+		        		singlegame.setGameisfull(true);
+		        		singlegame = gamerepo.save(singlegame);
+		        	}
+		        
+		        
+				};    	
 		        
 	    	return tryjoingame;
 			

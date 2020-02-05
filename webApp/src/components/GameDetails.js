@@ -15,7 +15,7 @@ constructor(props) {
         }
 
 async cancelthisgame() {
-       await this.props.cancelGame(url+'api/games/'+this.props.singlegameitems.id)
+       await this.props.updateGame(url+'api/games/'+this.props.singlegameitems.id, 'cancel')
        this.props.doNavigate('games')
       }
 
@@ -26,6 +26,7 @@ async jointhisgame () {
 
 async quitthisgame (id) {
     await handleQuit(url+'api/gameparticipants/'+id)
+    await this.props.updateGame(url+'api/games/'+this.props.singlegameitems.id, 'open')
     this.props.doNavigate('games')
 }
 
