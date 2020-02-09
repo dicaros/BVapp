@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <header>
+    <div
+      class="topheader"
+    >
+      <table
+        class="tableheader"
+      >
+        <thead>
+          <tr>
+            <td
+              class="headermenu_left"
+            >
+              <a
+                href="/"
+              >
+                <img
+                  alt="Logo"
+                  class="logo"
+                  src="{logo}"
+                />
+              </a>
+            </td>
+            <td
+              class="headermenu_center"
+            />
+            <td
+              class="headermenu_right"
+            >
+              <nav>
+                <ul>
+                  <li>
+                    <img
+                      alt="O"
+                      class="userlogo"
+                      src="UserIcon.png"
+                    />
+                  </li>
+                  <li>
+                    <div
+                      class="container"
+                    >
+                      <div
+                        class="bar1"
+                      />
+                      <div
+                        class="bar2"
+                      />
+                      <div
+                        class="bar3"
+                      />
+                    </div>
+                    <ul
+                      class="listmenuhidden"
+                    >
+                      <li>
+                        <a
+                          href="/"
+                        >
+                          Logout
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                        >
+                          Game list
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                        >
+                          Create game
+                        </a>
+                      </li>
+                      <li>
+                        <div
+                          class="line"
+                        />
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                        />
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+            </td>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </header>
+  <section
+    class="appbody"
+  >
+    <center />
+  </section>
+</DocumentFragment>
+`;

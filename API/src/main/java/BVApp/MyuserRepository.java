@@ -21,5 +21,4 @@ public interface MyuserRepository extends JpaRepository<Myuser, Long> {
 	@Transactional
 	void deleteByName(String name);
 	
-
 }

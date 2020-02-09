@@ -175,4 +175,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	    	return myuserdet;
 	    }  
 	    
+	/*    @RequestMapping(value = "api/updatepassword", method = RequestMethod.PATCH, produces = "application/json")
+	    @ResponseBody
+	    public void updateCurrentUser(@RequestBody UserDataFlow, userPrincipal principal) {
+	    	
+	    	MyUserDetailsRepository userrepo = context.getBean(MyUserDetailsRepository.class);
+
+	    	//return ;
+	    }*/  
+	    
 }

@@ -1,5 +1,5 @@
 // IP local - Praha
-//export const url = 'http://192.168.0.105:8080/'
+//export const url = 'http://192.168.0.103:8080/'
 
 // IP local - Bosovice
 //export const url = 'http://192.168.1.106:8080/'

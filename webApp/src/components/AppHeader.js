@@ -1,5 +1,5 @@
 import React from 'react';
-//import logo from '../img/BEVolej.gif';
+import logo from '../img/BEVolej.gif';
 import usericon from '../img/UserIcon.png';
 import { url } from '../constants/constants'
 
@@ -75,7 +75,7 @@ class AppHeader extends React.Component {
                     <ul className={this.state.list1}>
                           {!this.props.loginsuccess && <li><a href = '/' onClick={() => this.logout(logouturl)}>Login</a></li>}
                           {this.props.loginsuccess && <li><a  href = '/' onClick={() => this.logout(logouturl)}>Logout</a></li>}
-                          {!this.props.loginsuccess && !this.props.isError && <li><a href="#" onClick={() => this.props.doNavigate('register')}>Register</a></li>}
+                          {!this.props.loginsuccess && !this.props.isError && <li><a href="#" onClick={() => this.handleNavigate('register')}>Register</a></li>}
 
                           {this.props.loginsuccess && <li><a href="#" onClick={() => this.handleNavigate('games')}>Game list</a></li>}
                           {this.props.loginsuccess && <li><a href="#" onClick={() => this.handleNavigate('create')}>Create game</a></li>}
@@ -99,7 +99,7 @@ class AppHeader extends React.Component {
          <thead>
          <tr>
             <td className = 'headermenu_left'>
-                 <a href='/'><img src = '{logo}' className='logo' alt='Logo'></img></a>
+                 <a href='/'><img src = {logo} className='logo' alt='Logo'></img></a>
             </td>
             <td className = 'headermenu_center'>
             </td>

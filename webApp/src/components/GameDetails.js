@@ -161,7 +161,7 @@ async quitthisgame (id) {
                             {this.props.singlegameitems.myuser.firstName + ' ' + this.props.singlegameitems.myuser.lastName}
                             </p>
                             <p>
-                            {this.props.singlegameitems.myuser.name == this.props.username && 
+                            {this.props.singlegameitems.myuser.name == this.props.myuseritems.name && 
                             !this.props.singlegameitems.gameiscancelled &&
                             <a href='#' onClick={() => this.cancelthisgame()}>Cancel this game</a>}
                             </p>
