@@ -245,7 +245,25 @@ export function newGame(sportcenterid, isPrivate, gameDate, gameTime, descriptio
     }
 }
 
-
+export function updateUser(url, payload)  {
+    return (dispatch) => {
+    fetch(url, {
+             method: "PATCH",
+             credentials: 'include',
+             headers: { 
+               'Content-Type': 'application/json',
+            },
+             body: JSON.stringify(payload)
+          })
+          .then(res => res.json())
+          .then(items => {            
+                var response = items;
+                dispatch(setregistration(response));
+                if(response.error=='Success')
+                     dispatch(setNavigate('userp'));
+        })
+    }
+}
 
 export function newUser(url, target)  {
     var updatedrecord = {name: target.username.value, firstname: target.firstname.value, lastname: target.lastname.value, password: target.password.value, confirmpassword: target.password2.value, email: target.email.value}

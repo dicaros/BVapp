@@ -1,6 +1,8 @@
 package BVApp;
 
 import java.security.Principal;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -173,15 +175,55 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	    	List<MyUserDetail> myuserdet = (List<MyUserDetail>) userrepo.findAllByMyuserName(principal.getName());
 
 	    	return myuserdet;
-	    }  
-	    
-	/*    @RequestMapping(value = "api/updatepassword", method = RequestMethod.PATCH, produces = "application/json")
-	    @ResponseBody
-	    public void updateCurrentUser(@RequestBody UserDataFlow, userPrincipal principal) {
-	    	
-	    	MyUserDetailsRepository userrepo = context.getBean(MyUserDetailsRepository.class);
+	    }
 
-	    	//return ;
-	    }*/  
+    
+	    @RequestMapping(value = "api/updatepassword", method = RequestMethod.PATCH, produces = "application/json")
+	    @ResponseBody
+	    public Response updatePassword(@RequestBody UserDataFlow userdata, Principal principal) {   	
+	    	Response response = new Response("");
+	    	
+	    	MyuserRepository userrepo = context.getBean(MyuserRepository.class);
+	    	if (userdata.password.equals(userdata.confirmpassword) && !userdata.password.equals(""))
+	    	{
+	    		response.setError("Success");
+	    		Myuser myuser = userrepo.findByName(principal.getName());
+	    		myuser.setPassword(userdata.password);
+	    		userrepo.save(myuser);
+	    	}
+	    		    	
+	    	if (!userdata.password.equals(userdata.confirmpassword))
+	    		response.setError("The two passwords much match!");
+	    	
+	    	if (userdata.password.equals(""))
+	    		response.setError("The password cannot be blank!");
+	    	
+	    	return response;
+	    }
+	    
+	    @RequestMapping(value = "api/updatedetails", method = RequestMethod.PATCH, produces = "application/json")
+	    @ResponseBody
+	    public void updatePhone(@RequestBody UserDetails userdetails, Principal principal) {   	
+	    	
+	    		MyUserDetailsRepository userdetailrepo = context.getBean(MyUserDetailsRepository.class);
+
+	    		List<MyUserDetail> myuserdet = (List<MyUserDetail>) userdetailrepo.findAllByMyuserName(principal.getName());
+	    		myuserdet.get(0).setPhone(userdetails.phone);
+	    		userdetailrepo.save(myuserdet.get(0));
+	    	}
+
+    	public class Response {
+    		private String errore;
+    		public Response(String errore) 
+    		{
+    			this.errore = errore;
+    		}    		
+    		public void setError(String errore) {
+    			this.errore = errore;
+    		}
+    		public String getError() {
+    			return errore;
+    		}
+    	}
 	    
 }

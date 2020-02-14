@@ -1,5 +1,5 @@
 import { updateGame, getUser, loadData, newGame, newUser, setCurrentGame, setCurrentPage, setCurrentSize,
-          setgameresponse, setNavigate, signupGame, thelogin, thelogout, updateRecord } from './store/actions/actions';
+          setgameresponse, setNavigate, signupGame, thelogin, thelogout, updateRecord, updateUser } from './store/actions/actions';
 
 import { connect } from 'react-redux';
 
@@ -55,6 +55,7 @@ const mapStateToProps = (state) => {
       addNew: (sportcenterid, isPrivate, gameDate, gameTime, description, url, nitems, priceperperson, kurt) => dispatch(newGame(sportcenterid, isPrivate, gameDate, gameTime, description, url, nitems, priceperperson, kurt)),
       getUser: () => dispatch(getUser()),
       updateRecord: (firstName, lastName, description, url) => dispatch(updateRecord(firstName, lastName, description, url)),
+      updateUsers: (url, payload) => dispatch(updateUser(url, payload)),
       newUsers: (url, target) => dispatch(newUser(url, target)),
     };
   };

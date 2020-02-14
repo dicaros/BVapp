@@ -23,12 +23,16 @@ class MainContainer extends React.Component {
             if(this.props.loginsuccess && !this.props.isLoading)
                {
                   if(this.props.navigate[this.props.navigate.length-1] == 'games' && 
-                  typeof this.props.items._embedded != 'undefined' && typeof this.props.useritems[0].id != 'undefined')
+                  typeof this.props.items._embedded != 'undefined' && typeof this.props.useritems[0] != 'undefined')
                      {
                         return(<div className='maindiv'><UserComponent /><GameComponent /></div>)
                      }
-                   if(this.props.navigate[this.props.navigate.length-1] == 'userp' && 
-                   typeof this.props.usergamesitems != 'undefined' && typeof this.props.useritems[0].id != 'undefined')
+                   if((this.props.navigate[this.props.navigate.length-1] == 'userp' || 
+                   this.props.navigate[this.props.navigate.length-1] == 'userp2' ||
+                   this.props.navigate[this.props.navigate.length-1] == 'userp3'
+                   )
+                    && 
+                   typeof this.props.usergamesitems != 'undefined' && typeof this.props.useritems[0] != 'undefined')
                      {
                         return(<div className='maindiv'><UserComponent /><UserProfileComponent /></div>)
                      }
