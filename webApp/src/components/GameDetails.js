@@ -1,5 +1,5 @@
 import React from 'react';
-import userpic from '../img/userfotodefault.jpg'
+import userpic from '../img/userfotodefault.png'
 import { url } from '../constants/constants'
 import { handleQuit } from '../functions/functions'
 import { currentday, timedash, todaydash } from '../functions/functions'

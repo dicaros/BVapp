@@ -7,7 +7,7 @@ import { CURRENT_GAME, CURRENT_PAGE, CURRENT_SIZE, IS_ERROR, IS_LOADING, GAMERES
             SET_USER, SINGLEGAME_FETCH_DATA_SUCCESS, SPORTCENTER_FETCH_DATA_SUCCESS, 
             USER_FETCH_DATA_SUCCESS, GAMEPARTICIPANT_FETCH_DATA_SUCCESS, LOGIN_ERROR } from './action-type';
 
- 
+// cancel a game, remove a player from a game
 export function updateGame(urlupdate, param)  {
                 var updatedrecord = []; 
                 
@@ -31,8 +31,8 @@ export function updateGame(urlupdate, param)  {
                       })
                       .then(res => res.json())
                       .then(items => {            
-                            var response = items;
-                            dispatch(loadData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime'))
+                    // reload and update game list after the changes
+                          dispatch(loadData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime'))
                     })
                     .catch(error => {
                         console.log('error: ' + error);
@@ -83,7 +83,7 @@ export function getUser() {
      })
      .then((res) => {
         console.log("res stage " + res.status)
-        
+       // in case of error 401 put the application in "not logged" status
         if(res.status=='401') {
             dispatch(loginsuccessfull(false));
             dispatch(isError(false));
@@ -93,6 +93,7 @@ export function getUser() {
             dispatch(loginsuccessfull(true));
             return res.text()       
         }        
+    // if the user data fetch is successful update the current username in the store
     }).then((data) => {
                 if(typeof data!= 'undefined') {
                     dispatch(setuser(data))
@@ -217,6 +218,7 @@ export function nitems(nitems) {
         }
 }
 
+// create a new game and read the response for error handling
 export function newGame(sportcenterid, isPrivate, gameDate, gameTime, description, urlsport, nitems, priceperperson, kurt)  {
     var updatedrecord = {   sportcenterid: sportcenterid, kurt: kurt, priceperperson: priceperperson, isprivate: isPrivate, gamedate: gameDate, gametime: gameTime, gameisfull: false, gameispast: false, gameiscancelled: false, description: description }
 
@@ -245,6 +247,7 @@ export function newGame(sportcenterid, isPrivate, gameDate, gameTime, descriptio
     }
 }
 
+// update user information (i.e. password, phone number)
 export function updateUser(url, payload)  {
     return (dispatch) => {
     fetch(url, {
@@ -259,12 +262,14 @@ export function updateUser(url, payload)  {
           .then(items => {            
                 var response = items;
                 dispatch(setregistration(response));
+                // in case of success go to the user details page
                 if(response.error=='Success')
                      dispatch(setNavigate('userp'));
         })
     }
 }
 
+// create a new user and handle registration errors
 export function newUser(url, target)  {
     var updatedrecord = {name: target.username.value, firstname: target.firstname.value, lastname: target.lastname.value, password: target.password.value, confirmpassword: target.password2.value, email: target.email.value}
     return (dispatch) => {
@@ -284,6 +289,7 @@ export function newUser(url, target)  {
     }
 }
 
+// sign in for a game
 export function signupGame(url,  noshow, game_id)  {
     // noshow for a single game defaults to "false"
     var updatedrecord = { noshow: noshow, gameid: game_id }
@@ -304,6 +310,7 @@ export function signupGame(url,  noshow, game_id)  {
     }
 }
 
+// pagination is not being used in this version of the application
 export function setCurrentPage(direction, pagenum) {
     var thepage = store.getState().page
       if(direction == 'next' && store.getState().page+1<pagenum) {
@@ -333,18 +340,22 @@ export function setCurrentSize(size) {
     };
 }
 
+// manage page navigation within the app
 export function setNavigate(input) {
         return(dispatch) => {var tempvar = []
         
         dispatch(isLoading(true));
         tempvar = store.getState().navigate;
+        // if no input then go to previous page (remove first element from the stack)
         if(input == '')
             tempvar.pop();
+        // if input is not blank then add a page to the stack
         else if (tempvar[tempvar.length-1] != input)
              tempvar.push(input);
             
         dispatch(loadData('api/user', url, ''))
 
+            // based on pageinput refresh the data as needed
             if(tempvar[tempvar.length-1] == 'games')
             {
                 dispatch(loadData('api/games', url, '?page=0&size=1000&sort=gamedate&sort=gametime'))
@@ -370,7 +381,6 @@ export function setNavigate(input) {
             return {
                 type: SET_NAVIGATE,
                 navigate: tempvar,
-
             };
         }
     
@@ -472,22 +482,6 @@ export function thelogin(loginurl, target)  {
                   console.log("not logged " + error.status)
             })
        }  
-}
-
-export function updateRecord(firstName, lastName, description, url) {
-    var newrecord = {firstName: firstName, lastName: lastName, description: description}
-    return (dispatch) => {fetch(url, {
-             method: "PUT",
-             credentials: 'include',
-             headers: { 
-               'Content-Type': 'application/json',
-             },
-             body: JSON.stringify(newrecord)
-          })
-.then(res => { console.log(res.status); }
-         ).catch(error =>
-           { console.log(error.status) })
-    }
 }
 
 export function userFetchDataSuccess(useritems) {

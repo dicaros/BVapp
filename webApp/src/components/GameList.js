@@ -28,13 +28,6 @@ async handleSelectGame(id) {
 async handleCreateGame() {
     this.props.doNavigate('create')           
 }
-
- async updateRecord(firstName, lastName, description, url) {  
-    if (this.props.loginsuccess) {
-       await  this.props.updateRecord(firstName, lastName, description, url)
-         this.refresh();
-      }
-    }
  
    render() {      
      var tomorrow = new Date(Date.now()+1*24*60*60*1000);

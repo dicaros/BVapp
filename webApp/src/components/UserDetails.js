@@ -1,5 +1,5 @@
 import React from 'react';
-import userpic from '../img/userfotodefault.jpg'
+import userpic from '../img/userfotodefault.png'
 
 //var countpage = 0 + ' '
 
